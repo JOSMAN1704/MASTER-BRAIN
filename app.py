@@ -47,7 +47,7 @@ def autenticar_drive():
 # 3. FUNCIÓN PARA LEER ARCHIVOS TXT DE LA CARPETA DE DRIVE
 def obtener_contexto_drive(service):
     # NOTA: Reemplaza 'ID_DE_TU_CARPETA_AQUÍ' por el ID real de tu carpeta 00_Cerebro_Maestro
-    folder_id = 'ID_DE_TU_CARPETA_AQUÍ' 
+    folder_id = '16Qa47qooE2M6W4XrLYM_1-km_SINjxfx?hl=it' 
     query = f"'{folder_id}' in parents and mimeType = 'text/plain'"
     results = service.files().list(q=query, fields="files(id, name)").execute()
     items = results.get('files', [])
