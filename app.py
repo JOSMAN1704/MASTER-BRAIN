@@ -29,7 +29,7 @@ def obtener_credenciales():
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["https://cerebro-master-erp.streamlit.app/"]
+            "redirect_uris": ["https://odoo-implementacion.streamlit.app/"]
         }
     }
     
