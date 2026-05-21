@@ -21,35 +21,37 @@ st.write("Consulta todo el historial de Fathom e investigaciones de Odoo con IA 
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 def obtener_credenciales():
-    # 1. Configuración básica (aquí NO hace falta poner el redirect_uri)
+    # Esta es la URL que vive en la consola de Google
+    REDIRECT_URI = "https://odoo-implementacion.streamlit.app/" 
+    
     client_config = {
         "web": {
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET,
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
-            "auth_provider_x509_cert_url": "https://www.googleapis.com/auth/cert",
+            "redirect_uris": [REDIRECT_URI]
         }
     }
     
-    # 2. Creamos el flujo explícitamente para el modo manual (OOB)
     flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-    flow.redirect_uri = "urn:ietf:wg:oauth:2.0:oob" # ESTA ES LA CLAVE
+    flow.redirect_uri = REDIRECT_URI
     
+    # Aquí generamos la URL de autorización
     auth_url, _ = flow.authorization_url(prompt='consent')
     
-    st.write("### 🔗 Autorización manual necesaria")
+    st.write("### 🔗 Autorización necesaria")
     st.markdown(f"[Haz clic aquí para autorizar el acceso]({auth_url})")
     
-    auth_code = st.text_input("Pega aquí el código que te dará Google:")
-    
-    if auth_code:
-        # 3. Intercambiamos el código por el token
+    # IMPORTANTE: Para capturar el código, necesitamos que el usuario 
+    # regrese a la app con un parámetro en la URL
+    query_params = st.query_params
+    if "code" in query_params:
+        auth_code = query_params["code"]
         flow.fetch_token(code=auth_code)
         st.session_state.credentials = flow.credentials
         st.success("¡Autenticación exitosa!")
         st.rerun()
-
 # 3. AUTENTICACIÓN DIRECTA (Sin botones que desaparecen)
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
