@@ -1,0 +1,185 @@
+Sesión de Análisis Compras - NBG
+FECHA: 2026-04-16
+VIEW RECORDING - 125 mins (No highlights)
+Propósito de la reunión
+Definir y mapear el proceso de compras para el nuevo sistema ERP.
+Puntos clave
+Control presupuestario: El sistema requiere un módulo de presupuesto restrictivo (por departamento y empleado) que bloquee las solicitudes por encima del presupuesto, con una anulación flexible para el Gerente de Compras.
+Logística de plantas: El "almacén virtual" para plantas es el proceso más complejo. Requiere una transacción única y en tiempo real donde los asesores de campo registren tanto la entrega entrante desde el vivero (anotando calidad/merma) como la entrega saliente inmediata al productor.
+La trazabilidad es primordial: Todos los costos de un envío (flete, servicios, reempaque) deben vincularse a un único número de seguimiento. Esto habilita la visibilidad total de costos y permite cambios de destino (p. ej., Walmart → mercado) sin perder el historial de costos original.
+Rediseño de procesos: El equipo pausará la definición de flujos de compras de forma aislada. En su lugar, primero mapearán procesos de extremo a extremo (p. ej., ciclo de vida de la planta, importación/exportación) para identificar correctamente dónde se necesitan órdenes de compra (PO), órdenes de venta (SO) y transferencias.
+Temas
+Proceso general de compras
+Flujo de solicitud: Solicitud del empleado (en Odoo) → Aprobación del gerente → Revisión de Compras (para cotizaciones, presupuesto) → Creación de PO.
+Control presupuestario:
+El sistema debe hacer cumplir presupuestos por departamento y empleado.
+Las solicitudes que excedan el presupuesto deben ser bloqueadas, requiriendo una anulación por parte del Gerente de Compras.
+Esta anulación debe ser una autorización, no una modificación del presupuesto, para preservar el registro de presupuesto original para su seguimiento.
+Factura y pago:
+No se puede pagar una PO sin una factura cargada y comprobante de entrega.
+Decisión: Usar la política de "factura basada en la cantidad ordenada". Esto simplifica el procesamiento inicial; cualquier discrepancia (p. ej., faltantes) se gestionará con una nota de crédito por separado.
+Logística de plantas: El "almacén virtual"
+Desafío: Las plantas nunca se almacenan físicamente. Se entregan directamente del vivero a los productores, creando un "almacén virtual" que requiere un flujo de trabajo único en el sistema.
+Flujo de trabajo propuesto:
+PO a NBG: Naturberry emite una PO a NBG para plantas.
+Transacción en tiempo real: Un asesor de campo usa una app móvil para registrar una única transacción simultánea en el sitio de entrega:
+Recepción entrante: Registra la entrega desde el vivero, incluyendo controles de calidad y merma.
+Entrega saliente: Registra la transferencia al productor, vinculándola al lote entrante.
+Creación de SO: El sistema genera automáticamente una solicitud de Orden de Venta (SO) para el productor basada en los datos de la entrega.
+Justificación: Este flujo de trabajo asegura precisión del inventario en tiempo real y proporciona una pista de auditoría clara tanto para el vivero (proveedor) como para el productor (cliente).
+Gestión de fletes
+Complejidad: El negocio usa múltiples tipos de flete con distintos pagadores y flujos de trabajo.
+Nacional: Naturprime paga la entrega final desde el cooler de Naturagui hasta el cliente.
+Exportación: Naturberry paga el transporte desde los coolers regionales hasta el punto de consolidación de Naturagui.
+Planta: Naturberry paga el transporte de plantas de cepellón a los productores.
+Requisito crítico: El sistema debe permitir a usuarios autorizados cambiar el destino final de un envío en el mismo pedido. Esto preserva el historial de costos original y evita perder la trazabilidad.
+Servicios intercompañía
+Servicios de Naturagui: Naturagui presta servicios (enfriamiento, reempaque) a Naturprime y Naturberry. Se gestionarán mediante POs intercompañía.
+Reempaque de Naturberry: El servicio de reempaque de Naturberry para importaciones también se gestionará con una PO intercompañía.
+Servicios de NBG: Los pagos por servicios de NBG (p. ej., honorarios de Alfredo) seguirán el proceso estándar de PO.
+Próximos pasos
+Tania: Compartir el manual de políticas de compras existente con el equipo de Emiliano.
+Equipo de Emiliano:
+Analizar todos los requerimientos de compras y proponer un flujo de trabajo consolidado del sistema.
+Programar una sesión dedicada para definir el proceso complejo de gestión de fletes.
+Todos: Asistir a la reunión de seguimiento sobre el proceso de "Almacenes" mañana a la 1:00 PM.
+Sesión de Análisis Compras - NBG - April 16
+VIEW RECORDING - 125 mins (No highlights)
+Propósito de la reunión
+Alinear el proceso de Compras en Odoo para tres empresas (Naturprime, Naturberry, Naturagui/Naturagi) incluyendo: requisiciones y aprobaciones, presupuestos por departamento/empleado, manejo documental (facturas/evidencias), integración con inventarios, trazabilidad por lote/embarque, fletes, intercompañías e impactos contables.
+Temas y Tickets
+Requisiciones, Aprobaciones y Presupuestos (Consumibles e indirectos)
+Contexto
+Se describió el flujo actual: solicitud (Jotform) → autorización jefe → compras cotiza/compara → OC → recepción → factura → CxP. Se busca operar íntegro en Odoo con alertas y seguimiento al solicitante.
+Estado
+No existe en Odoo; se usa Jotform y controles manuales. Políticas y matrices ya documentadas (existen manuales y diagramas).
+Preocupaciones, desafíos y bloqueos
+Odoo estándar no bloquea por presupuesto; requieren control restrictivo por depto/empleado.
+Necesidad de flexibilidad para exceder presupuesto con autorización excepcional.
+Notificaciones/estado al solicitante dentro del sistema.
+Ideas y explicaciones
+Usar Módulo de Aprobaciones: requisición por área, autorización de responsable y luego compras.
+Presupuesto anual desagregado mensual por cuentas analíticas; asignación por empleado.
+Estados en requisición: aceptada/rechazada con chat interno y actividad automática.
+Decisiones y próximos pasos
+Implementar control presupuestal por depto y empleado con bloqueo y bypass por autorización de Tania. Owner: Inflexyon (Emiliano) diseño; Tania para excepciones.
+Tania/Robert enviarán políticas y diagramas a Emiliano para configurar flujos. Owner: Tania/Robert.
+Objetivo actual
+Diseñar flujo en Odoo de requisición-aprobación-OC con control presupuestal restrictivo+override, trazabilidad de autorizaciones y notificaciones al solicitante.
+Facturación de Compras y Evidencias
+Contexto
+Definir política de facturación vs recepción y requisitos de evidencia (factura, POD/fotos) antes de CxP.
+Estado
+Preferencia por “entregado” y manejo de notas de crédito por diferencias/devoluciones.
+Preocupaciones, desafíos y bloqueos
+Algunos servicios (honorarios, CFE, telefonía) no tienen evidencia de entrega.
+Importación puede requerir factura antes de recepción (flujo especial).
+Ideas y explicaciones
+Política: facturar con base a lo recibido; si parcial, factura parcial; devoluciones vía NC.
+Para importación compleja, evaluar permitir factura antes de recepción con validación posterior.
+Decisiones y próximos pasos
+Adoptar base a recibido como estándar; validar excepción importación más adelante. Owner: Inflexyon propuesta.
+Requerir factura y prueba de entrega para crear CxP excepto servicios sin evidencia tangible. Owner: Compras/Contabilidad.
+Objetivo actual
+Configurar reglas de facturación por tipo de compra/servicio y requisitos documentales por categoría.
+Reposición por Mín/Máx y Puntos de Reorden (Material de empaque)
+Contexto
+Desean máximos/mínimos y puntos de reorden integrados con curva de producción.
+Estado
+Concepto ya contemplado; falta parametrización.
+Preocupaciones, desafíos y bloqueos
+Tabla de lead times por proveedor/producto para evaluación de proveedores.
+Ideas y explicaciones
+Cargar tiempos de entrega y usarlos para medir OTIF/proveedor.
+Decisiones y próximos pasos
+Compras enviará tabla de lead times; configurar reglas de reorden. Owner: Compras; Inflexyon.
+Objetivo actual
+Parametrizar reorden por producto/proveedor con lead time y métricas de cumplimiento.
+Fletes (Nacional, Exportación, Importación, Planta, Traslados)
+Contexto
+Fletes múltiples: importación a Naturagi, distribución a clientes, consolidaciones, planta (cepellón/raíz desnuda), traslados entre almacenes/coolers; programaciones semanales (Leti).
+Estado
+Proceso operativo activo; requiere modelado en Odoo con cambios de destino y relación con pedidos.
+Preocupaciones, desafíos y bloqueos
+Cambios de destino de último minuto; requieren control y trazabilidad.
+Clientes con fleteras autorizadas; base de datos de transportistas.
+Necesidad de relación pedido–flete–destino y reducciones por incumplimiento de vivero/planta.
+Ideas y explicaciones
+Registrar transportistas autorizados por cliente/zona; programaciones viernes para semana siguiente.
+Cambios de destino restringidos, registrados en el mismo pedido con historial y comentarios.
+Decisiones y próximos pasos
+Sesión específica de fletes con Leti y JP para detallar flujos y restricciones. Owner: Víctor coord.; Inflexyon.
+Mantener cambios de destino dentro del mismo pedido con control de permisos. Owner: Inflexyon diseño.
+Objetivo actual
+Modelar órdenes/solicitudes de flete, relación con pedidos y control de cambios de destino con auditoría.
+Importación de Fruta y Trazabilidad por Embarque/Lote
+Contexto
+Cadena de OCs: fruta (USA) → importación → fletes (USA/MX) → despacho → servicio de frío/etiquetado en Naturagi → reempaque (Naturberry) → flete a cliente. Se requiere trazabilidad end-to-end.
+Estado
+Se usa lote por productor y fecha; importación desde NBG requiere captura manual de lote; desean unir por número de embarque.
+Preocupaciones, desafíos y bloqueos
+Vincular todos los costos de importación a la compra/lote/embarque.
+Reetiquetados y conversiones de presentación sin perder trazabilidad.
+Ideas y explicaciones
+Usar lote base (productor+fecha) y número de embarque como referencia transversal; mantener historial de cliente original y cambios.
+Decisiones y próximos pasos
+Diseñar modelo de embarque con vínculo a compras, fletes, servicios y movimientos de almacén. Owner: Inflexyon.
+Objetivo actual
+Trazabilidad completa por lote/embarque con costeo asociado y registro de cambios de destino/cliente.
+Intercompañías (Naturprime, Naturberry, Naturagi, NBG)
+Contexto
+Servicios entre compañías: frío/etiquetado, reempaque, fletes, materiales de empaque; además servicios a terceros (OSLO, AW) vía órdenes de servicio.
+Estado
+Precios definidos en cotizaciones; Prime debe levantar OC a Naturagi por servicios; terceros emiten su propia OC.
+Preocupaciones, desafíos y bloqueos
+Definir cuándo exigir evidencia para CxP interco.
+Cobros específicos: fitosanitarios, movilidad, tarifas por embarque/importación.
+Ideas y explicaciones
+Interco: OC Prime→Naturagi; materiales: OC Prime→Naturberry; terceros: orden de servicio y factura.
+Decisiones y próximos pasos
+Configurar flujos interco y catálogo de servicios/precios; mapear excepciones de evidencia. Owner: Inflexyon + Compras (Tania/Jorge).
+Objetivo actual
+Estandarizar órdenes interco por servicio/producto con reglas documentales y precios.
+Plantas (Cepellón y Raíz Desnuda): Compras, Recepción Virtual, Entrega a Productor y Mermas
+Contexto
+NBG compra a viveros y factura a Naturberry; recepción virtual en Naturberry y entrega directa a productor; asesores capturan calidad/mermas en sitio; requiere estado de cuenta del productor y control por contrato.
+Estado
+Proceso operativo con folios físicos; diálogos previos sobre contratos, financiamiento, temporadas y diferencias por tipo de planta.
+Preocupaciones, desafíos y bloqueos
+Doble objetivo de merma: imputar al vivero y reflejar al productor, sin perder existencias ni duplicar costos.
+¿Quién genera la OV? Sincronía con programaciones (Leti) y control interno (administrativo vs campo).
+Control de calidad “virtual” y trazabilidad sin paso por almacén físico.
+Ideas y explicaciones
+App móvil Odoo para que asesor capture recepción (calidad/merma) y luego salida a productor; merma descontada al ingreso con reflejo en estado de cuenta del productor.
+OV debe existir para generar salida y facturación; propuesta: asesor genera “solicitud/folio” que dispara OV administrativa (Coni) post-entrega; cambios de último minuto aceptados con control.
+Decisiones y próximos pasos
+Inflexyon presentará propuesta integral de flujo (ingreso virtual, merma, solicitud→OV, QC, estados de cuenta, contratos por vivero). Owner: Inflexyon (Emiliano/Alex).
+Sesión dedicada a planeación de planta y contratos con viveros; integrar finanzas (presupuestos, recordatorios pago). Owner: Edder + Inflexyon.
+Objetivo actual
+Definir flujo único para plantas que asegure trazabilidad, merma correcta (vivero/productor), control de OV y facturación, y enlace a contratos/temporadas.
+Catálogo de Proveedores/Produtores y IDs
+Contexto
+Separación proveedor/acreedor; productores distintos a proveedores; requerimientos de alta y numeración.
+Estado
+Lista en depuración con Giovanna/Yadira/José Roberto; propuesta de prefijos PV/AC.
+Preocupaciones, desafíos y bloqueos
+Evitar duplicidad y soportar multimoneda; relación NBG–viveros para contratos.
+Ideas y explicaciones
+Mantener contactos de viveros bajo NBG para control contractual y trazabilidad.
+Decisiones y próximos pasos
+Revisar alta de proveedores/productores con Contabilidad (Yuri) y cerrar convención de IDs. Owner: Tania + Contabilidad + Inflexyon.
+Objetivo actual
+Catalogación limpia con prefijos y relaciones necesarias para compras, contratos y trazabilidad.
+Otros temas incidentales
+Seguimiento y notificaciones en Odoo
+Implementar estados visibles al solicitante (“aceptada/rechazada/confirmada”), con chat interno y actividades automáticas.
+Evaluación de proveedores por tiempos de entrega
+Usar tabla de lead times para medir OTIF y alimentar decisiones de reorden y desempeño.
+Cambios de destino con prefijos de embarque
+Mantener número de embarque base y sufijos (A/R) para cambios/rechazos, preservando costos ya incurridos.
+Facturación anticipada y refacturación por cambio de cliente
+Flujo de anticipo de factura (Walmart) y cancelación/refacturación si cambia destino final.
+Sesiones pendientes y logística de agenda
+Sesión específica de Fletes (Leti, JP).
+Segunda sesión de Almacenes (recepción de plantas) agendada; agregar participantes faltantes (Coni, Sergio, Giovanna).
+Próximas: Inventario/Contabilidad, Facturación, Liquidaciones, Comercial (pedidos).
