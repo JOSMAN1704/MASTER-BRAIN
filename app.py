@@ -11,12 +11,11 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Añadimos el prefijo 'models/' para que la API v1beta lo encuentre sin problemas
+# Opción A: Usar el nombre de versión específico de la API v1beta
 modelo_ia = genai.GenerativeModel(
-    model_name="models/gemini-1.5-flash", 
+    model_name="gemini-1.5-flash-latest", # <--- Cambiamos a '-latest'
     tools=[{"google_search_retrieval": {}}]
 )
-
 # =====================================================================
 # 2. FUNCIÓN PARA LEER ARCHIVOS AUTOMÁTICAMENTE
 # =====================================================================
