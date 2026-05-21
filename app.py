@@ -60,13 +60,20 @@ def obtener_contexto_drive(service):
     
     return contexto_completo
 
-# Inicializar conexión a Drive
-try:
-    drive_service = autenticar_drive()
-    st.success("Conectado con éxito a tu Google Drive ✅")
-except Exception as e:
-    st.info("Por favor, inicia sesión para conectar tu base de datos de Drive.")
+# --- PUESTA EN MARCHA DEL BOTÓN DE CONEXIÓN ---
+if 'drive_service' not in st.session_state:
+    if st.button("Conectar con Google Drive"):
+        try:
+            st.session_state.drive_service = autenticar_drive()
+            st.success("Conectado con éxito ✅")
+            st.rerun() # Esto recarga la página para mostrar el chat
+        except Exception as e:
+            st.error(f"Error al conectar: {e}")
+    
     drive_service = None
+else:
+    drive_service = st.session_state.drive_service
+# -----------------------------------------------
 
 # 4. INTERFAZ DE CHAT Y PROCESAMIENTO CON GEMINI
 if drive_service:
