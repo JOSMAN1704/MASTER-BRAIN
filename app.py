@@ -64,18 +64,22 @@ def buscar_parrafos_clave_expertos(pregunta, carpeta="datos_internos"):
         if archivo.endswith('.txt') or archivo.endswith('.csv'):
             ruta = os.path.join(carpeta, archivo)
             with open(ruta, 'r', encoding='utf-8') as f:
-                # Estructuramos el contenido para que la IA sepa el origen exacto del fragmento
+                # Estructuramos el contenido original
                 documentos_texto.append(f"ORIGEN_ARCHIVO: {archivo}\nDATOS_REUNIÓN: " + f.read())
                 
     if not documentos_texto:
         return ""
         
-    # 2. Fragmentación matemática del texto para preservar el contexto de acuerdos
+    # 2. Picar el texto en fragmentos pequeños (Indispensable para no saturar la API de Embeddings)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    fragmentos = [Document(page_content=texto) for texto in documentos_texto]
+    
+    # Creamos los fragmentos como objetos "Document" puros compatibles con LangChain Core
+    fragmentos = text_splitter.create_documents(documentos_texto)
     
     # 3. Construcción del mapa semántico FAISS con la tecnología de Google
     embeddings_google = obtener_embeddings_google()
+    
+    # Ahora que los textos van en pedazos de 1000 caracteres, FAISS y Google los procesarán al instante
     base_conocimiento = FAISS.from_documents(fragmentos, embeddings_google)
     
     # 4. Extracción de los 4 bloques de datos más alineados conceptualmente a la duda
