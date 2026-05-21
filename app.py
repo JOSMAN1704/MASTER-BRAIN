@@ -29,7 +29,7 @@ def autenticar_drive():
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"]
+            "redirect_uris": ["https://cerebro-master-erp.streamlit.app/"] # LA MISMA QUE PUSISTE EN LA CONSOLA
         }
     }
     
