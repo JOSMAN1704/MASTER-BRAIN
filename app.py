@@ -20,8 +20,8 @@ st.write("Consulta todo el historial de Fathom e investigaciones de Odoo con IA 
 # 2. AUTENTICACIÓN CON GOOGLE DRIVE VIA OAUTH2
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
-def autenticar_drive():
-  client_config = {
+def obtener_credenciales():
+    client_config = {
         "web": {
             "client_id": CLIENT_ID,
             "project_id": "cerebro-maestro-drive",
@@ -29,15 +29,14 @@ def autenticar_drive():
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["https://cerebro-master-erp.streamlit.app/"] # LA MISMA QUE PUSISTE EN LA CONSOLA
+            "redirect_uris": ["https://cerebro-master-erp.streamlit.app/"]
         }
     }
     
-  flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-  auth_url, _ = flow.authorization_url(prompt='consent')
+    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
+    auth_url, _ = flow.authorization_url(prompt='consent')
     
-    # Esto te dará el link en la pantalla
-    st.write(f"### 🔗 Autorización necesaria")
+    st.write("### 🔗 Autorización necesaria")
     st.write("Haz clic en el enlace de abajo, inicia sesión y copia el código que te dará Google:")
     st.write(auth_url)
     
@@ -45,9 +44,9 @@ def autenticar_drive():
     
     if auth_code:
         flow.fetch_token(code=auth_code)
-        return build('drive', 'v3', credentials=flow.credentials)
-    
-    return None
+        st.session_state.credentials = flow.credentials
+        st.success("¡Autenticación exitosa!")
+        st.rerun()
 
 # 3. AUTENTICACIÓN DIRECTA (Sin botones que desaparecen)
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
