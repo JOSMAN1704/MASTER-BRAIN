@@ -46,11 +46,11 @@ def buscar_en_web_odoo(consulta):
 # =====================================================================
 @st.cache_resource
 def obtener_embeddings_google():
-    # Forzamos a la librería a usar la API Key y el cliente correcto de AI Studio
+    # Eliminamos 'models/' porque la API v1beta requiere el nombre directo
     return GoogleGenerativeAIEmbeddings(
-        model="models/text-embedding-004",
+        model="text-embedding-004",  # <--- Cambiado aquí
         google_api_key=st.secrets["GEMINI_API_KEY"],
-        task_type="retrieval_document" # Especifica a Google que es para buscar documentos
+        task_type="retrieval_document"
     )
 
 def buscar_parrafos_clave_expertos(pregunta, carpeta="datos_internos"):
