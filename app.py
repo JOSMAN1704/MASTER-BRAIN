@@ -21,7 +21,7 @@ st.write("Consulta todo el historial de Fathom e investigaciones de Odoo con IA 
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 def autenticar_drive():
-    client_config = {
+  client_config = {
         "web": {
             "client_id": CLIENT_ID,
             "project_id": "cerebro-maestro-drive",
@@ -29,7 +29,7 @@ def autenticar_drive():
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"] # Este es el truco para obtener un código manual
+            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"]
         }
     }
     
