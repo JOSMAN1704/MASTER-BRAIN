@@ -1,5 +1,6 @@
 streamlit
 google-generativeai
 requests
-langchain-community
 faiss-cpu
+langchain-core
+langchain-google-genai
