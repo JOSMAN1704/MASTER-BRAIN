@@ -1,0 +1,620 @@
+======================================================================
+ID DE SESIÓN: CONTINUACION ANALISIS OPERACIONES NBG
+FECHA: 2026-04-21
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/tHnphjGrzzFyfwWNk3_Ppd9rTUasM9Qq
+======================================================================
+
+RESUMEN
+
+Revisión De Análisis Almacen - NBG - April 29
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar el análisis del almacén para definir qué se cubre de forma nativa en Odoo y qué requiere desarrollo a la medida.
+
+Puntos clave
+
+  - Necesidades básicas de inventario cubiertas de forma nativa: Las funciones estándar de Odoo (existencia en tiempo real, trazabilidad por lotes, reabastecimiento min/máx) reemplazarán el seguimiento actual en Excel.
+  - Personalizaciones críticas requeridas: Procesos clave como digitalizar la papelería de entrega (firmas, fotos) y gestionar las entregas de materiales a productores requieren desarrollo a medida.
+  - La planificación de producción de planta es una nueva prioridad: Se necesita una reunión dedicada con Eder para definir requisitos de gestión de calendarios de producción de planta y contratos de vivero.
+  - Reunión de priorización agendada: Hay una reunión programada para mañana a las 4 PM para priorizar todos los desarrollos identificados para el Go-Live de agosto.
+
+Temas
+
+Objetivos de inventario de almacén
+
+  - Objetivo: Reemplazar el seguimiento en Excel con un sistema unificado para visibilidad de existencias y trazabilidad en tiempo real.
+  - Capacidades clave:
+      - Control preciso de existencias: Visibilidad en tiempo real de materiales, plantas y fruta en todas las ubicaciones, incluyendo la existencia “aparente en campo” de productores.
+      - Trazabilidad por lotes: Seguimiento de extremo a extremo (OC → Recepción → Venta) para control de calidad y reclamaciones.
+      - Estrategia de retiro: FIFO (PEPS) para fruta, configurable por categoría de producto.
+      - Historial de movimientos: Registros detallados de todas las transferencias, consumo y merma.
+      - Gestión de merma: Registrar pérdidas a una ubicación de “merma”, asegurando el costo de inventario correcto y evitando inflación de existencias.
+
+Funcionalidad nativa de Odoo
+
+  - Reportes:
+      - Historial de movimientos: Registros detallados con filtros (proveedor, producto, fecha).
+      - Existencias en tiempo real: Listas de inventario por almacén (Materiales, Cuartos Fríos, Irapuato).
+  - Reabastecimiento:
+      - Reorden min/máx: Reglas que generan automáticamente órdenes de compra para mantener niveles de inventario.
+  - Transferencias:
+      - Entre almacenes: Transferencias internas estándar (“albaranes”).
+      - Entre compañías: Funcionalidad nativa para transferencias entre Naturberry y Naturagui.
+  - Devoluciones:
+      - Devoluciones a proveedor: Proceso estándar para devoluciones totales, parciales o por intercambio.
+      - Devoluciones de productor: Funcionalidad nativa, pero puede requerir desarrollo para cubrir el proceso completo.
+  - Recepción:
+      - Flujo estándar: Proceso nativo de 1, 2 o 3 pasos (p. ej., Recepción → Control de Calidad → Stock).
+      - Control de calidad: Odoo tiene un módulo básico de CC; podría requerirse una solución a medida si resulta insuficiente.
+  - Gestión de productos:
+      - Lotes: Funcionalidad nativa para rastrear partidas de producto.
+      - Fechas de caducidad: Funcionalidad nativa con alertas configurables.
+      - Ubicaciones: Funcionalidad nativa para gestionar ubicaciones físicas de almacén (racks, pasillos).
+      - Escaneo de código de barras: Herramienta nativa que funciona con teléfonos/tablets; pueden requerirse escáneres especializados para etiquetas dañadas.
+  - Envíos directos:
+      - Triangulación: Funcionalidad nativa para envíos directos proveedor→cliente, pero requiere desarrollo para ajustarla al flujo de entregas de productores.
+  - Almacén de cuarentena:
+      - Nativo: Odoo soporta crear múltiples almacenes para propósitos específicos.
+
+Desarrollos a medida requeridos
+
+  - Papelería digital de entrega:
+      - Meta: Reemplazar las “papeletas” en papel con un flujo digital en tablets/teléfonos.
+      - Funciones: Firmas digitales, evidencia fotográfica, notificaciones automáticas por correo.
+  - Control de entrega de materiales a productores:
+      - Proceso: El chofer presenta INE → El almacén escanea el código de barras del productor → El sistema valida:
+          - Aprobación: El productor está autorizado por el responsable de Inocuidad.
+          - Lista de materiales: El productor solo puede recibir materiales preaprobados.
+      - Evidencia: Requerir foto de la INE del chofer y aprobación del responsable antes de la entrega.
+  - Automatización de entrega y venta de plantas:
+      - “Papeleta de Entrada y Salida”: Un formulario digital para que los asesores de campo registren la recepción de plantas y la entrega inmediata a productores.
+      - Creación de pedido de venta: Generar automáticamente el pedido de venta a partir del registro de entrega.
+  - Automatización del seguimiento de merma:
+      - Meta: Automatizar el cálculo de merma y su reporte en los pedidos de venta.
+      - Proceso: Registrar la cantidad total entregada y el porcentaje de merma → El pedido de venta refleja la cantidad neta, con la merma registrada para visibilidad del productor.
+  - Gestión de fletes:
+      - Módulo: Usar el módulo nativo de Odoo “Floquilla” (Fletes).
+      - Necesidades: Una base de datos de transportistas y un proceso para la planeación semanal de fletes.
+  - Proceso de devoluciones de productor:
+      - Lógica: El sistema debe impedir que los productores devuelvan más material del que recibieron.
+      - Evidencia: Requerir evidencia fotográfica para todas las devoluciones.
+  - Gestión de reclamaciones a proveedores:
+      - Proceso: Un flujo formal para rastrear reclamaciones de asesores de campo hacia compras/almacén.
+      - Necesidades: Un sistema para gestionar el estado de la reclamación (aceptada/rechazada) y notificar al asesor.
+  - Integración con sistema de tarimas:
+      - Necesidad: Integración por API con el sistema externo de tarimas (pallets).
+      - Acción: Robert enviará la documentación del API.
+  - Integración NBG USA (Annoblech):
+      - Necesidad: Permitir que NBG USA consulte inventario y cree pedidos de venta.
+      - Estatus: Requisito conocido desde el alcance inicial del proyecto.
+
+Próximos pasos
+
+  - Emiliano: Actualizar la matriz de desarrollos con todos los puntos discutidos y enviar el documento final a Robert.
+  - Víctor: Agendar una reunión con Eder para mañana para definir los requisitos de planificación de producción de planta.
+  - Raúl: Agendar la reunión de priorización de desarrollos para mañana a las 4 PM.
+  - Robert:
+      - Proporcionar la documentación del API del sistema de tarimas.
+      - Proporcionar el formato de CC para devoluciones de material.
+  - Todos: Asistir a la reunión de priorización de desarrollos mañana a las 4 PM.
+
+======================================================================
+
+ONE-ON-ONE
+
+Revisión De Análisis Almacen - NBG - April 29
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Revisar a detalle el análisis de Inventarios/Almacén en Odoo (qué es nativo vs. requiere desarrollo), alinear flujos clave (recepciones, devoluciones, salidas, control de calidad, triangulación y ubicaciones), y acordar siguientes pasos para priorización/estimación.
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Presenta matriz de funcionalidades nativas y desarrollos detectados para Almacén/Inventarios.
+
+Progreso en prioridades desde la última reunión:
+
+  - Inventario Odoo cubre: historial de movimientos, existencias en tiempo real, mínimos/máximos, movimientos inter-almacén e intercompañía, devoluciones a proveedor, recepciones por 1-2-3 pasos con posible QC, lotes/trazabilidad/caducidad, ubicaciones con códigos de barras, salidas a clientes, fabricación (listas de materiales, subcontratación), cuarentena, notas de crédito, mermas con cuentas contables.
+  - Identificados desarrollos clave: firmas digitales, evidencia fotográfica, papeleta de entrada/salida para plantas, etiqueta de paleta, control de mermas por parámetros, validaciones de productor/chofer/INE/FS, triangulación ajustada a asesores en campo, portal de productores (inventario aparente), gestión de fletes (base de transportistas, planeación), integración con sistema de tarimas, ajustes a control de calidad.
+
+Prioridades hasta la próxima reunión:
+
+  - Depurar y consolidar la matriz de GAPS/desarrollos (incluyendo puntos previos y por área).
+  - Incorporar consideraciones de consignación y visibilidad intercompañía (Naturalli/Naturprime).
+  - Preparar demo/opciones para QC en materiales de empaque (estándar vs adecuación).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Definir campos/flujo exacto de papeletas, firma y correos automáticos.
+  - Especificación de etiqueta “Paleta” (datos y formato).
+  - Datos/API del sistema de tarimas para integración.
+  - Formatos/evidencias de exportación y fletes por tipo (fruta/planta/material).
+
+Raúl Núñez
+
+Registro
+
+  - Enfocado en cerrar alcance y pasar a estimación/priorización.
+
+Progreso en prioridades desde la última reunión:
+
+  - Alinea proceso para priorizar GAPS y enviar a estimación de desarrollo.
+
+Prioridades hasta la próxima reunión:
+
+  - Sesión de priorización con matriz depurada (mañana 4 pm) para definir High/Medium/Lower para salida a productivo.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Evitar cambios de alcance tardíos; requiere validación puntual de escenarios por negocio.
+
+José Manuel Espinoza
+
+Registro
+
+  - Confirma necesidades operativas y pide digitalización integral (sin folios en papel).
+
+Progreso en prioridades desde la última reunión:
+
+  - Define separación de procesos por tipo de producto (planta vs material de empaque) y lineamientos de evidencias/firma.
+  - Señala requerimientos de visibilidad intercompañía y de NBG USA (Annoblech) sobre inventarios y órdenes.
+
+Prioridades hasta la próxima reunión:
+
+  - Coordinar reunión con Eder (producción/viveros, MPS/calendario) y con área comercial (Cholico) para requerimientos críticos.
+  - Validar si QC estándar de Odoo cubre recepción de materiales.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmar políticas de evidencias/exportación y fletes por auditoría SAT.
+  - Definir catálogo de motivos de rechazo y calificación de proveedores.
+
+Víctor De La Parra
+
+Registro
+
+  - Aporta precisión de términos (albaranes) y evidencia/folios digitales.
+
+Progreso en prioridades desde la última reunión:
+
+  - Reafirma necesidad de: folios digitalizados con firmas/fotos, papeletas por proceso, validaciones (INE + aprobación Food Safety), límites en devoluciones (no más de lo entregado), planeación de fletes multiuso.
+
+Prioridades hasta la próxima reunión:
+
+  - Programar reunión con Eder (ideal mañana).
+  - Proveer ejemplos de evidencias requeridas por tipo de flete.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmación de flujos diferenciados y evidencias por línea (fruta/planta/material).
+
+Sergio Oswaldo Núñez Meléndez
+
+Registro
+
+  - Confirma intención de abrir control de calidad en almacén (materiales) y separar procesos.
+
+Progreso en prioridades desde la última reunión:
+
+  - Valida que QC en recepción de materiales está contemplado; procesos de planta vs materiales deben mantenerse separados.
+
+Prioridades hasta la próxima reunión:
+
+  - Bosquejar paso de QC propuesto para materiales (para validar si estándar basta).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Definir criterios/formato de QC salida de material.
+
+Temas
+
+Cobertura nativa vs. adecuaciones en Inventarios
+
+  - Odoo cubre mayoría de operaciones (movimientos, existencias, lotes, devoluciones, intercompany, ubicaciones, fabricación básica).
+  - Adecuaciones necesarias: firmas/evidencia, papeletas unificadas por proceso, etiqueta “Paleta”, validaciones INE/FS, ajustes de triangulación con asesores, portal productores, integración tarimas, gestión fletes con evidencias.
+
+Recepción de materiales y QC
+
+  - Flujos 1-2-3 pasos; potencial QC en recepción de materiales.
+  - Estándar de Odoo podría bastar; si no, ajustes mínimos.
+  - Necesario catálogo de rechazos y scoring de proveedores (desarrollo ligero).
+
+Digitalización de folios y trazabilidad en campo
+
+  - Eliminar papel: firma en sitio, fotos, envío automático de acuses por correo.
+  - Papeleta de entrada/salida para plantas y materiales; crear OV desde salida.
+  - Límite en devoluciones del productor (no exceder entregado).
+
+Triangulación y ubicaciones en campo
+
+  - Triangulación adaptada: asesor recibe y libera sin pasar por almacén.
+  - Ubicaciones por productor para inventario aparente y portal de consulta.
+
+Intercompañías y consignación
+
+  - Movimientos entre compañías ya probados; usar consignación para Naturalli/Naturprime con visibilidad sin afectar costos.
+
+Mermas y contabilidad
+
+  - Uso de ubicaciones de desecho por área con cuentas contables específicas y afectación al costo.
+
+Gestión de fletes
+
+  - Base de transportistas, planeación semanal (Carla: nacional; Leti: importación/coolers).
+  - Unificar gestión; evidencias varían por tipo (requisito SAT); OC para pago a fletera.
+
+Producción (plantas) y MPS
+
+  - MPS útil para plantas/viveros y calendarización; requerirá reunión con Eder.
+  - Contratos con viveros y cumplimiento parcial/pendiente.
+
+Comercio/Exportación y documentos
+
+  - Revisar documentos requeridos post-Knowledge; aprovechar documentos estándar de Odoo.
+
+Próximos pasos:
+
+  - Emiliano: Depurar matriz de GAPS/desarrollos, integrar puntos previos por área y enviar para priorización (Fecha límite: antes de la sesión de mañana).
+  - Raúl: Convocar sesión de priorización de GAPS mañana 4 pm con Yuri/Emiliano/Pablo; ajustar lenguaje en comunicaciones para key users (Responsable: Raúl).
+  - Víctor: Agendar reunión con Eder para MPS/producción de plantas (objetivo: mañana) y compartir ejemplos de evidencias por tipo de flete (Responsable: Víctor).
+  - Sergio: Proponer flujo/criterios de QC en recepción de materiales y salida de material (Responsable: Sergio).
+  - José Manuel: Validar con comercial (Cholico) reunión para requerimientos críticos de Naturprime; definir políticas/documentos de exportación a reemplazar/usar en Odoo (Responsable: José Manuel).
+  - Equipo: Proveer especificación de etiqueta “Paleta” y campos de papeleta/firmas/correos; enviar detalles de sistema de tarimas y API (Responsables: Operaciones/Compras).
+======================================================================
+
+TRANSCRIPCION
+
+Revisión De Análisis Almacen - NBG - April 29
+VIEW RECORDING - 98 mins (No highlights): 
+
+---
+
+1:00 - Pablo Valero (Inflexyon)
+  Buenas tardes. Buenas tardes.
+
+1:04 - Roberto Estrada
+  Gusto en saludarte, Robert. ¿Cómo estás? Sí.
+
+1:08 - Pablo Valero (Inflexyon)
+  Ya listo, digo, ya tenía varios días que de vuelta, pero bueno, por ahí había estado más en comunicación con el equipo.  ¿Sí me escuchas?
+
+1:21 - Roberto Estrada
+  Sí, sí. ¿Tú nos escuchas?
+
+1:25 - Pablo Valero (Inflexyon)
+  Creo que no.
+
+1:30 - Roberto Estrada
+  ¿Sí me escuchan? Sí te escuchamos, ¿tú nos escuchas?
+
+1:52 - Pablo Valero (Inflexyon)
+  Sí, Robert.
+
+1:56 - Victor De La Parra
+  Raúl, ¿sí me escuchas tú?
+
+1:58 - Roberto Estrada
+  Sí, sí se escucha.
+
+2:00 - Raúl Núñez (Inflexyon)
+  Perfecto, muy bien.
+
+2:01 - Roberto Estrada
+  Aquí aparece como que el micrófono estuviera apagado, pero listo. Gracias, Checo, por unirte a la reunión. ¿Qué tal, Roberto?
+
+2:13 - Sergio Oswaldo Nunez Melendez
+  ¿Los demás? ¿De nada? ¿Por qué andamos?
+
+2:15 - Roberto Estrada
+  Parece que tú no nos escuchas, Roberto. Sí, al parcerio no nos escucho. A ver ahí, bueno, bueno, probando, ¿nos escuchas?
+
+3:04 - Victor De La Parra
+  Sí, yo sí te escucho, Raúl.
+
+3:08 - Roberto Estrada
+  Esa es mi aplicación del Teams. Aquí está. Teams, sí, no sé, no lo habilita. Si quieres vamos escuchándonos ahí a continuo.
+
+4:01 - Jose Manuel Espinoza
+  Listo muchachos. Listo. ¿Cómo empezamos Raúl o Emiliano? estás en mute Raúl. Ah, perdón, una disculpa.
+
+4:28 - Raúl Núñez (Inflexyon)
+  Sí, miren, la sesión del día de hoy básicamente es para entrar un poquito ya más a detalle en el análisis que realizaron Emiliano y Yuri, sobre todo ahorita en toda la parte de operaciones, para entrar a detalle de los gaps que se han identificado en el área de almacén, si nos da tiempo también en el área de compras, y Emiliano trabajó un documento al interno que nos hizo llegar.  Para determinar qué partes de la operación que tuvimos, que revisamos en el análisis, en las sesiones de análisis, se llevan de forma nativa y cuáles detalles o cuáles partes del flujo se requieren vía desarrollo.  Entonces, eso es lo que vamos a ver en la sesión del día de hoy. Va, ok.
+
+5:20 - Jose Manuel Espinoza
+  Ya habíamos previamente visto con Emiliano y el equipo las necesidades puntuales del área de almacén. No sé si ahí, en base a eso que ya habíamos visto, trae algo ya Emiliano preparado.  ¿Sí? Justamente, justamente, va a poder.
+
+5:38 - Raúl Núñez (Inflexyon)
+  perfecto. Entonces, Emiliano, somos todos tuyos.
+
+5:42 - Jose Manuel Espinoza
+  Diseñanos tu magia. Estás en mute, Emiliano.
+
+6:19 - Pablo Valero (Inflexyon)
+  Emiliano, no sé si estás hablando, pero estás en miedo. Déjenos escribirle por acá.
+
+8:40 - Emiliano  Lorenzano
+  Hola, Robert. Buenas tardes. ¿Qué hubo, Emiliano? Buenas tardes. Bien, aquí ya estamos. ¿Sí nos escuchaste la introducción? Sí, sí, sí.
+
+8:50 - Jose Manuel Espinoza
+  Ah, perfecto.
+
+8:53 - Emiliano  Lorenzano
+  Bien. De acuerdo a lo que estuvimos revisando, Robert, en las sesiones pasadas dentro de... Lo que fue el análisis del módulo de inventarios y lo que se revisó en el macroproceso general que tenían, pues se detectaron algunas cosas que ya van como funcionalidad posiblemente estándar, algunas que son estándar y que pueden entrar también con alguna adecuación para completar el flujo y otras que pues van prácticamente ya con desarrollo desde cero.  Entonces, tenemos ahorita identificado pues algunas funcionalidades, también tenemos separados los desarrollos. Voy a compartir pantalla y también ya tenemos agregado pues en la matriz de desarrollos los puntos a revisar y ya nos dicen también cuáles se van a...  Estar realizando con prioridad alta, media y los que no son tan prioritarios para la salida en vivo o para alguna prueba.  Voy a compartir pantalla. Ustedes me dicen si ya se puede ver. Yo sí la veo, Emiliano. Gracias.
+
+10:33 - Sergio Oswaldo Nunez Melendez
+  Bien.
+
+10:34 - Emiliano  Lorenzano
+  De lo que lo estuvimos revisando con ustedes en las pláticas de las sesiones pasadas, ustedes esperaban que en la parte del módulo de inventario se pudiera tener un control, un mayor control, que ahorita a mejor no se tiene tan completo, porque se llevan varias cosas en Excel o en algunos otros...  Entonces, con la parte del módulo de inventario de Odu, pues el objetivo sería gestionar, controlar y optimizar el flujo de materiales y productos.  Con esto, pues también considerando la disponibilidad en tiempo real, la trazabilidad, que también es importante para el tema de la gestión de calidad y prácticamente conocer el producto, en qué parte del proceso se encuentra.  Si está ya en parte de, en tránsito, ya por envío del proveedor hacia ustedes, si ya se recibió, si ya se envió al cliente, y también pues conocer la parte del inventario que se tiene con los productores.  Dentro de esta parte, ustedes, ¿qué esperaban? ¿Qué qué esperan del módulo de inventarios? Pues que permita tener un control preciso, trazable y en tiempo real de las existencias, tanto de plantas, la parte de los frutos y también pues tener el control de las mermas y pues asegurando la disponibilidad de los productos y que no vaya a afectar pues en la planeación que tienen ustedes con la producción de la fruta.  También ustedes pues esperaban tener una interfaz intuitiva y fácil de manejar, Y sabemos que Odu pues sí nos brinda pues esa opción.  Ya, Robert, tú ya conoces el sistema, ya lo has echado a andar con lo de calidad. Entonces yo creo que el sistema sí cumple con esta parte, ¿no?  De que sea fácil de manejar y también que pues sea intuitivo. que dentro de lo que se... Gustavo también del control preciso de existencias.  Con esto vamos a tener la visibilidad en tiempo real de todo nuestro inventario, de lo que tenemos realmente en materiales, plantas, la parte de las frutas, y también lo que vamos a tener en aparente en campo, lo que le llaman ustedes, lo que envían a los productores.  La cantidad disponible, ubicaciones. Con la trazabilidad por lotes, nos vamos a nosotros a asegurarnos de una buena gestión dentro del sistema, ya que en la parte de la trazabilidad con lotes vamos a asegurar o vamos a tener el control de con quién se compró, en qué entrada entró, en qué salida salió y pues con qué venta se fue.  Esto pues para tener el control Asegurar la parte del control de calidad y en caso de algunos reclamos, pues ustedes puedan rastrear de forma más sencilla qué pasó con ese producto.  Entonces, para eso vamos a tener acá la parte de los lotes, control de caducidad, también vamos a tener la parte del control de caducidad, si se llegara a ocupar la rotación.  comentaban ustedes que requerían que fuera la estrategia de remoción que fuera la de pets, primeros en entrar, primeros en salir.  Esta parte se puede manejar en base a las categorías y en cada categoría se puede configurar alguna estrategia de remoción en dado caso que se ocupe.  Puede ser que para la parte de los frutos se ocupe la de los pets, para la parte de las plantas se ocupe otra estrategia de remoción y para la parte de los materiales también algo.  El control de las entradas y salidas, pues aquí vamos a tener en el sistema el registro de todos los movimientos, quién fue el que dio la entrada, quién fue el que dio la salida, en qué fecha y día se registraron los movimientos, el historial de cómo se ha estado moviendo el producto, transferencia entre ubicaciones, si se ocupa, pues también consumo en campo o producción para la parte de lo armado de los pallets, o la parte del consumo en campo con los productores, la parte de las mermas, también vamos a tener controlado esto acá en el sistema.  Bueno, aquí también viene la gestión ya de mermas y pérdidas, aquí vamos a poder, vamos a registrar. Lo que vendría siendo las pérdidas, que ya se vaya directamente a una ubicación de desecho y que afecte al costo.  Bueno, ya ustedes me dicen si afecta al costo y qué cuenta contable nos va a relacionar el sistema para que se genere la póliza.  Con esto ya no tendríamos inflado nuestro inventario, sino ya lo tendríamos actualizado en forma. Bueno, esta parte ya de las...  Bueno, no sé si tengan algún comentario, Víctor, Robert. No, ahí vas bien. Todavía vas bien. Ya en la parte de las funcionalidades dentro del sistema de lo que ustedes nos pedían que se tuviera acá en Odoo, uno de los puntos que se consideraban o que se consideran importantes sería el historial de movimientos recientes.  Ahorita aquí le puse que es nativo. Y aquí viene pues alguna descripción de lo que, de qué se espera dentro del sistema.  El reporte historial de movimientos de la aplicación de inventarios proporciona un registro detallado de movimientos de los productos. Esta parte pues incluye de dónde se recibió, a dónde se envió, si se envió de un almacén a otro, cómo estuvo la retación de la parte de los movimientos.  Ya con esto, dentro del sistema nos permite generar pues ya reportes con lo nativo. El sistema pues tiene lo que vendría siendo agrupadores o filtros, donde podemos empezar a filtrar, no sé, por proveedor, por producto, por rango de fechas.  Entonces el sistema ya nos da, ya nos da pues la, el historial de movimientos. Con esta parte. Pues estaríamos cubiertos, ¿no?  Para lo que ustedes también esperan dentro del sistema. Y han dado caso, pues, que se requiera alguna adecuación, pues se hace.  Pero ahorita yo no detecté ninguna adecuación, fue por tal motivo que yo aquí no le puse combinación, ¿no? Con algún ajuste, ¿no?  Porque pues ya con lo que nos presenta el sistema, pues siento que pudiera estar cubierto para lo que ustedes buscan del historial de movimientos.  También ustedes querían, pues, el reporte de existencias en tiempo real. Ya también el sistema trae los reportes ya de, en tiempo real de lo que tenemos actualmente.  Entonces aquí, pues ya tampoco no tendríamos que desarrollar nada. El reporte de existencias de inventario para consultar una lista detallada con todos los productos almacenados.  Esta parte también del reporte nos los desglosa por almacenes. En este caso puede ser el de materiales, el de los coolers, o también aquí vamos a integrar la parte de lo que tendría el productor en campo.  Entonces ustedes van a tener el inventario en tiempo real, no nada más de un almacén. Bueno, acá ya está libre.  El que tenga acceso al módulo de inventario va a poder consultar las existencias de todos los almacenes que se tengan en sistema.  Y aquí sí, si se ocupara que solamente se pudiera restringir a que unos usuarios no puedan ver todo, pues ya ahí se metería algún ajuste vía de desarrollo.  Pero de entrada, pues viene ya con el sistema nativo, pues ya cubrimos esta parte del reporte de existencias en tiempo real.  El reabastecimiento automático por mínimos y máximos. Ustedes platicaban que también querían tener controlado esta parte, ¿no? Para generar las compras.  O bien que el sistema diera el pronosticado para mandar a compra de forma manual o pues que también ya fuera automatizado para que detonara la orden de compra y ya cayera directamente al área de compras.  Entonces acá en el sistema pues ya traen activos los mínimos y máximos. Se crean reglas de reordenamiento, así se le llama, por mínimos y máximos para generar las fornes de compra.  Pues con esto pues ustedes estarían asegurando las existencias. Aquí viene pues que se puede hacer sin intervención manual, ya que el sistema nos permite pues generar las fornes de compra de manera automática.  Ya cuando llega al mínimo. mínimo. Nos detona la orden de compra y en base al máximo, pues ya nos saca la cantidad a compra.  Pero pues también eso no significa que siempre pueda ser automático, ¿no? También se puede hacer de forma manual. Bueno, creo que aquí, ah, este es otro, ¿no?  Los movimientos entre almacenes e intercompañía también ya es nativo del sistema. Bueno, ya con Robert, en la parte de lo que vendría siendo la implementación de gestión de calidad que ya se hizo, con él ya también implementamos cómo poder enviar de una compañía a otra compañía sin necesidad de una orden de compra, ¿no?  Se envía producto, no sé, por ejemplo, de Naturberry, se envía a Naturagui sin necesidad de compra. Entonces el sistema sí nos cubre la parte de intercompañía.  Y... Y... Y pues también los movimientos entre almacenes. Los movimientos entre almacenes pues es más común, Con transferencias internas se comparte el producto, pero pues esto sí lo cubrimos también.  Y aquí viene que es nativo del sistema. Hasta el momento pues aquí no hemos detectado que con algo de esto pues no se pueda cubrir lo que están ustedes solicitando vía desarrollo, sino todo con lo estándar.  En esta parte de las devoluciones de productos a productores, esto se estaría manejando, o bueno, se estaría desencadenando a partir de dos factores.  Puede ser que sea a través de… Ah, sí, Víctor. No vi ahí que tenías levantada la mano. Sí, gracias, Emiliano.
+
+22:56 - Victor De La Parra
+  Regresándome tantito al punto anterior en donde dice los movimientos entre almacenes usan transferencias. Esa es interna, si le pones entre paréntesis albaranes, solamente nada más para diferenciarlo, el albarán es solo para el caso de planta.  Es un término general dentro de la plataforma de OLD.
+
+23:14 - Emiliano  Lorenzano
+  Ah, perfecto. Gracias. Sí, ya nada más ahí se identifica pues por un folio, ¿no? Ya sea si es una recepción, si es una salida o es una transferencia interna.  Perfecto, gracias. Pero sí, el término de albarán se consideraría como general. No sé, Robert, ¿tú algún comentario que quieras?  No, no, ninguno. Sigue, dale, dale. Bueno, en las devoluciones de productos a productores, aquí se consideraría la parte de la fresa.  Aquí se puede manejar por una orden de compra en dado caso que ya se relacione la entrada con una compra.  O también pudiera ser por una recepción, que prácticamente creo que va a ser por una recepción, porque primero hacen ustedes la entrada y después hacen un corte y seleccionan varias entradas para generar la orden de compra.  Entonces, de forma estándar, pues nosotros ya pudiéramos hacer las devoluciones de productos a proveedores, donde el producto pues sale de nuestro almacén y se va a la ubicación ya sea de productores o de proveedores, ¿no?  Que internamente en el sistema actualmente se maneja pues una ubicación como general de proveedores, entonces ya estaría enviando el producto allá y se tiene como, se tienen dos opciones, devolver todo el producto o devolver para cambio.  Devolver para cambio, pues es que nos van a cambiar el producto por uno nuevo, o devolver todo, pues es que vamos a devolver todo el producto.  En este caso, se puede hacer también parcial, de que solamente recibí, sí voy a recibir una parte, pero la demás, por algunas cuestiones, pues la voy a devolver.  Entonces, pues también se contemplan devoluciones parciales, y aquí sí, aquí sí agregué un punto, que posible ajuste vía desarrollo para contemplar el proceso completo de devoluciones, en dado caso que sí requiera algún ajuste para esta parte de las devoluciones.  Aquí, el proceso de recepción en almacenes de material de empaque, pues esto es nativo también del sistema, ¿no? Tenemos ya las operaciones de recepción, esto pues va a caer directamente a la almacén.  Almacén de Materiales, donde vamos a estar almacenando todo lo que es material de empaque, todo lo que vendría siendo las tarimas.  No recuerdo que otros productos se almacenan en la parte del almacén de materiales, pero esto es nativo del sistema, ¿no?  Toda la recepción se va a generar a partir de una orden de compra y con esto nos va a permitir hacer la gestión de la entrada de la mercancía.  Esta parte de las recepciones se pueden hacer en un paso que entra directamente a la ubicación del almacén de materiales.  Entonces, se puede hacer en dos pasos, que primero que haya una ubicación de entrada y después ya se pasa a la ubicación de...  Existencias. O la otra que contempla ya lo que vendría siendo en tres pasos, que sería entrada más control de calidad y pasa a existencias.  Acá depende mucho de cómo vayamos a querer gestionar las entradas para lo que vendría siendo la recepción de material.  Y como acá dice, se inicia a partir de una orden de compra y ya se genera un albarán. Entra aquí a la ubicación de almacenes, entrada y ya se recibe el producto.  Aquí se agregaron también unos flujos en recepción, que vendría siendo lo que les platicé hace rato, ¿no? En un paso que es más directo, así como lo recibo del proveedor, pues ya que haya la ubicación de existencias y ya está libre para poder usar ese producto.  La de dos pasos, que entra a primera entrada. Esta ubicación todavía no sería de existencias, no sería para ya uso.  Y después... Entonces, hay existencias que sí ya sería para poder usar el material y que ya esté disponible como inventario.  Y el último paso que sería entrada, calidad y existencia. Aquí se agregue una nota también de que posible ajusto vía desarrollo para contemplar el proceso completo.  Bueno, aquí creo que... ¿Por qué le puse esto? Porque es muy posible que dentro de este proceso de recepción de material, a lo mejor también se requiera algún tema de control de calidad, Victor.  No sé, aquí igual tú me puedes indicar y una vez le hago la anotación para cambiarle.
+
+28:48 - Victor De La Parra
+  A lo que me habían comentado, si se tiene todavía pensado, y si no me equivoco Oswaldo, que el material que se le haga recepción también se le pueda hacer un análisis.  Para la parte de material de empaque, a medida que haya cambiado.
+
+29:10 - Emiliano  Lorenzano
+  Igual lo dejo abierto, Victor, ya digo, no es que sea obligatorio, solamente está como sugerencia, en dado caso que se llegue a ocupar.
+
+29:26 - Sergio Oswaldo Nunez Melendez
+  Sí, hecho, el área de almacenes es lo que se pretende, ya en base a las reuniones que hemos tenido desde acá internas, es lo que se pretende, abrir la parte de calidad.  Está bien, no está definida al 100%, pero sí es algo que se tiene contemplado.
+
+29:49 - Emiliano  Lorenzano
+  Muy bien, entonces lo anotamos y que quede ahí como un historiano de que se puede contemplar algo ahí con las entradas.  Emiliano, por... Emiliano, por...
+
+30:00 - Jose Manuel Espinoza
+  ¿Por default, Odoo no maneja para este tipo de entrada al almacén un módulo de calidad como estándar? ¿Algo sencillo?  Sí maneja un control de calidad y como tú lo comentas, es muy sencillo, ¿no?
+
+30:16 - Emiliano  Lorenzano
+  Ahí viene, por ejemplo, tomar una fotografía, pasa o no pasa, algunos otros controles y se puede partir con eso.  Ok. Pero si dentro de esos controles que tiene el sistema no cumple con lo que ustedes buscan, pues ya sería ser una adecuación.  Muy bien. Pero sí, sí tiene. Perfecto.
+
+30:36 - Jose Manuel Espinoza
+  Entonces esperamos nada más que Oswaldo a lo mejor nos configure o visualice cómo sería ese paso de control de calidad y vemos si lo cubre con el estándar que ya trae, Odoo.
+
+30:55 - Emiliano  Lorenzano
+  Ahí está. Igual acá dejo esta parte como... Como posible alternativa y si no se ocupa, pues no, no pasa nada.  En la planeación de compras en base a consumos, ustedes consideraban, ¿no? ¿Sabes qué? Vamos a fabricar o armar el kit de la tarima, donde vamos a ocupar la tarima, donde vamos a ocupar las etiquetas, el, ¿cómo le llaman?  El fleje o para envolver la tarima. Bueno, los materiales que vayan a ocupar para la, para la, para armar la tarima, ¿no?  Que serían base a consumos. Mandar a comprar lo que falte. Aquí estamos considerando que se puede utilizar en el sistema, el, el MPS, que este es el plan maestro de producción.  Como vamos a utilizar en el sistema, el módulo de fabricación, Robert, para, para ya sea el armado de los kits o, o si para manejarlo como un producto fabricado, lo de las, lo de las tarimas.  Estamos considerando que se pueda utilizar este programa maestro de producción. Con esta parte ya nos va a dar el consumo de lo que se ocupe y también acá nos puede mandar a generar la parte de las compras.  Entonces, dentro de ahorita de lo nativo, el sistema ya contempla un histórico, pero el histórico lo jala en base a las ventas.  Si se ocupara con ustedes cargar un histórico de años anteriores para las tarimas que arman, pues pudiéramos hacer esa adecuación de que se carguen los históricos.  Entonces, ya en base a eso se pudiera hacer la planificación. ¿Sabes qué? El año pasado para tal día ocupamos tanto material.  Entonces, ya que nos dé el pronosticado para mandar a comprar. Esto sería cuestión de validarlo, Robert. Si nos vamos con el MPS o realmente nos vamos con algo más sencillo y lo manejamos con mínimos y máximos.  Ok, sí, está bien.
+
+33:14 - Jose Manuel Espinoza
+  Yo creo que el MPS lo vamos a necesitar, pero para el tema de la planeación de las plantas, de los viveros, de la entrega, de lo que quiere ahora hacer Eder, que yo creo que sería una muy buena herramienta, si nos la muestras, cuando tengamos la plática con Eder de lo que él quiere visualizar para su calendarización de producción de plantas.  Sí, sí, sí, ahorita sí lo pudiéramos revisar más adelante y no habría detalle.
+
+33:49 - Emiliano  Lorenzano
+  Sí, gracias. luego acá dice que... Materiales de oficina y material de limpieza no se van a manejar como un recurso almacenable, ¿no?  No nos interesaría como tener el control de esos productos, pero sí tendríamos que tener pues una trazabilidad en el sistema de que se mandó a comprar y que se recibió posiblemente ese producto.  Entonces los materiales de oficina y material de limpieza se van a manejar como consumibles, no van a tener trazabilidad.  Estos productos pues se pueden, se mandan a comprar y se reciben, ¿no? Generando pues un albarán de entrada y con esto ya no vamos a restrear existencias, pero sí vamos a tener controlados los movimientos de esos productos.  Al menos que cambien de opinión, ¿no, Robert? Que sí quieran tener la, el control de existencia de esos productos y que se debe de baja por departamentos, también se puede llevar sin ningún problema.  Bueno, después tenemos la recepción de material y revisión de la orden de compra. Aquí si viene combinación nativa y desarrollo.  Aquí si el cliente es correcto, se da entrada y si no, se rechaza. El producto sí tiene que pasar por una entrada y después se aplica la devolución y así poder calificar al proveedor.  En este apartado, ustedes aquí estaban considerando los motivos de por qué se va a rechazar el producto. Entonces, aquí si agregamos que era una combinación nativa con desarrollo, porque si se genera de una compra, se genera la entrada, pero ya para esta parte de los rechazos, pues no, de forma ahorita estándar, pues no tendría...  Ese catálogo, ¿no? De por qué no vamos a aceptar el producto y la parte de la calificación de los proveedores.  Adelante, Víctor. Gracias.
+
+36:13 - Victor De La Parra
+  Y aprovechando que tocas ese punto, vuelvo a repetirlo casi entre todas las reuniones de almacenes y lo bueno es que salió otra vez.  Bueno, justo que mencionas que viene entre nativa y desarrollo la parte de los folios, de los con los que se hacen las recepciones, tanto las entradas y las salidas, que se pudiera digitalizar y que se pudiera hacer de una forma más simple.  ¿A cuáles folios? En almacén, en las partes de almacenes, material de empaque, en las recepciones se hace un folio.  Cuando se acepta el material, se hace un folio. Me comentaba... Estaban en su momento que querían verlo visualizado, ese folio digitalizado, tanto para las entradas como las salidas y las devoluciones de material de empaque por parte de los productores.  ¿De acuerdo, Emiliano, que habíamos comentado?
+
+37:23 - Jose Manuel Espinoza
+  Bueno, en este caso estamos hablando de la recepción de material únicamente, pero en el proceso que hacen los chicos de la NACEN es también entregar ese material a los productores y queremos que ya no se haga con papeles, con folios, nada impreso, sino que todo se haga con una tablet o el teléfono o que de alguna manera se pueda gestionar algo más sencillo, que creo que como lo hacemos actualmente en el...  En el desarrollo que tenemos de calidad, creo que así pudiera ser, o a lo mejor hasta más fácil, porque si esto ya es nativo de Odoo, con una tablet entrando al mismo programa de recepción, creo que se pueda gestionar.  Pero la intención es que esos folios que se generen, pues se digitalicen, se ponga la firma de quién está entregando, tomemos fotos en ese folio, y se mande por correo a quien corresponda.  Exactamente. Sí, ya lo habíamos platicado en las sesiones anteriores.
+
+38:38 - Victor De La Parra
+  Y aquí, como dice Robert, retomando lo que dice, para la parte de la evidencia fotográfica, que es para lo de compras, que ahí va ligada justamente ahí, porque son unas evidencias para que, sí, cuentas por pagar, si no me equivoco, pueda librar el pago al proveedor.
+
+39:00 - Emiliano  Lorenzano
+  Bien, en esta parte, ahorita no viene aquí la firma, pero en la parte de los desarrollos sí ya traemos la firma, firmas que nos pidieron, traemos también esta parte de evidencia fotográfica y posiblemente lo que se nos pasó a notar sería de enviar correo a quien corresponda, con ya, bueno, con todo ese resumen ya de la evidencia y la firma.  También de la parte de lo que comentas, Robert, sí tenemos contemplado esa opción de que serían para los asesores, ¿no?  De cuando reciben el producto allá con el rancho, que reciben como si fueran parte de ustedes, pero que no es parte de ustedes, y así mismo que hacen la salida.  Entonces, eso sí también lo tenemos contemplado, ahorita no viene aquí en este apartado, porque lo tengo ahora sí en los puntos que vienen como desarrollo.  Perfecto. Esto de acá prácticamente vendría siendo lo que... Alcanzamos a cubrir con lo del sistema nativo. Pero igual ya lo anoté aquí para que no se nos vaya a pasar.  Y gracias también por recordarme. Igual en dado caso que algo no se me haya pasado, pues me recuerdan. Luego también la parte de utilizarlo.  a recordar, te preocupes. Está bien, pues. Utilizar los lotes, pues esto es forma nativa del sistema. Con la parte de los lotes, pues es para identificar y rastrar productos en nodo.  Por la parte en general de un lote, pues nos va a guardar la orden de compra, nos va a guardar la entrada, nos va a guardar también...  La venta, la salida, de cómo se estuvo generando los movimientos con ese lote. También ya de forma interna, bueno, la parte de los lotes lo vamos a utilizar cuando estemos haciendo la recepción.  con lo nativo nos da la opción de poner o agregar el lote que nos manda nuestro proveedor, nuestro productor, ¿no?  Con lo nativo. Ahí se hizo una adecuación ya con Robert en la otra implementación para agregar creo la parte de los lotes, ¿no?  Que es el número del productor, el... Pero también dentro del sistema la parte de los lotes pueden nacer en la parte de fabricación, ¿no?  Si estamos armando una tarima, si le dan un número de lote completo a la También se puede crear el lot.  Y yo creo que sí se va a utilizar porque vamos a desarrollar una etiqueta que le llaman paleta. Esa etiqueta va a contener cierta información y posiblemente sí nos vaya a ocupar en la parte de fabricación.  Bueno, aquí me faltó fabricación. Ahí está. La trazabilidad, ideal para productos que se manejan con caducidad o para los controles de calidad.  En el sistema nos permite establecer la fecha de caducidad de los productos. Yo sé que para el caso de ustedes a lo mejor no es tan común que utilicen las caducidades porque el producto no dura mucho tiempo con ustedes.  Así como entra, pues casi se va al otro día, ¿no? Pero pues se puede considerar... Una parte de fechas de caducidad, manejar alertas también en el sistema.  Por ejemplo, quedaría alguien de responsable, puede ser Sergio, que es de inventarios. A él se le establece como responsable en el formulario del producto y cuando ya esté próximo a caducar, pues ya nos va a mandar una alerta el sistema de que ese producto ya va a caducar y hay que darlo de baja o qué se tiene que hacer con ese producto.  La valorización de inventario también se puede gestionar con la parte de los lotes. En esta parte, Robert, por ejemplo, es un poco más común utilizarlo cuando son de importación.  Cuando mandamos a comprar productos al extranjero, pues no todo el costo. Siempre viene igual. Entonces, en esa parte se puede establecer el costo real en el lote por cada compra.  Y así nos está promediando de forma general. Tienes el promedio de forma general, pero también tienes el costo real de tu lote.  Entonces, cuando ya se vende, se va al costo real con el que entró por esa importación. Entonces, de esa forma también se puede utilizar la parte de los lotes.  Y para cuando ya vayamos a salir en vivo, pues también es posible importar los lotes existentes para que se relacione con un ajuste de carga inicial de existencias.  Entonces, también pues ya lo podríamos tener así. Bueno, después aquí en Naturberry cuenta con ubicaciones para algunos productos, ¿no?  Supongo que... Este va a ser para la parte del almacén de materiales, que ahí sí manejan rats. No sé, Robert, si te has de acordar en la visita que tuvimos, Rigo nos mostró un almacén también, pero dentro de estas pláticas que tuvimos comentaron que tenían ubicaciones.  Entonces, sin ningún problema, lo podemos gestionar con el sistema, ya sea que por pasillos, canterías, niveles. Y con esto, pues vamos a tener el inventario en tiempo real y qué se encuentra en cada ubicación.  Podemos también generar códigos de barras. Aquí se me lo va a poner, códigos de barras.
+
+45:40 - Jose Manuel Espinoza
+  Recuerda, ahí en ese apartado, que Naturalli como tal, acuérdate que es un poco medio confuso, ese almacén que vimos ahí de Naturalli con Rigo, que por cierto...  Tengo que dar una noticia, pero bueno, ese almacén que vimos con Rigo, recuerda que es un almacén, pero pertenece a Naturberry, o sea, es el inventario de Naturberry, que está en la ubicación de Naturalli, que está en la ubicación de Irapuato, pero el almacén como tal es de Naturberry, pero se llama Naturalli, como para identificar.  Tal vez si eso nos va a crear conflicto, a lo mejor podemos llamarle el almacén de Irapuato, para que no tengamos conflicto de, o bueno, es Naturberry, o es Naturalli, o es Irapuato.  Entonces, ese, todo el inventario, todo el material, pertenece a Naturberry, que está en el almacén de Irapuato.
+
+46:51 - Emiliano  Lorenzano
+  Sí, ya lo, ya lo, ya lo, ya mejor lo, lo agregué para, para no tener conflicto. Está, perfecto. Y también en la parte de los códigos de...  En las ubicaciones se puede utilizar código de barras. Dentro del sistema tenemos una herramienta que se llama código de barras.  Esto lo podemos utilizar ya sea en el teléfono, ya ocupar realmente un aparato especial para que funja como un escáner, una handker.  Con esto también pudiéramos utilizar esta parte para las operaciones, para recepción, para salidas, que todo se vaya por código de barras.  No viene aquí el caso, pero como estoy mencionando aquí, código de barras por ubicaciones, por eso lo hacía mención de eso.
+
+47:48 - Jose Manuel Espinoza
+  Para este tipo de hacer las recepciones que sean de manera más fluida, ¿tú qué considerarías? ¿Considerarías tener un teléfono?  ¿Uno normal? ¿Una tablet más grande para que el almacenista pueda visualizar? ¿O sí un equipo especializado como una handheld que pueda transmitir como se hace en otros sistemas como SAP o como Oracle o como etcétera?
+
+48:19 - Emiliano  Lorenzano
+  Odo no te limita a que lo usas con una herramienta especializada para esta parte, ¿no? Lo podemos usar con el teléfono, con la tablet, y pues va a depender mucho de la cámara del dispositivo, ¿no?  Ya que puede darse el caso que el código de barras que venga impreso en el producto pues venga dañado, borroso, por ejemplo, en el caso de lo que vendría siendo una tienda de pescados, los códigos pues ves que están en cámaras de frío y pues viene mojado el papel, entonces ya no se alcanza a leer.  Muy bien, pues con un celular, entonces ahí sí compran dispositivos especializados, que no importa que esté mojado el papel o húmedo, sí lee bien el código de barras.  Pero igual, Robert, podemos hacer unas pruebas con los teléfonos y vemos si jala bien y si en dado caso que no, pues ya entonces sí nos vamos a la posibilidad de comprar algún otro dispositivo ya especializado.  Bueno, aquí tengo anotado que Anáhuatl entrega directa de productores sin necesidad de tener la existencia en su almacén, es lo que platicábamos, ¿no?  nativo del sistema y un ajuste vía desarrollo para contemplar el flujo completo. Aquí nosotros en el sistema podemos usar la triangulación.  Esta parte de la triangulación... Lo que permite es que enviemos productos directamente del proveedor al cliente final, sin la necesidad de nosotros darle una entrada a nuestro almacén.  Esta parte rover funciona ahorita así bien, bien desde una venta. Yo genero una venta, pero yo no tengo el producto y lo mando a comprar directamente a mi proveedor y desde la compra yo hago el envío a mi cliente.  Así es como funciona ahorita el sistema. Pero el flujo, el flujo realmente se adapta mucho para lo que nosotros hacemos, ¿no?  De que entregamos directamente a los productores. Entonces aquí por eso sí puse que vamos a contemplar un ajuste de desarrollo, porque lo que vamos a hacer es que cuando ustedes reciban, cuando el asesor esté recibiendo la planta allá con el productor,  Él lo puede enviar directamente hacia... Puede haber la salida, ¿no? Sin necesidad de que ese inventario sea de nosotros.  Entonces ahí con eso se cumpliría pues el flujo. Acá, bueno, a Totonilco dice que son traspasos, traspasos de almacenes principales.  Esto es nativo del sistema. Y allá lo has visto, Robert, que pues se hacen las transferencias internas de un almacén a otro almacén.  Entonces aquí pues esta parte no nos preocupa, ya está cubierto con lo nativo. El material en campo, conocer la existencia aquí de lo que, bueno, de lo que tiene el productor.  Aquí vamos a utilizar ubicaciones específicas para cada cliente que vendría siendo pues el productor. Con esta parte, Robert, de tener una ubicación específica por cliente, vamos ahora sí a poder gestionar el material o la planta que tenga ese productor.  Con esta parte de estas ubicaciones para productores, también vamos a poder nosotros consultar la información que se requiere en el portal de proveedores, donde ustedes quieren también mostrarle lo que tienen en existencia, que le llaman aparente en campo, hacia los productores.  Entonces, aquí ya tenemos, nativo del sistema, la creación de las ubicaciones. Esa parte no habrá detalle, pero para los demás que se ocupan, allá del portal, pues ahí sí vamos a meter.  Ya una, pues, adecuaciones de desarrollo, ¿no? Para consultar y mostrarles a los productores su existencia. Bueno, aquí vienen las salidas de productos a clientes.  En este caso, vendría siendo para la venta nacional o podría ser internacional, ¿no? O clientes extranjeros, ¿no? Con las órdenes de entrega, ¿no?  Esto, pues, ya viene nativo del sistema. Sabemos que cuando se crea, bueno, perdón, cuando se crea una orden de venta o un pedido dentro del sistema, nos crea un documento de salida que vendría siendo...  Una orden de entrega. Con esta parte de la orden de entrega se va a gestionar la salida de productos a clientes, donde nos va a relacionar los lotes, la dirección de entrega, por ejemplo, vamos a ponerle aquí direcciones de entrega.  Entonces ya con la parte de lo nativo del sistema, pues ya podríamos cubrir también la salida de productos. Esta parte, pues se puede también, ocuparía también un poco de desarrollo para la parte que se requiere con los productos.  Porque ustedes quieren que primero se haga la salida y después crear el pedido de venta. Eso fue lo que nos habían platicado la vez pasada.  Utilizar listas de materiales. Esto sería con el módulo de fabricación. Y aquí también pudiéramos usar la subcontratación para el tema de los productores.  en la parte del módulo de fabricación, pues tendríamos que registrar la lista de materiales, donde vamos a agregar, pues ahora sí, Robert, la receta, por decirlo, ¿no?  De cómo se arma toda la tarima y qué insumos vamos a ocupar para ese armado. Ya la parte de la subcontratación la pudiéramos utilizar para poderle enviar al productor, por ejemplo, el...  Los materiales y que ellos nos regresen ya las cajitas armadas de las fresas. Esto pudiéramos también ya revisarlo en una sesión para ver el flujo y si se adapta pues lo usamos y si no se adapta pues lo utilizamos mejor con las ubicaciones de productores.  Muy bien. Bueno, ya del transporte del productor comentaban que iban a necesitar relacionar el chofer con el productor y ponerlo en el documento de salida.  Aquí le puse esta etiqueta Robra que ya se tiene porque revisando con Alex fue una de las funcionalidades que ya te había hecho anteriormente en la otra implementación.  Y supongo que ese desarrollo que ya hicimos se va a ocupar acá en este... En esta nueva implementación. Sí, así es.  Acá ya la llevaríamos ahora sí más en forma.
+
+57:06 - Jose Manuel Espinoza
+  Sí, por eso le puse que ya lo teníamos, porque ya se hizo esa adecuación.
+
+57:15 - Emiliano  Lorenzano
+  Bueno, acá nos pedían también tener un almacén de cuarentena. Este sería nativo del sistema. El sistema nos permite tener muchos almacenes, entonces no habría detalle para esta parte.  Con esto, pues ya también la almacén de cuarentena, su objetivo principal sería gestionar todo el producto que esté retenido, rechazado, o que esté con un control de calidad en revisión.  Entonces, no habría tanto detalle. La devolución de materiales aprobados. Porque casi cada devolución, ya sea a proveedores, a productores, es muy distinto, ¿no?  Cada devolución tiene sus propios criterios a considerar. Igual, si se pueden unificar, pues estaría bien, ¿no? Pero si es así por separado, tampoco no hay problema.  Entonces, las devoluciones de materiales a proveedores, pues es nativo del sistema, ¿no? Las devoluciones de materiales a proveedores se pueden gestionar directamente desde la compra o desde el inventario, ¿no?  Accediendo, pues, al documento de recepción. Aquí se puede aplicar ya sea una devolución completa, una devolución parcial o una devolución para cambio, ¿no?  Dado caso que el proveedor nos vaya a devolver, no sé, el material de empaque, ¿no? Acá no estamos considerando ahorita nada de control de calidad.  No estamos considerando algún otro tema que vaya por vía de desarrollo, pero estamos dejando la opción a considerar alguna adecuación, ¿no?  En dado caso que se ocupe. Aquí comentaban que las devoluciones se pueden cerrar con notas de crédito. Cuando nosotros hacemos una devolución, en este caso de material, pues podemos aplicar una nota de crédito a la factura que estaría ya en la cuenta por pagar.  La nota de crédito puede considerarse por una devolución, por un descuento, y esto ya estaría afectando a nuestra factura de proveedor.  Entonces, esa parte tampoco no nos preocupa porque ya con lo nativo del sistema, pues pudieran nosotros gestionar lo que vendría siendo la nota de crédito.  A lo mejor no viene en relación acá en los almacenes. Pero lo agregamos como punto porque partía de una devolución.  Aquí en esta parte también se estaba considerando que el producto también se puede mandar a merma. Ya con lo nativo del sistema, pues nos da una ubicación de desecho o desperdicio.  Esta ubicación, pues nosotros ya la podemos utilizar para dar de baja producto que ya no vamos a ocupar en el sistema.  Y con esto, pues ya se manda a pérdida y ya nos estaría contemplando dentro de nuestro inventario. Acá, Robert, se debería considerar, pues, una cuenta contable para la afectación de la póliza.  Ahorita, pues, está una sola ubicación de desecho. Pero si se quiere controlar en diferentes áreas, pudiéramos crear unas ubicaciones de desecho por áreas.  O, por ejemplo, no sé. Desecho o merma de productores, merma de proveedores, o merma en inventario, ¿no? Entonces, con eso ya se puede establecer una cuenta contable por cada departamento y ya tu póliza va a afectar a su cuenta contable correspondiente y se va a ir directamente al costo.  Entonces, eso es con lo nativo del sistema. Y eso sería ahorita, Robert, de lo que estuvimos platicando con ustedes y lo que tenemos considerado hasta ahora, ¿no?  No sé si de estos puntos que platiqué tengan algún comentario. No, está muy completo.
+
+1:01:49 - Jose Manuel Espinoza
+  Y a lo mejor hacer énfasis en el tema de intercompañías y también de cómo tendrían visibilidad el... La empresa Naturalli, la empresa Naturprime, a estos inventarios.  Tal vez lo que platicamos de Naturalli, que se genere algo de una visión, un espejeo, algo para que ellos puedan también hacer el cobro de los servicios por cada una de las recepciones o servicios que estén prestando a Naturberry o a Naturprime.  Sí, en esa parte tuve una reunión con Yuri a lo interno.
+
+1:02:36 - Emiliano  Lorenzano
+  Estábamos considerando manejar lo que vendría siendo, ahí se me fue el nombre, la confinación, para poder mandar a traer el producto a otra empresa que no pertenezca a ellos y que no afecte su costo, pero que sí tengan ahí la evidencia.  Ok. Estamos contemplando con Yuri así, pero sí, eso sí lo traemos en radar, Robert, esa parte. Perfecto. Bien, y ahora voy a pasar a la parte de los desarrollos.  Los desarrollos que logramos detectar dentro de lo que vendría siendo en inventarios, aquí viene un control de calidad para la recepción de frutas, se mencionó, pero ya aquí este desarrollo ya se tiene, ¿no?  Sí. Voy a ponerle que este desarrollo ya se tiene. Lo agregué aquí en la lista para no dejarlo pasar, pero ya sabemos que ya tenemos ese.
+
+1:03:44 - Jose Manuel Espinoza
+  Sí, porque va a haber adecuaciones, va a haber adecuaciones ahora que lo tuvimos. ¿Te acuerdas que tuvimos unos tres o cuatro puntos que ya no quisimos invertirle, pero que sí lo queremos contemplar?  Ya estando ahí. Sí. Y ya te menciono cuáles son. Sí, bien.
+
+1:04:07 - Emiliano  Lorenzano
+  Después tenemos la parte de lo que vendría siendo al recibir productos, se debe pedir hasta información, ¿no? Datos del chofer e información del vehículo.  También revisando con Alex, nos dimos cuenta que este desarrollo, pues ya lo tenemos, que prácticamente viene con lo del control de calidad.  Bien. Luego aquí, es lo que te decía, aquí sí tenemos, ¿no? La firma del proveedor al recibir el producto.  Aquí sí ya lo estamos contemplando como un desarrollo. Después, imprimir, bueno, imprimir la etiqueta del Paletat. Acá, pues, nos falta todavía recabar la información que se va a ocupar en ese  Pero ya lo estamos considerando. Acá nos pedían una papeleta de entrada. Recuerdo que esto es muy importante para la parte de los asesores que están en campo, que platicamos hace rato, que ellos hacen la recepción como si fuera a entrar al sistema, pero ahí mismo hacen la salida hacia el productor.  favor, esta papeleta de entrada para plantas se va a ocupar para plantas y salidas. Con esta parte de la papeleta de entrada de plantas y salidas se va a utilizar al mismo formato y con opción a crear la orden de venta.  Querían ustedes que quedara más automatizado, de que no se creara ya la venta manual, sino ya en base a lo que salió, que ya se...  Y luego aquí también controlar porcentajes de merma en base a parámetros, pues justamente para lo que están recibiendo y con esto pues darle al productor pues cuánto se obtuvo de merma y que nada más se le está entregando la cantidad real que se le está entregando con ese descuento de merma, ¿no?  Que en otra reunión platicaban que ya en el pedido de venta tiene que ir el total que se le entregó y tiene que quedar como un historial de lo que se fue a merma para que esté enterado el productor y que ya no se iba a contemplar un descuento porque antes lo hacían con descuento en las ventas.  Entonces eso también ya lo... Aquí lo estamos considerando. Aquí realizar una integración con un sistema de tarima. No recuerdo el nombre, Robert, pero aquí sería importante que si tú nos pudieras conseguir el dato de que si tienen ya expuesta alguna API o si ellos pueden crear alguna API para que nos podamos conectar a ese sistema.  Ok, sí. Después, en la entrega de materiales, bueno, ustedes solicitan copia del INE del chofer. Aquí tendríamos que validar qué campos más van a requerir para cuando se entrega el material.  Ahí no se había comentado la parte del INE. Puede ser que nada más se adjunte Robert en el clip que ya nos da el sistema, pero eso no validaría pues a que ya se le entregó o algún otro.  Otro tema. Sí, Víctor.
+
+1:08:01 - Victor De La Parra
+  Como tal, lo de la INE es anterior a que se le entregue material junto con la validación de operaciones para que ya se le pueda entregar al productor.  Posterior de esos dos, ya es cuando ya se le entrega material de empaque, que era lo que decía mi compañero Oswaldo en su momento.  ¿Cuál otro, Víctor? Es el INE y la aprobación de la gerenta de inocuidado de Food Safety. Las que tienen que decir que ya si ya tiene la INE está bien, pero aún no se le puede entregar hasta que la gerenta de inocuidado Food Safety ya da la orden de que ya se puede liberar el.
+
+1:08:44 - Jose Manuel Espinoza
+  ¿Te acuerdas que habíamos platicado entre el proceso que hay una persona que dictamina qué rancho, qué productor ya está habilitado para qué?  Que pueda pasar por su material y en esa opción ella tendría que habilitar a ese productor para que pueda pasar.  También habíamos mencionado que si fuera posible el identificar con la base de datos o con un catálogo, no lo sé, qué tipo de material también va a pasar ese productor.  Que no vaya a pasar por materiales que vaya a pedir de 8 libras y que nada más tengamos y se tenga contemplado nada más de una libra.  Es eso, el que se tenga contemplado cuál es el número o el nombre de los productos que puede pasar por él y que esté habilitado.  Y ahora sí ya con lo anterior que creo que ya lo habías puesto ahí arriba, la identificación de choferes, ahí es donde ya nos dirás qué es lo que se necesite.  Que la persona de almacén, cuando reciba al productor, lea su código de barra que ya va a traer. Ese código de barra también ya va a estar estipulado en el sistema para identificación de cada productor.  Verifique si ya está habilitado y qué tipo de material le vamos a dar.
+
+1:10:21 - Victor De La Parra
+  Bien, igual ya lo anoté para que no se nos vaya a pasar.
+
+1:10:27 - Emiliano  Lorenzano
+  Gracias, Sammy.
+
+1:10:29 - Victor De La Parra
+  Bueno, quizás todavía no, quizás me está adelantando, pero también justamente por donde está el punto, un poquito más arriba.  Ándale, ahí justamente donde dice papeleta de entrada para las plantas y salidas, que ya me lo pusiste ahí arriba, que también es la papeleta también para la recepción de almacén, que fue el que te había comentado hace ratito.
+
+1:10:57 - Emiliano  Lorenzano
+  Sí, es lo que platicamos hace rato, ¿no? Sí, Sergio.
+
+1:11:04 - Sergio Oswaldo Nunez Melendez
+  Bueno, igual aquí lo que yo estoy entendiendo es que estamos tratando de unificar el proceso de almacenes tanto para material de empaque como para la planta, porque hay puntos en los que son exclusivos de a lo mejor de planta y hay otros que son exclusivos de almacenes.  Sí, se va a tener el proceso separado, lo que es para planta y lo que es para materiales.
+
+1:11:31 - Emiliano  Lorenzano
+  Ah, ok.
+
+1:11:31 - Jose Manuel Espinoza
+  Sí, allá arriba lo mencionó Checo un poquito antes de llegar aquí a los desarrollos, mencionamos que podíamos separar por productos el cómo lo manejaríamos.
+
+1:11:45 - Sergio Oswaldo Nunez Melendez
+  Ah, ok. Perfecto. Muy bien. Bueno, vamos a tener que generar un pronosticado de productos.
+
+1:11:55 - Emiliano  Lorenzano
+  Creo que esto va en referencia ahorita a lo que comentó Robert. Para saber qué es el... No. Ahí lo tienes.  Sí, para saber qué se le puede dar al cliente y qué no se le puede liberar. Entonces, pues ya esto va con la parte de acá arriba, ¿no?  Sí, sí, ahora sí que no hagas redundancia o dejas el 9 o quitas el...
+
+1:12:15 - Jose Manuel Espinoza
+  Lo voy a quitar acá para que se contemple una vez con el 8.
+
+1:12:20 - Emiliano  Lorenzano
+  Ok. Ahí está. Bueno, aquí dice que los productores tienen que estar liberados para que se pueda vender. Entonces va también con esta parte de...  ¿Sería con el rancho aprobado, Robert? Sí, también. Así es. vamos a... Nada más déjame aquí, lo voy a poner allá como para que quede aquí.  Para que no pierda aquí esta... Ahí está, entonces ya lo unifiqué en uno solo. Aquí también nos pedían una firma del productor, creo que esta ya está, Robert, esta ya la tienen actualmente, porque ya firman, ¿no?  O no firma el productor en lo del desarrollo.
+
+1:13:52 - Jose Manuel Espinoza
+  Sí, cuando está entregando el producto, pero aquí estás hablando de la planta, aquí este es el... Lo menciona tanto Víctor como Checo, que estaremos buscando el hacer la separación, que sí va a traer, ya vimos que va a estar el desarrollo de la firma, pero dependiendo del proceso que se esté haciendo, es el tipo de papeleta y el tipo de proceso que se va a generar.  Bien, entonces lo dejamos.
+
+1:14:26 - Emiliano  Lorenzano
+  En los embarques ocupamos tener evidencia del embarque que está saliendo, ¿no? Acá comentaban ustedes que con una foto o dos fotos de lo que están cargando.  Acá no sé, Robert, si se vaya a ocupar realmente un formato o solamente con la pura evidencia fotográfica pueda quedar.
+
+1:14:53 - Jose Manuel Espinoza
+  Si hay documentos que se tiene que generar el almacén, sobre todo cuando hablamos del tema de... De Exportación, son unos temas de documentación que actualmente se hacen que tendríamos que verificar cuáles de ellos se van a seguir, a continuar o cuáles de ellos ya no los vamos a necesitar por el tema de que antes utilizamos el sistema de la Knowledge y ahora al no tener la Knowledge podríamos platicar con la gente de Estados Unidos qué sí y qué no podríamos tener y qué datos o qué documentos por default también ya nos entrega Odu que a lo mejor podríamos aprovechar de eso.  Sí, bien.
+
+1:15:40 - Emiliano  Lorenzano
+  Luego dice que devolución de material por parte del productor, ¿no? Aquí primero se revisa la revisión del material y se consideran pues tres veredictos, ¿no?  Eso es lo que nos habían comentado, ¿no? Se recibe el material pero no se cuenta en su balance. ¿Se recibe el material?  ¿No se recibe el material? En la devolución, pues vamos a tener que meter evidencia fotográfica. Robert va a mandar los ejemplos del control de calidad para la devolución.  Aquí no sé, Victor, si sí estén bien estos tres que anotamos o sería algo distinto.
+
+1:16:19 - Victor De La Parra
+  Sí, nada más que bueno, no sé en este caso, en el primero, si vaya también a cambiar, porque por ejemplo, una de las cosas que también se espera también para los almacenes de material de empaque es que el productor no devuelva más material del que sacó.  Entonces, quizás por ahí, no sé si se pudiera matar ahí, se recibe el material, pero no se cuenta en su balance, porque a la final no nos puede devolver más material del que realmente sacó, porque si no le quedaríamos a deber al productor.  Bueno, ya lo contemplé ahí también. Hasta ahí estamos bien también, Valdo, ¿verdad?
+
+1:16:59 - Sergio Oswaldo Nunez Melendez
+  Sí. Sí, ahí estamos. Bien, gracias, Val.
+
+1:17:04 - Jose Manuel Espinoza
+  Aunque ahí yo creo que por default lo va a traer el sistema, ¿no, Emiliano? Porque simplemente es, si te entregamos 5, pues no puedes entregar más de 5 y el sistema solamente no nos debería permitir.
+
+1:17:21 - Emiliano  Lorenzano
+  No, no debería permitir, pero sí, sí es más flexible, pues en esa parte. Entonces, ahí lo toparíamos, toparíamos a que no entregue más de lo que él sacó, ¿no?  Muy bien. Bueno, aquí viene contemplado considerar un control de calidad en la salida de material, es lo que platicábamos también.  Ya nos van a pasar el formato que se vaya a considerar, para saber aquí ponerle el formato. Luego, ¿podrían ustedes generar un reporte en Excel?  Bueno, ahorita le pusimos un reporte en Excel o crear una solicitud de reclamo en el sistema. Solicitud de la asesora a compras por reclamo de devoluciones y almacén revisa la entrada y compra o le da el seguimiento al proveedor.  Aquí, lo que ustedes consideraban en esta parte, que quieren un seguimiento del reclamo, ¿no? Donde se pueda llevar toda la gestión de que sí se acepta el reclamo, se rechaza, se notifique al asesor que está en campo de que, pues, sí procedió con su reclamo o no.  Y, pues, ya a lo interno, pues, ustedes harían toda la gestión para devolver con el productor. Entonces, ahorita le puse que generar un reporte en Excel, ¿no?  O, pues, formato. Este, para la solicitud de reclamo. Ya con eso, pues ya tengan todo el control acá en el sistema.  Bueno, también acá se platicaba algo de la gestión de fletes. Estaríamos utilizando el módulo de floquilla de Odu. Con esta parte de la gestión de fletes vamos a tener una base de datos.  Aquí creo que no la tengo. Voy a ponerle aquí base de datos de los camiones. Ponle de los transportes o transportistas, porque camiones se oye muy mucho.  De transportistas, ahí está. Vamos a generar una planeación de fletes. Ustedes comentaban que la planeación se hace en los viernes.  acuerdo? Aquí nos van a pasar el, no sé, el reporte de planeación o cómo lo, o cómo hacen esta planeación, para que nos muestren cómo hacen toda la planeación.  Aquí pues dicen que gestiona, gestión de fletes de Naturprime, que vende nacional, tiene dos formas de realizar la entrega, ¿no?  Una por importación de lo que se compra en NBG y de exportación de los productos locales, poder realizar cambios de destino, que por algún tema ahí que surja, que venga bajo permiso de que alguien pueda cambiar el destino.  Tanto en la venta como en la salida. Bueno, aquí viene anotado, ¿no? Se genera una orden de compra para el flete, para pagar el servicio, ¿no?  Hacia la fletera. Bueno, aquí ya creo que la base de datos ya, aquí viene, ¿no? Debe existir una base de datos en los fletes y se debe mandar una solicitud semanal.  aquí tenemos identificado dos cosas, que es Carla y Leti, quienes hacen esta gestión de la solicitud. Por ejemplo, Carla hace solicitud de fletes para entrega nacional y Leti para fletes para importación de los coolers, ¿no?  Sí, sí, Víctor. Gracias, Emiliano.
+
+1:21:54 - Victor De La Parra
+  Con una pregunta, ¿ahí estás considerando solo fletes de fruta? ¿Cuál la, por vía? que son... ¿O también está el general también para fletes, por ejemplo, de material de empaque y de planta?
+
+1:22:10 - Emiliano  Lorenzano
+  Pues viene de forma general, pero no sé si el proceso sea igual para ambos, bueno, para todos.
+
+1:22:22 - Jose Manuel Espinoza
+  Son procesos diferentes, pero podrían como estandarizarse, puesto que recuerdas que gestionamos los transportes LED y gestiona transporte de materiales de una almacena a otro, también se gestiona el tema de la planta, ¿qué más?  Bueno, y ya Naturprime gestiona lo que son sus camiones para la venta nacional. Sí. Sí hay como diferentes temas, pero creo que la gestión de fletes podría cubrir todo este tema, independientemente si es planta, si es materiales o si es producto.
+
+1:23:19 - Victor De La Parra
+  Hay realmente quizás lo que cambia, Robert, nada más son las evidencias. ¿De qué evidencia? Las evidencias que nos piden por tipo, o por ejemplo, no le vamos a enviar una evidencia de un flete de planta a uno de, a uno yo que sé, a uno de fresa, a uno de venta nacional de fresa.  Ese tipo de evidencias que las piden para las auditorías del SAT.
+
+1:23:49 - Emiliano  Lorenzano
+  Bien, después tenemos generar formato para control de entrada y salida, cuando Naturberry recibe el producto, ah, creo que este ya viene.  Ya sería la papeleta. Ya la voy a quitar entonces. Ahí está. Ahorita, Robert, pues esto es lo que ahorita encontré como desarrollo.  Son 14, posiblemente me falten algunos. Igual voy a estar actualizando este documento y voy a actualizar la matriz de desarrollos que ya te compartió Raúl.
+
+1:24:26 - Jose Manuel Espinoza
+  Ahí entre esos desarrollos, pero que ya está también en el gap, en el primer hito. Recuerdas que es la interacción que vamos a tener con el Annoblech, con NBG USA, que le vamos a mandar.  Estamos hablando del almacén y estamos hablando del inventario. Justamente es el tema del inventario que también lo puedan visualizar ellos y ellos nos van a gestionar las órdenes de venta para nosotros.  Y sacar el material. A lo mejor no lo tienes contemplado aquí, lo tienes contemplado en otro lugar, pero vamos mucho de la mano, ¿no?  Ahorita estos son de los que sacamos ahorita, ¿no?
+
+1:25:13 - Emiliano  Lorenzano
+  En las sesiones que tuvimos con ustedes. A ver si por acá tengo un archivo.
+
+1:25:19 - Jose Manuel Espinoza
+  En el primerito que nos enviaron, ahí está estipulado, no te preocupes, ahí sí está, que tenemos que tener la interacción con la knowledge.
+
+1:25:33 - Emiliano  Lorenzano
+  Por ejemplo, aquí vienen, ¿no? Entonces, aquí vamos a estar actualizando todo y vamos a pasar también los desarrollos que ya se habían contemplado en el otro documento.  Por aquí vienen separados, mira. O viene por departamento de calidad, almacenes, compras, contabilidad y logística, ¿no? Bueno, aquí le puse logística, pero vendría siendo, pues yo le puse relé.  Ok, entonces aquí lo voy a integrar, voy a quitar este de acá porque ya ahorita de la revisión pues algunos ya se quitaron, entonces voy a actualizar todo esto, Robert, bien para que también ustedes tengan la información ya en ese archivo.  Ok, ¿sabes?
+
+1:26:18 - Jose Manuel Espinoza
+  Ahí también, no lo sé, pero el tema del MPS o de la producción, de lo que se quiere revisar de la planta, no lo sé si también tendrías que generar un almacén especial para planta y poder tener control de qué viveros son los que de los que nos están surtiendo, cuánta planta todavía tienen ellos proyectada, este, o decirlo de manera, Eder va a ver cuáles son los viveros que van a estar dados ya.  En una temporada y de esos viveros tiene que gestionar la proyección de plantas que va a ser por temporada.  Esa proyección de plantas tiene que venir identificada por la variedad de planta que nos van a entregar y sobre eso gestionar los envíos que nos van a hacer hacia nosotros y que nosotros les vendemos a los productores.  Entonces, eso no lo sé si también lo tienes contemplado como almacén para que él tenga visibilidad de esa proyección, calendarización de producción de la planta.
+
+1:27:44 - Emiliano  Lorenzano
+  Esa parte creo que lo tengo en el otro archivo donde íbamos a utilizar la parte de los contratos con los viveros para, no sé, por ejemplo, mil plantas y nos entregó 500 plantas, nos faltan otras 500.  Ok. Entonces, esa parte lo tengo en el otro archivo y justamente vamos a estar pasando los desarrollos en el otro archivo para acá también.  Muy bien. Ya en dado caso que no lo encuentre, Robert, ya te avisaría de que revisemos esa parte.
+
+1:28:17 - Jose Manuel Espinoza
+  Sí, y a lo mejor podríamos tener, hay que programar, Victor, una reunión con Eder para ver ese tema de la producción, de lo que él quiere llevar ahora, aterrizarlo bien con el equipo de Odoo y ver si eso, con esto que estamos viendo, ya lo tenemos contemplado o con lo que habíamos visto en la primera sesión, ya lo teníamos contemplado, ver qué más podríamos tener.  Sin problema, Robert.
+
+1:28:50 - Victor De La Parra
+  Entonces, le comento y creo una reunión para, bueno, ya me fijo en los horarios y pues ya, para tenerla, no sé si quieres en esta semana o la que sí.  Yo, pues mira, ya sería el día de mañana.
+
+1:29:03 - Jose Manuel Espinoza
+  Si el día de mañana tiene disponibilidad Eder, estaría suave. Ya nomás aquí vemos con los chicos de Odu si el día de mañana tienen disponibilidad, porque sí sería importante que ya se vaya contemplando.  A pesar de que ya en la primera reunión ya lo había escuchado Emiliano y Alejandro, sería bueno solamente recalcar que es eso lo que se quiere, o aún es más, y que se tenga contemplado en un desarrollo.  Ok, sí, sin problema.
+
+1:29:32 - Victor De La Parra
+  Sí, ojalá y pueda ser el día de mañana. Va.
+
+1:29:39 - Jose Manuel Espinoza
+  Sí, Emiliano, adelante. Ah, perdón, Raúl, quería mencionar algo.
+
+1:29:43 - Emiliano  Lorenzano
+  De mi parte, Robert, esto es lo que, pues, de acuerdo a las pláticas, lo que hemos revisado con ustedes, esto sería mi avance.  ¿Hay algo más que te recuerdas? Ya en cuanto tenga terminado el documento. Te lo voy a hacer llegar ahí por Raúl, para que también lo tengas ahí con los puntos que platicamos y con los desarrollos a considerar.  Muchas gracias, Emiliano.
+
+1:30:16 - Raúl Núñez (Inflexyon)
+  A mí me pueden regalar nada más cinco minutos ahorita al final, equipo. Creo que Emiliano ahorita ya tiene otra sesión.  Ah, perfecto. No, adelante, Emiliano.
+
+1:30:26 - Jose Manuel Espinoza
+  Si ya tienes que saltar a otra, adelante.
+
+1:30:28 - Emiliano  Lorenzano
+  Muchas gracias por esto. Gracias, Emiliano. Buenas tardes.
+
+1:30:35 - Victor De La Parra
+  Muchas, muchas gracias.
+
+1:30:37 - Raúl Núñez (Inflexyon)
+  Un segundo. Listo. ¿Cómo vieron la sesión? Es bien importante que validemos muy, muy bien los escenarios y el alcance de cada uno de los desarrollos y tenerlos muy, muy, muy precisos porque los cambios...  De alcance o cambios en las estimaciones nos pudieran llegar a desviar en cuanto a los tiempos del proyecto y es fundamental que ahorita ya empecemos a pasar al equipo de desarrollo lo que se va encontrando para pasarlo a estimación y pasarles a ustedes la estimación para que lo prueben y poderlo pasar a desarrollo.  Ahorita vimos Almacén y Compras, lo cual creo que fue bastante buen avance tener esta sesión y haber terminado con estas dos partes.  Sería el día de mañana estábamos proponiendo aquí a lo interno tener una sesión con ustedes a las 4 de la tarde ya con la matriz de GAPS bien depurada.  Para... Para... Empezar a determinar que ustedes nos indiquen la prioridad de qué desarrollos consideran que son los fundamentales para la operación, para la salida en vivo sobre todo, y cuáles pueden ser menos prioritarios, no que no sean importantes, pero sí menos prioritarios para una salida en productivo en agosto, para dejarlos, digamos, como una segunda prioridad.  Entonces, no sé cómo está en el tiempo el día de mañana para ir haciendo esta validación de prioridades con la matriz ya bien depurada para empezar a pasar estimación.
+
+1:32:40 - Jose Manuel Espinoza
+  Creo que nos harían falta algunos otros puntos, Raúl, como lo habíamos mencionado, el tema de Eder, el tema de la producción de los viveros.  Creo que también no hemos atacado mucho el tema de la parte comercial con Naturprime, si bien la hemos... Si bien lo hemos mencionado, todavía no has escuchado, por ejemplo, a Cholico, de los puntos esos que ya tenemos, saber qué más cosas él quiere contemplar y quiere tener sí o sí.  Tal vez tendrá algunos puntos que se puedan ver en una segunda fase, pero de lo que sí quisiera él verlo, yo creo que pudiera ser muy bueno tener esa reunión, que él nos hiciera puntual la anotación de sus objetivos.
+
+1:33:31 - Raúl Núñez (Inflexyon)
+  Cholico, perdón, Cholico, ¿está en la parte comercial?
+
+1:33:36 - Jose Manuel Espinoza
+  Ajá, es nuestro director de operaciones en la parte comercial o nuestro director comercial de Naturprime.
+
+1:33:46 - Raúl Núñez (Inflexyon)
+  Ok, aquí el tema es que, o sea, sí sería bueno ir avanzando con lo que ya se tiene validado en almacén y en compras, o sea, me queda claro que nos hace falta toda la parte de análisis comercial.  Pero no podemos tener frenado el equipo de desarrollo a esperar a la parte comercial. Si queriéramos ir liberando desarrollos.
+
+1:34:11 - Jose Manuel Espinoza
+  Si el tema este del análisis de esto que hemos visto de almacenes y compras, entonces sí, adelante. Eso no podremos detenerlo y podemos avanzar.  Sí, porque la realidad es que ya nada más nos queda el día de mañana de la semana, pues el viernes no es laboral.
+
+1:34:32 - Raúl Núñez (Inflexyon)
+  Entonces avanzar mañana con la sesión comercial nos va a dejar a medias. creo que la sesión de análisis comercial ya la dejamos para la siguiente semana.  Y mañana nada más tenemos esa validación para empezar a mandar al equipo de desarrollo las estimaciones. Sí, está bien.
+
+1:34:49 - Jose Manuel Espinoza
+  Va. Buenísimo.
+
+1:34:51 - Raúl Núñez (Inflexyon)
+  Entonces les mando la sesión.
+
+1:34:52 - Jose Manuel Espinoza
+  ¿Sabes qué nos gustaría, Raúl, cuando nos comentes de...? Y no está Pablo aquí, pero cuando nos comentes de que se va a valorar para las estimaciones de desarrollo, no nos lo menciones porque notas así como que, espérame, voy a pagar algo más.  No, mejor no nos lo menciones y nos dice, es para que el equipo de desarrollo visualice las implementaciones que se va a tener.  ¿Por qué? Porque nosotros tenemos estipulado o tenemos pensado de que, pues, nuestro RP o como tenemos la intención es de que, pues, se va a gestionar el RP a nuestros procesos, a lo que nosotros queremos y deseamos que esté, pero nos haces énfasis en el...  Ah, sí, sí.
+
+1:35:48 - Raúl Núñez (Inflexyon)
+  No, más que nada va el sentido... No, no, no, no, no, por ahí. Va más que nada en el sentido de decirles, ah, este desarrollo toma 10 horas, este...  ¿Por qué lo hacemos así? Porque luego nos dicen, oye, pues temas estéticos, pues me voy a gastar 20, 30 horas en temas estéticos cuando hay prioridades más fundamentales de desarrollo en el control de almacenes, pues si dices, pues hay que, pues mejor vamos priorizando los desarrollos que son fundamentales y ya después vemos temas, temas de estéticos o temas que a lo mejor no son tan fundamentales para la salida en vivo.  Va más en ese sentido, en mandarles, decirles, estos puntos que encontró Emiliano, que están en la matriz, irle asignando cuántas horas va a tomar de sus horas contratadas, cuánto se va a reducir de esas horas contratadas el desarrollar X o Y o Y punto para adoptar su operación.  A eso nos referimos con la estimación, pero si no le cambiamos el lenguaje.
+
+1:36:51 - Jose Manuel Espinoza
+  Sí, no, sí, no, no, no, lo menciones, este, si a uno lo saber en el correo que vayas a poner, a estas.  Esta es la gestión de los desarrollos, la estimación, sí, pero cuando estemos con el equipo de los key users, de los usuarios, solamente día, pues esto se va a desarrollar y los chicos de desarrollo lo van a tener listo dentro de poco, ¿no?  Esa es la intención. Muy bien, así estamos entonces.
+
+1:37:24 - Raúl Núñez (Inflexyon)
+  Perfecto, muy bien.
+
+1:37:25 - Jose Manuel Espinoza
+  Entonces, el día de mañana tenemos esa sesión a las 4, dices, ¿verdad? Sí. Sí.
+
+1:37:33 - Raúl Núñez (Inflexyon)
+  Ok.
+
+1:37:33 - Jose Manuel Espinoza
+  ¿Estará ahí quién? ¿Yuri y Emiliano, los dos?
+
+1:37:36 - Raúl Núñez (Inflexyon)
+  Yuri, Emiliano, Pablo y un servidor. Ah, perfecto. Muy bien.
+
+1:37:41 - Jose Manuel Espinoza
+  Para reunir también al equipo.
+
+1:37:43 - Raúl Núñez (Inflexyon)
+  Va que va. Muy bien. Gracias, Rubén. Gracias, Rubén. Gracias, Rubén.
+
+1:37:51 - Jose Manuel Espinoza
+  Gracias, Rubén.
+
+1:37:52 - Sergio Oswaldo Nunez Melendez
+  Manuel, Raúl, nos vemos, que tengan mucha tarde. Nos vemos. Buenas tardes, Emiliano. Hasta luego.

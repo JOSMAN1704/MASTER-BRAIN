@@ -1,0 +1,882 @@
+======================================================================
+ID DE SESIÓN: PRIMER SESION AVANCE PROYECTO NBG 
+FECHA: 2026-04-30
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/wXw6Z8xq_2fR86bmsvzzTVhbw4PCxtkc
+======================================================================
+
+RESUMEN
+
+Sesión de avance de proyecto - NBG - April 30
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar el estado del proyecto y priorizar desarrollos a medida para la salida a producción.
+
+Puntos clave
+
+  - Los templates de datos bloquean el progreso: La falta de datos de productos, clientes y proveedores es el principal cuello de botella del proyecto, impidiendo los talleres y la configuración del sistema. Se entregará una muestra parcial de datos la próxima semana para desbloquear el trabajo.
+  - Desacuerdo en el alcance de la contabilidad en dólares: Surgió un conflicto clave sobre la contabilidad en dólares. NBG requiere asientos contables en tiempo real y en doble moneda (como SAP B1), mientras que Inflexión propuso una conversión más simple, solo para reportes. Esto es un requisito crítico para la salida a producción por los reportes en EE. UU. de NBG.
+  - Prioridades de desarrollo definidas: El equipo priorizó los desarrollos a medida para la salida a producción, enfocándose en funciones operativas centrales (p. ej., control de calidad, cierre de material, etiquetas de pallet).
+  - Sesiones de análisis programadas: Se establecieron sesiones de seguimiento para Compras (hoy, 4 PM) y Comercial (la próxima semana) para completar el análisis de procesos.
+
+Temas
+
+Estado del proyecto y bloqueadores
+
+  - Adendas: No se requiere desarrollo a medida para las facturas de Naturprime; las descripciones estándar de productos son suficientes.
+  - Templates de datos (cuello de botella):
+      - Productos: En espera, pendiente de una nomenclatura estandarizada de NBG USA.
+      - Proveedores: En progreso; Víctor está depurando la lista y agregando domicilios fiscales.
+      - Clientes: En progreso.
+      - Impacto: La falta de datos impide los talleres del sistema y la configuración.
+      - Acción: Se requiere una muestra parcial de datos para el entorno de pruebas a fin de desbloquear el trabajo.
+  - Catálogo de cuentas: Para la próxima semana por parte de Alfredo. Es un insumo crítico para determinar necesidades de desarrollo y configurar escenarios de prueba.
+  - Acta y plan del proyecto: Robert revisará los documentos contra el análisis de riesgos de NBG y proporcionará comentarios el lunes.
+
+Priorización de desarrollos a medida (Matriz GAP)
+
+El equipo revisó la matriz GAP, asignando necesidad para salida a producción y nivel de prioridad a cada desarrollo.
+
+  - Control de calidad
+      - CQ en recepción: Indispensable, Prioridad alta (requiere ajustes).
+      - CQ de material de salida: Indispensable, Prioridad media.
+  - Almacenes
+      - Captura de información de conductor/vehículo: Indispensable, Prioridad media (requiere firma).
+      - Firma del proveedor en el recibo: Indispensable, Prioridad media.
+      - Impresión de etiquetas de pallet: Indispensable, Prioridad alta (crítico para trazabilidad).
+      - Pase de entrada/salida de planta: Indispensable, Prioridad media (requiere parámetros definidos por NBG).
+      - Porcentaje de merma: Indispensable, Prioridad media.
+      - Evidencia de embarque de salida: Indispensable, Prioridad alta.
+      - Devolución de material a productor: Indispensable, Prioridad media.
+      - Formato de solicitud de reclamo: Indispensable, Prioridad media (formulario Odoo/PDF).
+  - Compras
+      - Cierre de material (semanal): Indispensable, Prioridad alta (debe incluir rechazos de calidad).
+      - Portal de productores: Indispensable, Prioridad media (debe estar listo para la salida a producción).
+      - Aprobación de requisición de compra: Indispensable, Prioridad alta.
+      - Reporte de planeación de planta: Indispensable, Prioridad media.
+      - Reporte de planeación de materiales: Indispensable, Prioridad media.
+      - Solicitud de comprobante de entrega: Indispensable, Prioridad media.
+  - Contabilidad y finanzas
+      - Contabilidad en dólares: Indispensable, Prioridad alta.
+          - Conflicto: NBG requiere asientos contables en tiempo real y en doble moneda (como SAP B1). Inflexión propuso una conversión más simple, solo para reportes, citando la alta complejidad y riesgo de una solución paralela de “empresa espejo”.
+          - Resolución: Inflexión demostrará la opción solo de reporte en el entorno de pruebas. NBG decidirá entonces si cumple con su requisito “imprescindible”.
+      - ADD (Descarga CFDI del SAT): Indispensable, Prioridad alta.
+      - Estados de cuenta de clientes: Indispensable, Prioridad alta (crítico para productores-clientes).
+      - Catálogo de cuentas: Indispensable, Prioridad alta.
+      - Conexión bancaria Monex: No indispensable para la salida a producción. La integración inicial será basada en archivos.
+      - Gestión de fletes: Indispensable, Prioridad media (requiere análisis detallado).
+
+Programación y próximos pasos
+
+  - Análisis de Compras: Hoy, 4 PM.
+  - Análisis Comercial: La próxima semana, a partir del martes a las 12 PM (pendiente de la disponibilidad de Juan Pablo Cholico).
+  - Análisis de Fletes: Por programar.
+  - Análisis de Producción (Eder): Por programar.
+
+Próximos pasos
+
+  - Víctor:
+      - Proporcionar la próxima semana una muestra parcial de datos de clientes y proveedores al entorno de pruebas.
+  - Robert:
+      - Revisar el Acta de Proyecto y el Plan contra el análisis de riesgos de NBG y proporcionar comentarios el lunes.
+  - Equipo NBG:
+      - Proporcionar el catálogo de cuentas la próxima semana.
+  - Equipo Inflexión:
+      - Demostrar en el entorno de pruebas la solución de contabilidad en dólares solo para reportes.
+      - Programar sesiones de análisis de seguimiento para Comercial, Fletes y Producción.
+
+======================================================================
+
+ONE-ON-ONE
+
+Sesión de avance de proyecto - NBG - April 30
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Revisar estatus general de implementación Odoo (NBG), destrabar cuellos de botella (plantillas, GAPS), priorizar desarrollos indispensables para salida en vivo y calendarizar talleres/sesiones clave.
+
+Actualizaciones
+
+Raúl Núñez
+
+Registro
+
+  - Conduce revisión de estatus, plan y matriz de GAPS; confirma instalación y bases de 3 compañías listas.
+
+Progreso en prioridades desde la última reunión:
+
+  - Cargó formatos de factura; confirmado: no se requerirá adenda con Naturprime.
+  - Sistema instalado con módulos de alcance; bases de 3 compañías configuradas.
+  - Concluidas sesiones de análisis: Contabilidad, Almacenes, Compras.
+  - Acta del Proyecto (Project Charter) y Plan General compartidos; tablero de avance activo.
+
+Prioridades hasta la próxima reunión:
+
+  - Ajustar porcentajes del plan según avances.
+  - Consolidar matriz de GAPS con prioridades (indispensable y alta/media/baja).
+  - Coordinar sesiones: Comercial, Compras (seguimiento), Fletes.
+  - Preparar soporte para talleres con datos de prueba.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Muestras de datos (productos/clientes/proveedores) para cargar en pruebas.
+
+Pablo Valero
+
+Registro
+
+  - Enfatiza necesidad de datos para talleres y disciplina en priorización.
+
+Progreso en prioridades desde la última reunión:
+
+  - Guía priorización por operación crítica vs. automatización/reportes.
+  - Aclara alcance nativo vs. desarrollos (CFDI/contabilidad electrónica nativos; ADD es herramienta propia).
+
+Prioridades hasta la próxima reunión:
+
+  - Organizar participación de desarrolladores en temas priorizados hoy.
+  - Alinear agenda de sesiones (compras hoy; comercial martes 12:00; fletes por definir).
+  - Analizar implicaciones contabilidad espejo USD vs. reportes multimoneda.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmación de horarios y datos de prueba.
+
+Roberto (SALA VIP)
+
+Registro
+
+  - Conduce decisiones de negocio; impulsa foco en lo indispensable para operar.
+
+Progreso en prioridades desde la última reunión:
+
+  - Define criterios de prioridad (alto/medio/bajo + “indispensable”).
+  - Aclara procesos: control de calidad, papeleta/etiquetas, cierre de materiales, portal productores.
+
+Prioridades hasta la próxima reunión:
+
+  - Entregar muestras de catálogos la próxima semana; si no llega estandarización USA, subir parcial.
+  - Reagendar contabilidad para no frenar talleres; asegurar asistencia de áreas (Comercial con JP).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Plan de cuentas final de Alfredo para configuración.
+
+Víctor De La Parra
+
+Registro
+
+  - Referente de catálogos y parámetros de planta.
+
+Progreso en prioridades desde la última reunión:
+
+  - Recabó clientes/proveedores de múltiples áreas; depura y agrega direcciones fiscales.
+  - Señala requerimientos de folios/“albaranes” cubiertos por estándar.
+
+Prioridades hasta la próxima reunión:
+
+  - Subir muestra de clientes/proveedores la próxima semana.
+  - Documentar parámetros para entregas de planta (Gloria).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Espera estandarización de productos desde NBG USA.
+
+Tania Ortega
+
+Registro
+
+  - Enfocada en Compras y control de devoluciones/proveedores.
+
+Progreso en prioridades desde la última reunión:
+
+  - Alinea que reportes/formatos de reclamo pueden ser en Odoo (PDF) en vez de Excel.
+
+Prioridades hasta la próxima reunión:
+
+  - Cerrar criterios de calidad/devoluciones vinculados a compras.
+  - Participar en sesión de Compras (hoy 16:00).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Definiciones finales de plantillas y flujos de aprobación.
+
+Juritzen (Yuri) Rentería
+
+Registro
+
+  - Líder funcional contable.
+
+Progreso en prioridades desde la última reunión:
+
+  - Sesión de plan de cuentas con NBG; definiciones para cruce con cuentas SAT.
+  - Explica opciones técnicas para contabilidad USD (empresa espejo vs. reportes).
+
+Prioridades hasta la próxima reunión:
+
+  - Validar si habrá desarrollo para plan de cuentas/moneda y preparar escenario de pruebas.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Recibir plan de cuentas final de Alfredo.
+
+Emiliano Lorenzano
+
+Registro
+
+  - Técnico/configuración y consolidación de GAPS.
+
+Progreso en prioridades desde la última reunión:
+
+  - Instaló sistema, módulos y 3 compañías.
+  - Depuró matriz GAPS (eliminó redundancias; agrupó desarrollos).
+  - Documentó descripciones de GAPS (vía WhatsApp).
+
+Prioridades hasta la próxima reunión:
+
+  - Cerrar documento de Compras y levantar detalles en sesiones específicas (compras/fletes/comercial).
+  - Ajustar desarrollos ya existentes (control de calidad recepción) según ajustes pedidos.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Datos de prueba; disponibilidad de negocio para sesiones detalladas.
+
+Temas
+
+Adendas y layouts de factura
+
+  - Confirmado: con Naturprime no se requerirá adenda; solo descripción detallada del producto. Formatos ya en carpeta del proyecto.
+
+Plantillas de productos/clientes/proveedores
+
+  - Cuello de botella principal. Se pide muestra parcial esta semana próxima para ambiente de pruebas. Productos pendientes de estandarización con NBG USA; si no llega, subir versión parcial.
+
+Plan de cuentas y configuración SAT
+
+  - Sesión con Yuri aclaró requerimientos; se espera plan de Alfredo la próxima semana para configurar y validar si requiere desarrollo.
+
+Plan general y Gobierno del Proyecto
+
+  - Acta del Proyecto y plan compartidos; tablero con % avance. Entran a fase más demandante; importancia de mantener ritmo y cerrar definiciones para evitar retrabajos.
+
+Priorización Matriz de GAPS (extracto clave)
+
+  - Calidad: recepción ya existe (ajustes) indispensable/alta; control calidad salida material: indispensable/media; firma proveedor al recibir: indispensable/media; evidencia de embarque: alta/sí.
+  - Etiqueta Palet Tag: alta/sí (trazabilidad).
+  - Papeleta entrada/salidas plantas con OV + parámetros NBG: indispensable/alta.
+  - INE chofer + aprobación gerente para entregar material: indispensable/media.
+  - Devolución de tarimas CHEP: baja/no indispensable al “go-live” (se hará después).
+  - Reporte reclamo a proveedor (formato Odoo/PDF): media/sí.
+  - Cierre de materiales semanal con rechazos de calidad: alta/sí.
+  - Portal de productores: indispensable; prioridad media “negrita” (segunda línea pero debe estar antes del go-live).
+  - Reportes de planeación de plantas: media/sí (revalorar con Eder).
+  - Planeación materiales (mín/máx): media.
+  - Prueba de entrega requerida para facturar: media/sí.
+  - Contabilidad en USD:
+      - Reportes en USD por fecha/tipo de cambio: alta/sí.
+      - Empresa espejo USD (doble contabilidad): analizar complejidad/impacto; negocio lo marca como indispensable; equipo revisará implicaciones técnicas.
+  - ADD (descarga CFDI): negocio lo ve importante; se sugiere media (operación puede iniciar sin ADD). CFDI/contabilidad electrónica son nativos.
+  - Estados de cuenta clientes (productor cliente/proveedor): alta/sí.
+  - Presupuestos (viáticos): prescindible para go-live.
+  - Plan de cuentas: alta/sí.
+  - Conexión Monex: prescindible al inicio; iniciar con archivos (layout de dispersiones y extractos). Conexión directa (host-to-host) en etapa madura.
+  - Gestión de fletes: media “negrita”; requiere sesión de detalle (planeación, OC a fletera, traslados entre “coolers”).
+
+Talleres y datos de prueba
+
+  - Se requiere cargar datos en pruebas para mejorar experiencia en talleres; se aceptan parciales.
+
+Calendarización y coordinación
+
+  - Ajustes para no empalmar; priorizar sesiones de análisis/desarrollo. Solicitan agenda consolidada.
+
+Próximos pasos:
+
+  - Víctor/Roberto: Entregar muestra de clientes/proveedores (y, si aplica, productos parciales) la próxima semana; subir a carpeta y notificar por correo. Owner: Víctor/Roberto.
+  - Alfredo (vía NBG): Enviar plan de cuentas final la próxima semana. Owner: Alfredo; seguimiento Yuri/Roberto.
+  - Raúl: Actualizar tablero de avance y matriz GAPS con prioridades acordadas hoy; marcar “indispensable” y alta/media/baja. Owner: Raúl.
+  - Emiliano/Yuri/Raúl: Consolidar matriz GAPS depurada post-sesión y preparar sesiones de detalle por tema (compras, fletes, comercial). Owner: Emiliano/Yuri/Raúl.
+  - Equipo Inflexión: Analizar técnica y riesgos de contabilidad espejo USD vs. reportes multimoneda; preparar demo en entorno de pruebas para contabilidad. Owner: Pablo/Yuri/Emiliano.
+  - Sesiones:
+      - Hoy 16:00: Compras (detalle y priorización). Owner: Roberto coord.; Emiliano/Pablo/Raúl/Yuri asisten.
+      - Martes (después de las 12:00): Comercial con Juan Pablo; incluir fletes si da tiempo. Owner: Roberto agenda; Emiliano/Yuri confirman.
+      - Programar: Producción con Eder; Fletes dedicado (si no entra en Comercial). Owner: Pablo/Emiliano proponen si NBG no define.
+  - Pablo: Invitar desarrollador a las primeras sesiones de los GAPS priorizados “alta/sí”. Owner: Pablo.
+  - Víctor: Documentar parámetros de planta (Gloria) asociados a papeleta/entregas; compartir. Owner: Víctor.
+  - Todos: Mantener criterio de priorización comunicado por Roberto; evitar inflar “alta”. Owner: Equipos NBG/Inflexión.
+
+======================================================================
+
+TRANSCRIPCION
+
+Sesión de avance de proyecto - NBG - April 30
+VIEW RECORDING - 92 mins (No highlights): 
+
+---
+
+0:11 - SALA VIP
+  Hola, Javi. Buenos días. ¿Cómo están? Buenos días, Jadira, Manuel, Robert.
+
+0:17 - Victor De La Parra
+  Javi, ¿cómo estás?
+
+0:21 - SALA VIP
+  Bien, Robert, gracias. ¿Está bien? ¿Cómo estás? ¿Cómo estás? ¿Y bien ustedes? También bien, gracias. ¿Qué nos falta? Falta de inflexión.  Bueno, aquí falta Rafa. De inflexión falta Yugi y Emiliano. Está Raúl solamente. ¿El voto no va, Rafa? Para ir a decir.  Sí. Vamos a tratar de un lado. Ya le acabo de decir. Pues estamos acá y si no hay desde su lugar también, porque sé que hay muchos.  ¿Cierre? Sí, gracias. Bueno, sí cierre, pero... Sí, ¿no? Hola Yuri, buenos días. Hola, buen día, ¿cómo están?
+
+2:09 - Juritzen  Rentería
+  Bien, gracias. Solamente nos falta Emiliano.
+
+2:27 - SALA VIP
+  Hoy es día de polo negra, ¿por qué no me dijeron? Es que es como viernes. Ah, no te vieron.  Me dieron incompleto por la talla, pero ya pidieron más. Es que las que ayer me quedaban enormes. Eran M, pero como que vienen amplias, ¿no?  Sí. Muy bien, gracias. ¿Verdad? No me quedan. Ah, pero pues tú quieres usar extra S, amigo. No, la razón dice lo que queda.  Por eso, hombre, tú quieres usar extra S. Gracias. Bueno, está bien ampliante. Pues esto sí, gracias. Pues sí, el taguímetro.  Gracias. También viene ampliante. Me llamo. Gracias, me llamo. bien. ¿Qué tal, buen Pablo Valero? ¿Cómo están? Buenos días a todos.  Oye, Pablo, me enviaste por fin, Kevin, que si quiero contratar a UDU con ustedes.
+
+3:24 - Pablo Valero (Inflexyon)
+  Como, qué insistente, ¿verdad? Y ya nos activamos, mano.
+
+3:32 - SALA VIP
+  Fíjate que quiero decir que está siendo efectiva la publicidad.
+
+3:36 - Pablo Valero (Inflexyon)
+  Ayer me pasó justo con un cliente que seguramente tiene relación con ustedes. Ellos hacen cajitas de clanchos. Y me dijo también el director, oye, pero ¿otra vez?  Y le dije, no, haz caso miso. Quiere decir que está bien perfilado ahí el... La segmentación en Linkedin. Son automáticas, ¿no?  Sí, sí, sí, exactamente. Son mensajes automáticos.
+
+4:11 - SALA VIP
+  Ya se va a unir Alejandro Magaña o no? En esta ocasión, no. Creo que no. No, no, en este punto no es necesario.  Denle mensajito a Emiliano, a ver en cuál carretera va. Déjenle, comparto el link, por si acaso. ¿Está todo el grupo?  ¿Está todo tu libro? ¿Todo el libro? No. Uy, ahorita está. ¿Tienes cita o no? Sí, pero ya la haces tu libro.  No, pero ¿no te pusiste en la fila? ¿En la fila virtual? ¿Y alguna sí, no? ¿Hace cuánto te pusiste en la fila?  20 días. Sí, es para los que precisamente no están su devolución, ¿no? ¿Se le ha vencido? Ok. Sí. ¿Puedo hacer un mes?  hacer un mes? Ahí está Emiliano. Muy bien. Ahora sí ya, estamos completos. Gracias y buen día a todos.
+
+6:43 - Pablo Valero (Inflexyon)
+  Buen día. Buen día.
+
+6:45 - SALA VIP
+  Buen día. ¿Qué tal Emiliano? Buenos días. Buenas. Ahora sí, arranquen. Adelante, Rob. Vamos a ver. Buen
+
+7:00 - Raúl Núñez (Inflexyon)
+  Es muy rápido realmente, es para ver en dónde estamos actualmente y ver qué pendientes hay, más o menos conocer el estatus de cada uno de, un segundo, dónde está, ahí está, para ver el estatus de cada uno de los puntos que tengo por aquí.  Si nos pudiera, vamos uno por uno para más o menos ver en dónde estamos parados. sé si recordarán que les comentaron que realmente en cuanto al tema del layout de las adendas, no era como tal una adenda, no me quedó muy claro esa parte, pero me gustaría saber en qué punto está, si nos van a enviar la información, cuándo nos lo pudieran hacer llegar, para determinar si requiere un desarrollo más puntual, a ver qué es lo que se va a necesitar hacer en esta parte.  Ya se les mandamos por correo el día.
+
+8:00 - SALA VIP
+  ¿En esta semana? ¿En esta semana? ¿Martes o miércoles? ¿Por qué fue el martes? A ver, ¿me pusieron en copia?
+
+8:10 - Raúl Núñez (Inflexyon)
+  Sí, está todo el equipo de inflexión. ¿Con qué punto estamos, Raúl?
+
+8:20 - Pablo Valero (Inflexyon)
+  Con el de el envío de layout de adendas.
+
+8:25 - Raúl Núñez (Inflexyon)
+  Ah, ok.
+
+8:26 - Pablo Valero (Inflexyon)
+  ¿Ví un correo que estaba en copia donde veía que no se necesitaban adendas o...? Sí, es correo, eso sí.  Sí, justo se lo vi, pero no tengo nada.
+
+8:43 - Raúl Núñez (Inflexyon)
+  No sé si me lo pudieran reenviar o... A ver, espera. No hay que tener un...
+
+8:49 - SALA VIP
+  Va, voy a dar alguna captura. Mira, es uno, Raúl, del martes 9.40m.
+
+8:56 - Pablo Valero (Inflexyon)
+  Lo manda Chema y dice... Este, este, la liga para que puedan acceder a los formatos de factura y con Naturprime no se va a requerir adenda, solamente la descripción del producto que viene detallada.
+
+9:13 - Raúl Núñez (Inflexyon)
+  Ah, sí, ya lo tengo, de hecho ya lo cargué en la carpeta de proyecto, todos los formatos de las facturas, entonces como tal no se requeriría ninguna adenda.
+
+9:23 - SALA VIP
+  Entiendo que es correcto. Sí, de hecho no se va a necesitar, nada más son como requerimientos que quisiera la parte de Naturprime ver en su, en su facturación, pero no es un, no es un formato obligatorio.
+
+9:37 - Raúl Núñez (Inflexyon)
+  Ok, ok, bueno, eso ya, ya, eso ya lo tengo, lo, lo tengo cargado en la carpeta del, en la carpeta del proyecto.  Va, el siguiente punto, no sé cómo van con la, la plantilla de productos y la plantilla de, de contactos, llámese clientes y proveedores.  Este ya, ya tiene rato que fue entregado. No sé cómo van con el avance, si nos pudieran comentar algún porcentaje más o menos del avance que traen.  En la plantilla de productos, perdón Vic, adelante, adelante, dale Vic.
+
+10:10 - SALA VIP
+  No, dale Robert, tú primero y ya luego voy yo con la de clientes. Gracias, gracias Vic. En la plantilla de productos todavía estamos en la espera para estandarizar con lo que NBG USA nos va a mandar.  Sí, se quiere estandarizar y tener solamente una sola nomenclatura. Entonces estamos en la espera de que nos lo envíen NBG USA.  Con la de proveedores, ahí Vic, ayúdanos. Sí, sin problema.
+
+10:41 - Victor De La Parra
+  Ya por ahí, tanto con Giovanna, con Yadira Tania y con José Roberto, ya me los enviaron. Ya nada más me queda depurar los proveedores, quienes sí, quienes no, de la parte de Naturprime y de Naturberry.
+
+10:59 - Raúl Núñez (Inflexyon)
+  Y.
+
+11:00 - Victor De La Parra
+  Y de los productores, ya nomás estoy terminando de agregar las direcciones fiscales en la plantilla, ya para terminarlo.
+
+11:09 - Pablo Valero (Inflexyon)
+  Sí, en ese sentido quisiera agregar, es muy importante ir contando con esto, digo, como para tratar de que cuando vayamos agendando las primeras sesiones, digamos, o talleres del sistema, pues ya tengamos datos, ¿verdad?  Si de pronto creen que en algún punto los catálogos, o sea, faltan detalles por pulirle, oye, no sabemos si vamos a incluir 10 productos más, 10 productos menos, si los vamos a archivar o no, nuestra recomendación es entreguenla, aunque sea parcial, o sea, con un avance, porque al final de cuentas el objetivo es tener datos para poder hacer los talleres en este momento.  Ya si hay una versión final final que... Que se pueda entregar en un mes, mes y medio, no sé, no pasa nada, se cargaría ya esa versión a productivo, pero para, digamos, no afectar ahí la experiencia en los talleres, ¿verdad?  Que sin datos y con datos, pues es muy distinto. Ok, sin problema.
+
+12:19 - Victor De La Parra
+  Sí, de hecho, hasta viene por ahí subrayado con rojo en la parte importante del cuello de botella.
+
+12:23 - Raúl Núñez (Inflexyon)
+  Sí, justamente, aquí le puse prácticamente, es el cuello de botella de casi todos los proyectos, es el tema de las plantillas, entonces, sí es muy importante, incluso, como comenta Pablo, y recordarán, tenemos una rama que es productivo y una rama que es pruebas, si nos pudieran hacer llegar una muestra de algunos datos que pudiéramos cargar en pruebas para empezar a, digamos, configurar algunos flujos, tener cierto avance en cuanto a...  Al sistema para poder presentar algunos talleres en su funcionalidad estándar o para que ya ustedes también cuando se metan al sistema puedan ver ya información real, pues siempre es más fácil la adaptación al uso de un sistema cuando ya hay información que ya se conoce.  Entonces, si bien ahorita no es, no urge, digamos, ya las plantillas completamente depuradas, ayudaría bastante al menos una muestra.  Ok, sí, sí, sin problema.
+
+13:32 - Victor De La Parra
+  La puedo subir a la misma carpeta por correo, cualquiera de las dos.
+
+13:37 - Raúl Núñez (Inflexyon)
+  Les hago llegar un avance. Va, que va.
+
+13:40 - Pablo Valero (Inflexyon)
+  Ambas yo creo que están bien para, digamos, el correo nos ayuda como a notificarnos y bueno, ya tenemos el repositorio ahí en la carpeta.  ¿Creen que se pueda tener esta muestra ya la siguiente semana, aunque sea la muestra? Sí, sin problema.
+
+13:56 - SALA VIP
+  Buenísimo.
+
+13:56 - Victor De La Parra
+  Cuanto menos de clientes y proveedores, yo digo que sí. Sin problema.
+
+14:01 - SALA VIP
+  Sí, si por alguna razón vemos que es jueves, miércoles y no tenemos respuesta de los productos, podemos subir una que se pueda asemejar y la tomamos como parcial.
+
+14:16 - Pablo Valero (Inflexyon)
+  Absolutamente, sí, sí, sí. Aunque sea una muestra o como dicen, una parcial, pero el punto es sí tener ya algo que nos ayude como a ir haciendo talleres.
+
+14:28 - SALA VIP
+  Muy bien, en cuanto al plan de cuentas que le solicitó Yuri, ¿es más o menos en qué punto estamos?  Sí, también tenemos chance la próxima semana, estamos esperando que Alfredo nos lo comparta ya con la sesión que tuvimos con Yuri en la semana, avanzamos mucho.  No más que Alfredo tenía unos asuntos, pero ya esperamos la próxima semana podérselos... Gracias. Gracias. Gracias. Gracias. Muy bien.
+
+15:03 - Raúl Núñez (Inflexyon)
+  Igual, si tienen alguna duda o requieren algún apoyo por parte del equipo, ya saben que está toda la disposición para subirnos a alguna sesión o lo que necesiten.  Gracias.
+
+15:18 - SALA VIP
+  Por ahí también... No sé, en ese punto sí tuvimos una sesión con Yuri en la que nos explicaba un poquito más a detalle de lo que se necesitaba.  Entonces, creo que solamente quedó de nuestro lado el recibirla y hacer la configuración con lo que las cuentas o hacer referencia a las cuentas del SAT para hacer el cruce.  Sí. Entonces... Vale, no sé si aprovechando, Yuri, que estás por acá, tengas algún comentario o sugerencia adicional.
+
+15:59 - Pablo Valero (Inflexyon)
+  Digo, a lo que se... Platicó, ¿verdad? O algún punto que quieras enfatizar.
+
+16:07 - Juritzen  Rentería
+  Sí, más que nada, pues sí, cuando lo tengan ya empatado, sobre todo saber si va a necesitar desarrollo o no, también por eso es parte de la premura.  Y ahora sí que hacer el escenario también para las pruebas, va a ser parte del eje central. Gracias. Gracias, Bacaba.
+
+16:32 - Raúl Núñez (Inflexyon)
+  También por ahí les hice llegar un correo, Robert y Víctor y Chema, con el Project Charter y el Plan General de Implementación.  No sé si tuvieron la oportunidad de revisarlo, ahí algún comentario nos daría norte cómo lo vieron. No sé si han tenido oportunidad de revisar esa parte.  Sí, si lo puedes presentar aquí, Raúl, para que lo dé al equipo.
+
+17:04 - SALA VIP
+  Claro que sí. Sí, sí, lo tiene Chema Vic, creo que también se lo ponemos a Chava y a Ale, pero igual si me lo puedes mostrar.  El chat, yo sí lo vi, nomás está muy largo, terminé de leer, pero está muy completo. Sí, voy macharlo, sobre el que voy a macharlo, contra lo que yo tengo de análisis de riesgos del proyecto, y les doy mis comentarios, va contra la 27, que es lo que queremos en migración de datos.  Muy bien. yo creo que el lunes, el lunes o más tarde, Raúl, yo te doy los, les comparto al equipo los comentarios, porque sí, fui la más feliz con ese papel.  ¿Verdad? Te dije que te iba a gustar. Sí, claro, justo la idea es, digamos, tomar la base de lo que hemos...
+
+18:00 - Pablo Valero (Inflexyon)
+  Hemos platicado, incluso hay partes que son, digamos, hasta del contrato, ¿no? En cuanto a metodología, documentos, etcétera, pero sí se va complementando con otros temas ya propios de talleres, mecánicas de proyecto y demás, y por supuesto con esto.  Sí. Aquí está el plan general de implementación.
+
+18:23 - Raúl Núñez (Inflexyon)
+  Yo periódicamente me meto según los avances a ajustar el porcentaje de avance de cada uno de los puntos que están por aquí.  Igual lo pueden consultar ahí en la liga de la carpeta del proyecto cuando ustedes gusten, pueden entrar a ver cómo vamos en cuanto avance.  Ahorita actualmente estamos todavía en las etapas de análisis. Vamos en tiempo, pero ya estamos medio ajustadones, entonces sí es importante que vayamos apretando un poquito el paso en la implementación.  Vamos a entrar al equipo ahorita en una etapa en la que se vuelve... Un poco más demandante de ambos lados, el involucramiento, lo van a notar, entonces para que estén en canal, ¿no?  De que vamos a entrar en unas etapas un poquito más robustas en cuanto al tiempo.
+
+19:18 - SALA VIP
+  Voy bajando si quieren que me tengan algún punto o con confianza me lo comenten.
+
+19:25 - Raúl Núñez (Inflexyon)
+  No vaya, la verdad es que está muy bueno.
+
+19:29 - SALA VIP
+  ¿Se irá poniendo en verdecito o solamente cambiará el porcentaje cuando ya llevemos implementado o terminado algo?
+
+19:40 - Raúl Núñez (Inflexyon)
+  Sí, mira, si hago cambios aquí, por ejemplo, vamos a poner cambios aquí. Si yo le paso al 100% se cambia de color.  Entonces, ahí va, ahí yo iré ajustando hoy. Hoy les ajusto los porcentajes en función de los avances que tenemos hasta ahora.  No son tampoco tantos, pero voy ajustando aquí para que tengan un contexto más puntual de los avances de cada etapa.  Al final hay un promedio total del avance completo del proyecto.
+
+20:24 - Pablo Valero (Inflexyon)
+  Sí, digo, yo aquí quisiera comentar algo y seguramente va ligado al siguiente tema que traes, Raúl. O sea, ahorita, digamos, hemos estado con el análisis del proceso general.  Vamos a entrar a, y es parte de lo que por ahí seguramente va a comentar Raúl, a una revisión, ¿verdad?, de los gaps que traemos de momento.  Y queremos tener una charla para poder confirmar. Una que sean, cuál es indispensable y cuál no para la salida en vivo y dentro de los indispensables también saber el, digamos, el nivel de prioridad, ¿verdad?  O sea, que recordemos, primero buscamos establecer la parte operativa y alrededor de la parte operativa ir de menos a más, ¿no?  Entre operación crítica, operación tal vez de automatización, mejora deseable, en fin. Entonces, para eso va a ser muy importante, digo, y seguramente habrá que irlo alineando con esa matriz de desarrollos, el que puedan tener, pues, una buena charla interna, ¿verdad?, al momento de hacer los diseños para, pues, evitar al máximo, ¿verdad?, el retrabajar esos desarrollos y que, bueno,  En la medida que estén mejor alineados con las áreas, podamos reducir, sabemos que son ciclos que requieren pruebas, que hay que corroborar que cubran la expectativa y hay ajustes, eso está más que claro, pero bueno, en la medida que podamos hacerlo con el menor número de iteraciones posibles, pues va a ser mucho más eficiente y vaya, mucho puede partir desde el diseño, ¿verdad?  A veces tal vez cambiar el diseño, no sé, por ejemplo, de una memoria fotográfica, de un punto de calidad, así como lo llevamos, por ejemplo, el año pasado en calidad, a veces puede implicar tal vez un rediseño a nivel tripas de desarrollo, entonces nos va a ayudar mucho en la medida de lo posible tenerlo lo mejor platicado entre las áreas para reducir ese ciclo de iteraciones, ¿verdad?  Sí, sí, Pablo.
+
+23:02 - SALA VIP
+  Ok. En la sesión que vamos a tener en la tarde, ¿para qué sería? Digo, no lo sé si con esto ya vamos como terminando esta sesión o igual podemos ligarnos con la otra aprovechando que está el equipo, ver qué es lo que se vería y darle más avance.  Pues me parece muy buena idea, Roberto.
+
+23:25 - Pablo Valero (Inflexyon)
+  Vamos viendo, Raúl, no sé, de los otros temas de estatus general, ¿qué nos falta? Para ver si... Muy bien.  Sí, no sé si traes otros puntos en la presentación de avance que... Sí. Para concluir.
+
+23:42 - Raúl Núñez (Inflexyon)
+  Sí, justamente parte de otro de los Cuegos de Botella en los proyectos suele ser mucho esta parte del desarrollo y como lo comentaba Pablo y lo comenté yo también ayer, es importante que tener bien estas definiciones de las funcionalidades que se van a probar.  Para los desarrollos, tenerlas bien claras con el equipo para que no haya algún tipo de cambio de alcance en cuanto al desarrollo.  Y bueno, eso obviamente nos quita tiempo y alarga un poquito más el proceso. Entonces, ahorita lo que seguiría, y como lo comentó Robert, es ver lo que ya tenemos recopilado de las sesiones de análisis que se ha tenido, ver los desarrollos que tenemos ya en la matriz de GAPS y empezar a ver cuáles son muy, muy fundamentales para una operación en vivo y que el equipo de desarrollo y Emiliano empiecen con el diseño del mismo para poder proceder después a una estimación de horas y pasarlo a desarrollar.  Hechos destacables de lo que hemos avanzado hasta ahorita. Ya Emiliano me confirmó que tiene El sistema instalado con los módulos de alcance.  Ya configuró la base de las tres compañías y ya terminamos con la sesión de análisis de contabilidad, almacenes y compras.  Seguiría en siguientes pasos cuadrar la parte de análisis en toda la parte comercial y registrar las horas de desarrollo que encontramos.  Las sesiones de análisis en la matriz de GAPS para empezar con las aprobaciones y mandarlo a desarrollar. En cuanto a la matriz de GAPS, bueno, antes de pasarme a la matriz de GAPS, no sé si tengan algo, algo que comentar, algo que agregar, equipo.
+
+25:44 - Pablo Valero (Inflexyon)
+  Yo sobre esta sesión de análisis comercial, pues ver si la podemos de una vez cuadrar, Emiliano, para también tener ya esa parte, ¿verdad?  Aquí nos faltaría de nuestra...
+
+26:00 - SALA VIP
+  nuestro lado, Juan Pablo, Juan Pablo Cholico, no lo invité, pero es de las reuniones que creo que tenemos pendientes, sería terminar tal vez el detalle del flujo de compras, que a lo mejor quedó pendiente desde la primera sesión, sería como terminarlo primeramente, después, tal vez muy puntualmente con lo de la producción de Vive en Atlanta, que quiere manejar Eder, que también ya lo habíamos visto en una sesión anterior, y con el tema comercial, con el tema comercial, que también ahí sería importante ver el punto de vista de Juan Pablo, de todo ese flujo que te mostramos, Pablo, en la última sesión que estuviste aquí presencial, que te mostramos.  Que era todo el flujo que traía Naturprime, que sí era bastante, pero que tal vez con Juan Pablo se...  Lo puedan, lo podamos resumir y este, ver el proceso en donde se une una con la otra. De todos modos ya lo tienen, ya lo tienen ese macro, macro proceso, ya lo habíamos tocado, pero sí es importante el punto de vista de Juan Pablo.
+
+27:19 - Pablo Valero (Inflexyon)
+  Sí, de acuerdo y en canal, Robert, este, no sé cómo se han estado coordinando con las sesiones, si, no sé, si, digo, no sé, Emiliano, si ves bien, yo creo que si nos proponen ustedes el horario o nosotros les damos la propuesta.
+
+27:35 - SALA VIP
+  ver que, ajá, como ya teníamos esa de las cuatro de la tarde, déjame ver si alcanzo a que esté Juan Pablo a ese horario y pues lo podíamos aprovechar.  Sí, sí, sí.
+
+27:47 - Raúl Núñez (Inflexyon)
+  Y también falta, falta concluir con, con la revisión de, del documento que tiene Emiliano en la parte de compras, esa también, también hace falta concluir.  Este, en cuanto a la matriz de GAPS, no sé, Emiliano y Yuri, les consulto, digo, se puede mostrar ya, pero no sé si ayer comentaban que sería buena una reunión interna para nada más cuadrar que ya tengamos detectados todos los desarrollos hasta ahorita al corte de, digamos, de hoy de lo que se ha encontrado en las sesiones de análisis.  No sé si faltaría agregar algo más, si no, digo, yo presento la matriz, pero, pero que se sepa que no, a lo mejor no está actualizada hasta el punto de, hasta el corte de ahorita.  Sí, adelante, Raúl.
+
+28:45 - Pablo Valero (Inflexyon)
+  Sí, de hecho, miren, la parte de la revisión de avance, este, es el espíritu es que sea dinámico, ¿verdad?  Es un tema de coordinación. Y, bueno, si falta alguno, pues, por aquí lo agregamos. Sí, eso también creo que nos lo mandaste en el mismo correo.  Sí, perdón, Raúl, aquí lo que quisiéramos en especial es, tenemos este listado de acuerdo a lo que hemos estado viendo, es como decíamos, ir conociendo el nivel de prioridad, ¿verdad?  Entonces, nosotros, por supuesto, nos imaginamos un poco de acuerdo a lo que tiene que ver con operación, reportes tal vez puede ser algo que quede en una segunda prioridad, que no por ello sea menos importante, pero es por orden de, digamos, de enfoque, liberación, etcétera.  Pero bueno, también sus comentarios no. Nos pueden guiar mucho al respecto, ¿verdad? Entonces, no sé, yo creo que si están de acuerdo que sobre cada uno nos fueran marcando, oye, es indispensable y en prioridad, sabiendo que es indispensable, ya tiene un cierto nivel de prioridad.  Y en la columna D viene alta, media o baja. Como para que, digamos, empecemos en alta lo que se estaría trabajando, por decir un ejemplo, en las siguientes dos semanas, en media después y en baja, no quiere decir que no sea importante, sino que va en una tercera prioridad, pero también está el factor de indispensable o no para la salida en vivo.  Yo creo que con eso podemos irnos alineando, no sé qué les parece. Sí.
+
+30:56 - SALA VIP
+  Muy bien.
+
+30:58 - Pablo Valero (Inflexyon)
+  Pues adelante. Este, Raúl, yo veo que, por ejemplo, ese tema del control de calidad es muy de operación, ¿no?  Me corrigen y es crítico, ¿cierto, Robert? Ese sería, creo que, de prioridad alta. ¿Cuál, perdón? Estos de calidad, los primeros dos.  A ver, es que se ve muy chiquito.
+
+31:23 - SALA VIP
+  Sí, sí, lo puedes ampliar, Raúl, por favor.
+
+31:26 - Pablo Valero (Inflexyon)
+  Ok.
+
+31:27 - SALA VIP
+  Estos dos de aquí, digo, porque este ya se entregó. Ah, este desarrollo ya se tiene. Sí, Ajá, ya lo habíamos tocado el día de ayer con Emiliano, el control de calidad, de recepción, ya la tenemos y solamente es algunos ajustes que queremos se realicen.
+
+31:45 - Raúl Núñez (Inflexyon)
+  Igual para que no se quede vacío, digamos que es prioridad indispensable y prioridad alta para tenerlo en radar. El siguiente, más o menos, ¿cómo lo ven?  El de considerar la calidad...
+
+32:00 - SALA VIP
+  La salida del material podría ser baja porque aún no tenemos qué es lo que queremos. Entonces, puedes ponerlo como baja.  Si a lo mejor ya tuviéramos la configuración, tuviéramos formatos de qué es lo que queremos, pero nuestro material de lo que le damos de empaque hacia los proveedores.  Por supuesto que el control de calidad tiene que ver, porque tenemos problemas con devolución de proveedores, pero Tania, para mí es un punto importante porque tenemos la parte de devoluciones y tenemos que hacer una validación de lo que estamos tanto recibiendo por parte de los proveedores como lo que yo le estoy entregando al productor.  Entonces, yo no lo pondría como prioridad baja, pero que lo diga el equipo. Sí, por supuesto, tenemos los parámetros de qué material debemos rechazar y qué no rechazar.  Ok, entonces hay que ponerlo como alta. Raúl, por favor. Va. Y en una, tal vez cuando veamos algo de detalle de almacenes o detalle de compras, podemos tocar tal vez este punto.  Ok.
+
+33:21 - Pablo Valero (Inflexyon)
+  Recuerden que también está la segunda columna que es indispensable para la salida en vivo. O sea, puede estar en una medida media o baja, algún desarrollo, que digamos, vámonos por orden, pero de todas maneras, eso nos va a indicar que es importante tenerlo antes del inicio de operaciones.
+
+33:44 - SALA VIP
+  Aquí para reforzar lo que dice Pablo, muchachos, no todo puede ser prioridad alta, porque si todo es importante, nada es importante.  ¿Qué es prioridad alta? Que puede interrumpir la operación del negocio cuando salgamos a productivo. Esa sería la principal prioridad si no podemos operar.  Operar correctamente cuando salga, eso tendría que ser número uno. Ya de ahí para abajo, podemos operar con un plan secundario, pero tenemos un riesgo alto, a lo mejor es prioridad media.  Prioridad baja es, podemos operar sin eso, tenemos un medio secundario alternativo para sustentarlo mientras queda, y no hay un riesgo alto con ese medio secundario, podría ser prioridad baja, pero indispensable.  Muy bien, muy de acuerdo, Salvador.
+
+34:32 - Pablo Valero (Inflexyon)
+  Claro.
+
+34:34 - SALA VIP
+  Ok, ¿quieren que cambiemos entonces esa de la calidad de la salida del material, algo? Ojo, no estoy diciendo que sea diferente, ustedes son los expertos a dejarlo.  Pues yo, a ver, María, yo sí quisiera tu opinión aquí porque eres tú la que, ja, ja, que va a llegar a ti el último trabajo.
+
+34:52 - Tania Ortega Laureano
+  Sí, creo que sí pudiéramos dejarlo en prioridad media, más indispensable. Porque si es... Es bastante importante que en el momento que quede ya el proceso, sí se mencione, como se diga.  De acuerdo.
+
+35:11 - Raúl Núñez (Inflexyon)
+  Pasamos a lo detectado hasta ahora en almacenes. Al recibir productos, se debe pedir esta información. Dice desarrollo y ya se tiene datos del chofer, información del vehículo.  Esto de ya se tiene, Emiliano, ¿es porque ya se desarrolló? ¿O se refiere a que ellos ya tienen algún tipo de formato?  ¿O por qué menciona esto? Ah, entonces es sobre lo que se comentó ayer con Robert, que es lo que ya se tiene de la implementación anterior.
+
+35:46 - Emiliano  Lorenzano
+  Ah, ok. Porque Samuel, sí.
+
+35:48 - SALA VIP
+  Sí, esa parte del desarrollo tal vez es lo de la firma que pedimos. Dijimos que esté ya en el sistema como configurado y actualmente ya lo tiene al momento de recibir el producto.  Por eso que ya lo tenemos. Solamente hace falta afinar lo que va a contener el catálogo, lo que va a contener para hacer las validaciones de todo lo que hemos hablado, que está por ahí más abajito.
+
+36:30 - Raúl Núñez (Inflexyon)
+  Ok, y en cuanto a, digo, creo que no es tan, no sé, pero no es tan indispensable. Creo que si posterior a la salida en vivo no se tiene, un par de semanas no afectaría tanto, ¿no?  Creo que es algo que se puede tener hasta después.
+
+36:51 - SALA VIP
+  Mira, yo creo que sí es indispensable puesto que la salida en vivo nos va a agarrar casi cuando el...  Sí, creo que importante. Los productores están recogiendo el material. Entonces, sí o sí necesitamos tener identificado quién pasa y quién deja, tanto material como producto.
+
+37:22 - Raúl Núñez (Inflexyon)
+  Ok. ¿Y en cuanto a prioridad, qué dirán? ¿Media prioridad? Podemos ponerle media, puesto que ya llevamos algo avanzado.
+
+37:34 - SALA VIP
+  Entonces, tal vez sí nos pudiera ayudar la importancia. ¿Qué onda, Sí, gracias. Nada más una pregunta, Emiliano.
+
+37:48 - Victor De La Parra
+  ¿Ese Emiliano es cuando nosotros le entramos material al productor o cuando el proveedor nos deja material en la bodega?  Nada más para no confundirme.
+
+38:01 - Raúl Núñez (Inflexyon)
+  Con lo que te hemos explicado.
+
+38:02 - SALA VIP
+  Tal vez sería de lo mismo, porque en los dos vamos a solicitar la misma información, tanto cuando el productor lleva las cajas, se tiene que identificar, y cuando el productor va por el almacén al material, se tiene que identificar, Entonces, si o si va a dar la mano el que se tenga que poner este desarrollo, cuando va el productor, es a nuestros almacenes o cool.  Ok, gracias Robert. Ok, pasamos al siguiente firma de proveedor al recibir el producto. Pues, si ya tenemos actualmente lo de la firma.  Ahí, Emiliano, creo que solamente aplicarlo para el tema de los proveedores, no sé qué tan difícil se haga. Para nosotros, volvemos a lo mismo, todo este control de calidad que queremos hacer en nuestra salida del material, creo que tendría que tener la misma tesitura del anterior, entonces puedes ponerlo como es media y que sí es necesario para que salga en vivo.  Imprimir la etiqueta del Palet Tag, ese sí es alta, puesto que si no, no se puede almacenar o configurar o hacer la trazabilidad.  Ok. Papeleta de entrada para las plantas y salidas con opción a crear la orden de venta, pues esa también es indispensable.  El porcentaje de merma también es, es que podemos ponerle alta y media alta. Yo creo que sí o sí son de los que se necesitan que salga.  ¿Media y sí? Media y sí, podría ser. Y hasta cierto punto es normal, ¿verdad?
+
+40:33 - Pablo Valero (Inflexyon)
+  Porque son, digamos, temas muy de operación. Yo creo que claramente cuando tengamos tal vez algún tema de algún reporte o automatización, ahí quizás podemos bajar, pero sí, queda claro que cuando es un tema que va muy de operación, pues no importa, ¿verdad?  O sea, si ahorita nos salen 5 o 10 de prioridad alta, pues está bien. O sea, a esos son los que les metemos...  Un poco inmediato. Sí, para eso es esta sesión de ahorita.
+
+41:08 - SALA VIP
+  Esa segunda, digo, la que sigue, esa sí puede ser como baja y que no es tan dispensable para salir del video.  Ok. Son las tarimas, son las devoluciones de tarimas chef, aquí ponle un asterisco porque se lo va a calificar Churico diferente.  Sí, esto es tarima chef, ¿no? Con la tarima chef. Sí, a lo que voy es que sí se va a hacer, pero no es indispensable para que salgamos en vivo.  O no digo que no se va a hacer, no, sino que sí se va a hacer, pero no es tan dispensable.  Correcto, todos se van a hacer, ¿no?
+
+41:48 - Pablo Valero (Inflexyon)
+  O sea, asumiendo que esté dentro de lo contemplado, yo no veo tema, o sea, todos deberían de hacerse, más bien es como para ir.  Marcando primero en cuáles nos vamos a enfocar.
+
+42:03 - SALA VIP
+  Esa también la puedes poner como media y sí, el de antes de entregar el material se solicita copiar del INE del chofer y aprobación de gerente para poder entregar.  Esa sí se tiene que hacer, puedes ponerla como media. Si me ve Gloria va a decir, no, ponla alta.  Es sabes que nos estamos limitando material. Bueno, no sé si en el cooler está la entrega de la planta.  Para mí ese es alta, pero es algo muy similar. No sé si lo tengan en el cooler. ¿Quién está viendo esto?  ¿Tú, Víctor? ¿Pero qué está hablando de otro proceso? Creo que es es el entrega de la planta. Más bien, esto está más enfocado a cuando nosotros le entregamos el material de empaque al productor.  Sí, cuando Gloria ya hace la validación de que el productor puede ir por el material, que Gloria, la configuración de que Gloria...  Habilite a ese productor, indique cuál es el material que va a pasar y que cuando el productor ya llegue y se identifique, los chicos de Ramazén sepan qué es lo que le van a entregar y si está habilitado o no.  ¿Pero de la planta lo tienen en el curlen o no? Yo creo que deberíamos poner en el enunciado, o no es específico para que aplique, ¿no?  Ajá, sí, a lo mejor aquí podemos poner para el material de empaque, en este caso, y... Porque mira, estás cruzando ya plantas.  Y si te fijas, allá arriba está la papeleta de entrada para las plantas y salidas, entonces... como que, o sea, sí, nomás para ponerlo, son dos cosas...  Sí, son dos cosas, pero acuérdate que para la entrega de las plantas, ahí no se necesita configuración de que Gloria habilite, en este caso, en ese renglón es...  La configuración de que Gloria habilite al productor, al rancho, de que ya puede estar liberado y el de arriba...  Sí, es el dirigido especialmente al de la planta.
+
+44:06 - Victor De La Parra
+  Yo nada más, como observación, para la entrega de plantas, sí, Gloria sí me pidió parámetros de los que vimos en la reunión, que era que tuviera el rancho listo y algunos otros que también tengo descritos.  Digo, son aparte, no tanto de almacén, pero nada más para que se tenga en consideración en planta. ¿Eso estaría en producción o dónde estaría?
+
+44:25 - SALA VIP
+  Yo creo que allá arriba de ese papeleta de entrada para las plantas y salidas, con opción a crear la orden de venta, a lo mejor allí pudieras poner, Raúl, el hecho de la configuración de parámetros dictaminados por NVG, que es en la línea 20, Raúl, en el reino 20.  Con parámetros dictaminados NVG.
+
+45:05 - Raúl Núñez (Inflexyon)
+  Ah, muy bien.
+
+45:22 - Pablo Valero (Inflexyon)
+  ¿Dejé de escucharlos o no están hablando? No, estamos viendo.
+
+45:29 - SALA VIP
+  Perdón, es que no estoy viendo la sesión, entonces. Ah, justamente es parecido al de... El 24 y el 23 son como muy redundantes.  El 24 y el 23.
+
+45:47 - Raúl Núñez (Inflexyon)
+  A ver, a lo mejor aquí me gustaría... Igual ponlo igual en la mitad. A priori, a la otra vez.  Ah, A ver si uno está hablando de cositas, Pablo. Sí, más no nos vayan a poner...
+
+46:03 - Pablo Valero (Inflexyon)
+  O sea, ahorita no estamos ni estimando nada, o sea, ahorita queremos entender el nivel de prioridad, ya llegando al momento de aterrizar cada uno, ya vemos, oye, a ver si es el mismo, no, quitamos, etcétera, ¿no?
+
+46:20 - Raúl Núñez (Inflexyon)
+  Sí, también tengan en cuenta que también puede ser que es parte de lo mismo, pero tienen especificaciones muy puntuales por una parte y hay especificaciones muy puntuales para otra parte, entonces, no sé, a lo mejor Emiliano lo puso así para tenerlo separado, pero forman parte de, digamos, de un flujo completo o de una necesidad muy puntual completa.
+
+46:50 - SALA VIP
+  Creo, creo que en el, ayer, antes que estábamos con Emiliano, sí había mucha redundancia, si él las estaba eliminando, estaba quitando, este, números, a lo mejor.  A eso se quedaron con lo anterior y no con lo que ya habíamos visto en la última sesión con Emiliano, que fue ayer, ¿no?  Sí, ayer. Sí, lo que se movió fue el archivo y había faltado el estilo. Exactamente, a lo mejor este ya no lo habían entregado y el día de ayer hicimos como la depuración de esos puntos.  Yo creo que es eso, Pablo. Ok, va. Bueno, continuamos con el que sigue. Sí, ahí es media y sí.  Ahí sí puedes actualizar tu Excel, Raúl.
+
+47:41 - Emiliano  Lorenzano
+  Como dice Robert, yo ahorita revisé y corregí algunas cosas, entonces unos ya no van a estar porque entraban dentro de otros desarrollos, se agrupaban, pues.  Ya ves, ya no están bien. Gracias.
+
+48:00 - SALA VIP
+  Ok, en los embates ocupamos tener evidencia del embarque que está saliendo. Sí, ahí es alta y sí. Ok. Revolución de material por parte del productor, pues ahí sí, ahí podríamos dejarlo como media, igual que la de la configuración de calidad, creo que pudiera ser de la misma manera.  generar un reporte en Excel para solicitud de reclamo, pues ahí sí, no sé.
+
+48:50 - Emiliano  Lorenzano
+  Roberto, te dejé las descripciones ahí en el grupo de WhatsApp, ahí si los quieres revisar para que se identifique a qué se refiere, porque aquí viene pues nada más el puro.  Nombre corto, ¿no?
+
+49:01 - SALA VIP
+  Como tal.
+
+49:06 - Emiliano  Lorenzano
+  ¿Pero te placer decir?
+
+49:11 - SALA VIP
+  ¿El de generar un reporte en Excel para los estudios de reclame?
+
+49:18 - Tania Ortega Laureano
+  Va de la mano, Robert, el de generar con la devolución. Mi pregunta es nada más si por algún motivo específico se solicitó que se generara el reporte como tal, o sea, el en Excel.  ¿Viene a modo ejemplo?
+
+49:37 - Emiliano  Lorenzano
+  Ayer que platicábamos con Robert, pues podía ser ahí nada más como el Excel. Ustedes platicaban que llevaban un Excel actualmente, ¿no?  Pero ahí le puedes poner entre paréntesis, Raúl, o le puedes poner formato de solicitud en Odoo, ¿no? Sí, exactamente.  Si es un formato de solicitud en Odoo, con eso está perfecto.
+
+50:00 - Tania Ortega Laureano
+  De esa forma llega ya con la información y se transfiere al proveedor. Mi pregunta es si querían que fuera en Excel como para poder descargarlo o algo así, pero podría ser hasta un PDF, pues, algo inamovible, nada más que tenga la información.
+
+50:17 - Emiliano  Lorenzano
+  Sí, ahorita son como a lo mejor puntos generales y ahorita que se está definiendo la prioridad de todo eso, vamos a pedir que nos ayuden con sesiones ya específicas para aterrizar ya bien, bien el desarrollo.  Te agradezco.
+
+50:35 - Tania Ortega Laureano
+  Sí, creo que podría quedar como media y sí, porque va de la mano con la devolución.
+
+50:50 - SALA VIP
+  Listo, pasamos a... ¿Compras? Compras. Antes de, no sé si me dan la oportunidad, de almacenes.
+
+51:00 - Victor De La Parra
+  De material de empaque, yo no vi el punto de la reducción de papel con lo de los folios de recepción de material, de recepción de material de empaque y las salidas junto con sus devoluciones, que se tenga pues el mismo formato, que se tiene en físico, pero ya se haga de manera digital.  Creo que era lo que mencionaba ayer, Roberto.
+
+51:50 - Pablo Valero (Inflexyon)
+  Preguntaba Víctor sobre los folios de entrada y salida. Digitación. Sí.
+
+52:03 - SALA VIP
+  La digitalización, Emiliano, que Vic está preocupado de que no lo mencionas, pero Pablo dice que por estándar se va a llevar y nada más el hecho de que no aparezca aquí no significa que no vaya a Ah, es que, bueno, no sé si recuerden del documento que realizamos ayer, que preguntaban que Alvarán qué eran, ¿no?
+
+52:29 - Emiliano  Lorenzano
+  Entonces nosotros comentábamos que eran los documentos de entrada y salida y ya cada documento pues lleva su propio folio, pero eso ya se asigna de manera automática en el sistema.  Ya nada más se pone un prefijo de acuerdo a lo que quieran ustedes que lleven, ¿no? O cómo se vaya a conformar ese folio.  Si eso no cumple con lo que esperan en la parte de almacenes, pues ya vemos qué modificación hacemos, pero con los estándares se puede decir que lo cubrimos.
+
+53:00 - Raúl Núñez (Inflexyon)
+  Sí, justo recordemos que lo que tenemos aquí es cosas que por estándar no se pueden tener y estamos recopilando los desarrollos que se requerirían.
+
+53:17 - SALA VIP
+  Pasamos a compras.
+
+53:20 - Raúl Núñez (Inflexyon)
+  Sí, aquí están aquí las chicas, chicos.
+
+53:26 - SALA VIP
+  Cierre de materiales, ¿a qué te hacen mención de cierre de materiales? Creo que sí, no sé. Vamos, tendremos preguntas para...  Dale, ¿puedes preguntarte? Un segundo.
+
+53:46 - Pablo Valero (Inflexyon)
+  Creo que esa sería pregunta para Emiliano, ¿no? No lo decía para Emiliano o Yuri o...
+
+53:57 - SALA VIP
+  no lo sé, a qué se refiere.
+
+54:00 - Pablo Valero (Inflexyon)
+  Gracias. Ese punto estimado, ¿a qué se refiere? Sí, sería para ¿A qué documento?
+
+54:09 - Raúl Núñez (Inflexyon)
+  Ese tema, Robert, es para el corte que hacen.
+
+54:13 - Emiliano  Lorenzano
+  Cada semana comentaban ustedes que hacen un corte, seleccionan varias entregas que hacen a los productores y de ese rango, bueno, ustedes seleccionan un rango de fechas, seleccionan varias entregas y en base a eso crean la orden de compra.  para ahora sí cobrarle lo que se quedó con el proveedor. Incluso te voy a mandar ahorita ahí en el WhatsApp como la descripción que iba de esos desarrollos.  Te lo mandé.
+
+54:52 - Raúl Núñez (Inflexyon)
+  Ahí se está. Ya no lo puso Raúl en la pantalla.
+
+54:55 - SALA VIP
+  Presentando el documento.
+
+54:58 - Raúl Núñez (Inflexyon)
+  Se refiere a este.
+
+55:00 - SALA VIP
+  Ok, se informa a qué productores van a cerrar en la semana, se relacionan con la evolución de materiales, presentar balance general, firma, ok, sí, el productor no está a acuerdo, se revisa en el país, se firma de aceptado, revisar cómo va a quedar el portal de proveedores, tener en la sesión.  Se va separado, Robert, eso del portal de proveedores va separado, no, es que ahí lo había unificado, pero va abajo.  No, el cierre de materiales, así pasan los rechazos a considerar, es el cierre de materiales para nosotros poder cobrar con ellos el saldo restante, y es importante considerar los rechazos que tengan de calidad en el cooler para que se reste ese material del saldo que tenga el productor en su carácter, ese material.  Sí, yo creo que entonces en ese cierre de materiales iría todo ese detalle. ¿En qué prioridad? Lo quiero detectar es considerarnos usados.  Alta y sí, la parte, que las partes fundamentales de nuestro Es que estamos siendo aparente con cierre material. Sí, pero por eso hay que poner, hay que agregar en las variables el rechazo.  Portal de productores, sí, también es alta y sí. ¿Puede? Sería informativo, ¿no? Lo que sientes que lo vamos a apurar, la más cantidad de rechazos, pasar como un paréntico de rechazos y eso.  eso, el departamento solicita una requisición de compras y el jefe de área autoriza a la parte de los departamentos de compras.  ¿Cuándo lo que sea no? Compras, sí, aquí es alta y sí, es lo que sí o sí se debe de proceder.  Ahora, aquí una pregunta.
+
+56:54 - Pablo Valero (Inflexyon)
+  ¿Cómo es portal e involucra también, entiendo que los productores ahí es donde? Donde también harían consultas. ¿Lo ven al mismo nivel de prioridad que los otros?  O sea, ¿no ven que tal vez se pudiera hacer media? Que también se va a trabajar, por supuesto, pero...
+
+57:14 - SALA VIP
+  Fíjate, como en el punto anterior, en el 32, en el cierre de materiales, en la hoja que nos mostraron, es la revisión semanal del productor.  Entonces, este portal de productores tiene que estar al día y también ya lo veremos si también se requiere cortes semanales, algo así para poderlo presentar.  Entonces, es... Y desde el inicio de que esté el ODU, ya debe de traer esta parametrización mostrada en el portal.  Y como nosotros lo volvemos a decir, es indispensable que... Nos enfocamos a la claridad con el productor. Ese portal debe estar indispensable.  Está claro la importancia, Roberto.
+
+58:09 - Pablo Valero (Inflexyon)
+  Ahora, siendo indispensable, que tiene que estar antes de la salida en vivo, digamos en orden de atención, o sea, creo que pudiéramos ponerlo tal vez como un media o para después de los primeros tener este, ¿no?  ¿O lo ves al mismo nivel de prioridad que los otros de alta?
+
+58:33 - SALA VIP
+  Bueno, si quieres ponlo medio, pero debe salir en el mismo momento de los siguientes en vivo.
+
+58:43 - Pablo Valero (Inflexyon)
+  Y algo que creo que también es bueno comentar es, o sea, conforme vayamos liberando, pues también podemos ir ajustando.  O sea, esto no se queda, digamos, escrito en piedra, o sea, porque pues obviamente las prioridades van a ir, pueden ir cambiando.  Entonces, pongámoslo en media negritas, Raúl, como para que sea, digamos, de los primeros de segunda línea, que se trabajen, también sabiendo que antes del go-live.  Este, y bueno, o sea, pueden surgir sobre los ciclos de prueba algunos que entren arriba en prioridad, y demás, lo que ya no movemos son las estimaciones, que ya son tiempos, pues, compromiso, ¿verdad?
+
+59:35 - SALA VIP
+  El reporte de planeación de plantas, ahí sí es media y sí, cuando tengamos la reunión con NEDER, tal vez podamos dimensionar la prioridad, si a lo mejor es muy alta o la dejamos en media negrita.  Ahorita podemos ponerle como media, sí. Sí, media, Raúl. Reporte de planeación de materiales, pues aquí, no lo sé, ¿qué le podemos poner, Vic, Chema?
+
+1:00:33 - Victor De La Parra
+  Me imagino que era con lo que pedía Rigo en aquel momento, que era lo de los puntos de reorden, que bueno, por ahí platicando ayer con Emiliano, también Odo maneja parte de los mínimos y máximos.  No sé cómo lo ve, Robert.
+
+1:00:50 - SALA VIP
+  Sí, porque aquí le pegamos mucho a Tania en las compras, que va mucho de la mano, entonces tal vez tendría que ser.  Sí, tal vez media, solicitar una prueba de entrega con el productor, proveedor.
+
+1:01:15 - Emiliano  Lorenzano
+  Comentaban que traían un documento, bueno, ahí mencionaban pues que era una prueba de entrega y que ese documento, si no lo entregaban, no iban a poder crear la factura y no aplicaba pues para todos los productos.
+
+1:01:30 - SALA VIP
+  Sí, sí, entonces ahí sí la pueden poner también que sí es innecesaria y media también.
+
+1:01:51 - Raúl Núñez (Inflexyon)
+  Muy bien, pasamos a contabilidad. Ahí viene lo bueno.
+
+1:01:57 - SALA VIP
+  A ver qué hable Chava y Rafa. En el ADD. ¿Por qué no? Contabilidad en dólares para las tres empresas.  Ese es el que los reportes se conviertan en otra moneda, ¿no?
+
+1:02:19 - Pablo Valero (Inflexyon)
+  Alta y sí, ¿no?
+
+1:02:21 - SALA VIP
+  Sí, ahí lo que estamos viendo, contabilidad en dólares, es tanto movimientos, todos reporteros y financieros.
+
+1:02:30 - Pablo Valero (Inflexyon)
+  En ese, no sé ahí cómo, qué platicaron, Yuri, como para, digamos, ir defiendo la expectativa. Ahí de los puntos que me preocupan es, o sea, no tener, digamos, los movimientos como en una contabilidad paralela.  Creo que eso puede ser, pues, muy complejo. O sea, por eso, digamos, mi sugerencia sería enfocarlos a la reportería para que, claro, con la fecha.  fecha del reporte se pueda tomar un tipo de cambio y que la reportería se facilite. No sé, ¿qué comentaron, Yuri?
+
+1:03:09 - Juritzen  Rentería
+  Sí, se comentaba tal cual, o sea, sí, importante la reportería, pero también los movimientos como tal, por ejemplo, de almacén, una entrada, una salida, evaluada.  Este, lo comenté con Alex y me comentaba que sí se puede hacer, sería tipo una empresa espejo y él tendría que hacer ahí unos ajustes.  Aquí sí necesitamos que ellos nos indiquen si lo quieren a un tipo de cambio del diario oficial, del día o del fin de mes.
+
+1:03:43 - SALA VIP
+  Sí, porque justamente ahí es donde creo que el alcance es muy distinto.
+
+1:03:48 - Pablo Valero (Inflexyon)
+  Y digo, a reserva de platicarlo con Alex y me corriges, creo que un nivel de complejidad es que, por ejemplo, un estado financiero lo podamos...  Vamos a a otra moneda con el tipo de cambio de la consulta porque es un reporte y otro nivel de complejidad es el de la empresa espejo, ¿no?  O sea, porque ahí pues habrá que ver el impacto de los movimientos, cada movimiento y seguramente esa contabilidad espejo no sería tan consistente por el tema de tipos de cambio con cambiar solamente el reporte.  ¿No? Dice acá de este lado Rafa que eso ya lo habíamos visto.
+
+1:04:38 - SALA VIP
+  Sí, eso lo platicamos desde el inicio y nos comentaron que sí se va a poder, por eso pasaron realmente a checar Odu, por ese tipo de situaciones.  Entonces sí necesitábamos que realmente estuviera en esa moneda porque realmente es muy indispensable porque reportamos a Estados Unidos. Y nos dijeron
+
+1:05:00 - Pablo Valero (Inflexyon)
+  Sí, no, o sea, de habilidad se puede, pero es importante comentar que es un desarrollo de alta complejidad, porque pues al final el poder de programación de Odoo ahí está, pero sí es importante ser claro, porque por ejemplo les quiero comentar de un caso, ¿no?  Donde, por ejemplo, y fue un caso del que aprendimos mucho, nosotros hacíamos la sugerencia de manejar el tema de las diferencias cambiarias con la funcionalidad estándar, ¿no?  Oye, este, tomas el tipo de cambio, que el sistema por supuesto es multimoneda, tomas el tipo de cambio del diario oficial al momento de la factura contra el día del pago y registras esas diferencias cambiarias, todo eso es.  Es estándar. Y el cliente, me acuerdo que en aquella ocasión nos pidió, oye, yo quiero que el tipo de cambio que yo registre en mi contabilidad sea el que yo pacto con el cliente, no el del diario oficial o de las páginas oficiales, ¿no?  Entonces eso, al momento de generar, digamos, reportes y validar su consistencia, pues sí le generó una complejidad importante, porque al final, o sea, lo que te da el sistema de garantía de caja, pues es toda la integración contable, ¿verdad?  O sea, es algo que ya tiene muy, muy amarrado, muy, muy nativo. Entonces, este tema de la contabilidad en dólares, pues se puede crear esa contabilidad espejo, este, pero, pero pues es un tema de alta complejidad y de hecho sí, sí, sí.  Sí aclaramos también, ¿verdad?, antes de arrancar que buscaríamos que fuera más enfocado a la reportería, porque esto sí es un desarrollo de alta complejidad que hay que revisar esa consistencia y, no sé, me corriges, Yuri, creo que la consistencia de los tipos de cambio puede ser retadora, ¿no?, entre la contabilidad de espejo y la original en pesos, ¿no?  Sí, correcto.
+
+1:07:31 - SALA VIP
+  Oye, Pablo, nada más siendo muy puntual y muy honestos, cuando tuvimos nuestra sesión de tres, cuatro horas, Roberto, recordarás, yo fui muy puntual en decirte a Pablo, en específico, ese es un requerimiento que lo está pidiendo, y tú dijiste que si nunca hablabas de complejidad, nunca tocamos la parte que iba a hacer por reportería, solamente ponerlo, sea, finalmente ustedes y el comité tomarán su decisión, pero, este, sí que...  Y muy puntual que de frente lo tratamos y jamás se tocó la base de que iba a ser un sistema de reportería y que iba a ser algo complejo.  O te dijo que sí se podía, ¿sí? Y eso lo hicimos. ¿O estoy equivocada, Rol? No, digo, desde siempre, como lo mencionó Rafa, desde el primer acercamiento, siempre fue buscar eso.  Y recuerdo la primera reunión que tuvimos con Alfredo, que tú estuviste. Alfredo hizo muy puntual el hecho de que es un corporativo que tiene que mostrar sus datos en dólares y que sí o sí nuestros documentos, nuestros pólizas, nuestros pólizas, tendría que estar valuado en el tipo de cambio que se esté ejecutando en ese vía o X, Y, Z.  Nos hicieron mención de que sí, sí se podía. No era algo... Un nativo, pero que sí se podría desarrollar, que no tendría ningún problema.  Yuri también nos mencionó cuando ya nos acercamos con ella de que también existía y podíamos hacer como una empresa de esta manera, como una empresa en dólares, en espejo y poder transmitir.  Entonces, con ese dato, pues yo creo que el equipo de contabilidad se quedó tranquilo y Alfredo también se quedó tranquilo.  Y es la misma tranquilidad que nosotros esperamos recibir de ustedes cuando tocamos este punto, que nos digan, no se preocupen, NVG, esos datos sí los van a tener.  Ahora, si siendo un poco más puntual, pues si bien es cosa de reportería, al fin lo que vamos a mostrar a Estados Unidos, que a lo mejor eso no les complica mucho, esa otra parte de ver las pólizas, Rafa, o ver...  Ver el movimiento, ver cómo se afectó en dólares y después llevarlo a un reporte de balanza, estado, resultado, no lo sé.  Esa parte creo que también la platicamos y debería de estar asentada, ¿no? Sí, de hecho lo que platicamos es que realmente necesitamos los asientos contables en tiempo real en las dos monedas.  En las dos monedas, una solución, dijeron que era prácticamente la empresa Especo, que realmente se tenía que reflejar en el momento.  Este, a mí no se me hacía tan práctico, pero volvieron por esa parte, porque manejar las empresas probablemente no se me hace muy funcionar, ¿no?  Pero en fin, dijeron que sí se podía, este, en ese momento, ahora que no había tanta complejidad, porque realmente solamente iba a ser, este, una interacción de los movimientos en pesos con los tipos de cambios de los movimientos del día, pero ahora sí ya no entendí porque realmente  Yo no estuve en las últimas puntas donde tomaron esas decisiones y no sé exactamente cuál fue el acuerdo y qué realmente se realizaron ustedes, como que sí se podía, si era un desarrollo, pero no teníamos ningún problema para tener esa información.
+
+1:11:13 - Pablo Valero (Inflexyon)
+  Sí, digo, yo quisiera comentar, o sea, queda claro que la importancia del reporteo a Estados Unidos es importante, o sea, eso que está platicado y es un requerimiento está claro para todos, o sea, y sí lo comentamos.  Y de hecho, por eso viene así desglosado, ¿verdad? La consulta en dólares de los estados financieros con el tipo de cambio de las fechas de consulta, o sea, eso es claro y es importante.  Ahora, hay maneras de justamente cómo manejar eso, y sí me acuerdo que hicimos esa aclaración y por eso así se redactó justamente en el contrato.  El, el, el, el, el. Una cosa es trasladar los reportes a un esquema multimoneda y otra, como bien dice, me parece que es Jonathan, llevar una doble contabilidad, una empresa paralela, porque bueno, las empresas son tres, no son empresa paralela 4 o 5, ¿verdad?  Con el multimoneda. Es viable técnicamente, sí, sí es viable, que ya fue algo que esto último del paralelo seguramente se platicó en esta parte de análisis, pero digamos, el scope considerado es, claro, que los reportes se puedan llevar en multimoneda, pero debemos de ser, pues, muy consultivos en decir, oye, el tema de llevar una empresa paralela con estos movimientos en automático es un desarrollo de alta complejidad, muy alta, y porque, pues, es integración contable.  Gracias. Y hay que ver, pues, la consistencia, ¿verdad? Yo creo que una cosa sería, oye, reportemos nuestros reportes, trasladémoslos a dólares, démosles vistas para el análisis contable, etcétera, así como bien establecido aquí.  Y otra es, tengamos un, pues, una empresa paralela. Creo que ahí, digo, está claro que es importante el tema del reporteo, pero creo que sería bueno que también este, pues, si consideremos, si consideramos el tema del paralelo, analicemos bien lo que implica todos, ¿no?  Ambas partes y su complejidad, este, y posible impacto, ¿verdad? O sea, pero sí quería aclarar eso.
+
+1:13:51 - SALA VIP
+  Sí, Pablo, entiendo y como que recibo ahí también un tono un poquito diferente. Diferente en lo que mencionas, pero mira, vamos a ver, muéstranos cómo se vería en el sistema de prueba, cómo los chicos de contabilidad lo pueden visualizar y no nos cerramos a nada, pero sí escuchar nuestro sentido de esta reunión, que creo que ya lo habíamos hecho en otras reuniones, pero que en esta reunión se quede asentado de que sí o sí es indispensable.  El hecho de cómo lo haga Odú, pues se lo deja a ustedes, pero el hecho de que nosotros lo necesitamos de esa manera, pues es un sí o sí que debe de estar.  Entonces, no nos cerramos, no nos cerremos y si quieres lo podemos tocar cuando nos muestres el modo de cómo los chicos de contabilidad van a poder visualizar.  Si quieres, para no... No enrollarnos tanto en este tema. No, totalmente, Robert. No nos desviemos.
+
+1:15:04 - Pablo Valero (Inflexyon)
+  Está claro que ese punto del reporteo en dólares va a estar. O sea, eso está más que claro para todos.  Vamos viendo los cómodos, ¿no? ¿Y nos puede mostrar, Raúl, cómo vamos?
+
+1:15:23 - SALA VIP
+  Sí.
+
+1:15:25 - Raúl Núñez (Inflexyon)
+  Ah, ¿no están viendo la matriz por lo que veo? No. ver, dejaste de presentar. Ah, quién sabe qué paso.  Ahí está. ¿Sí?
+
+1:15:35 - SALA VIP
+  Entonces, pues ahí es alta y sí, o muy alta, o súper alta. O súper alta, sí, alta. ¿El ADD?  Sí, es una bimoneda como Compact, no funciona. Entonces, no. No, va mucho más que eso.
+
+1:15:55 - Pablo Valero (Inflexyon)
+  Ok. Constance, constance.
+
+1:15:58 - SALA VIP
+  Sí, sí, sí, vamos, ya vamos. Es más, es más, y poniéndolo todavía más, ustedes eran, son consultores, eran, o siguen siendo, son consultores de SAP HANA y de SAP Business One, saben que el SAP Business One lo maneja de forma nativa y que de esa forma nosotros, en los duros, queremos, queremos verla.
+
+1:16:24 - Pablo Valero (Inflexyon)
+  Los soportes multimonedas, sí, los soportes de consolidación también, o tú también, en la contabilidad paralela, espejo, la contabilidad espejo, o no.
+
+1:16:40 - SALA VIP
+  Ok. Es que, pues no. Ok, está bien, bueno, le damos, le damos detalle para no, no, no estar aquí.  ¿Adví? ¿Quién ve, Adví? Tú, Adví. Todos, prácticamente. Sí, este, alta. Porque, pues, he requerido todos los campos del XML en ADD.
+
+1:17:09 - Pablo Valero (Inflexyon)
+  Yo quisiera aclarar, o sea, todo lo que es los campos de XML son, digamos, nativos. O sea, el CFDI, la contabilidad electrónica, que también se basa en las pólizas y datos del XML.  Todo eso es nativo. El ADD ya es una herramienta, este, es un desarrollo, porque eso no lo cubre la localización.  Es un desarrollo que nosotros ya tenemos muy maduro. Y es una herramienta para conectar con el SAT y descargar CFDIs.  Este, digo, ya lo tenemos, es muy maduro. Hay que ver qué adaptaciones se le hace. Yo, yo, digo... digo...  Propondría tal vez ponerlo en una prioridad media o baja, ¿no? O sea, porque, bueno, también se puede operar sin ADD, ¿verdad?  Que justo con lo que comentaba Salvador, pues hay que ir disirviendo, pero lo otro, sea, todo lo que es FDI, XML, UID, contabilidad electrónica, está cubierto por estándar, ¿no?  Esto de ADD hablamos más de poder conectarse al SAT y descargarse FDIs.
+
+1:18:31 - SALA VIP
+  Sí, un ADD me daría la seguridad que se está capturando bien desde la compra. Entonces, sí, lo considero importante para mí.  Sí, pero... Estados de cuenta de clientes.
+
+1:19:08 - Pablo Valero (Inflexyon)
+  Estados de cuenta de clientes. Ajá.
+
+1:19:11 - SALA VIP
+  Aquí piden, sí, pidieron enviar en un correo todas las facturas que tendría que realizar el proveedor.
+
+1:19:22 - Juritzen  Rentería
+  Esa parte para las deducciones y el estado de cuenta del cliente, tal cual, ver cuánto le queda a cada uno.  Sí. Creo que por ahí me iban a pasar un reporte.
+
+1:19:40 - SALA VIP
+  ¿Es alta e indispensable?
+
+1:19:46 - Pablo Valero (Inflexyon)
+  Sí.
+
+1:19:47 - SALA VIP
+  ¿Qué implica? Tenemos productores que son clientes y proveedores a la vez.
+
+1:19:57 - Pablo Valero (Inflexyon)
+  Alta e indispensable, Rafa. Sí. Sí. Ya lo puse, no se está sincronizando, creo que tengo problemas con mi internet.
+
+1:20:06 - Raúl Núñez (Inflexyon)
+  Sí hay un delay, pero ya se ve.
+
+1:20:08 - Pablo Valero (Inflexyon)
+  Adelante. Presupuesto... Eso es, creo que de viáticos. Digo, creo que en temas de presupuestos también se pudiera arrancar sin eso.  Digo, por supuesto que si lo podemos tener antes, se va a hacer antes. No por poner alguno no indispensable, quiere decir que se va a hacer hasta después de la salida en vivo, simplemente es saber, ¿no?  Ok. Ese creo que está claro, ¿no?
+
+1:20:56 - Raúl Núñez (Inflexyon)
+  Sí, plan de cuentas es alta e indispensable.
+
+1:21:02 - Pablo Valero (Inflexyon)
+  Sí, sí hay como un delay porque se quedó como en el de presupuestos. Traigo tema con el internet. Bueno, igual nos faltan dos, ¿no?  Conexión con Monex creo que también es prescindible, o sea, no quiere decir que no se va a hacer, pero pues está la opción de primero cargar al banco manualmente, ya después a través de un archivo, ¿verdad?  Sí, este, Monex maneja un ERP, no sé si puedan conectarse ahí.
+
+1:21:38 - SALA VIP
+  ¿Un ERP? Sí, yo esa información se la pasé a Robert, este, Monex ya nos pasó su información de ERP, que es, este, compatible con los ERPs de las empresas, pero no sé que a nivel sea compatible.  Si nos lo comparten, hay dos niveles de conexión.
+
+1:22:06 - Pablo Valero (Inflexyon)
+  El primero de ellos es el que tenemos visualizado. Monex nos debería poder generar algún extracto bancario o si se puede exportar en Excel.  Eso lo bajamos y a partir de ahí podemos hacer procesos de conciliación. Y nosotros podemos generar el envío de un archivo para que se importen los movimientos de pagos.  Si hablamos de eso, no hay ningún problema que nos consigan nada más el layout de dispersiones para corroborar la estructura que tienen esos archivos.  Luego hay otros esquemas que se manejan de conexión host to host, pero se reconoce. Se recomienda más como para etapas futuras porque, digamos, ya en un host to host, digo, aparte de que sí tienen costos considerables con los bancos, pues tú administras tus cuentas desde Odoo, ¿verdad?  Entonces, sí se recomienda tal vez eso ya en una etapa más de madurez, o sea, decir, oye, pues este, que se revise, o sea, mejor mientras vamos empezando con que alguien revise, que el archivo coincidan los totales y ya después generamos los pagos desde Odoo.
+
+1:23:32 - SALA VIP
+  Sí, más que nada, pues sí, comprendo el tema que una vez que estemos más establecidos y busco la seguridad, pues de las operaciones bancarias y pues también tenemos derivados, manejamos compras y ventas, entonces, de dólares, entonces, también si pudiéramos después conectar algo.  Muy bien.
+
+1:24:03 - Pablo Valero (Inflexyon)
+  Y el tema de gestión de fletes, Emiliano, ¿cuál es el desarrollo ahí?
+
+1:24:16 - Emiliano  Lorenzano
+  Para la planeación que hacen, creo que comentaban que hacen una planeación cada viernes para la parte de la venta nacional, la que se va al extranjero, y también para los traslados que existen entre los coolers, ¿no?  Ahí comentaban que eran dos personas las que definían esa parte. Se hace una orden de compra al proveedor, en este caso, pues, no sé, Tres Guerras, Paquetes Press, no sé cuál, qué fleteras se hace.  Es una orden de compra por el servicio de flete. Entonces, en base a esa planeación, ellos ya pueden elegir qué transportista va a llevar el producto.  ¿Todo hacia el cliente? ¿A eso se refiere?
+
+1:25:06 - SALA VIP
+  Sí, aquí la prioridad podría ser, es un sí, y la prioridad pues está entre alta y media, porque va mucho de la mano con las órdenes de compra que te ponen para ese tipo de los fletes.  Sí, lo puedes poner en media, negritas, Raúl, como para...
+
+1:25:24 - Pablo Valero (Inflexyon)
+  Sí, ya lo puse, negritas.
+
+1:25:27 - Raúl Núñez (Inflexyon)
+  También falta que nos metamos a detalle, ¿no, Emiliano? Al tema de fletes, pero ahí los coordinamos en el grupo, vamos avanzando con la de compras y la de comercial.  Muy bien.
+
+1:25:47 - Pablo Valero (Inflexyon)
+  No, pues para este tema sí nos consumimos la hora de la tarde, pero este, pues era, es bueno aprovechar que aprovechamos el espacio de una vez, aprovechando que la...  La primera estuvo más cortita. Y bueno, nos quedamos con el tema del análisis de esta parte de la contabilidad de espejo para ver posibles implicaciones, poderlas platicar, los pendientes que comentamos en la primera parte de la sesión y seguramente cuadrar esta parte de las sesiones que nos hacen falta para ver si también hay desarrollos comerciales que podamos revisar aquí y clasificar.  Y no sé si ven algún otro punto.
+
+1:26:49 - SALA VIP
+  No, yo creo que podemos estar en el portal de proveedores, ahí podemos unirlos. Hasta lo que hemos visto, sin entrar todavía a los temas finales que nos quedamos pendientes, que ya habíamos platicado de compras y el de los fletes, el de la producción y el de comercial, creo que hasta ahorita serían lo que hemos platicado.
+
+1:27:21 - Pablo Valero (Inflexyon)
+  Sí, digo, y recordar esto no quiere decir que esa matriz ya está escrita en piedra, ya no se va a mover, ¿no?  O sea, sabemos que en las pruebas posiblemente surjan algunas cosas en la parte comercial, pero estamos en ese entendido.  Entonces, a las cuatro, no sé si te alcanzaron a confirmar.
+
+1:27:42 - SALA VIP
+  Sí, no, no, me dice que va a estar en carretera, pero que la siguiente semana, a partir del martes, ya va a estar disponible, vi su calendario y después de las doce, está disponible.  Entonces, para ver el tema de comercial, si lo pueden poner. De doce a una y media, o de doce a dos, y si están disponibles Emiliano y Yuri, estaría genial.  Bueno, obviamente tú y Raúl. Y hoy sí podemos avanzar con el de compra, Robert, a las cuatro. El día de hoy, a las cuatro.  ¿Cómo andan chicos? Creo que, bueno, no se los había, esa de las cuatro no se las había agendado. Tenemos la de contabilidad, pero no sé si valga, sea más importante.  Que tengamos esta junta de compras. Y la de contabilidad la pasamos al viernes. ahora no. Que llega triple. No, que ya alguien te salió.  Y yo ya tengo dos, güey, que le digan de broma. Pero creo que mañana no se elabora, ¿no? Es primero.  No, estamos hablando. Por eso, por eso. ¿Cómo va Raúl? ¿Qué opinas de eso? Yo digo que hay que embargar seguidas las sesiones.  ¿Sí? ¿Entonces a las 4? No, no, digo, la de lunes. A ver, estoy pensando de finanzas, ¿qué relevante traemos para Rafa y Gio con el equipo?  O ¿sí traemos algo de relevante o le damos a esta sesión? Pues no, prácticamente nada más estaríamos enfocadas más al cierre.  ¿Te vale? ¿No va? No, no, pero tú me ayudas con los pedidos que traemos en el departamento. sea, tú traes, tú traes mucho.  ¿Con lo de qué? Con lo de la... Pero eso no es... Listo, le damos 30 de abril. No, pero esa la tenemos a las 3.  Esa está bien, esa es a las 3 o 4. Yo creo que no hay... Quítala, Rafa. Sí, no. Quítala de hoy y tenga la de UDU.  Ok, la canción. Porfa. Ok, esta iteración nada más. Ok. Sí, porque no quiero que nos atracemos acá. Y... Este Raúl, equipo Juan Pablo, este Pablo, ayúdenos hacia adelante, a lo mejor ya lo tienen, si ya lo tienen con Robert, prospectado que otras reuniones tenemos hacia adelante, para que Robert nos las aparte del calendario y no pase esto, por favor.  Porque la próxima semana viene el premio.
+
+1:30:17 - Pablo Valero (Inflexyon)
+  Sí, sí, tratemos de agendarlas, tanto la comercial, compras, y de análisis de, bueno, los análisis de desarrollo, no sé, ¿verdad?
+
+1:30:27 - SALA VIP
+  Sí, el de programación de, de producción, con Eder, eso está pendiente, el de comercial, después del martes a las 12 pudiera estar, falta el de los fletes, este, que sería como, verlo lo más grande.  Oye, los fletes, ¿crees que la puedes contar?
+
+1:30:51 - Pablo Valero (Inflexyon)
+  Yo, no sé cómo ves, Emiliano, si mejor nos, o sea, porque nosotros podemos proponer los horarios para esta de fletes.  Compras, pero creo que quizás sería mejor que ellos nos propongan, ¿no?
+
+1:31:05 - Emiliano  Lorenzano
+  Está bien, si hoy se complica, podríamos que nos pasen los horarios para arrancar desde el día lunes, lunes, martes.  Hoy está bien a las cuatro.
+
+1:31:14 - SALA VIP
+  Hoy está bien. Hoy está bien a las cuatro el de compras. Ah, va. Y el martes podríamos poner a las doce el de comercial y tal vez ahí puedas tocar algo de fletes.
+
+1:31:26 - Pablo Valero (Inflexyon)
+  Bien, y ya nada más nos quedamos de este lado, denos chance de organizar con el desarrollador para que también participe con las primeras de lo que vimos hoy.  Sí, sí, está bien.
+
+1:31:45 - SALA VIP
+  Bueno, entonces nos vemos en un ratito más, muchachos.
+
+1:31:50 - Pablo Valero (Inflexyon)
+  Gracias. Gracias a ustedes. Gracias ustedes.
+
+1:31:53 - SALA VIP
+  Gracias a Yuri, Emiliano, Raúl. Hasta luego. Gracias a todos. Hasta luego. Bye.

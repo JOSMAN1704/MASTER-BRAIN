@@ -1,0 +1,639 @@
+======================================================================
+ID DE SESIÓN: CREACION DE PROVEEDORES Y GESTION DE ORDENES DE COMPRA
+FECHA: 2026-05-14
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/AePzzzbyw3ZXZRBt2uEtqsLEyTHsfRWQ
+======================================================================
+
+RESUMEN
+
+Taller creacion proveedores y gestion de Ordenes de compra - May 14
+VIEW RECORDING: 
+Propósito de la reunión
+
+Taller sobre creación de proveedores y gestión de órdenes de compra en Odoo.
+
+Puntos clave
+
+  - Estructura de proveedor: Utiliza un único registro de contacto para los productores, vinculando sus múltiples ranchos como subcontactos. Esto centraliza la información financiera manteniendo la distinción operativa.
+  - Gestión de contratos: Usa los "Contratos de compra" de Odoo para servicios estacionales (p. ej., análisis de laboratorio) y compras de plantas. Esto rastrea el valor total del contrato y descuenta automáticamente con cada nueva orden.
+  - Reabastecimiento automatizado: Configura niveles de inventario mínimo/máximo en los productos para detonar órdenes de compra automáticas cuando el stock cae por debajo del mínimo, agilizando el reabastecimiento.
+  - Trazabilidad de extremo a extremo: El seguimiento por lotes de Odoo vincula cada artículo con su orden de compra, movimientos de almacén y venta final, proporcionando un historial completo para control de calidad y auditorías.
+
+Temas
+
+Configuración de proveedor y productor
+
+  - Principio central: Utiliza un único registro de contacto para entidades que sean tanto proveedores (p. ej., entrega de fruta) como clientes (p. ej., compra de plantas).
+  - Estructura del productor:
+      - Contacto padre: El productor (p. ej., Alfonso Ríos Ayala).
+      - Subcontactos: Cada uno de sus ranchos (p. ej., Rancho La Piedad, Rancho Zamora).
+      - Justificación: Esto centraliza la información financiera del productor permitiendo un seguimiento operativo diferenciado por rancho.
+  - Campos y configuraciones clave:
+      - Razón social y RFC: Requeridos para el reporte DIOT.
+      - Régimen fiscal: Esencial para identificar productores Recico.
+      - Etiquetas: Úsalas para segmentación (p. ej., "Productor", "Vivero", "Facturador").
+      - Idioma: Define el idioma para correos y PDFs generados por el sistema.
+      - Condiciones de pago: Condiciones predeterminadas para el proveedor.
+      - Cuentas bancarias: Agrega todas las cuentas del proveedor (MXN y USD).
+          - Nota: Marca las cuentas como "Enviar dinero" para habilitar pagos.
+      - Tipo de operación DIOT: Requerido para el reporte DIOT (p. ej., 85 para proveedores nacionales).
+
+Compra de servicios (análisis de laboratorio)
+
+  - Escenario: Un contrato estacional para servicios de análisis de laboratorio con una tarifa preacordada.
+  - Solución: Usa un "Contrato de compra".
+      - Configuración: Crea un contrato con la cantidad total y el precio para la temporada (p. ej., 150 análisis a $2,500 cada uno).
+      - Ejecución: Crea nuevas Órdenes de Compra (OC) contra el contrato conforme se presten los servicios.
+      - Beneficio: El contrato rastrea automáticamente la cantidad y el valor restantes, simplificando la facturación y la gestión del presupuesto.
+
+Compra de bienes físicos (cajas de cartón)
+
+  - Escenario: Compra de cajas de cartón a un proveedor con precio fijo y reabastecimiento automatizado.
+  - Configuración del producto:
+      - Tipo: Producto almacenable.
+      - Seguimiento: Por lotes (para trazabilidad completa).
+      - Valoración de inventario: Permanente (para un costo de inventario en tiempo real y preciso).
+      - Reglas de reorden: Define un mínimo (p. ej., 1,000) y un máximo (p. ej., 8,000) para detonar OCs automáticas.
+  - Proceso:
+    1.  OC automática: El sistema crea una OC por la cantidad máxima cuando el stock cae por debajo del mínimo.
+    2.  Recepción: El personal de almacén recibe la mercancía, valida la cantidad y asigna un número de lote.
+    3.  Trazabilidad: El número de lote vincula las cajas con su OC, los movimientos de almacén y la entrega final a un productor.
+
+Compra de plantas (contratos de vivero)
+
+  - Escenario: Compra de plantas a un vivero mediante un contrato con una empresa matriz (NVG) para entrega directa a los productores.
+  - Proceso:
+    1.  Contrato de compra: Crea un contrato con NVG por la cantidad total de plantas.
+    2.  Creación de OC: Crea una OC contra el contrato, especificando el vivero como ubicación de entrega.
+    3.  Entrega directa: Las plantas se entregan directamente al rancho del productor, sin pasar por el almacén de Naturberry.
+    4.  Pedido de venta: Crea un pedido de venta para el productor, vinculándolo al subcontacto del rancho específico para la entrega.
+    5.  Trazabilidad: El número de lote rastrea las plantas desde el vivero, a través de la OC, hasta el rancho del productor.
+
+Próximos pasos
+
+  - Emiliano: Actualizar la plantilla de importación de proveedores para incluir columnas de subcontactos (p. ej., ranchos) y tipos de contacto (p. ej., "Dirección de entrega").
+  - Victor: Rellenar la plantilla actualizada de proveedores con todos los datos de productores y ranchos.
+  - Equipo: Agendar una sesión de seguimiento para revisar el flujo de aprobación de OCs.
+
+======================================================================
+
+ONE-ON-ONE
+
+Taller creacion proveedores y gestion de Ordenes de compra - May 14
+VIEW RECORDING: 
+Propósito de la reunión
+
+Taller práctico para configurar en Odoo (v19) el alta/edición de proveedores, órdenes de compra, contratos de compra y recepción de materiales, alineando procesos específicos de Naturberry (etiquetas, DIOT, multimoneda, trazabilidad y contratos por temporada).
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Listo para continuar el taller (día 2); alineado con Raúl para dudas contables/DIOT.
+
+Progreso en prioridades desde la última reunión
+
+  - Demostró alta completa de proveedores (fiscal/contable, bancos, etiquetas, idioma, moneda, DIOT).
+  - Configuró vistas, etiquetas de contacto y multicompañía.
+  - Mostró flujo de RFQ→PO, envío por correo y adjuntos.
+  - Implementó ejemplo “servicio de análisis” (precio por temporada y contrato de compra).
+  - Montó ejemplo de reabastecimiento Mín/Máx para “caja de cartón” con trazabilidad por lote y multi-almacén.
+
+Prioridades hasta la próxima reunión
+
+  - Ajustar plantilla de importación de proveedores/contactos con nuevas columnas (tipo contacto, facturador, múltiples direcciones).
+  - Revisar/app de compliance-onboarding documental para proveedores (opinión cumplimiento, CSF, vigencias y bloqueos).
+  - Preparar taller de aprobaciones de compra y portal de proveedores con validación de XML.
+
+Necesita asistencia / Está bloqueado en
+
+  - Confirmación del módulo/app de compliance documental a usar (nombre exacto en Odoo/apps).
+  - Definiciones finales de campos obligatorios y reglas por etiqueta/tipo de proveedor.
+
+Tania Ortega Laureano
+
+Registro
+
+  - Alineada a operación de compras por contratos y precios pactados por temporada.
+
+Progreso en prioridades desde la última reunión
+
+  - Definió estrategia: órdenes/contratos anuales para laboratorios con facturación contra consumo.
+  - Aclaró lead times: producción 12 días, entrega ~15 días para empaques.
+  - Confirmó uso de Mín/Máx gestionado por Compras (sin revisión adicional, salvo excepciones).
+
+Prioridades hasta la próxima reunión
+
+  - Enviar estructura de contratos por proveedor (vigencias, términos, adjuntos requeridos).
+  - Validar y compartir costos pactados por temporada (servicios y materiales) y monedas.
+  - Confirmar política de aprobación por montos/áreas.
+
+Necesita asistencia / Está bloqueado en
+
+  - Necesita esquema claro de portal para recepción de facturas (XML/PDF) y validaciones automáticas.
+
+Víctor De La Parra
+
+Registro
+
+  - Consolidando plantillas y datos maestros.
+
+Progreso en prioridades desde la última reunión
+
+  - Proveyó lista inicial de proveedores y ejemplos (AGQ, International Paper).
+  - Alineó etiquetado (proveedor nacional/extranjero, productor, facturador).
+  - Validó reabastecimiento Mín/Máx y multialmacén (Zamora, Irapuato).
+
+Prioridades hasta la próxima reunión
+
+  - Completar y enviar plantilla de productos (3–4 ítems representativos: servicio análisis, caja cartón, planta, insumo).
+  - Enviar catálogo de cuentas contables definitivo (cuentas por pagar/cobrar y de inventario/costo).
+  - Ajustar plantilla de contactos con campos para múltiples ranchos y facturadores.
+
+Necesita asistencia / Está bloqueado en
+
+  - Definición final de campos obligatorios y mapeo DIOT por tipo de operación.
+
+Raúl Núñez
+
+Registro
+
+  - Se unió para soporte contable/banqueo.
+
+Progreso en prioridades desde la última reunión
+
+  - Indicó ajuste en cuentas bancarias proveedor: marcar “Enviar dinero” para considerar confiable.
+
+Prioridades hasta la próxima reunión
+
+  - Revisar mapeo contable (201.01/201.02 y reglas por proveedor/moneda).
+  - Validar extracción DIOT desde Odoo (TXT) y tipos de operación aplicables.
+
+Necesita asistencia / Está bloqueado en
+
+  - Confirmación de reglas de DIOT por proveedor (85 y otros).
+
+Juritzen Rentería
+
+Registro
+
+  - Soporte de procesos compra/inventario.
+
+Progreso en prioridades desde la última reunión
+
+  - Aclaró diferencia proceso RFQ vs PO y su encadenamiento operativo.
+  - Recomendó PEPS y valuación inventario “permanente al facturar”.
+
+Prioridades hasta la próxima reunión
+
+  - Documentar mejores prácticas de recepción con lotes/ubicaciones y traslados inter-bodegas.
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A
+
+Jose Manuel Espinoza
+
+Registro
+
+  - Alineado a control documental fiscal.
+
+Progreso en prioridades desde la última reunión
+
+  - Listó documentos críticos de proveedores: Opinión de cumplimiento y CSF.
+
+Prioridades hasta la próxima reunión
+
+  - Compartir checklist completo de documentos y vigencias por tipo de proveedor.
+
+Necesita asistencia / Está bloqueado en
+
+  - Selección/implementación del módulo de compliance documental.
+
+Gloria Araceli Ceja Olivares
+
+Registro
+
+  - Apoyo en flujos de planta y relación con viveros/productores.
+
+Progreso en prioridades desde la última reunión
+
+  - Aclaró que viveros están en MX; planta se entrega directo a productor (no pasa por cooler).
+
+Prioridades hasta la próxima reunión
+
+  - Definir nomenclatura estandarizada para nombres de ranchos/productores y unidades (planta vs pieza).
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A
+
+Temas
+
+Alta y edición de proveedores en Odoo
+
+  - Persona física/moral; idioma para plantillas; etiquetas (productor, facturador, proveedor nacional/extranjero, vivero, rancho).
+  - Datos fiscales: RFC, régimen, uso CFDI (si aplica), DIOT tipo operación (p.ej., 85).
+  - Contabilidad: cuentas por pagar/cobrar; multicompañía; asignación de empresa.
+  - Bancos: CLABE, cuenta, moneda; marcar “Enviar dinero” para confiable.
+  - Portal: mensajes, adjuntos, historial; posibilidad de otorgar acceso.
+
+RFQ/PO, envío y adjuntos
+
+  - RFQ como etapa de negociación; Confirmar → PO firme.
+  - Envío por correo con plantilla por idioma; adjuntar archivos (formatos del proveedor).
+
+Contratos de compra por temporada
+
+  - Contrato abierto con vigencia (inicio/fin), cantidad y precio pactado; adjuntos/condiciones.
+  - Permite generar múltiples PO contra el contrato; visibilidad de ordenado vs consumido.
+  - Alternativa: precios de proveedor con vigencia en el producto.
+
+Servicios de análisis (laboratorio)
+
+  - Crear producto tipo servicio; precio por temporada; contrato anual; facturación parcial contra consumos.
+  - Portal de proveedores para subir XML y validar vs PO (cantidad, precio, RFC, etc.) antes de crear factura.
+
+Materiales de empaque: caja de cartón
+
+  - Producto stockable, unidad “pieza”, impuesto 16%, costo en USD, trazabilidad por lote, PEPS.
+  - Proveedor en USD; lead time ~15 días; Mín/Máx (ej. 1,000–8,000).
+  - Reabastecimiento automático genera PO; recepción por almacén y lote; trazabilidad y valor inventario.
+
+Multi-almacén y traslados
+
+  - Bodegas: Zamora e Irapuato (Naturberry); recepción por almacén; traslados con conservación de lote.
+  - Trazabilidad completa: compra → ingreso → traslado → existencias por ubicación.
+
+Viveros, productores y ranchos
+
+  - Modelado de contactos con múltiples sub-contactos (ranchos) y facturadores ligados.
+  - Planta puede entregarse directo al productor (no pasa por almacén); ventas pueden consolidar varias salidas por productor.
+
+Compliance y documentos fiscales
+
+  - Necesidad de módulo para gestionar CSF/opinión cumplimiento, vigencias y bloqueos.
+  - Pendiente identificar app específica compatible con localización MX.
+
+Aprobaciones y portal de proveedores
+
+  - Pendiente taller de reglas de aprobación por montos/centros de costo.
+  - Portal para recepción de facturas: subir XML/PDF y validaciones automáticas antes de AP.
+
+Próximos pasos
+
+  - Emiliano: Enviar plantilla actualizada de proveedores/contactos con columnas para tipo de contacto (contacto/facturación/entrega), facturadores, múltiples direcciones, etiquetas.
+  - Víctor: Entregar plantilla de productos (3–4 casos: análisis, caja cartón, planta, insumo) con unidades, impuestos, costos/monedas y proveedores.
+  - Raúl: Validar mapeo contable y DIOT (tipos de operación por proveedor); confirmar export DIOT TXT.
+  - Jose Manuel: Compartir checklist y vigencias de documentos obligatorios por tipo de proveedor.
+  - Emiliano/Juritzen: Configurar Mín/Máx y lead times para materiales clave; documentar flujo.
+  - Tania: Definir estructura y vigencia de contratos por proveedor (laboratorios, empaques) y precios pactados; enviar a Emiliano.
+  - Equipo: Identificar y proponer módulo/app para compliance documental (nombre/enlace) para evaluación.
+  - Emiliano: Preparar sesión siguiente sobre aprobaciones de compra y portal de proveedores con validación de XML.
+
+======================================================================
+
+TRANSCRIPCION
+
+Taller creacion proveedores y gestion de Ordenes de compra - May 14
+VIEW RECORDING - 125 mins (No highlights): 
+
+---
+
+1:19 - SALA VIP
+  Buenos días, Emiliano. ¿Cómo están? ¿Están listos? Muy bien, gracias a Dios. ¿Tú cómo estás, Emiliano?
+
+1:29 - Emiliano  Lorenzano
+  Muy bien de aquí.
+
+1:30 - Edder Palacios
+  ¿Están listos para iniciar?
+
+1:32 - Emiliano  Lorenzano
+  Bueno, buen día, equipo.
+
+1:34 - SALA VIP
+  Buenos días. Voy a esperar a ver si se une Yuri.
+
+1:39 - Emiliano  Lorenzano
+  Hablé con Raúl que tenía oportunidad de sumarse un poquito más por los temas ahí, a lo mejor que puedan surgir en el tema contable.  Ok. Sí, como vamos a ver. Entonces, vamos a esperar unos minutos a ver si se puede unir. Igual le voy escribiendo a Raúl a ver qué.  ¿Qué comentó Yuri? ¿Por el tema de las órdenes de compra o de aprobación? Por el registro, el registro de proveedores, como unas cosas van ligadas con la parte de las cuentas contables, de incontabilidad, y el registro del tipo de operación para el reporte de la DIO.  Ok. Vamos a ver qué nos dice Raúl.
+
+2:27 - SALA VIP
+  Ok, muy bien. ¿Qué hay, Raúl? Buen día. Buenos días, Raúl. ¿Cómo están? Todo bien, gracias. Muy bueno. Y entra Yuri.  Ok. Hola Yuri, buen día. Hola, buen día. ¿Cómo están? Bien, gracias. Ahorita falta que se une aquí está Tania.  qué? Amén. ¿Cómo ¿Y yo sí estaba? Sí, sí. Emiliano, Yuri, si gustan, vamos empezando. Creo que ya subió Gio, Tania, ya estamos la mayoría, entonces podemos ir adelantando.  ¿Me escuchaste, Emiliano? ¿No se escucha o no se escucha? Sí, sí se escucha. Ah, perfecto. Sí, escucha. Entonces nada más es, Emiliano, que si estás hablando...  ¿Tienes el micrófono apagado, Emiliano? No lo sé. No, no, disculpa, Robert. Salí un poquito y... Ah, ok. Listo. Listo, Emiliano.  Bien. Bueno, creo que ya están todos, ¿verdad? Sí. Antes de avanzar, Robert, me comentaste que ayer ya habían checado sus plantillas y ya vieron qué campos se van a ocupar adicionales para los productos, ¿no?  Sí. ¿Eso lo estarían enviando el día de hoy? Bueno, no lo sé. Víctor es quien se está encargando de juntar todos los campos y creo que está en la espera también de que le pasen algunos otros datos.  Sí, Gio. Ah, es lo que iba a comentar. Yo sí le debo a Víctor eso, pero le decía que antes...
+
+7:00 - Giovanna Villalobos (naturprime.mx)
+  De mandárselo, lo checábamos acá en Prime, nada más para ver si no hacía falta ningún otro dato que sea importante.  Sí, gracias, Diego. Muy bien, entonces vamos a continuar con lo que dejamos pendiente el día de ayer. Pues ayer prácticamente nada más nos alcanzó el tiempo para revisar el registro de los productos.
+
+7:35 - SALA VIP
+  No sé si con lo que revisaron al interno tengan algún comentario, alguna duda, una inquietud. Ninguna. No, no, ya cuando te agreguemos los datos ya nos indicarás.  Muy bien. Sí, igual ahí incluso si alguno de los datos se tiene que mostrar en el... En el PDF de la orden de compra que sale del sistema, o en algún otro apartado, pues ya también nos van indicando.  Bien, entonces retomando los puntos, hoy nos toca revisar la creación de proveedores, edición de proveedores, que prácticamente dentro del sistema pues manejamos un solo término que vendrá siendo un proveedor, pero sabemos que nosotros pues no tenemos proveedores, tenemos a los viveros, también tenemos a los ranchos, entonces prácticamente vamos a estar capturando la información en el módulo de compras.  Aquí pues hay dos opciones, ¿no? Una es que solamente registremos un contacto y ese contacto se va a estar compartiendo para una compra y para...  Una venta. En este caso, pudiera aplicar para los ranchos, ¿no? Porque a los ranchos les hacemos un corte, les emitimos una, una, pues sí, una compra y les mandamos esa compra para que ellos también comprueben si está correcto lo que le estamos cobrando, ¿no?  Y después a esos ranchos también nosotros les emitimos una factura, este, por lo que ustedes les, les entregan. Entonces ahí pudiera ser que el rancho así aplicara que nada más tener un solo registro y compartirlo en, tanto en, en el módulo de compras como en el módulo de ventas.  Pero bien, vamos a ingresar al, módulo de compras. Ayer ya veamos un poquito la parte de los, de los productos.  Y hoy vamos a revisar la parte de los proveedores. Ayer como mencionábamos, este, este sería nuestro menú principal. Dentro de cada menú principal, nosotros tenemos el submenú.  Voy a darle clic acá en órdenes y tenemos el submenú que se llaman proveedores. Vamos a ingresar a proveedores.  Aquí ya tengo yo, pues, algunos proveedores se hicieron algunas pruebas y lo tenemos, pues, en forma de lista, ¿no?  Aquí tengo, en la parte superior derecha, si se dan cuenta, aquí tengo la empresa con la que estoy trabajando.  Me dice que vendría siendo Naturberry. Si yo quisiera cambiarme a otra empresa, le daría clic acá y selecciono la que yo quiera, en donde yo quiera trabajar.  Acá va a depender mucho de la configuración que se haga ya en la parte, este, de configuración con usuarios.  Esto ya lo estaríamos revisando también con, con Robert. Pero, pues, esto ya... ya... Bueno, Tendríamos disponible la empresa donde estaríamos trabajando.  Si se dan cuenta, aquí también, pues tengo el ícono, o aquí me saldría la imagen, o la foto de perfil, si yo agregara mi foto de perfil, y dice, ah, no, porque es el administrador.  A lo que quería llegar es que acá, si se dan cuenta, aquí tengo, dice que de 1 a 4.  Aquí en esta vista, en esta vista de lista, me van listar solamente 80 registros. Si yo tuviera más de 80 registros, aquí me iba a poner un 80, de 80 a 160, por decirlo, y así sucesivamente, ¿no?  Me los iba a dar en bloques de 80 registros, solamente para visualizar. Ahorita solamente tengo 4, y pues no me permite editarlo.  Bueno, si me permite editarlo, si se dan cuenta, si yo me posiciono acá, donde dice de 1 a 4, yo le quito el 4, y si tuviera yo más registros, pues le pongo que me...  Muestre todo, ¿no? Los 100, 200 o la N cantidad de registro que tengo. Acá pues tengo las flechitas para cambiar de, por decirlo, de página para visualizar pues los demás proveedores.  A lo que quería llegar ahorita es esta. Estas son las dos vistas principales que tenemos. Esta es la vista principal de lista, pero tengo una vista alternativa que vendría siendo una vista de Canva.  Si yo le doy click aquí en la vista de Canva, me va a poner en cuadritos, como si fuera un tablero pues de un CRM o, pues sí, más que nada como un tablero de un CRM, ¿no?  Donde tengo yo las fichas de cada, de cada este proveedor. Si se dan cuenta, aquí me trae el nombre del proveedor, me, me genera el correo electrónico.  Voy a ingresar a esto para ver si tiene un número de teléfono. No, no tiene. Vamos a poner un número de teléfono ahorita así nada más de prueba para ver si nos lo muestra.  Acá en la ficha principal. Acá me genera el nombre, el correo, el número telefónico, la ubicación, en este caso vendría siendo México.  Yo aquí lo identifique con una etiqueta, le puse que este es un productor, que este es el facturador. Este actualmente tiene dos pedidos en clientes que vendrían siendo ventas, ¿no?  Como comentaba al inicio, un mismo registro puede afectar tanto en compras como en ventas. Entonces acá nos va a poner pues la cantidad de documentos que se estén generando para cada registro.  Este proveedor dice que tiene actualmente dos compras y yo ingreso, bueno, ingreso acá y aquí me tiene estos botones inteligentes y le queremos llamar así, donde va a poner la relación de las ventas que tiene.  Gracias por ver el video. La relación de lo facturado que tiene, este facturado vendría siendo clientes, factura de proveedores, pues ya su nombre dice de proveedores, las compras y lo que tiene adeudado.  Entonces dice que este cliente tiene adeudado 2.262, ¿no? Perdón, este proveedor. Aquí viene la tasa de retención, ¿no? Que vendría siendo la tasa de entrega a tiempo para ir midiendo a los proveedores, si nos entregan a tiempo, si no nos entregan a tiempo.  Y aquí viene una pequeña gráfica, entonces pues dice que sí ha estado entregando, pues en tiempo, ¿no? Que es del 100% la entrega.  Esto se va a basar en base a los días de entrega que nosotros establezcamos dentro del producto. Se establece el tiempo de entrega de cada proveedor y cuando se genera una orden...  de compra, pues ahí ya va a establecer la fecha próxima a la entrega, ¿no? Entonces, si la entrega se hace antes de esa fecha, pues prácticamente estamos cumpliendo con un 100% de entrega, ¿no?  Pero si ya se pasa, se pasa de esa fecha de entrega establecida, pues ya ahí vamos a tener ya datos que nos está entregando pues a tiempo nuestro proveedor.  aquí tiene la relación de los números de serie y lote que se han establecido a este proveedor. Yo ingreso y aquí me dice que pues yo no tengo ninguno.  Ahorita revisamos y hacemos pruebas para ver el efecto, ¿no? Ahorita me estoy adelantando un poquito, pero acá en esta parte queda todo el historial.  Dice el administrador generó este contacto el 7 de mayo a la 1.35. Un historial de algunas cosas que se van modificando, y yo creo que sí es importante.  Por ejemplo, aquí dice que lo cambiamos, el productor principal se cambió el RFC, después del RFC se cambió el nombre, y así viene, que se está cambiando, ¿no?  Y aquí dice que se le otorgó acceso al portal, y a qué correo se le envió ese acceso, ¿no?  Bien, entonces ahora sí, vamos a... ¿Ah, sí iban a comentar algo? No. Ah, muy bien, bien. Por ejemplo, vamos a registrar un nuevo proveedor, le damos acá en nuevo, aquí vienen dos tipos de opciones, ¿no?  Si es una persona física o si es una... persona moral. Ya viene aquí la relación de si es persona o empresa.  Igual pueden agregar una fotografía o logo de su proveedor o el sistema pues nos da ya por default una imagen.  Si lo cambio me agrega pues una cara de una persona, ¿no? Si lo cambio me pone una empresa. Aquí en el nombre, pues realmente tendríamos que establecer el nombre como viene en la constancia de situación fiscal.  Hay que recordar que ya para la versión del CFDI del 4.6, 4.0 creo, ya no nos permite agregar el régimen capital.  Digo, para los proveedores a lo mejor lo dicen no es tan importante, pero aquí creo que Yuri me va a poder corregir un poquito, pero creo que esta información sí se ocupa tanto el RFC, el nombre para generar el reporte de la DIOT, el que ustedes...  Entonces, generan, pues, ahí con el tipo de operación de cada proveedor. Perdón, este, sí, nosotros sí necesitamos el régimen para identificar los que son reciclo.  Sí, el régimen sí lo tiene, aquí está, mira, el régimen fiscal. No, el que me refería era el que ponen ustedes como S.A.  de C.B. Ah, S. Ese ya no se ocupa. Ok. Entonces, aquí, pues, tendríamos que establecer el nombre. Voy a abrir el archivo que me envió Víctor, para ir una vez a hacerlo con un ejemplo ya real de ustedes.
+
+19:03 - Victor De La Parra
+  Aquí están los proveedores que nos envió Víctor. Bueno, creo que son, bueno, son 14. Por lo que veo, este proveedor tiene un contacto relacionado.  Ah, no, tiene contacto relacionado, Víctor. ¿Qué te refieres? Es un contacto relacionado, Víctor. Ah, como dejaste un espacio, pensé que ibas a agregar ahí al tema de un facturador o un...  No, me había dicho que dejara espacio para cuando tuvieran dos cuentas en pesos y en dólares. Ah, para lo de la cuenta bancaria.  Bien. bien. Por ahora vamos a hacer el registro manual. Después ya les enseñamos cómo hacer la importación. Primero vamos por lo complicado y si no, esto ya por lo fácil.  Voy a copiar el... Nombre de este cliente. Supongo que así viene la constancia de situación fiscal. Entonces vamos a copiar el nombre.  Voy a agregarlo acá. El correo, pues yo creo que sí sería importante establecerlo, porque con ese correo nosotros vamos a darle el acceso al portal, al portal de proveedores o...  Pues sí, sería el portal de proveedores. Voy a agregar el RFC.
+
+20:33 - Juritzen  Rentería
+  El país, pues sería México. La moneda del proveedores en pesos, ahorita lo pongo, terrenos de pago son 15. La calle vendría siendo del Carmen.  Es Jalisco. El código postal. ¿Esto que está haciendo Emiliano? ¿Se recomienda que siempre elijan los campos que tiene el sistema?  Porque ya coinciden con las claves que tienen las colonias, el código postal contra los catálogos del SAT.
+
+21:29 - Victor De La Parra
+  Es con la plantilla que por ahí me dio Emiliano, nada más que lo que por ejemplo no sé es si para cuando importamos datos con un CSV o con un Excel, si tenga algún tipo de respeto por el nombre de las columnas.  Sí. Agregar el número interior, que vendría siendo casa, y el número exterior vendría siendo puerta. Aquí viene el número interior, sería 1, el número exterior sería 230.  La calle 2, pues no tiene, no tiene una referencia de calle 2. La colonia es Toluquilla. Aquí pudiéramos dejarlo en mayúscula, o pudiéramos ponerlo con mayúsculas y minúsculas, ¿no?  No, pero digo, ahorita yo estoy viendo que si te lo respeta la primera mayúscula y luego ya la más minúscula lo voy a ajustar.  Espera para que ya quede. Sí. Así. Todo lo que ya, ahí está. Y listo, ya tengo, pues de cierta manera, la dirección de mi proveedor.  La curva no, realmente no me interesa. Aquí el idioma, el idioma, este, sí la vamos a ocupar. Ayer les comentaba que el sistema, igual les voy a mostrar un poquito, para que vean a qué me refiero.  Cuando nosotros creamos una orden de compra en el sistema, este dice que es un proveedor en dólares. Aquí tiene una opción de enviar orden de compra al proveedor.  Si yo le doy a enviar orden de compra y el proveedor está en, con el idioma inglés, la plantilla, la plantilla va a cambiar totalmente a, pues así al idioma inglés, ¿no?  Si mi contacto... Está en, tiene el idioma español, al enviar por correo, me va a salir en, en español.  Para eso sirve esta parte de acá del idioma, establecerlo en el, en el proveedor. Como es en, como es de un cliente mexicano, vamos a ponerle que pues es español.  Aquí en la etiqueta, en la etiqueta yo lo estaba utilizando ahorita, que este es un productor, que es un facturador.  Pero, por ejemplo, voy a salirme acá del módulo de compras. Voy a venirme aquí al módulo de contactos. Aquí en configuración tengo unas que se llaman etiquetas, etiquetas de contactos.  Aquí voy a ponerle, por ejemplo, este proveedor, Víctor, ¿qué vendría haciendo? Ese sí es un proveedor, si no mal recuerdo.  Ese no es acreedor ni productor. Vamos a ponerle entonces proveedor, proveedor nacional. Podemos establecer también un proveedor, proveedor internacional o extranjero, no sé cómo le sea mejor.
+
+25:22 - SALA VIP
+  Podemos agregar también aquí, este, no sé, un vivero. W. Ah, disculpe que no terminé la primaria. Vamos a poner aquí un rancho.  Bueno, no sé si, no, sería productor, ¿no? Ya está el productor. Sí, ya está arriba. Entonces acá, yo ahorita lo puedo manejar así con estas etiquetas, a modo ejemplo.  Ya con esto que ustedes visualizan, pudiéramos ir segmentando. La parte de nuestros proveedores. Por ejemplo, vamos a ponerle que este es un proveedor nacional.
+
+26:06 - Emiliano  Lorenzano
+  Ahí está, listo. Acá en la parte, bueno, ya tengo esta información. Si ustedes requieren agregar, bueno, aquí falta el teléfono, falta el correo.  Ahorita, si yo lo guardo, Robert, esta no me trae como restricciones, no me pone que campos obligatorios, ¿no? Que tenga que llenar.  Si se ocupa campos obligatorios, ya lo modificamos. ¿Sí, Víctor? Hay una pregunta, Melino. Digo, la que haces como etiqueta, como proveedor nacional, pero está para el campo del país.  No, no, no será un poco redundante en ese aspecto. Pues realmente, pues puedes filtrar por país. Esto lo agregué yo ahorita a modo ejemplo, ¿no?  Para que ustedes vean, pues, como qué uso le pueden dar a la parte de las etiquetas. Realmente sí es cierto.  Con el país. Podemos filtrar, si yo vengo acá, voy a ponerle este que es, no sé, Estados Unidos.
+
+27:11 - Victor De La Parra
+  Si yo vengo acá y filtro por país, yo voy a ¿sabes qué? Tenemos Estados Unidos y ya sé que es un proveedor extranjero.  Pero aquí, pues ya me da, aquí estás cuenta, al agregarle una etiqueta me dice que es un proveedor nacional, que es un facturador, que es un productor, entonces pues ya hace más una segmentación, ¿no?  Aquí ya si yo estoy filtrando por país y ahora le pongo por etiqueta, aquí está bien, ¿cuántos productores tengo?  ¿Cuántos productores nacionales tengo? ¿Cuántos facturadores tengo? Ok. Entonces ya aquí con esto... Si ustedes quieren darle un uso a esas etiquetas, estaría bien y yo creo que sí nos va a servir porque recuerda, recuerda, Víctor, que varios campos se van a habilitar dependiendo al registro, ¿no?
+
+28:20 - Emiliano  Lorenzano
+  De alguna manera tenemos que identificar, por ejemplo, si un proveedor nacional no lleva los mismos campos que un productor, pues no tendría sentido dejarlos ahí para que los llenen, ¿no?  Mejor tener controlado esa parte. Bueno, es lo que yo sugiero, ¿no? Pero ya ahorita con lo que están revisando, bueno, con lo que estamos viendo, ya ustedes me indican.  Gracias, Emiliano. Bien, Bueno, vamos a continuar entonces con nuestro proveedor. Ahí está. Tengo esta opción que se llama Contactos.  Aquí en esta parte puedo relacionar a la gente de ventas de parte ya de mi proveedor, en dado caso que tenga.  Si es directamente con la empresa, pues ya ni agregamos ahí nada, ¿no? Tengo una opción que se llama Factura.  Esta ya nos pudiera servir para lo que ustedes ocupan cuando tienen dos facturadores con un rancho, ¿no? Esta dirección de entrega, pues me sirve a dónde tengo que entregarle yo la mercancía a mi proveedor.  Bueno, más que nada aquí de dónde me entregaría la mercancía a mi proveedor. Y otro, pues es simplemente para registrar alguna información de otro contacto, pero creo que ya es redundante, ¿no?  Porque ya está aquí el contacto. Pero yo principalmente creo que sí nos pudiera servir mucho esta refactura, porque... ¡Adiós!  Ya con esto tendríamos la relación de los facturadores. Aquí en Venta y Compras tenemos las dos opciones que aplica para la parte del módulo de ventas y para el módulo de compras.  Si se dan cuenta aquí en Ventas me dice que ocupo un vendedor. Aquí el vendedor lo pudiéramos aplicar para el asesor, ¿no?  El que anda en campo. Pero ahorita no me voy a meter aquí en la parte de Ventas. Voy a dejar esta opción acá, esta pendiente.  Tengo la opción de compra. Aquí me dice agrupar solicitud de cotización, al ordenar, diario, semanal, siempre. Aquí dice, ¿no?  Define la solicitud. de cotización que se deben agrupar según la recepción esperada. El sistema va a agrupar la necesidad del reabastecimiento.  Aquí lo que hace Robert o Víctor con esto es que el sistema crea una recepción, una orden de entrada, pero si no se ha hecho esa recepción, está pendiente por recibirse y nosotros generamos otra compra para este proveedor y ya está confirmada, puede ser que se agrupe en una sola recepción y no nos convendría porque realmente no tendría nuestra estabilidad por cada orden de compra.  Entonces aquí vamos a ponerle que sea al ordenar entonces para que se crea una agrupación por cada orden de compra y no una general por muchas órdenes de compra.
+
+31:57 - SALA VIP
+  ¿Te ha sentido eso, Tania?
+
+32:04 - Emiliano  Lorenzano
+  Sí, porque tendrían más control por las formas de compra, por cada una, más trazabilidad. Aquí en el comprador, pues tendríamos que agregar a Tania, por decirlo, ¿no?  O a las personas que van a estar en el área de compra, o el departamento de compras. Ahora voy a ponerle al administrador.  Aquí vienen los términos de pago. Aquí tiene términos de pago nuestra plantilla. Dice que son 15 días que le vamos a dar para que nos pague este proveedor.  Vamos a ponerle 15 días. El método de pago, aquí dice que sí es por efectivo, por cheque, por banco.  Cuando nosotros, cuando nosotros generemos nuestras cuentas bancarias en el sistema, yo no sé cuántas cuentas bancarias tengan, pero aquí pudiéramos...  Podemos establecerle de qué cuenta bancaria estaríamos pagándole a este proveedor, o si se va en efectivo, o si se va por cheque, aunque esta parte pues no nos limita al momento de estar ya pagando, pues elegir otra forma de pago, ¿no?  Esta parte del, ah, perdón, esta parte del 19 bots es más para la parte de, como supiera decir que estuviernos una contabilidad en Estados Unidos, nosotros estamos en México, entonces no lo ocupamos.  Aquí viene el recordatorio de entrega, ahorita no está habilitado, pero si yo le pongo o lo habilito, le puedo poner cuántos días antes de que se haga la entrega, o marcada la entrega, por ejemplo, ¿no?  Con este proveedor yo tengo 10 días para que me entregue, aquí le puedo marcar que yo quiero que a los 5 días antes.  De llegar a la fecha de entrega, se le envió un recordatorio. El mismo sistema estaría enviando una plantilla automática donde le va a decir al proveedor, oye, proveedor, pues confírmame, ¿no?  Que sí me vas a enviar el producto a tiempo. Puede que aplique para ustedes, puede que no aplique porque, pues, creo que es más por el tipo de producto que manejan.  A lo mejor no lo lleven, pero aquí está, ¿no? Le podemos establecer los recordatorios. Entonces, aquí viene la moneda del proveedor.  Ahorita tenemos habilitado que son pesos mexicanos y dólares. Yo aquí establezco qué moneda va a tener el proveedor de forma predeterminada.  Sin embargo, al momento de comprar, yo puedo cambiar la moneda, ¿no? Si se requiere. Entonces, aquí me dice que la moneda que tiene este proveedor sería pesos mexicanos.  Vamos a ponerle pesos. Aquí viene la información fiscal. Esta información fiscal realmente nos ayuda más cuando es un cliente, ¿no?  Para agregar el régimen fiscal, el uso del CFDI, la forma de pago, la política de pago, si es PPD, si es PUDE, si necesita comercio exterior.  Entonces esta parte viene un poquito más enfocada para la parte de los clientes, si se va a generar alguna factura con este proveedor.  Comentaban que para ustedes es importante agregar el régimen fiscal. Aquí ya lo agregué. Si también ustedes necesitan agregar el uso, aquí lo pueden agregar.  Pero este sería el uso que daría el proveedor, no nosotros. Aquí en varios, aquí me dice que tengo la referencia.  Aquí tendría que agregar, Robert, como ya lo habías hecho con los productores. O los ranchos en la otra implementación.  Aquí estaríamos agregando el número, el número que estarían asignando a los productores, a los ranchos y a los proveedores, ¿no?  Una identificación corta de cada proveedor. No sé ahorita si tengan alguna de estas. Sí, de hecho la deje ahí, es en la columna de referencia.
+
+36:23 - Victor De La Parra
+  Vamos a ver. No más para la... Aquí está, mira. Este es el proveedor, 01.
+
+36:35 - Emiliano  Lorenzano
+  Ahí está. Aquí dice la empresa, la empresa, si está, si este proveedor va a estar visible, ahorita lo estoy creando en Naturberry.  No sé, este proveedor dice que, ah, es de Naturberry, sí, estamos bien. Por lo que entiendo, Víctor, es que este proveedor no se va a compartir con ninguna otra empresa, ¿no?  No. No. No. Ok, entonces aquí se va a ponerle que solamente pertenece a Naturberg. Así solamente este registro estará disponible en la empresa de Naturberg, no Naturagui ni en otro lado.  Aquí pueden agregar la industria, ¿no? Si pertenece, realmente no nos ayuda mucho, entonces no lo establecemos. Ahora sí viene la parte de contabilidad.  Aquí en contabilidad viene, por ejemplo, la cuenta por cobrar, clientes nacionales, cuenta por pagar, que vendría siendo la 201, proveedores nacionales.  Si fuera un proveedor extranjero, aquí tengo la cuenta a la 201.02, proveedores extranjeros. Aquí vamos a registrar una cuenta bancaria, vamos a darle en CREA.  Vamos a agregar el... Esta es la clave, ¿verdad, Víctor?
+
+37:57 - Victor De La Parra
+  No estoy muy seguro si es... clave o número de cuentas?
+
+38:02 - Emiliano  Lorenzano
+  Sí, es la clave. Si ponerle la clave es de 18, el banco, el Bancomer, Bancomer, este, es de la empresa Naturberry, la moneda estaría en pesos, Victor.  La predeterminada. El número de cuentas no lo tienen, me voy a inventar uno, de 7 dígitos, creo que sí son de 7, creo, 7 dígitos.  Aquí puedes agregar el domicilio del banco, pero pues no. No, no es tan necesario. Con esto acá, pues ya tenemos registrado una cuenta.  Guardamos. Y aquí ya tengo una cuenta, Victor. Y así yo ocupo la otra. Agregamos la clave. Es del mismo banco, Bancomer.  ¿La moneda esta estaría en pesos también? No, dólares. Ya estaría en dólares. Vamos a agregar aquí un número de cuenta.  Y listo, ya tenemos dos cuentas bancarias acá. Ahí, Emiliano, ¿por qué te las marca como en color rojo?
+
+39:58 - Victor De La Parra
+  Dice que no es confiable. acá.
+
+40:03 - Emiliano  Lorenzano
+  Supongo que es por esto, dice que no está, no es fiable, pero realmente esto, pues no vamos a hacer ni una operación nosotros con estas cuentas, no nada más es para pagos.  Raúl?
+
+40:19 - Raúl Núñez (Inflexyon)
+  algo que puso Odoo en el último release de la versión 19, Emiliano, nada más es entrar a la cuenta, en dado caso que les pase es entrar a la cuenta de banco, ir a otra información me parece que es, y tiene un check que dice enviar dinero, y ya con eso ya se activa de que es confiable y se puede enviar dinero desde su cuenta.  Algo por ahí es el tema. ¿No, perdón? ¿Te tienes que ir a la configuración de la cuenta bancaria?
+
+40:53 - Emiliano  Lorenzano
+  Pues aquí está, mira, nada más es de... Ahí está, ajá, exacto. Y ya nada más con eso ya se quita.  Bueno, que tiene sentido, ¿no? Porque sí le vamos a enviar dinero a esa cuenta para hacerle el pago al proveedor.  Después tenemos esta información que dice, información de hoy, el tipo de operación. Vamos a checar si aquí lo tiene.  Por ejemplo, aquí contadores, este proveedor es un proveedor nacional, ¿entraría en la 85 o en cuál entraría para el tipo de operación de la DIO?
+
+41:41 - SALA VIP
+  Está preguntando, Mariela, ¿sabes cuál sería?
+
+41:50 - Emiliano  Lorenzano
+  Bueno, igual ahorita le ponemos al 85, que es el más común, ¿no? Que el 85 creo que hace... Referencia, o sea, tipo.
+
+42:06 - Tania Ortega Laureano
+  Ese entra en el 85, Emiliano.
+
+42:16 - Emiliano  Lorenzano
+  Sí, bueno, ya lo agregué en el 85, ya tiene aquí el 85. Entonces ya tengo yo, ya tengo un proveedor.  Esto es importante porque de acá desde el sistema ustedes van a poder consultar el reporte del audio. Creo que lo descargan en un TXT, ¿no?  Bueno, entonces tengo un proveedor. Incluso acá yo pudiera juntarle algún documento. Por ejemplo, voy a ponerle aquí este ahorita.  Como si fuera la circunstancia de situación fiscal o alguna otra información que ustedes quieran agregar acá dentro del proveedor.  En esta parte, ustedes de aquí también directamente, si le dan a enviar mensaje, les va a llegar un correo electrónico a lo que tengan acá, directamente desde el sistema.  pueden agregar alguna actividad para darle seguimiento al registro del proveedor, pero prácticamente ya tenemos a nuestro proveedor registrado. Si se dan cuenta, este no tiene nada de, ni una venta, ni una compra.  Está limpiecito, pues de cierta manera, nuestro proveedor. Aquí puedo habilitar el RFC, el correo electrónico, si no lo quiero, pues lo quito.  El vendedor no tiene vendedor, actividades también la quito, el país ya lo tiene, si quiero también. Bien filtrar aquí los estados, la etiqueta, que vendría siendo un proveedor nacional, un facturador, un productor.  Aquí viene, por ejemplo, el total atrasado, el adeudo total. Si tuviernos adeudos, aquí nos los iba a estar mostrando.  Que prácticamente, pues son algunas de las funciones nativas que te da el sistema para mostrar en esta vista. Aquí, Víctor, bueno, no sé si quién se vaya a encargar de dar de alta proveedores, viveros o los ranchos.  No sé si tengan alguna pregunta con el alta de los proveedores.
+
+44:55 - SALA VIP
+  Para la subida de los documentos de los productores, de los proveedores. Vas a activar el módulo de, ¿cómo se llama?  Compliance y onboarding fiscal, que creo que es ahí donde necesitaríamos como bloqueos o vigencias de los documentos y que los proveedores o los productores suban sus documentos obligatorios como opinión de cumplimiento, constancia, no lo sé, Chema, ¿recuerdas?  Todos esos documentos que se necesiten, que estén. Entonces, creo que Odu ya maneja ese módulo para que quede ligado con los proveedores.
+
+45:45 - Jose Manuel Espinoza
+  Sí, nosotros de entrada con la actualización de documentación es la opinión de cumplimiento y constancia de situación fiscal.
+
+45:59 - Emiliano  Lorenzano
+  Ahí no estáis. ¿Tú conoces el módulo?
+
+46:03 - Juritzen  Rentería
+  No, no que yo sepa, no está habilitado, no sé si sea alguna de las aplicaciones de terceros. ¿Tienes el nombre, Robert, ahí?
+
+46:12 - Emiliano  Lorenzano
+  ¿Lo pasas para buscar ahorita la aplicación? Sí, ahorita te lo paso. Lo estoy buscando también, perdón. Sí, porque dentro de la localización mexicana no me suena ese nombre, nada más tenemos estos que vendrán siendo para la parte de la contabilidad.  Fiscal, bien. Bueno, ya tengo a mi proveedor, igual acá, Si se ocupan algunos campos ya nos avisan para agregarlos.  Con este proveedor, Víctor, ¿qué se estaría comprando? Ese es un servicio de análisis, no es este, no se compra un producto en físico, es un servicio.  Vamos a agregar entonces un producto ahorita para hacer una prueba. Igual ahorita trato de importar esta plantilla para tenerle a todo.  Voy a agregar un producto nuevo, vamos a ponerle, este, análisis, o de servicio de análisis, Víctor. Sería un servicio.  Aquí lo agregamos en la categoría de servicios. No sé si lleve impuestos al 16, te lo voy a poner así.  ¿Cuánto cuesta aproximadamente ese servicio, Víctor? $2,500, aproximadamente. Este sí quedaría sobre cantidades ordenadas porque no estaríamos recibiendo ningún producto.  Y, bueno, no sé si la cuenta de gastos sería... Voy a poner otros gastos generales por ahora. Y listo, tengo un servicio.  Entonces, si yo vengo y hago acá mi... Bueno, aquí en las solicitudes de cotización, aquí le doy en nuevo y establezco, por ejemplo, el proveedor.  Aquí está, ¿no? Aquí tengo la fecha límite de la orden hasta cuándo pudiera estar vigente para nosotros, que pues realmente depende más de nuestro proveedor, ¿no?  Hasta cuándo nos va a respetar, pues, la cotización que ellos nos manden. Fecha de entrega, pues, no le vamos a agregar porque realmente no nos va a entregar un producto.  Aquí como referencia, pues, entraría directamente a Naturberry Recepciones. No es que vamos a recibir nada, pero por default lo agrega.  Viene la moneda, que vendría siendo en pesos mexicanos.
+
+49:56 - Victor De La Parra
+  Si yo quiero elegir en dólares, ya aquí le establezco dólares. Aquí en referencia del proveedor, si cuando les envíen la factura o ellos, o no sé si el proveedor les manda una orden de compra primero, aquí lo pudieran establecer en referencia del proveedor.  Por lo general ahí, Emiliano, el proveedor nos solicita a nosotros rellenar un archivo PDF o Excel en donde van la información de los análisis.  Porque de aquí nada más, prácticamente lo que estaría comprando sería un servicio de análisis. Me dice que es una cantidad y la unidad sería unidad de servicio.  No sé si aquí sería unidad de servicio o entraría como actividad. El precio unitario vendrán siendo 2.500, viene el impuesto.  Total, el IVA y el total. Aquí dice que el administrador lo está comprando en la empresa Naturberry y aquí viene que los términos de pago serían 15 días con ese proveedor.  Esto se puede enviar por correo electrónico. Si yo le doy a enviar aquí por correo electrónico, me saca esta plantilla.  Ahorita no tengo pues un correo, vamos a ponerle alguno que sea ejemplo nada más. Y esta sería la plantilla y aquí me adjunta el PDF.  Si yo le doy a enviar, pues ya me saca la relación acá del envío del correo. Si yo imprimo este documento,  Este es el formato que nos saca el sistema, ¿no? Viene la dirección de la empresa. Igual esto se pudiera cambiar el tipo de formato.  La dirección de envío, que viene siendo de Naturberry. La dirección del cliente, que es una solicitud de cotización, la P004.  Aquí viene la descripción, servicio de análisis. La fecha prevista, pues, para el 15. Y la cantidad sería una unidad de servicio.  Dentro de esta parte, Víctor, tú aquí pudieras agregar, no sé qué análisis hagan, pero puedes agregar aquí una nota, ¿no?  Servicio, análisis de pesticidas. Sería así nada más. Sí. Nada más, una pregunta, Emiliano. Justo ahorita que dices que se envíe ese correo, ¿se pueden adjuntar archivos?  Sí. Creo que te decía, que a nosotros el laboratorio nos pide rellenar un archivo. Vamos a darle aquí en enviar solicitud.
+
+53:19 - Emiliano  Lorenzano
+  Aquí tengo la opción esta para adjuntar. Vamos a darle aquí adjuntar. Y aquí tú puedes subir alguno, ¿no? Vamos a descargar esta orden de compra.  Aquí está. Nada más como para ejemplo, vamos a darle esto. Y tú ya puedes adjuntar los documentos que requieres.
+
+53:48 - Victor De La Parra
+  Aunque ahí con Tania, esa sería, por solicitud de cotización, sería una cotización general por más o menos por la cantidad de análisis.  que se van a tomar en la temporada, o si sería de una por una, porque pues si no, si sería, se toman bastantes análisis durante la temporada.
+
+54:11 - Tania Ortega Laureano
+  Se generaría, de hecho ya me pasaron la información, lo voy a terminar de analizar bien, pero generaríamos orden por toda la temporada, por los diferentes tipos de servicios que nos hacen nuestros dolores.  Ahí, justo esa era mi pregunta, ¿todas, todas, todas forzosamente tienen que entrar desde una solicitud? O más o menos como quieras.
+
+54:44 - Emiliano  Lorenzano
+  Sí, ahí no entendí la pregunta. Yo, yo, yo puedo generar directamente la orden de compra, o forzosamente tienen que entrar desde la solicitud para convertir la orden de compra.  Ah, no, ven, ahorita lo revisamos, pero ya para terminar aquí con Víctor, entonces aquí Víctor sí superan los documentos.  Ok. Darles descartar. No necesariamente, Tania, ahorita el sistema, por default, me entra, da el menú de solicitud de cotización, ¿no?  Aquí en este menú de solicitud de cotización, aquí pongo los estados, en qué estado está los, este, la, pues el documento que estoy creando, ¿no?  Pero si tú ya es una orden de compra, lo único que lo va a diferenciar, ¿sabes cuál sería? Esto de acá, mira.  Si yo automáticamente lo pongo en confirmar orden, ya sería, ya sería una orden en firme. No necesariamente sería una, una solicitud.  De acuerdo, muchas gracias.
+
+55:50 - Tania Ortega Laureano
+  Sí. Bien.
+
+55:53 - Emiliano  Lorenzano
+  Por ejemplo, Víctor, déjame ver si puedo entrar acá el, al registro de los correos. Correos, que sería este. Se ve medio raro ahorita, pero como no funciona aquí el envío de correos electrónicos en pruebas, te lo voy a pegar aquí en el chat.  Igual si quieres interactuar ahí conmigo, puedes enviarme un mensaje o algo, ¿no? Sí, se ve, gracias, Emiliano. Ahí está, mira.  Ya te lo puedes ver.
+
+56:41 - Victor De La Parra
+  Entonces toda la comunicación ya la pudieran tener también acá desde el sistema.
+
+56:45 - Emiliano  Lorenzano
+  Me deja cotización, me deja ver la cotización, puedo descargarla, imprimirla. ¿Puedo descargar pantalla y a ver cómo se ve?  Sí. ¿Sí se ve en pantalla? Sí. Ya, sí, mira, aquí está.
+
+57:14 - Victor De La Parra
+  Solicitudes de cotización, aquí está el botón de descargar e imprimir, quién fue el comprador, solicitud, que fue la que nos decías, igual la información de Naturberry, los precios, bueno, aquí se quedó con cantidad de uno, términos de pago 15 días, historial de comunicación, doble enter, aquí la puedo ver, ¿sí?  Muy bien, entonces así es como le llega a los proveedores, Víctor. Ya aquí me va a caer el mensaje tuyo.  Aquí también. Buen día, muchas gracias. Pero realmente esta parte no es muy complicado, ¿no? Porque es un análisis de servicio.  Aquí ya la podemos dar como confirmar. Confirmamos la orden de compra. Aquí les decía, no, aquí puedo agregar una referencia.  Regularmente agregan el número de factura que les envía el proveedor para relacionarlo acá con el sistema. Una vez que ya tengo esto, si se dan cuenta aquí yo no puedo crear la factura.  No me da la opción de crear la factura. Sé que ahorita me voy a meter en unos temas, amor, que no tocarían ahorita, pero aquí donde dice subir factura, aquí es donde tendríamos que hacer la opción, Chema, de que valide, antes de que crea la factura, aquí con el XML tendríamos que validar que venga con la cantidad, el precio, el nombre y el RFC, O los campos que nos mandaste ahí en el XML para validar.  A lo mejor no va a aplicar para todos los proveedores, pero para los que llegue a aplicar, pues así es como lo estaríamos haciendo.  Pero ahorita ya me da una factura, una factura de proveedor, que en este caso vendría siendo para tener la cuenta por pagar.  Aquí nada más pongo la fecha del día de hoy, agrego la referencia de la factura, o sea, ponerle este...  Proveedor, no sé, así. Y tengo una factura ya en sistema, ¿no? Pero si te das cuenta acá, Víctor, Tania, la creación de la factura, pues, no es muy complicada.  Aquí vamos a usar dos procesos, ¿no? Una comentaban que querían que en las áreas, cada área o departamento, ya sea el jefe, ya sea que el jefe inmediato o alguien de ahí del departamento pueda levantar sus solicitudes de cotización o para el material que requiera, eso sería otro apartado.  Pero ya en esta parte, cuando ustedes necesiten crear órdenes de compra de manera... Más directa, pues sería así. Digo, no, ahorita no tiene tanto tema porque estamos generando pues un servicio de análisis, donde sí viene ya un poquito más pesado, pues vendría siendo con la parte de productos, ¿no?  Cuando vamos a comprar material de, materiales de empaque, cuando vamos a hacer la recepción de la fruta, cuando vamos a hacer la recepción de la planta, ahí sí ya se vuelve un poquito más pesado.  No sé, Emiliano, si podríamos hacer como otro ejemplo, es que no sé si, si, yo me estoy perdiendo que se hace un poco.  Al proveedor, bueno, se le solicita una cotización, ya nos las envía, y ya es cuando ya a partir de nosotros empezamos a tomar, por ejemplo, podamos tomar más de...  No sé, más de 50 análisis en el mes, por así decirlo. Pero entonces nosotros le pediríamos con el sistema primero la solicitud de cotización y luego ya sería la orden de compra.  ¿Cómo sería? No. Sí, lo que pasa es que suele ser la solicitud de cotización como donde inicias el proceso de negociación justamente con tus proveedores.
+
+1:02:25 - Juritzen  Rentería
+  En precio, cantidades, en tiempo, en factores o en el tipo de variantes que llega a haber. Entonces, cuando ya acuerdan el precio, el siguiente paso es crear la orden de compra, donde queda en firme y ahora sí lo que va a recibir el almacén, qué día lo va a recibir y qué tipo de productos es lo que tiene que revisar a la entrada del almacén.  Pero sí son diferentes, tanto la orden de cotización como la orden de compra.
+
+1:02:55 - Victor De La Parra
+  Nada más pues van ligadas. Ajá, van ligadas. Gracias. Gracias.
+
+1:03:00 - Juritzen  Rentería
+  Pero son como ese tipo de etapas lo que la distingue. Ya en tu orden de compra confirmas los precios, ya le indicas al almacén qué es lo que espera recibir y en qué tiempos, en qué plazos.
+
+1:03:16 - Victor De La Parra
+  Tania, ¿tiene levantada la mano?
+
+1:03:19 - Tania Ortega Laureano
+  Sí, creo que tal vez nos estamos confundiendo un poquito porque esto es lo que nos ofrece el sistema, más no lo que aplicaría para nuestras compras.  Por ejemplo, volviendo a este de laboratorios, nosotros ya tenemos antes de inicio de temporada una tarifa para toda la temporada, lo cual ya no requiere que le estemos solicitando al proveedor actualizaciones.  Y tampoco vamos a requerir estar, o en este caso tú no vas a necesitar estar levantando solicitud por solicitud, porque se va a hacer una orden de compra anual, por llamarla de esta forma, que va a contener...  La cantidad necesaria en dinero para cubrir los servicios y posterior sólo se van a agregar las facturas.
+
+1:04:14 - Juritzen  Rentería
+  Eso es lo que deberíamos aplicar. De hecho, si tú inicias directamente desde la cotización o desde la orden de compra, en automático te generan las solicitudes sin que tengas que iniciar por ese proceso.  En realidad es un clic en este paso. Bueno, entonces ahí, Tania, si ya tienen un precio pactado para toda la temporada, aquí en la parte de los productos, aquí tengo los servicios de análisis, ¿no?
+
+1:04:45 - Victor De La Parra
+  Aquí tengo la opción de compra, donde yo agregué a este proveedor que es el que me va a realizar los servicios.  Aquí puedo habilitar una opción que se llama fecha de inicio. y Fecha de finalización, donde está, donde este precio va a estar disponible para toda una temporada, así como tú lo comentas, entonces, ¿cuándo inicia su temporada?  Empezamos más o menos análisis en julio. Ah, entonces vamos ponerle acá, julio, el primero de julio, ¿y cuándo terminaría?  Febrero, marzo, marzo. Nada más que ahorita, para que nos respete a nosotros que podamos usar este precio, sí tendríamos que ponerle que sería a partir de mayo, porque si no lo pongo ahorita en julio, pues no lo podría utilizar como ejemplo.  Pero una vez, Tania, que esta parte llegue a su fin, ya no pudieran usar ese precio ustedes, tendrían que volver a renovarlo, pues para la siguiente temporada, ¿no?
+
+1:06:00 - Tania Ortega Laureano
+  Sí, está muy bien, me parece perfecto eso. Entonces, si ustedes dicen que tienen un análisis, lo pueden hacer aquí en solicitud de cotización o aquí en orden de compra.  Si le pongo aquí en solicitud de cotización, puedo dar nuevo, voy a buscar a mi proveedor y aquí puedo ponerle una referencia, contratación o feria servicio por temporada 2025, 20...
+
+1:06:39 - Victor De La Parra
+  Ah, no, perdón, sería ya 20, 26, 20, 27. No sé, un ejemplo, ¿no? Aquí vamos a agregarle el producto, servicio de análisis.  Aquí estamos contemplando uno, uno, Tania, pero ¿cuántos serían?
+
+1:06:56 - Tania Ortega Laureano
+  ¿O es uno general? En esa parte, bueno, me gustaría saber de qué tal, de qué forma podríamos ponerlo, si sabemos, si tenemos un pronóstico de cuántos en total vamos a necesitar.  Creo que sería mejor así poner la cantidad, no sé, 150 por poner un número que son muchos más. Sí, entonces aquí en la cantidad le agregamos que serían 150.
+
+1:07:37 - Victor De La Parra
+  Aquí ya me pone que serían, este, bueno, 435, ¿no? La cantidad ya por esos 150. Aquí entonces este precio prácticamente yo no pudiera ya editarlo porque tendría que ya venir pactado con lo que establecí en un inicio.  Yo le pongo ahorita 3.000. Va a cambiar, y no debería ser lo correcto, debería ser los 2.500, en lo pactado que ya tengo yo.  Entonces, una vez que yo tengo esto, Tania, yo aquí ya no le envío ni nada de eso, yo directamente la confirmo, la confirmo, ya confirmé, y ahora aquí, ¿qué voy a hacer?  Ah, pues ya vinieron a hacer el análisis, me generaron mi factura, creo mi factura, tengo que subir aquí un documento, aquí le voy a poner la cantidad, que sería por un análisis nada más, vamos a ponerle aquí la fecha de factura, confirmar, y si te das cuenta, aquí queda facturado, ¿no?
+
+1:08:52 - Tania Ortega Laureano
+  Yo ya tengo pendiente por facturar 149, de este mismo, de este mismo orden de compra. Pedí que es 150.  Como yo no estoy recibiendo nada, Tania Victor, este servicio de análisis tendría que ser sobre la demanda. Entonces aquí me dice que ya tengo una.  Si yo quiero otra factura, vamos a ponerle aquí uno. Aquí vamos a ponerle un número para que no me...  Aquí vamos a poner el número de factura que les manda. Confirmamos. Emil, dice que tiene dos. Sí, Tania.
+
+1:09:45 - Emiliano  Lorenzano
+  El sistema ODU nos da la opción de que el proveedor pueda subir su factura a nuestro... Lo que vamos a realizar en el portal de proveedores, donde van a...  No adjuntar, bueno, sería adjuntar el XML para validar que coincida con lo que ustedes tienen y ahora sí se pueda crear ya la factura en sistema.  Perfecto, gracias. Muy bien. Bueno, pero aquí sí pudiéramos ir haciendo esto, ¿no?
+
+1:10:18 - Victor De La Parra
+  En base, si tenemos una orden de compra, que pudiéramos usar esto o, por ejemplo, a ver acá, tengo una opción que se llama contratos de compra.  Voy a darle aquí nuevo, voy a poner el proveedor. Es una orden abierta, moneda está en pesos, validez del contrato va a estar desde el mayo al marzo, ¿verdad?  31. Referencia, vamos a poner análisis por temporada. Aquí vamos a agregar el producto. Vamos a ponerle servicio de análisis.  Aquí puedo agregar la descripción, Víctor, que decía, ¿no? Sí, pues que es un análisis. La cantidad serían 150.
+
+1:11:34 - Emiliano  Lorenzano
+  El precio, ahorita este sí no me lo está jalando, pues, del formulario del producto, pero aquí ya puedo establecer el precio.  Que vendrían siendo los dos. Sí, bueno, vamos a tomar los 2.500 como reversa, como dice Víctor. Aquí vamos a confirmar.  Bueno, aquí pueden agregar términos y condiciones, ¿no? También. Se pueden apuntar igualmente archivos, ¿verdad?
+
+1:11:57 - Victor De La Parra
+  ¿En dónde? Ahí. En esta plantilla, en la parte de contrato de compra. Sí, aquí está, mira. Perfecto. A ver, vamos a subir un documento.  Ahí está, mira. Incluso tú aquí puedes agregar, bueno, ahí ustedes ya se pueden ingerir y lo pueden usar más bonito que yo.  No sé, aquí vamos a ponerle, pueden agregar una tabla de Excel o, bueno, ahí ya sería cuestión de ir jugando un poquito más.  Vamos a confirmar. Y aquí está, mira. Yo hice una demanda inicial por 150, pero aquí ya puedo estar estableciendo una cotización de acuerdo a cada análisis que vayan a realizar.  Ya no dejo una orden. Una orden de compra abierta, sino lo hago en base a un contrato y sobre ese contrato voy metiendo compras.  Bueno, ya metiendo la compra ya confirmada del análisis que me están haciendo. Ok, va. Gracias, Emiliano. Incluso, Víctor, esta parte nos pudiera ayudar mucho para el contrato que tienen con los viveros, ¿no?  De cuánta cantidad de plata tienen que entregar. En vez de realizar una cotización, hacer la entrada para ir descontando todo el producto que vamos recibiendo de cada vivero.  Bueno, pero ya sería otro tema. Entonces, aquí puedo hacer una cotización. Mira, aquí viene de un contrato. Aquí vienen los archivos que adjunté.  Y aquí voy a poner la cantidad, la cantidad de los servicios que me están haciendo. Ah, que aquí vinieron y me hicieron cinco servicios.  Y aquí vamos a ponerle análisis, mayo, por ejemplo. Confirmo y ya está. Entonces yo me vengo a ver los contratos, ingreso y aquí está, mira, cantidad, 150 ordenado, 5.  No sé, Tania, aquí cómo lo veas.
+
+1:14:31 - Tania Ortega Laureano
+  Sí, también son super funcionales porque tenemos muchos probadores con contrato, entonces creo que esta es una muy buena opción.  Muy bien, entonces, pues pudiéramos que sí irnos por la parte de los contratos.
+
+1:14:50 - Emiliano  Lorenzano
+  Ya se establece y pues aquí nos va descontando la parte de todos los servicios establecidos. Sí, Tania. Una pregunta, ¿existe la forma de ligar como las fechas de contrato también por vigencias?  Ah, caray, ¿cómo sería eso?
+
+1:15:17 - Tania Ortega Laureano
+  Como en tema documento, es decir, tengo este contrato de tal proveedor y tal vez no directo en la compra, pero sí dentro del sistema, en un lugar donde se puedan manejar contratos y fechas de los mismos, como vencimientos.  Ah, es que aquí está, mira, valididad del contrato. Yo ahorita le puse del 1 de mayo al 31 de marzo del 2027.  Ok, esto sería para el tiempo que está vigente dentro de la orden y de ahí, ok, no, creo Creo que con esto me da la info que requiero.  Muchas gracias. Ya incluso si se ocupara algo, lo revisamos, pero aquí ya tiene validez del contrato. Aquí lo que pudiéramos hacer, bueno, ya una vez que tú tengas todos los análisis, ya le das en cerrar, que ya este contrato está cerrado por temporada, ¿no?
+
+1:16:22 - Victor De La Parra
+  Pero aquí ya tendrías todos los historiales, Tani, de temporadas pasadas, temporadas nuevas. Ya conforme vayamos usando, pues, el sistema más, este, vas a tener ya, pues, el historial de todas las temporadas como te has manejado con los proveedores.
+
+1:16:42 - Tania Ortega Laureano
+  Sí, está perfecto. Muchas gracias. Bien, entonces ahora, ¿algún proveedor, Víctor, que podemos usar para compra de un material?
+
+1:16:55 - Victor De La Parra
+  Para ver cómo es la compra de un material. Vamos a ver... ¿Pudera ser Module Rent? Digo, no es como de los que se utilizan en su es servicio.
+
+1:17:07 - Tania Ortega Laureano
+  Más bien International Paper o International Basket.
+
+1:17:11 - Victor De La Parra
+  No lo dejé ahí, pero si quieres te lo puedo dictar, Emiliano, nada más dame un minutito, si quieres presento pantalla.  Igual si quieres agregarlo aquí en la plantilla, esa está compartida ahí para todos. Déjame te lo agrego, dame unos minutitos.  Sí, para, ahorita ya vimos una compra de servicios y se puede decir que es lo más fácil, ¿no? Vamos con International Paper.  International Paper, aquí estamos abrindo entonces la carpeta. Otra vez no me deja entrar a la carpeta de Raúl. No, Marul.  Mira, si quieres mejor, Emiliano, para no tardarme tanto porque no me, no entra, te voy poniendo aquí en el chat los campos igual.  Bueno, vamos crear el proveedor entonces. Es de Estados Unidos. ¿De dónde sería? No, es de México, pero tiene su moneda de Estados Unidos.  Ah, ya, México. ¿El estado de qué estado sería? Es de Querétaro. ¿Cuánto va a poner que es de Querétaro?  La calle es... No te la pongo aquí en el chat. 5 de febrero, código postal 7620. RFC, IPH, o bueno, no sé si por ahí lo tenemos en el chat.  Es IPH140. El número exterior es 1351, no tiene interior, y tenemos teléfono y correo electrónico, por si los quieres agregar.  Ajá, este, dices que es al dólares, ¿cuántos días de pago tiene este, tu proveedor? 43, nada más. Tania, una pregunta, porque ya no me cuadro.  Esa sí es de la moneda, es en peso mexicano, es en dólares, que ya no me cuadro. Dólares.
+
+1:22:26 - Tania Ortega Laureano
+  ¿Sí es en dólares? Sí. ¿Qué se compra con este proveedor? Es, fue paper, ¿verdad? Es caja, caja de cartón.  Así como tal se llama caja, en fin.
+
+1:22:50 - Victor De La Parra
+  Ese no lo, ese no lo entregan a un, a un, a un, a un rancho, ¿verdad? ¿O sí? No, eso se reciben en almacén.  Es un material. en fin.
+
+1:23:00 - Tania Ortega Laureano
+  Al ajá, al final sí se da salida a productor.
+
+1:23:05 - Victor De La Parra
+  No directamente, pero pues bueno, ese es el número y el banco, ya ya vi por qué me estaba confundiendo.  Voy empezando a ponerle que es un bien, vamos a rastrear el inventario, esto no lleva trazabilidad por lotes, Victor, ¿sí?  Mándeme, sí, este sí debería llevar trazabilidad por lote. El impuesto que tienen con este, ¿cómo salía? Ese no sé si lleve impuesto, me imagino que sí.  16, 0. Sí, en 16. El costo de, por cartón o por caja. Ese, espérame, ahorita te digo cuánto es.  O no, bueno, ¿verdad? Ah, no, sí, sí, sí, sí, Aunque no sé si pueda cambiar, pero sí, aquí lo tengo.  Es caja de cartón, ¿verdad? Sí. Vamos a suponer que sea de una libra. no, ese es el peso base.  No, no tengo el costo. Ahorita se los paso.
+
+1:24:14 - Tania Ortega Laureano
+  Este supongo que sí es por pieza, ¿no, Tania, Víctor? Sí, así es, es por pieza. Vamos a ver aquí ahorita, mientras me pasan el costo.  Voy venir aquí en Inventario, Configuración, Unidades y Embalajes, ¿no? Aquí tengo que se llama Unidades, hace referencia al H87 y el código de aduanas es el 06.
+
+1:24:34 - Victor De La Parra
+  Esto lo puedo poner aquí como unidad o lo puedo manejar como pieza. ¿Cómo se queda mejor? ¿Por pieza o por unidades?  Estoy preguntando, ¿verdad? Sí. Comenta aquí por pieza. Muy bien, tú vas a dejarlo por pieza entonces. La categoría esta en que entraría, Víctor, material de empaque.  Sí, como material de empaque. Vamos a crear una categoría entonces que se llame material de empaque.
+
+1:25:34 - Juritzen  Rentería
+  Ahí sería también primeras entradas, primeras salidas. Sí. Yuri, aquí en esta parte de la evaluación de inventario sería al permanente, no al facturar.  Ah, permanente al facturar. Bien. La estrategia de remoción, Víctor, sería primeras entradas, primeras salidas.
+
+1:25:57 - Victor De La Parra
+  Sí, también. Bueno, aquí la parte de las cuentas, tal vez voy a poner que se vaya el costo.
+
+1:26:07 - Emiliano  Lorenzano
+  ¿Todo bien, Tania? Levantaste la Les iba a pasar el precio.
+
+1:26:12 - Tania Ortega Laureano
+  Ah. Pero ahorita que termina. ¿Cuál sería? Punto 71.
+
+1:26:26 - SALA VIP
+  ¿La referencia, Víctor? Eso lo podemos dejar como AC-001.
+
+1:26:36 - Victor De La Parra
+  Ese sí sería creador, ¿verdad, Tania? Ah, no, pero esta es la caja de cartón. Ah, esta es de la caja de cartón.  Ah, ya, No, no sería del proveedor. Ya, ya, perdón. Yo creo que no es un acreedor, ¿no? Pero bueno, me dicen.  ¿Qué es un ponemito? Ahorita le puse... soy proveedor nacional, pero ¿cómo iría? ¿En etiqueta o en dónde, Emiliano? Ajá, en la etiqueta del proveedor.  Pues como proveedor, digo, no sé si sea proveedor estadounidense. Vamos a ponerle proveedor. No dicen que es de México, ¿no?  Porque está en México. Sí, pues entonces por eso es como proveedor nacional. Ahí está. Póntale, ¿no le pones referencia?  Código de barras tampoco. Aquí en la compra vamos a ponerle que lo compramos con el proveedor de... Paper México, vamos a ponerle la fecha de inicio.  Bueno, entonces le pones la fecha de inicio, voy a ponerle una cantidad de una pieza. 0.71 dólares. Sí sería dólar, ¿no?  Los plazos de entrega con este proveedor, Víctor, tienen... ¿Las qué, perdón? Plazos de entrega. No sé cuánto manejen. Voy a dejarlo tan cero, para que no haya problema.  Inventario, el peso lo obtendrás, no le pondré peso ahorita, pero este sí tiene trazabilidad por lotes, no creo que tenga fecha de caducidad, no se vende, se queda así entonces, caja de cartón, solamente se compra.
+
+1:28:54 - Tania Ortega Laureano
+  Esta solicitud para las cajas de cartón se generan en base a un mínimo. Máximo, ¿la solicitan los jefes de área o quién la solicita?  Creo que quedaría que la solicita compras y sí tendríamos Máximo 100.000. ¿Quién la solicita compras, perdón? Sí. No, ¿quién solicita compras?
+
+1:29:18 - Victor De La Parra
+  ¿Para los plazos podrían ser de dos a tres días de entrega?
+
+1:29:23 - Tania Ortega Laureano
+  ¿Para los plazos? No, sí, de producción tenemos 12 días. ¿12 días? Ajá. Ah, bueno, entonces 12 días. No, serían como 15 días más o menos el tiempo de entrega, pero sí se hace por máximos y mínimos.  entrega, No, En el primer lugar de Ah, perdón, tenía deshabilitado el micrófono y ni me daba cuenta. ¿Cuánto sería el mínimo?  Y por poner un número pongamos, no sé, mil por poner algo. Y el más, ¿no? Ocho mil. Aquí si te das cuenta ya me da la opción para ordenar, mira, dice que el mínimo son mil, el máximo son ocho mil, como no tengo nada a la mano ni nada pronosticado que esté pendiente por llegar, pues me manda a ordenar el máximo, ¿no?  Que vendrán siendo los ocho mil. Yo aquí le puedo dar a ordenar, si tuviera varios, pues yo puedo seleccionarlos y los ordeno.  Para que esta parte, bueno, ahí no sé con quién lo tendríamos viendo o ya sea en el tema de inventario, pero para que se pueda cumplir esta regla, si dentro del producto tendríamos que establecer un proveedor para que lo podamos comprar.  Entonces vamos a ver aquí si tengo un proveedor, ver, ¿dónde está? Proveedor, aquí me aparece el proveedor. La ruta, pues...  Ya no aparece como, como comprar, ¿no? Si ya le doy aquí, este, orden, y de manera automática, me va a crear la orden de compra-cambio.  Y ya está, viene, viene de origen. Bueno, el sistema le pone una que se llama OP, aquí lo podemos poner aquí que sea reabastecimiento, o algo, prefijo más, para identificar lo que viene por un reabastecimiento, ¿no?  De un mínimo y un más. Pero aquí ya te da la compra, mira, te da la compra de, de, de este producto, está en dólares, son 0.71 centavos, nada más vamos a cambiar el tipo de la moneda.  Vamos a ver. Y aquí ya cambia, mira. Dice que son dólares y en pesos mexicanos son 128 mil pesos.  ¿Aquí pasa por alguna revisión, Tania, o ya la confirman ustedes en base al mínimo y el máximo que les da?  Bueno, que incluso la cantidad se puede modificar. Sí, creo que ya no pasaría por revisión, a menos que comenten lo contrario para hacer las compras, pero creo que no pasaría.  Vamos a confirmarla. Ahorita, este, nada más tengo una almacén en general que se llama Naturberry. ¿Cómo se llama el almacén de materiales, Víctor?  Eh, pues son bodegas Zamora. ¿Y bodegas? Bodega Irapuato. Bodega Irapuato.
+
+1:34:02 - Victor De La Parra
+  Ese es el de materiales. Sí. ¿Tienen algún nombre corto para el de Zamora? ¿Como un código? ¿Un prefijo? No, en realidad no.  BD, puede ser 001, por así ponerlo ahorita, como Bodega 1. ¿Esta sí pertenecería a Naturberry o sería de otra empresa?  Pero ahorita lo estoy diciendo Naturberry. No, sí sería Naturberry. Es al menos la bodega. No, sí es Naturberry. Sería la de Zamora, ¿verdad?  Ajá. ¿Irapuato? También entrarían después para Naturagui, ¿no? Ahí entrarían los dos, ¿no? A ver, Tania.
+
+1:35:07 - Tania Ortega Laureano
+  No, también es Naturberry, la bodega, la bodega también es Naturberry, aunque sea Irapuato. Sí. Ok. Muy bien, entonces, voy a actualizar un poquito esta página, y aquí dice que Naturberry, ahorita viene una, sé en general, Naturberry, ¿no?  Pero aquí viene bodega Zamora, bodega Irapuato. Dentro de esta, ¿dónde entraría? Vamos a ponerla en Irapuato, por así decirlo, en Irapuato.  Vamos a confirmar la orden. Bueno, antes aquí, pues, en otra percepción, viene el comprador, 45 días, la empresa, Naturberry, el origen.  Vamos a darle confirmar. Dice, el almacén de tipo operación Bodega Irapuato, recepción es incompatible con la ubicación Berri existencia de la regla de...  Ay, perdón. Aquí está mal. Ah, miren, le puse BD Zamora. BD Irapuato. Aquí la regla de restecimiento también pueden aplicarse por este...  Caray, está mal esto. Por almacén. Ahí está. Listo. Y ya se crea una recepción. Ya tengo una compra, entonces, del producto cartón, caja de cartón, 8000 piezas, el precio.  Aquí no sé si llega a cambiar el precio, Tania. También tenemos precio pactado desde antes de la temporada. Entonces, es otro que se puede ajustar y que se puede agregar por contrato también.  Ah, bien, pues nosotros también lo podemos agregar por contrato, sin tema, entonces. Bien, entonces, una vez que hago la compra, pues prácticamente aquí en inventario, voy a tener ahorita tres almacenes.  Este de Naturberry, ahorita no le hagamos caso, pero le tenemos bodegas amor. Ahora, Bodega Irapuato, aquí en Bodega Irapuato, tengo una recepción pendiente, ahí está, ya lo como de más bonito, ¿no?  Tengo aquí en Irapuato, tengo una recepción, aquí tengo la recepción de ese producto, que dice B, Bodega Irapuato, una entrada, la de 02, viene de la ubicación de un proveedor, viene de la ubicación de existencias, ya ahí en la Bodega Víctor, si tenemos ubicaciones, las metemos, ¿eh?  O Rats y todo eso, para tener controlado ese tema. El contacto, pues viene, ¿qué? De Paper México. La fecha programada, bueno, creo que aquí la...  Había puesto para hoy mismo, no le puse pues alguna otra, voy a ponerle a lo mejor ahorita a ver si me lo cambio, para el lunes 18, a ver si me cambio algo aquí en la recepción, bueno ya se quedó con la fecha programada el día de hoy, el documento origen, de qué orden de compra proviene, de la empresa que es Naturberry, o a si aquí puedo poner aquí, no tiene el contrato, bueno ya se hace la recepción, caja de cartón, esto es con todo lo nativo, ¿no?
+
+1:39:35 - Victor De La Parra
+  Aquí en detalles ya pongo el número de lote, vamos a ponerle la fecha del 14, 015, 2026, aquí pues esta parte se puede modificar, ¿no?  Si reciben de menos. Había puesto para hoy mismo, no le puse pues alguna otra, voy a ponerle a lo mejor ahorita a ver si me lo cambio, para el lunes 18, a ver si me cambio algo aquí en la recepción, bueno ya se quedó con la fecha programada el día de hoy, el documento origen, de qué orden de compra proviene, de la empresa que es Naturberry, o a si aquí puedo poner aquí, no tiene el contrato, bueno ya se hace la recepción, caja de cartón, esto es con todo lo nativo, ¿no?  Aquí en detalles ya pongo el número de lote, vamos a ponerle la fecha del 14, 015, 2026, aquí pues esta parte se puede modificar, ¿no?  Si reciben de menos. Si reciben de menos, pues se puede mostrar la cantidad. Guardamos. Ahorita voy a ingresar todos.  Validamos. Ya no tengo nada pendiente de recibir. En mi recupe de inventario, bodega Irapuato, tengo caja de cartón con el lote 1405-2026, 8000 piezas.  Bueno, al parecer tampoco esta parte está muy complicada, ¿no? Ya donde, a lo mejor no está complicado, pero los procesos ya son distintos para la entrega de la, para la recepción de la planta y para la recepción de la fruta, porque la recepción de la planta no viene, vendría de un contrato con el, con los viveros.  Y la recepción de la fruta, esa no viene de una compra, se tiene que recibir sin compra. Ya después se hace el corte, se selecciona un rango de pecho.  De lunes a viernes, y todas esas entradas se acumulan a una sola compra, ¿no? Para enviarle al proveedor lo que le estarías cobrando.  Bien. De esto, Tania, Víctor, ¿cómo lo ven? Para mí está muy bien, simple. Pues más que nada es del lado de compras, esta parte sí es más bien, Tania.  Ya si yo entro aquí al proveedor, por ejemplo, vamos a entrar aquí a este, aquí dice que tenemos una compra, ¿no?  Vamos a ingresar. Ahorita no tengo nada. Bueno, dice que la tasa de retención es a tiempo. Dice que aquí viene al 100%.  Tengo aquí el número de lote que está ligado, acá no me aparece, déjame ver si se creó el registro, aquí está mi caja de cartón, ahorita este lote está visible para todas las empresas, no tiene fecha de caducidad, nada de eso el cartón, su nombre realmente es el puro registro, que tiene la cantidad de 8000.  Aquí dentro del lote sí está relacionado, por ejemplo, a qué compra pertenece. Voy a hacer una transferencia, así nada más para ver un pequeño ejercicio.  Cuando hacen traslados entre bodegas, ahí entran también las paqueterías, ¿no? Ah, bien, no me preocupo por la carta porta, entonces.  Vamos a ver cómo se quedan. Ahí está, aquí tengo el lote. Aquí ven... La trazabilidad, aquí me dicen, ¿no?  La entrada del 14, bueno, aquí viene la, está mal la zona horaria, me está marcando a las 4 de la tarde, el lote, aquí viene que dice, bueno, aquí dice que se generó de, desde Irapuato a Zamora por mil pies, entonces pues tienen toda la trazabilidad.  Y aquí están las ubicaciones donde se encuentran, en Irapuato se encuentran 7 mil, y en Zamora se encuentran mil, mil.  Aquí viene la cantidad restante, vamos a poner la cantidad disponible y el valor en inventario. El valor en inventario tienen 110 mil pesos.  Entonces, ten en cuenta, esta parte, lo digo, a lo mejor no está complicado, nada sé que ir adecuando los temas que comentaban, ¿no?  De, de, juntar el, el, apertura o el, XML para validar y las restricciones que se van a ir haciendo.  Quizás un poquito off topic, Emiliano, fuera de aquí ya un poquito más de Odu, más que nada en la parte de la plantilla.  No sé si le puedas abrir la que tienes por ahí, a la que le sí se llega. Ahí, por ejemplo, si te fijas, cargué algunos productores.  Este, indistintamente de ahorita de los que estén ahí, se, por ejemplo, se puede presentar el caso de algún productor, por ejemplo, Berritec, tiene dos ranchos, ahí cómo yo puedo hacer la distinción.  O por ejemplo, puede que esté muy cerca o puede que esté en dos diferentes estados para no repetir nombre e información, ahí cómo le hago.  ¿Cuál dices que tienes acá? Por ejemplo, vamos a ponerlo Alfonso Ríos Ayala, por ejemplo, que tenga dos ranchos.
+
+1:47:00 - Raúl Núñez (Inflexyon)
+  Para yo dejártelo definido en la plantilla, ¿cómo lo hago?
+
+1:47:05 - Emiliano  Lorenzano
+  ¿Le creería un nuevo registro con ese rancho? ¿O cómo te lo dejo como el de hasta arriba, que el de AGQ te lo dejo como en línea en blanco?  Yo voy a darle a insertar fila. Acá viene todo arriba. Toma, el que sea. Ahí está.
+
+1:47:41 - Victor De La Parra
+  Aquí, desde le damos que agregar, bueno, agregaría otras columnas. Serían más columnas. Sí, serían más columnas, porque mira. Vamos a tomar como ejemplo ese proveedor.  Lista. Eso sería persona física. Ah, perdón, perdón, tenías habilitado el micrófono. Este vendría siendo el productor, ¿no, Víctor? Alfonso Ríos Ayala.  Así es. ¿Y los ranchos vendrían siendo, qué es los lugares donde entregamos? No, lugar donde tiene plantado, donde tiene la producción.  Aparte sería el tema del facturador, entonces. Sí, no, es aparte, completamente aparte. sea, por ejemplo, Alfonso Ríos Ayala puede tener un rancho en Zamora y uno en Chavinda, por así decirlo.  Gracias. Ahí está, mira. Ah, mira, sí, se crea el principal y se crean dos diferentes. Sí, lo liga, lo liga al otro registro.  Ok. Entonces, en plantilla tengo que revisar para agregarte esos campos para que quede todo distribuido. Sí, igual si quieres, ahí por el grupo, si me compartes cuáles serían los campos, ya nomás yo agregaría ya las columnas a la plantilla.  va, es que vamos a agregar uno que se llama... Más tipo, tipo contacto, donde tú vas a poner si es este, dirección de entrega, contacto, facturación.  Ah, muy bueno, muy bueno. Sí, compártemelo en blanco y pues ya nomás ya lo que ya tengo, pues se las agrego.  Y por ejemplo, mira, estos que están aquí como ranchos, pues le podemos aquí identificar que fue un rancho, miren.  Ya sé que viene el nombre arriba, pues. Sí, no lo ponen. Le podemos aquí agregar rancho. Nada más que esto debería quedar en clientes, ¿no?  Porque le vas a entregar tú a estos ranchos, la planta. Sí, pero también él es nuestro cliente, él también nos, no sé cómo se llama, nos entrega fruta.
+
+1:51:56 - Gloria Araceli Ceja Olivares
+  Ah, sí, le entrega fruta, ¿verdad? Así es cierto. Sí, miren, entonces ya acá. Por ejemplo, bueno, es que aquí tengo la planta nada más.  Si yo la entrego ahorita, supongo que esta de Naturberry no tengo aquí, vamos a darle aquí, vamos a ponerle aquí la dirección, vamos a ponerle Alfonso, creo, y aquí tengo Rancho La Piedad, Rancho Zamora.
+
+1:52:27 - Victor De La Parra
+  Ah, ¿de qué rancho te va a entregar? Vamos entregarle, no, vamos a entregarle a primero la planta. Ah, ok.  Vamos a entregarle el Bounty Race. Digo, ahí en plantas no hay tantos temas. No sé si hasta puede diferenciarse para qué rancho va cada entrega de planta.  No sé cómo lo veas ahí, Gloria. Es que más bien ahí, ahí más bien ya cada rancho ya tiene su, tiene diferente nombre de rancho.  O sea, el nombre es Alfonso Ríos, pero el de Chavinda es... Este, un ejemplo, ¿no? Las cascadas y el otro es el purengue, ¿no?  O sea, cada rancho sí está identificado por zona. De hecho, no he comprado nada de la planta, pero para la planta, por ejemplo, uno tiene un proveedor, este tal vez sería Estados Unidos, ¿verdad?  Sí. Este, ¿qué le vamos a poner?
+
+1:53:41 - Gloria Araceli Ceja Olivares
+  Proveedor extranjero, vamos a agregar un contacto, vamos a ponerle aquí, por ejemplo, este, el vivero, ¿no? Ya harían los viveros.  Vivero con la finca San Vicente.
+
+1:54:02 - Victor De La Parra
+  Bueno, aquí también tenemos que establecer cómo vamos a dejar todo la nomenclatura, ¿no? De los, pues, en mayúscula, minúscula, a ver, San Vicente.  Este ya no está en Estados Unidos, Este ya está en México. ¿Sí, verdad? ¿O no? No necesariamente. No, pues sí, sí, sí está aquí en México, Gloria, ¿no?  Sí, está en México, todos los libros. Vamos a ponerle que esto está en, bueno, vamos a ponerle aquí. ¿Así?  Por ahorita, por ejemplo, ¿no? Sí, está bien. Ahora ya aquí vamos a ponerle por etiqueta para diferenciarlos ahorita. Este no tiene ninguno.  Vamos a ponerle finca San Vicente, que este es un vivero, y listo, mira.
+
+1:55:42 - Raúl Núñez (Inflexyon)
+  Aquí incluso también pudieron generar un contrato de compra, porque el contrato lo hacen con NVG, ¿no? Sí, con NVG es el al que sale el contrato, pero sí se tienen contratos también con los viveros.
+
+1:55:54 - Victor De La Parra
+  ¿Ah, también? Sí. Ah, entonces no lo voy a meter entonces así. Creamos una orden de compra, vamos a ponerle aquí proveedor, vamos a ponerle NVG, y aquí me va a dar finca San Vicente, tres cruces, o aquí lo puedo poner como principal, y si quieren acá abajo podemos agregar el vivero, ¿no?  Pero ahorita, como tiene existencia, vamos a ponerle finca San Vicente, viene en pesos mexicanos, no sé si va a ser en pesos o en dólares, o sea, ponerle Bumpy, ¿cuánto?
+
+1:56:38 - Emiliano  Lorenzano
+  ¿Cuántas plantas son mil, por decirlo, no? A cuatro pesos, cuatro piezas, no sé si la ordenidad de medida está correcta como pieza, o quieren ponerle planta, no sé, cómo lo va.  Pues puede quedar como pieza, pero generalmente ahí Gloria la podríamos dejar como planta, para que nos pueda hacer. Igual, pues si coincide con la factura, con la factura estaría mejor como la...  Mejor, entonces sí, creo que sí, sería como planta, plantula. Este, este entraría directamente a los, no entraría directamente a los coolers, ¿no?  Dependiendo, en este caso, como acá está San Vicente, esa no entra a cooler, esa va directo al productor.
+
+1:57:32 - Victor De La Parra
+  A ver, entonces déjame intentar hacer algo, igual para que vean cómo pudiera quedar.
+
+1:57:50 - Emiliano  Lorenzano
+  La opción, acá no me parece. me La parece. parece. Gracias Bueno, prácticamente entonces entraría, ¿Esta sí entraría por una compra, Víctor?  No, ¿verdad? ¿O sí? Pero, ¿la orden de compra o la orden de cotización? No, la orden de compra para la planta sí entraría por una orden de compra, ¿no?  Sí, pues en teoría sí tendría que entrar por una orden de compra. Entonces vamos a ponerle NVG. Ahorita lo voy a hacer así, va a entrar directamente acá, pero ya sé que no tendría que entrar acá en, o pisar el almacén pues de ustedes.  Creo que se va directamente al producto. Se crea una recepción. Aquí proviene de Finca San Vicente, el proveedor principal es NBG, pero viene de Finca San Vicente.  Vamos a ponerle aquí en detalles, vamos a ponerle el lote. Ahorita no tiene controles de calidad, nada de eso, pero ya es involuntario, entonces aquí ya tengo, ahorita tendría la existencia realmente acá.
+
+1:59:37 - SALA VIP
+  Yo sé que no la debería tener aquí, aquí está, mira, la planta.
+
+1:59:46 - Emiliano  Lorenzano
+  Entonces ya tú en la salida, bueno, aquí se puede hacer de forma, ¿no? Desde la venta, pero que ustedes comentaron que a través de una hoja o papeleta, ¿cómo le llaman?  Dar la salida al Dar la salida al productor. Y ya después de... Dar la salida a crear la venta, ¿no?  Pero vamos a hacer la simulación ahorita como si Alfonso, Rancho La Piedad, vamos a entregarle Bounty, 50, ya lo estamos vendiendo a 5.60, para poder decir, decirlo.  Bueno, aquí vamos a ponerle que son 30 días para pagarle, forma de pago, transferencia, va a ser pues, ahorita me lo está poniendo aquí como, como, este, facturar al público con general, por el RFC, pero vamos a manejar la cierta de momento.  Bueno, aquí vamos a confirmar y voy a crear otra, ahora para el desamor.
+
+2:01:01 - Victor De La Parra
+  Por las otras 500.
+
+2:01:03 - Emiliano  Lorenzano
+  Sí, se nos van a crear dos salidas. Aquí tengo dos salidas. Que prácticamente tendríamos que partir de esto, Víctor.  Para la entrega al productor, tendríamos que partir primero, crear la salida y después crear la venta. Aquí no sé si quede una venta por cada rancho o quedaría una venta por los dos ranchos.  No, pues a la final al productor se le cobra indistintamente del rancho, o no sé a qué te refieres.  Ah, no, este salida sería para el cobro a él. Ajá, sí, pues, el cobro que le hacen ustedes. Sí, no, pues el cobro es en general.  Si no mal me equivoco, ¿verdad? No importa el rancho. Sí, es en general ya, al nombre del productor.
+
+2:02:05 - Victor De La Parra
+  Ahorita entonces, ahorita lo hice uno, uno, uno, pero bueno, use uno por cada salida, pero podríamos ver que se haga un pedido general por varias salidas.  Vamos a dar aquí la entrega, aquí dice que viene para el rancho Zamora, 500, validamos, validamos las otras para el rancho La Piedad.
+
+2:02:31 - Emiliano  Lorenzano
+  Y aquí en la parte del lote, que está bien, tiene una compra para finca San Vicente y tiene dos ventas para rancho Zamora, rancho La Piedad, están los traslados, las salidas que se generaron y la trazabilidad, mira, cómo se estuvo moviendo.
+
+2:02:55 - Tania Ortega Laureano
+  Por el lote. Sí.
+
+2:03:01 - Emiliano  Lorenzano
+  Que al final, en ese, por ejemplo, en ese hipotético lote es el que se quiere que se tenga desde ahí, desde ese inicio, hasta, pues bueno, ya está la venta de clientes de ya de bruta.
+
+2:03:13 - SALA VIP
+  Sí. Que se tenga todo eso trazado.
+
+2:03:17 - Emiliano  Lorenzano
+  Bueno, pues ya con esos, entonces, pues yo nada más quedaría pendiente, Emiliano, si me compartes las nuevas columnas, este, no sé si las agregues en la plantilla en blanco, entonces ya yo ya las agrego, porque pues ya nos, como vimos dos minutillos más.  Sí, está bien, y ahorita la reviso, porque creo que ya la había generado así con todos los campos, perdón, por dejar de revisarlo, ahorita reviso y ya te comento si te adjunto una nueva o sobre esta misma te agrego las columnas.  Va.
+
+2:03:47 - Raúl Núñez (Inflexyon)
+  Talpente. No sé, Tania, algún comentario en el alta de los proveedores, ¿alguien más? No, por el momento no, este, muchas gracias.  Bien, Robert. ¿Qué hay en mí?
+
+2:04:04 - Victor De La Parra
+  Un comentario, te veo muy apagado. Ah, es que me moví a una reunión y ahorita regresé. Pues ya vimos parte de los proveedores, unas compras y creo que hasta algunos ejemplos hay de inventario, no nos tocaba el tema, pero para que nos reforzaron ahorita el proceso.
+
+2:04:25 - Raúl Núñez (Inflexyon)
+  Ok, tema de aprobaciones, ¿sí tocaron ese comentario? No, ahorita no, no, no, no, no lo revisamos, pero igual si gustan mañana podrán revisar ese tema.  Yo quería consultarle ese equipo como del tema de las plantillas, no sé si nos pudieran hacer llegar algunos cuantos datos para empezar a armar el resto de talleres más, que ya involucran más datos para que este...  Para seguir avanzando. ¿Cuáles serían las otras plantillas? Porque bueno, de proveedores, de productos, esa te la tengo pendiente, la estamos trabajando yo y Manuel, Manuel y yo.  Ok. ¿Cuáles serían las otras? Por lo pronto, no sé qué otra, Emiliano, necesitas para montar un flujo, pero productos, no sé si pudieran ayudar con tres, cuatro productos que nos puedan facilitar, por lo pronto, sería bueno.  Y también el catálogo de cuentas creo que es un...

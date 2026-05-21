@@ -1,0 +1,1157 @@
+======================================================================
+ID DE SESIÓN: PLANEACION FORECAST PRODUCCION ODOO
+FECHA: 2026-05-08
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/1ey9nYfpsz4a6_-DS3_y92meSAPTTT5y
+======================================================================
+
+RESUMEN
+
+Planeacion-Forecast-Produccion Odoo NBG Mexico - May 08
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir el pronóstico de producción y el flujo de trabajo de trazabilidad en Odoo.
+
+Puntos clave
+
+  - Nuevo sistema de trazabilidad: Se añadirá un nuevo sector ID a los números de lote del productor (p. ej., 31775-1) para vincular la fruta con su variedad específica, tipo de planta (a raíz desnuda/plug) y vivero de origen.
+  - Bloqueo por Inocuidad: Una función crítica bloqueará toda la actividad del productor (recepción de fruta, pagos, entrega de materiales) por incumplimientos de inocuidad, y los desbloqueos requerirán la carga de documentos para auditoría.
+  - Ajustes al pronóstico de producción: Odoo rastreará la mortalidad de plantas posterior a la siembra (merma) y otros eventos (p. ej., granizo) para ajustar automáticamente los pronósticos de producción, reflejando retrasos reales.
+  - Proceso de adquisición de plantas: Odoo gestionará la adquisición de plantas mediante una OC general a NVG US (la contraparte financiera), rastreando entregas específicas de viveros y ventas a productores.
+
+Temas
+
+Trazabilidad y numeración de lotes
+
+  - Objetivo: Rastrear la fruta hasta su vivero de origen.
+  - Problema: Los números de lote actuales del productor no identifican el vivero.
+  - Solución: Se agregará un nuevo sector ID al número de lote del productor.
+      - Formato: [ID de lote del productor]-[Sector ID] (p. ej., 31775-1).
+      - Función: El sector ID será único por productor y se asociará a una variedad específica, tipo de planta y vivero de origen.
+  - Implementación en Odoo:
+      - Edder proporcionará un archivo de mapeo que vincule cada sector ID con sus atributos específicos.
+      - Odoo autocompletará estos detalles cuando se ingrese el sector ID en la recepción de fruta.
+      - Esto habilita reportes detallados sobre el origen y desempeño de la fruta.
+
+Bloqueo por Inocuidad (Seguridad Alimentaria)
+
+  - Objetivo: Hacer cumplir el cumplimiento de inocuidad bloqueando a productores no conformes.
+  - Mecanismo: Un estado de "bloqueo" detendrá toda la actividad del productor.
+      - Disparador: Gloria (Inocuidad) activa el bloqueo en Odoo.
+      - Impacto: Detiene la recepción de fruta, pagos, entrega de materiales y retiros de cámara de frío.
+  - Auditabilidad: Desbloquear a un productor requiere cargar evidencia (p. ej., un análisis limpio de plaguicidas) para prevenir errores humanos y proporcionar una clara trazabilidad de auditoría.
+  - Estado inicial: Todos los productores estarán bloqueados al inicio de la temporada hasta que se cargue su liberación emitida por EE. UU.
+
+Ajustes al pronóstico de producción
+
+  - Problema: Problemas posteriores a la siembra (p. ej., mortalidad de plantas, granizo) retrasan las cosechas, volviendo inexacto el pronóstico inicial de producción.
+  - Solución: Odoo rastreará estos eventos para ajustar el pronóstico.
+      - Proceso: César (Asesor de Campo) evalúa el problema → Registra un informe en Odoo (p. ej., 20% de merma) → Edder usa estos datos para actualizar el pronóstico.
+      - Lógica en Odoo: El sistema usará estos datos para desplazar automáticamente las estimaciones de producción, proporcionando un pronóstico más realista.
+
+Abastecimiento de plantas e inventario
+
+  - Flujo financiero: Naturberry compra plantas a NVG US, no directamente a los viveros.
+  - Proceso en Odoo:
+    1.  OC a NVG US: Se crea una orden de compra general para todas las plantas.
+    2.  Entregas de viveros: Las entregas específicas de cada vivero se reciben en un inventario virtual "en tránsito".
+    3.  Ventas a productores: Las plantas se venden a los productores desde este inventario, creando una orden de venta.
+  - Datos de contrato: Edder proporcionará datos de contratos de plantas (variedad, vivero, cantidad) para establecer el inventario inicial y rastrear el cumplimiento.
+
+Próximos pasos
+
+  - Edder:
+      - Compartir el archivo de Excel del pronóstico de producción (solo la estructura).
+      - Proporcionar los datos de contratos de plantas (variedad, vivero, cantidad).
+      - Coordinar con Rafa para estandarizar la lógica del sector ID.
+  - Robert:
+      - Compartir plantillas de contratos de productor para definir campos en Odoo.
+  - Inflexyon (Emiliano, Alex):
+      - Revisar todos los archivos compartidos para definir requisitos técnicos.
+      - Diseñar el sistema de trazabilidad con sector ID.
+      - Diseñar el flujo de trabajo de bloqueo/desbloqueo de Inocuidad.
+      - Diseñar la lógica de ajuste del pronóstico de producción.
+
+======================================================================
+
+ONE-ON-ONE
+
+Planeacion-Forecast-Produccion Odoo NBG Mexico - May 08
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Alinear el diseño de Odoo para planificación, pronóstico y producción en NVG/Naturberry: definir la trazabilidad de lote/sector/vivero, insumos del pronóstico, flujo de compras, bloqueos de productores por Inocuidad y datos/artefactos requeridos.
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Listo para revisar flujos y requerimientos Odoo; foco en recepción/entrega de planta, contratos, bloqueos y pronóstico.
+
+Progreso en prioridades desde la última reunión:
+
+  - Analizó esquema para registrar sectores, vincular vivero y variedad, y restricciones por sector para recepción/entrega.
+  - Definió que compras se modelarán a NVG US con recepciones por vivero y salidas a productor.
+
+Prioridades hasta la próxima reunión:
+
+  - Diseñar modelo de Sector: relación variedad + vivero + reglas de recepción; evaluar si sector es por variedad o por lote (documentar decisión).
+  - Prototipo de bloqueos Inocuidad: motivos, alcance (materiales, recepciones, pagos, embarques), y requerir evidencia para bloquear/desbloquear.
+  - Definir flujo de OC “ficticia” a NVG con líneas por tipo de planta; recepción por vivero; salida inmediata a productor (venta).
+  - Revisar archivo de pronóstico de Edder para trasladar lógica a Odoo (curvas y desplazamientos por mermas/post-plantación).
+
+Necesita asistencia / Está bloqueado en:
+
+  - Recibir: contratos/campos requeridos; Excel de pronóstico/plantaciones; IDs de lote de Ana (Acknowledge); lista de motivos de bloqueo.
+
+Alejandro Magaña
+
+Registro
+
+  - Enfocado en decisiones de modelado: sector, lotes, y trazabilidad a vivero.
+
+Progreso en prioridades desde la última reunión:
+
+  - Planteó la decisión crítica: sector por variedad (múltiples lotes) vs. sector por lote (uno a uno).
+  - Acordó restricciones por sector/variedad para evitar capturas erróneas.
+
+Prioridades hasta la próxima reunión:
+
+  - Especificar reglas de validación por sector (variedad permitida, vivero permitido cuando aplique).
+  - Definir evidencias obligatorias para desbloqueos y liberaciones de productores.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Lista de motivos de bloqueo y ejemplos de evidencias.
+  - Confirmación de cómo identificar vivero en la etiqueta/lote a la recepción de fruta.
+
+Edder Palacios
+
+Registro
+
+  - Operación planta/pronóstico; mostrará manchote y lotificación real.
+
+Progreso en prioridades desde la última reunión:
+
+  - Explicó lotificación actual: productor con sectores; sector agrupa variedad/planta (raíz/cepellón) y puede tener múltiples lotes de vivero en el tiempo.
+  - Acordó estandarizar “paquetes” variedad+vivero para trazabilidad.
+  - Confirmó disponibilidad actual de contratos y números pactados por vivero.
+
+Prioridades hasta la próxima reunión:
+
+  - Compartir: Excel de pronóstico/manchote; números pactados por vivero; históricos de entrega de planta; papeletas formatos de entrega/salida.
+  - Coordinar con Ana para adelantar IDs de lote (Acknowledge) de junio/julio.
+  - Definir con Rafa el catálogo de paquetes variedad+vivero y su codificación.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Homologación de identificación en Odoo para que el número de lote del vivero se ligue a sector/paquete.
+
+Raúl Núñez
+
+Registro
+
+  - Admin de repositorio y grabaciones.
+
+Progreso en prioridades desde la última reunión:
+
+  - Confirmó alojamiento permanente en Fathom; gestionará transcripciones a carpeta compartida.
+
+Prioridades hasta la próxima reunión:
+
+  - Subir transcripción/archivos a la carpeta del proyecto para consumo del equipo.
+
+Víctor De La Parra
+
+Registro
+
+  - Proveer insumos operativos y plantillas.
+
+Progreso en prioridades desde la última reunión:
+
+  - Subió a carpeta: históricos de planta 24-25 y 25-26, verificación alta productores, lista de verificación y puntos de clima (KML).
+
+Prioridades hasta la próxima reunión:
+
+  - Apoyar compilación de motivos de bloqueo de Inocuidad.
+
+Gloria Araceli Ceja Olivares
+
+Registro
+
+  - Inocuidad; define bloqueos y liberaciones.
+
+Progreso en prioridades desde la última reunión:
+
+  - Acordó: bloqueos por pesticidas/agua/etc. activados por Gloria; bloquean materiales, recepciones, pagos y embarques; requieren evidencia para (des)bloquear.
+  - Solicitó: iniciar temporada con todos productores bloqueados; liberar con evidencia (correo de EE. UU.).
+
+Prioridades hasta la próxima reunión:
+
+  - Enviar lista de motivos de bloqueo; criterios y evidencias por motivo.
+  - Definir evidencia para “preparación de rancho” (fotos, lista de verificación) para liberar entrega de planta.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Implementación en Odoo de estados de bloqueo y adjuntos obligatorios.
+
+César Octavio Aguilar Muñoz
+
+Registro
+
+  - Asesoría campo/calidad de planta.
+
+Progreso en prioridades desde la última reunión:
+
+  - Propuso registrar mermas post-plantación (20/45 días) y eventos (plagas, inundación, granizo) que desplacen/reduzcan el pronóstico.
+  - Aclaró que reposición o nota de crédito debe reflejarse en el pronóstico y trazabilidad.
+
+Prioridades hasta la próxima reunión:
+
+  - Definir formato/campos para reporte de mermas/eventos y su efecto en curva (desplazamiento/ajuste).
+  - Establecer evidencia requerida (evaluación de campo) y vínculo a lotes entregados.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Lógica de ajuste de curvas en Odoo basada en el archivo de Edder.
+
+Temas
+
+Trazabilidad: productor, sector, lote, vivero y variedad
+
+  - Sector: se perfila “por variedad” (puede contener múltiples lotes con el tiempo); alternativa “por lote” discutida. Decisión pendiente documentar.
+  - Etiqueta en caja: número de lote del productor ampliado para identificar vivero; se usará paquete variedad+vivero; recepción en Odoo debe inferir variedad y tipo de planta.
+  - Homologación: último dígito estándar (1=raíz, 2=cepellón) no garantizado por US; se preferirá usar paquete y mapeo anual de lotes de Acknowledge.
+
+Pronóstico y mermas post-plantación
+
+  - El pronóstico inicia en fecha de plantación; se monitorean desviaciones hasta caja 1.
+  - Mermas a 15-20 y 45 días: pueden causar reposición o nota de crédito; ajustar curvas (desplazar/reducir) por sector/variedad/vivero.
+  - Odoo tomará lógica del Excel de Edder; eventos de campo (plagas, clima) registrables con evidencia.
+
+Compras y logística planta
+
+  - OC “maestra” a NVG US con líneas por tipo de planta; recepción por vivero; salida inmediata (venta) a productor.
+  - Inventario virtual en tránsito hasta recepción real; papeletas de entrega/salida serán base operativa.
+
+Bloqueos de Inocuidad y liberaciones
+
+  - Bloqueo por motivos (pesticidas, agua, pre-harvest, etc.) activado por Gloria; impacta: materiales, recepciones, pagos, embarques, y movimientos de lotes.
+  - Evidencia obligatoria para bloquear y desbloquear; auditoría soportada por adjuntos.
+  - Inicio de temporada: todos bloqueados; liberación por correo de EE. UU. con evidencia.
+  - Bloqueo adicional “preparación de rancho” para liberar entrega de planta (foto/lista de verificación: acolchado, cintilla, riego funcional).
+
+Datos y artefactos requeridos
+
+  - Contratos/volúmenes pactados por vivero disponibles ya; finales reales de entrega a productores en agosto.
+  - IDs de lote de Acknowledge (Ana) necesarios para mapeo de paquetes y recepción de fruta.
+  - Plantillas de contratos múltiples y campos de productor para liquidaciones/retenciones separadas del contrato base.
+
+Próximos pasos:
+
+  - Edder: Compartir manchote/Excel de pronóstico con estructura/columnas; históricos de planta; papeletas de entrega/salida; números pactados por vivero. Fecha límite: inmediato/esta semana.
+  - Ana vía Edder/Robert: Enviar IDs de lote (Acknowledge) adelantados de junio/julio para mapeo en Odoo. Fecha límite: cuando esté disponible; intentar anticipar.
+  - Gloria: Enviar lista de motivos de bloqueo + evidencias requeridas por motivo; lineamientos de “preparación de rancho” (foto/lista de verificación). Fecha límite: próxima reunión.
+  - Robert: Enviar plantillas/contratos (5-6) y campos necesarios para alta de productor y modelos de negocio de liquidaciones/retenciones. Fecha límite: próxima reunión.
+  - Emiliano/Alejandro:
+      - Prototipo de modelo Sector y Paquete variedad+vivero; reglas de validación por sector; recepción con inferencia de variedad/planta. Fecha límite: próxima iteración.
+      - Diseño de bloqueos (estados, alcance, adjuntos obligatorios, excepciones controladas). Fecha límite: próxima iteración.
+      - Diseño OC NVG US con recepciones por vivero y salida inmediata a productor. Fecha límite: próxima iteración.
+      - Evaluar lógica de ajuste de pronóstico con archivo de Edder y eventos/mermas. Fecha límite: tras recibir archivo.
+  - Víctor/Raúl: Verificar que carpeta compartida contiene todo lo citado (listas de verificación, KML clima, históricos) y avisar si falta algo. Fecha límite: 2-3 días.
+
+======================================================================
+
+TRANSCRIPCION
+
+Planeacion-Forecast-Produccion Odoo NBG Mexico - May 08
+VIEW RECORDING - 115 mins (No highlights): 
+
+---
+
+3:07 - SALA VIP
+  Hola, Robert, buenos días. Hola, Víctor. ¿Estás, Henry? Bien, bien.
+
+3:14 - Emiliano  Lorenzano
+  Revisando ahí los temas de cómo puede quedar ya el flujo para convivir las tres empresas. Qué bueno, qué bueno, Miriam, para estar aquí.
+
+3:30 - SALA VIP
+  Alex, falta, ah, no, ya está Alex con nosotros. Sí, sí, ahí ya lo vi. ¿Quién no se va? Falta Raúl, ajá.  Deja, preguntarle si se va a unir. Sí, sí. Oye Vic, se supone que íbamos a invitar a Gloria para el tema de inocuidad.  No recuerdo si la invité. Ajá, no está. ¿Crees que César nos pueda ayudar en todo o si le echamos un fonazo?  César nos puede apoyar en muy buena parte.
+
+4:47 - Victor De La Parra
+  Él estuvo como asesor en campo, pero pues igual como ahorita ella es la encargada, pues igual no estaría. Yo diría que metamos a Gloria, que metamos a Gloria Cortas.
+
+4:57 - Edder Palacios
+  Yo invité a César, de hecho, para que cada quien se empiece.
+
+5:00 - SALA VIP
+  Tiene que ser cargo de sus departamentos.
+
+5:02 - Edder Palacios
+  Sí, gracias, Edder. Por más.
+
+6:05 - SALA VIP
+  Gracias, Gloria.
+
+6:11 - Raúl Núñez (Inflexyon)
+  Por si estoy yendo por acá, equipo, una disculpa que me va viendo unos temas y cuando menos me di cuenta ya eran las 12.5.
+
+6:19 - SALA VIP
+  Sí, la verdad que sí, ya estamos creo que todos, faltaría de nuestro lado Cholico, pero dijo que si podías se unían, creo que somos todos.  Va, igual cuando iniciemos y podamos grabar la sesión.
+
+6:43 - Raúl Núñez (Inflexyon)
+  Por cierto, Robert, no hemos podido, bueno, yo no he podido ver las grabaciones, me llega el correo de, ¿cómo se llama la aplicación?  Fathom, Fathom, Fathom. Este, pero, sobre todo es para descargarlas, no sé, déjame ver si Fathom me deja descargar, sobre todo es para descargarlas y tenerlas cargadas, digamos, en el repositorio de carpeta, en la carpeta del proyecto donde voy guardando todo, este, no sé si caduque aquí en Fathom la grabación, el problema es que luego en Teams las descargo porque caducan.
+  ACTION ITEM: Upload Fathom transcripts to shared folder for Raúl - WATCH: https://fathom.video/calls/665010386?timestamp=443.9999
+
+7:26 - SALA VIP
+  Ok.
+
+7:27 - Raúl Núñez (Inflexyon)
+  Si me dices que no caduca en Fathom, está perfecto. Sí, no, ahí se quedan.
+
+7:34 - SALA VIP
+  Lo que puedo hacer es poner todo el transcript, todo lo puedo copiar en un archivo de TXT y los dejo ahí en el archivo compartido que tenemos para que las puedan tomar, de ahí es, de hecho es donde estoy haciendo yo las anotaciones.  Y así ya ustedes puedan bajarlos y ya ahora sí que utilizar sus herramientas para sacar. Gracias. Los pormenores de cada una de las reuniones.  Baca, te agradezco. ¿Listo, Emiliano?
+
+8:12 - Emiliano  Lorenzano
+  Sí, adelante, Robert. Ok, gracias.
+
+8:17 - SALA VIP
+  ¿Quedaron pendientes algunas tareas? Estoy revisando qué fueron lo que quedó pendiente. Edder nos iba a ayudar a refinar y pulir su archivo de Excel, el que incluye la Growers List y el Forkast.  También BIC nos iba a ayudar a definir lo de los cuadrantes para los datos climáticos. Y iba a coordinar con Gloria y el equipo de Inocuidad el implementar con los productores el nuevo requisito de etiquetado que incluye el ID o letra del vivero de origen.  ¿Y qué más? Dice aquí que íbamos a enviar a Emiliano y a Alex los datos históricos de cajas y plantas desglosados por productor, vivero, variedad y semana.  Eso sí, no recuerdo cómo lo íbamos a hacer. Y que Emiliano y Alex iban a analizar internamente los requisitos para ver qué se presentaba y determinar la mejor estrategia.  Esos son los puntos que íbamos a ver hoy. Entonces, tú dime, Emiliano, con cuál empezamos, o si tú traes también algunos puntos.
+
+9:38 - Emiliano  Lorenzano
+  Ah, disculpa, ya el tema principal creo que era el revisar lo de, ya más más a detalle, de la obtención de las compras con Edder.  Comentaban que iban a... A tratar de hacer algunas modificaciones en el reporte y eso es lo que íbamos a revisar.
+  ACTION ITEM: Share blank forecast template w/ Emiliano & Alex; then they analyze formulas - WATCH: https://fathom.video/calls/665010386?timestamp=600.9999
+
+10:11 - Edder Palacios
+  La parte del forecast, el archivo, el que tenemos el forecast nosotros, lo que vamos a hacer ahorita es, podemos mandárselos en blanco porque para nosotros ahorita es imposible hacer un forecast hasta que no esté plantado, de lo contrario, únicamente estaríamos metiendo números por meter, que no serán los reales, esa es la realidad.  Lo que podemos hacer es ahorita checar el manchote Emiliano y decirte sobre este archivo vamos a trabajar la parte del forecast, tanto por variedad como por vivero y por fecha de plantación y ahí mismo estaríamos sacando lo que decía.  Y ahorita, Robert, letra no le pondríamos letra de vivero. Lo que platicábamos, Gloria, te pongo rápido en contexto, era de este año poner un código también para, así como se ponen los códigos, ya ves que se pone el código notificado, el número de lote, para ya sea raíz desnudo, la parte de cepellón, dependiendo del sector que lo saque el productor, para que vaya habiendo un histórico de cada una de las variedades, tanto de fecha de plantación, como de fecha curva.  Ah, ok, está muy bien.
+
+11:41 - SALA VIP
+  Se refiere, Edder, a la etiqueta que le pone el productor cuando nos entrega las cajas, ¿correcto, Edder? Es correcto.  Sí, en esta etiqueta, ajá, habíamos hablado, Gloria y César, las... Más pasada, que, bueno, como ustedes ya saben, se pone mes, año y el número de productor, pero el número de productor actualmente no nos indica de qué vivero fue esas cajas que nos está entregando.  Entonces, para tener la trazabilidad de reconocer y ubicar qué vivero es ese, le íbamos a dar la oportunidad o conforme al número que ustedes nos iban a indicar, el número de productor iba a llevar al final un número que identificara de qué vivero se está recolectando esa fresa.  Entonces, sería... Es el número del lote, Roberto.
+
+12:51 - Edder Palacios
+  Ajá, sí, el lote, pero sería agregarle un número más.
+
+12:57 - SALA VIP
+  ¿Sí, Edder? No, es que...
+
+13:00 - Edder Palacios
+  Ese número de lote ya nos lo pasa, Ana, y nosotros de ahí lo jalamos. Déjame ver si me puedo meter a la recepción que hago en el Acknowledge, si tengo guardada aquí la página con reseña, para que más o menos se den una idea de qué es lo que queremos.  ¿Tú no tienes ese acceso, Gloria, o César? No, yo voy a estar en campo.
+
+14:00 - Cesar Octavio Aguilar Munoz
+  ¿Cómo no traigo ahorita ese acceso? Sí, yo estoy en carretera.
+
+14:04 - Gloria Araceli Ceja Olivares
+  Si lo intento abrir en el teléfono, me dice que no es compatible.
+
+14:11 - Cesar Octavio Aguilar Munoz
+  Es el de...
+
+14:18 - Edder Palacios
+  A lo mejor Vic tiene el acceso a esa carpeta de operaciones.
+
+14:24 - SALA VIP
+  No, es el de grading.
+
+14:26 - Edder Palacios
+  Necesito meter al de grading, pero no me acuerdo cuál era la...
+
+14:47 - SALA VIP
+  Pero entonces ese dato que indica CEDER se lo vamos a poner a cada uno de los productores y ellos tendrán que seleccionar.  Vale. Gracias. ¿Es el lote para poder identificarlo? Cuando me llegue a mí al sistema, cuando yo lo meta al sistema.  ¿Te metas al sistema LODU o...? Sí, a LODU.
+
+15:21 - Edder Palacios
+  Cuando yo dé de alta en el LODU, yo lo doy de alta con ese número de lote.
+
+15:29 - SALA VIP
+  Ok, ¿y ese número de lote es el que ya va a identificar el número del productor más el vivero?  Así es. Ah, ok. Entonces, con ese número vamos a asignárselo al productor ya en LODU. Ok, porque actualmente solamente manejábamos tres dígitos para identificar al productor.  Vamos a manejar... ¿Cuatro entonces ahora?
+
+16:03 - Edder Palacios
+  Sí, el último que va a ser el 1, el 2, el 3, dependiendo del sector.
+
+16:13 - SALA VIP
+  Ok, pero entonces, porque nosotros solamente vamos a dar de alta a un solo productor. Sí, pero tienes que dar de alta los lotes.
+
+16:39 - Cesar Octavio Aguilar Munoz
+  O sería el ID del productor más los números del lote, que serían en este caso el número del vivero, ¿correcto?  Así es, sería 725.1, 725.2, que el 2 o el 1 va a ser el lote.
+
+16:57 - Edder Palacios
+  Como lo hacía Gloria hace, ¿qué? dos temporadas.
+
+17:00 - SALA VIP
+  Pero la compra y factura todo se va a hacer solamente a un solo productor independientemente del lote y únicamente al productor le vamos a indicar que ya nos genere la etiqueta con ese nuevo lote, pero que nos identifique de qué vivero fue, si es así.  Sí, sería como adicional solamente ese dígito, a lo que ya lleva nueva edad, a lo que tengo entendido, solamente es un dígito adicional.  Entonces, Emiliano, ahí ayúdanos cómo pudiera ser porque actualmente tenemos un solo contacto para identificar al productor y... Creo que ahí tendríamos que ayudarnos a que...  Es que mira. Esa etiqueta para identificar el vivero. No me pude, no me pude meter al... No encontré la...
+
+18:16 - Edder Palacios
+  Para meterme rápido, pero encontré el manual. ¿Ya puedes ver mi pantalla? Sí. Mira, cuando yo doy de alta a un productor, empiezo a reescribirlo, pongo el número del productor, me aparece su número de lote.  Aquí está, mira. 236631. ¿Ya viste? Independientemente del que dice arriba, 663. Aquí está el lot ID. Esto, en el momento en que yo pongo que es este el número de lote...  En automático el sistema me arroja, que es este, que es la 056, Santa María, que es Santa María, la variedad.
+
+19:12 - SALA VIP
+  Es la variedad, que es la variedad. Ajá, el 1 es la variedad, entonces el 1 es la variedad, no el vivero, no, en este es el 1.
+
+19:22 - Edder Palacios
+  No, es que el vivero, cuando yo anexe Ponte y Finca San Vicente, para mí ese será lo mejor el guión 3 o el guión 4.
+  ACTION ITEM: Send sector codes by producer/variety/vivero to Emiliano & Alex; then they configure Odoo auto-variety - WATCH: https://fathom.video/calls/665010386?timestamp=1163.9999  Y únicamente, te voy a pasar esa lista diciéndote, Ponte y de San Vicente es el guión 5, este es el guión 3, este es el guión 2.  O, te tengo que pasar acá, productor, porque si no se va a hacer un desastre si te lo pasas así, por el número de sectores que tengas.  Tiene 4 sectores, es 1, 2, 3, 4. Entonces, cuando el sistema tú le pongas... Sector 2, el sistema tiene que saber ya que el sector 2 era Bounty o era Santa María de Raíz o era en automático el sistema ya te lo tiene que aventar porque yo te voy a pasar la Grow Web List, desglosada con cada una de las variedades que tiene el productor.
+
+20:19 - SALA VIP
+  ¿Y ese número va a ser el mismo para todos los productores o no? No, no, porque cada productor va a tener el diferente número de lotes.  O sea, no podemos decir el 1 va a ser para Bounty, para todos, porque unos a lo mejor no van a tener, en el 1 no van a tener Bounty, sino van a tener Santa María.  Exactamente. Oh, ok. Sí, Alejandro.
+
+20:54 - Alejandro Magaña (Inflexyon)
+  Muy bien. Ahí para eso que comentan, por lo que entiendo van a estar manejando... Sectores por productor. Y ustedes van a saber en qué sector tienen qué variedad.  Así es, y yo te lo voy a pasar así.
+
+21:09 - Edder Palacios
+  El sector 1 es esta variedad. El 2 es esto para cuando tú recibas en el Odu, como lo hacemos aquí en el Acknowledge, tú lo recibes del sector 1, como este es el caso, en automático cuando yo avance, me arroje ya que el sector 1 fue esta variedad.
+
+21:30 - Alejandro Magaña (Inflexyon)
+  Ok, y esos sectores lo manejan por temporada, es decir, esta temporada es esto, la temporada siguiente puede ser otra.  Así es, sí. Muy bien. Y, perdón, otra vez, ¿y el vivero?
+
+21:47 - SALA VIP
+  Es que el vivero ya ve sectorizado dentro del sector.
+
+21:52 - Edder Palacios
+  Hoy te estoy en entrega de fruta. Todo esto que te estoy enseñando es entrega de fruta ya. Sí.
+
+22:02 - SALA VIP
+  Sí, pero queremos identificar que cuando nos llega la caza al cooler, saber de qué vivero fue esa caza. Es por el sector.  Es por el sector. El sector 1 va a tener pura raíz desnuda o puro cepellón.
+
+22:20 - Edder Palacios
+  El 2 va a tener pura raíz desnuda o puro cepellón.
+
+22:24 - SALA VIP
+  Ok, entonces ahí, Alex, entonces cada sector va a ser identificado por dos tipos de planta y por diferentes variedades.  Esa es como la señal que debes de activar ahí en la base de datos. Es que también le faltaría el vivero.  Por eso en el sector, si el productor tiene dos sectores, a Odudo le vamos a decir... Ok, en el sector 1, ¿qué hay?  En el sector 1 hay la variedad Bounty y ¿qué planta? Ah, pues va a ser, perdón, ¿qué vivero? Sí, perdón, perdón, ¿qué vivero?  Y ¿qué vivero? Listo. En el sector 2, ¿cuál variedad es? Pues la Santa María. Y ¿de qué vivero es?  Ah, pues es de otro vivero. Entonces, así se tendría que identificar. Bueno, por ejemplo, me queda duda. No sé si, Edder, ¿tú quieres también ver ahí la parte de qué tipo de planta es?  No sé si también lo necesites o no, si es raíz de nuda o ese peñón, porque ahí sería otro adicional.  Ok. Es que ya lo ven en el sector. Ok. En este, mira. Sí.
+
+23:49 - Edder Palacios
+  Sí, mira. Entonces, tenían tres datos. Déjame les comparto.
+
+23:54 - SALA VIP
+  Es que no son tres datos. Es que si no nos vamos a llenar de...
+
+24:00 - Edder Palacios
+  Información de todo. Aquí, por ejemplo, lot number, 31, 685, este va a tener 1, 2, 2 lotes. 85, 1, 31, 685, 2.  Yo ya sé que el 2, el 1, es pura raíz desnuda, y el 2 es pura raíz y el es pura desnuda.
+
+24:33 - SALA VIP
+  Si tienes a lo mejor cepillón en raíz desnuda, no puedes tener que tengas una tercera, o sea, un tercer lote con otra variedad, bueno, variedad con diferente planta, por ejemplo.  No, porque nada más existe raíz, nada más existe raíz, no digo un tí, raíz desnuda, perdón, cepillón. Pero me refiero a que, por ejemplo, va un tí, lo tengas tanto en cepillón como en raíz desnuda, este, en los dos, y aparte tengas, ¿mande?  Aquí hay uno, mira. Ok. Aquí hay uno, mira. Este. El grama, ¿no? El grama fields. El grama fields, Ah, ese, por ejemplo.
+
+25:08 - Edder Palacios
+  Es 317751, ¿no?
+
+25:20 - SALA VIP
+  317752, 317753, ahí están sus tres lotes.
+
+25:23 - Edder Palacios
+  Raíz desnuda, cepellón, que es bonti cepellón, bonti raíz y santa mariada de raíz. Ah, ok. Este, por ejemplo, que tiene los dos, 318131, 318132, aquí tiene ya el 1 y 2.
+
+25:44 - SALA VIP
+  Ok. Pero el 1 y el 2 significan variedad y... Sector. planta. La variedad de planta. Variedad, planta y sector.  Sí. Es lote.
+
+26:02 - Edder Palacios
+  Es como lo tiene el Acknowledge, Robert. No hay que buscarle tanto. El Acknowledge ya me lo arroja en automático.
+
+26:12 - SALA VIP
+  Sí, pero ¿cómo lo vamos a identificar en el Odu? Es que en el Odu, cuando llegue en el Odu, los de Inflexyon ya me captaron lo que yo quiero.
+
+26:24 - Edder Palacios
+  Ya lo captaron el que, cuando llegue el productor, voy a en Agrícola Gammafield. ¿Qué lote trae? 317751. Y en automático, cuando le ponga Enter, el sistema me va a arrojar.  Es Bounty, Bounty de raíz. Yo cuando baje de ahí el, ¿cómo se llama? Cuando baje un reporte, yo ya voy a saber cuánta llegó de raíz y cuánta llegó de cepillón.  Porque yo esta misma base de datos en la que estoy trabajando, yo se la tengo que pasar Odu. Para que Odoo sube esta base de datos y en base a esto el lote lo vaya ligando por productor y de acuerdo a la variedad del vivero, si es Raíz, Desnudo o Cepillón.
+
+27:15 - SALA VIP
+  Sí, tendrías que homologar los lotes. ¿Todo el 1 tendrá que ser el mismo, el 2 y el 1 para que el sistema te lo reconozca?  No, pero no porque su base de datos va a ser diferente. Es que es lo que no entiendo cómo lo vamos a manejar allá, porque tiene que ser homologado para que el sistema te lo reconozca.  Sí, tendría que ser. Tendría que ser así. Si es 1 para Raíz Desnuda y 2 para Cepillón, podríamos ser esa homologación, pero si vamos a depender mucho de lo que en Estados Unidos nos arrojen y nos manden para que sea el número, y nosotros manda la trazabilidad, pues tenemos que alinearnos a lo otro.  Que nos vaya a mandar a Estados Unidos. ¿Qué onda, Civic?
+
+28:03 - Victor De La Parra
+  Ah, justamente con eso, ya que pues va ligada a la de la plantilla de clientes, tanto clientes proveedores. En esta yo te iba a preguntar ahí, Emiliano, ¿agregamos una columna más?  O por ejemplo, para el caso de los lotes, al igual que con los proveedores, les voy agregando una fila extra para irlos también poniendo en esa plantilla.
+
+28:27 - SALA VIP
+  Porque ahí Alejandro también trae otra duda. ¿Pueden volver a mostrar el Excel?
+
+28:32 - Alejandro Magaña (Inflexyon)
+  Quería hacerles un comentario. Ahí para esa parte entiendo cómo lo manejan ahorita. Ustedes lo manejan por sector. Es decir, ustedes, no sé si realmente saben qué planta pusieron en qué sector o para ustedes una variedad es un sector.  No, pues sí tenemos que saber que la variedad tenemos en cada sector, si no, nunca nos va a checar el forecast.  Y entonces, ahí, por sector, imagínate que tienen dos de Bounty y Raíz, pero son dos diferentes Bounty, dos diferentes lotes.  Ahí los separan como dos sectores diferentes. ¿Cómo acuerdo? Ah, mire, por ejemplo, imagínate que viene el productor, y a ese productor tú le entregaste Bounty y Raíz, pero fueron dos camiones.  Primero le entregaste hoy un Bounty y Raíz, y ayer le entregaste otro. Entonces, por consiguiente, son dos diferentes lotes, ¿no?  Sí. Mi pregunta es ahí. ¿Tú los identificas como dos sectores diferentes, el Bounty que le entregaste hoy y el Bounty que le entregaste ayer?  Sí, tiene más de un mes de diferencia, sí. Si tiene un día, no.
+
+29:52 - Edder Palacios
+  Ese es interno. Yo llevo el control interno, por eso era lo que decíamos que en la planta. En la planta, cuando tú me lo entregues, es importante.  Sacarlo por el número de lotes y que el Odu me esté dando inventarios y el Odu va a estar ligando el número de lote al productor.
+
+30:09 - Alejandro Magaña (Inflexyon)
+  Ahí si manejan el mismo lote durante todo un mes, van a tener solo un sector de bounty y va a ser un solo lote, ¿no?
+
+30:22 - Edder Palacios
+  Sí, pero si yo lo saco del Odu, tendrá que el Odu identificarme los tres lotes, cuatro lotes que yo le di para ese mismo sector.
+
+30:32 - Alejandro Magaña (Inflexyon)
+  Sí, entonces puedes seleccionar el sector, pero aún queda la incertidumbre de que no sabemos exactamente qué lotes, a menos que el productor te diga.  No, no quedaría, porque el Odu me lo va a identificar cuando yo saqué la planta, que era lo que yo les pedía.
+
+30:46 - Edder Palacios
+  Cuando yo saqué la planta, quiero que vaya ligado el número de lote al productor. Cuando tú saques la planta, ¿de dónde a dónde?  Del vivero.
+
+30:56 - SALA VIP
+  Del cooler. Sí, cuando llega el vivero del cooler, yo se le...
+
+31:00 - Edder Palacios
+  Entrego al productor, y el número de lote que yo le entregué es el 40-20, ese lote 40-20 si se lo entregué a Rafael, Rafael va a tener ese 40-20, y si mañana Rafa fue y le vuelvo a entregar Bounty, pero ahora el 40-21, ese 40-21 al momento, porque viene en el mismo sector, yo lo voy a plantear en el mismo sector, porque Reyes desnuda.  Entonces cuando Du, si yo me meta lo Du, me va a decir tu sector Bounty de Raíz desnuda, que es el 751, trae estos números de lote de planta, que fueron los que te dije.
+
+31:42 - Victor De La Parra
+  Y ahí como dice Edder Alejandro, están en los históricos de entrega de planta, ya por ahí subí el de esta temporada, 25-26 y el de la 24-25, ahí están todos los lotes, y cada lote viene por variedad, ahí se puede ver en la carpeta que por ahí nos compartió Raúl.  Gracias. Gracias. ¿Qué era la que había presentado una vez por aquí en alguna de las reuniones? Sí, para esa parte no hay problema.
+
+32:08 - Alejandro Magaña (Inflexyon)
+  No hay problema que registremos el histórico de lotes que se le han entregado al productor. El detalle es que no puedo darte automáticamente qué lote te planta provino la fresa que vino, a menos que lo especifique.  Ah, no, por eso es sectorizado.
+
+32:30 - Edder Palacios
+  Ya el número de lote me lo va dar cuando yo baje el histórico de cuánta planta le entregue al productor.  Ahí sí me tiene que arreglar todos los lotes. Ahí esa es la pregunta que llego.
+
+32:40 - Alejandro Magaña (Inflexyon)
+  Por sector, es un lote de planta, ¿no? Así es. Ok, sí, es la pregunta. Entonces...
+
+32:49 - Emiliano  Lorenzano
+  Pero, si es un lote, cuando se entregue el productor, como dice Edder, voy a llevar anteriores. ¿Puedes entregar el lote que recibieron del vivero?  Si llega, si, no sé, pasado mañana llega otro, llega ese mismo vivero con el ejemplo que están poniendo de Bounty, puede que traiga el mismo lote del que ya entregó o puede que traiga otro número de lote para esa planta.  Va a traer otro, en 4021 a lo mejor. Ahí cuando ya se entregue Alex al productor, ya va a tener dos lotes que se le entregaron, ahí lo único que se estaría ligando sería el sector a ese lote, yo creo.  Exactamente. El que tienes que ligarse al lote, el sector. Dentro de aquí, Edder, disculpa, ahí sí te preguntan, pero ¿cuál columna es del sector o dónde tomo yo ese sector?  Tú vas a tomar esto, esta, la F, el número de lote.
+
+34:07 - Edder Palacios
+  Este sector, este lote, son tres hectáreas. Y a lo mejor estas tres hectáreas tienen tres lotes diferentes. El 2021, el 2022 y el 2023.  Así como lo muestra acá, Dice el 31, el 37, el 51, el 52 y el 53.
+
+34:26 - Emiliano  Lorenzano
+  No, es que estos son diferentes variedades. Ah, ya, sí, perdón.
+
+34:30 - Edder Palacios
+  Sí. Pero un ejemplo. Este lote a lo mejor te trae tres hectáreas. Y estas tres hectáreas yo las planté con tres lotes.  Con el 2021, 2022 y 2023. Pero traen un día de diferencia. Al final de cuentas, para mí es la misma variedad y es raíz desnuda.  ¿Para qué me va a servir el caso de los lotes? Es por si llega a fallar alguna planta. Si llega a fallar alguna planta, ahí ya...  Me tengo que meter a los lotes que yo saqué del cooler para el productor, para saber qué números de lotes le di al productor.
+
+35:13 - SALA VIP
+  Ok, o sea, ligaríamos el 317751 con uno de los tres lotes que le entregamos de planta.
+
+35:23 - Edder Palacios
+  Sí, lo ligas con los tres lotes al final, pero lo vas a recibir con un solo código, con el 771, 751.  Ajá.
+
+35:32 - SALA VIP
+  Y el productor, cuando vaya al cooler a entregar la caja, ¿va a traer 751? Exactamente, sí. Ok. Y que es bonti de raíz desnuda.
+
+35:47 - Edder Palacios
+  Todas esas tres hectáreas son bonti de raíz desnuda.
+  ACTION ITEM: Update cooler receipt sheet to capture per-delivery lot ID - WATCH: https://fathom.video/calls/665010386?timestamp=2148.9999
+
+35:55 - SALA VIP
+  Sí, si no me equivoco, Edder, era lo que me habías dicho en la reunión pasada.
+
+35:59 - Victor De La Parra
+  está bien, En la hojita que se le entrega a los productores cuando ellos llevan fruta al cooler, era que me habías pedido que en vez de que fuera el número de lote general, que fuera por fila en cada una de sus entregas, ¿verdad?  Así es, para que tú le puedas meter este número de lote, el 751-752-753.
+
+36:20 - SALA VIP
+  Y no hay, ahí Alejandro, no hay un, como un estándar de decir, el 1 va a ser de raíz desnuda, porque si te fijas aquí en el archivo que está presentando, Edder, en el código 31718, en el Agrícola Monarca, te fijas, en el número 1, dice Bounty, y el segundo dice Bounty Raíz, entonces, no hay, ahí por ejemplo, no se aprecia.  Este, el número de lote tendría que ser 317181. En el agrícola monarca. O sea, que Bunti Raíz no siempre va a ser el 1 al final, sino va a depender mucho de...  Que tendríamos que homologarlo. Eso es a lo que me refería. Sí, ¿no? Porque ese dato no lo entrega Estados Unidos.  Y no creo que el 1 diga, ah, sí, el 1 va a ser estandarizado para Bunti Raíz. No va a ser así.  Entonces, cada temporada... Todo el tipo de rancho. Ajá, cada temporada vamos a tener que subir ese número de lote cada vez para que sea identificable.  ¿Cómo? Ah, el 1, el 1, pues ahora para ese productor es Bunti Raíz. Ah, el 1 para el otro productor es Bunti nada más.  Cepellón. Es que, fíjate, hay una cosa muy curiosa y como las Estados Unidos.
+
+37:55 - Edder Palacios
+  Estados Unidos, yo le paso ahorita esto con el número de grower. Ajá. Perdón. Estados Unidos lo que va a hacer con este 807, ahorita tiene 31, le va a poner 32807.  Cada año le sube nomás uno. Ok, para tener el cambio de temporada, ¿no?
+
+38:19 - SALA VIP
+  Nada más. Sí, para cambiar la temporada. Sí, pero al final le va a poner un uno, ¿no? Ajá. El 228071.  Así es. Ajá. Sí, pero creo que aquí lo que estamos viendo es que el último dígito, que es el que va a definir si es raíz o es cepellón, no lo van a homologar Estados Unidos que, por ejemplo, que raíz siempre sea el uno.  Volte y raíz siempre tenga la terminación uno. O Volte y cepellón siempre tenga la terminación dos. No sé si lo termina así o no.  Bien. Poder, no. Podemos hacerlo así como ustedes dicen. Sí. Sí.
+
+39:00 - Edder Palacios
+  Nos va a ser un caos porque va a haber unos que van a tener a lo mejor un 31-7758, 752 y 7756.  Ah, porque va a estar homologado. Exactamente, porque va a estar homologado. Sí, exactamente. veas, Gloria y César.
+
+39:19 - SALA VIP
+  Creo que para ti lo de Se pueden llegar a confundir, como está bien clara esa parte.
+
+39:36 - Cesar Octavio Aguilar Munoz
+  Que nos vamos a confundir si no está homologada esa parte.
+
+39:40 - SALA VIP
+  Por ejemplo, ahí en el 31-738, que dice Agrícola y Ganadería Hernández, que es únicamente esa yulita. Ahí va a ser el número del lote, 31-738-1.  ¿Verdad? convertido convertido convertido convertido en de convertido el se Uno no es ni Bounty, ni Bounty Raíz, es Sayulita.
+
+40:06 - Edder Palacios
+  Es que debemos de dejar claro que es que queremos hacer, Robert, si ligarlo a un paquete o ligarlo a una operación.  Si queremos ligarlo para que sea más práctico, también para contablemente, sin ningún problema lo podemos ligar. Si es práctico para la operación, esto, pero sí lo podemos ligar así como dices, hacer un paquete como lo que tenemos en, por ejemplo, en los clanchos y eso, en las cajas, Rafa, sí podemos hacerlo sin ningún problema, también ligarlo así.  Porque yo lo estoy ligando a flexibilidad de operación, pero tú lo estás ligando a flexibilidad administrativa. Sí lo podemos ligar y para ambas partes va a ser funcional.  Nada más sí ahí tendremos que tener mucho cuidado, César y Gloria, a cada productor, a lo mejor dentro de su carnet que le dé esta CONI, que le ponga en chiquito el código de los sectores para que no se nos confunda el productor.  Lo vamos a estar ligando por variedad. Ay, disculpa, Edder.
+
+41:27 - Emiliano  Lorenzano
+  Creo que sí sería, sí sería bueno identificar el, ahorita me decías que el F era el sector, pero comentan que ese lote, no sé si realmente sí exista un número de sector, que para mí, si ustedes lo ponen como un número de sector, ese sector, ¿sabes qué?  Vamos a estar recibiendo tal producto, y ya cuando se haga el ingreso, pues ya pudiéramos, concatenar el lote que  Trae el vivero y le agregamos nada más el número de sector que ustedes tienen ya identificado, porque ahí no.  Ahí, por ejemplo, no se nos harían muchísimos lotes.
+
+42:14 - Edder Palacios
+  Si tengo en ese sector hasta cuatro lotes. Es que sí, tendrían que estar los cuatro lotes por las cuatro salidas que tú hiciste.
+
+42:26 - Emiliano  Lorenzano
+  Entonces, si de tu vivero te trajo en un, en un, este, pongamos una semana, te trajo, te hizo cuatro, cuatro entregas el vivero, pero te puso el mismo lote, pues en el sistema podemos usar el mismo lote que ya te había traído en un inicio, ¿no?  Y la salida se va a ir a un solo lote para el productor, pero si te trae cuatro lotes distintos para la trazabilidad que ustedes quieren, pues sí sería que se vaya por separado.  Al final de cuentas... Eso sería como en el historial, pues en el sistema, ya en el reporte que tú tienes, pues va a salir ya el concentrado, ¿no?  Del total de la... Exactamente, los lotes, que era lo que te decía.
+
+43:12 - Edder Palacios
+  Sí, entonces aquí lo que se puede hacer es hacer paquetes, pero por variedad y por vivero. Porque, por ejemplo, ahorita para los productores, aquí tenemos identificado que vamos a agregar un asesor, ¿no?
+
+43:33 - Emiliano  Lorenzano
+  Vamos a agregar el número de productor, el nombre del productor y los ranchos, a dónde... Los ranchos, recuerdo ahí que eran a dónde se iban a entregar la planta, ¿no?  Porque pues comentaban que un productor podría tener muchos... Varios ranchos, entonces, ahorita veo que nada más tienen uno, pero sí se va a dar el caso que un productor tenga más de dos, ¿no?  Sí, eso lo vamos a tener que agregar. Vamos a también agregarle, yo creo que por rancho, vamos a tener que agregar una condición de que solamente pueda aceptar de la variedad Bounty, para que no te permita aceptar planta de, por ejemplo, Fayulita.  Por ejemplo, el que dice Agrícola Cerda SPR, dice el rancho Caja Grande, ¿no? Y ese que tiene Bounty, Bounty Raíz, ese rancho tiene 20 hectáreas, tiene 20 hectáreas, también tendremos que ponerle cuántas hectáreas tiene el rancho, y para que tú, para que en sistema, por algún error, no le puedan permitir entregarle niña o fantamaría o Fayulita, ¿no?  Que solamente va a tener permitido el recibir Bounty Raíz, nada más. La dirección, ya la tenemos. La geolocalización, Adriano, si hay el campo, ya nada más aquí que nos definan pues el sector para agregarlo.
+
+45:11 - SALA VIP
+  ¿Y el vivero, Emiliano, lo vas a ligar internamente con el lote? No, comentaba Edder que el vivero ya viene relacionado al sector.
+
+45:25 - Emiliano  Lorenzano
+  Entonces, si agregamos un modelo, Robert, de sectores que creemos el sector, no sé, el sector 1, por así decirlo, ¿no?  Adentro del sector 1 vamos a tener este vivero. O al menos que cuando se ingrese, pues vamos a, ahí podríamos ponerle un número de, a lo mejor del vivero.  Para que venga el lote que te trae el vivero, pero adicional agregarle algún número que nos haga. Identificar qué es de ese vivero, entonces así cuando se vaya al productor, hasta ahí podríamos identificar de qué vivero está saliendo, pero ya para la entrada, la entrada es ahí que también ahí tendríamos que identificar de qué vivero era el que pertenecía a esa planta, bueno, la planta ya no, porque ya sería la fruta la que están recibiendo, ¿no?  Sí, la fruta, sí, las carnes.
+
+46:31 - SALA VIP
+  Sí, sí, Alex.
+
+46:35 - Alejandro Magaña (Inflexyon)
+  Sí, así como lo comentó Emiliano, y también es importante que nos definan si el sector es por variedad o es por loto.
+
+46:54 - Edder Palacios
+  Es que tendría que ser algo por variedad, así como decía ahorita Rafael. Berries Rafa, para que lo liguen rápido a administración.  Y esa variedad tiene que ir ligada a los lotes entregados. Así es.
+
+47:15 - Alejandro Magaña (Inflexyon)
+  Pero por sector, ya no sabrían automáticamente qué lote fue. Saben la variedad, pero no el lote. En el caso de que sean varios lotes.  Lo sabríamos si nos metemos al histórico de entregas de planta.
+
+47:30 - Edder Palacios
+  Pero no sabrían hasta el momento en el que el productor les diga cuál, porque ustedes no sabrían de cuál lote es.  Pero por ejemplo, si yo en ese momento me meto a Lodú y digo, a ver, Rafa, ¿qué planta le entregué de raíz de nuda?  Ahí me tienen que apreciar todos los lotes, ¿no? Sí. Así lo puedo saber.
+
+47:51 - Alejandro Magaña (Inflexyon)
+  Sí, pero los lotes, ¿se va a identificar el vivero y el sector?
+
+48:04 - Edder Palacios
+  Sí, les queda lo que decía Rafa, tenemos que hacer un paquete, si tú lo dijiste también, Roberto, tenemos que hacer un paquete por variedad y por vivero, en el cual el 1 sea Bounty de Finca San Vicente a lo mejor, el 2 Bounty de Planaza, el 3 Bounty de Latinberry Plans.
+
+48:29 - Alejandro Magaña (Inflexyon)
+  Es que ya están poniendo el escenario en el que sector va por lote, entonces lo que es bueno definir es el sector, por qué va a ir, por variedad o por lote.  Si es por variedad, el sector puede contener múltiples lotes, ¿estamos de acuerdo? Sí. Y si es por lote, el sector únicamente va a ser un lote.  Y puede haber varios sectores con diferentes variedades, o con la misma variedad, pero diferente lotes. Sí, que también si es por sector, va a haber un sector con diferentes lotes.
+
+49:18 - Edder Palacios
+  Porque hablando, por ejemplo, de cepellón, si son cuatro hectáreas, un trailer no me cubre cuatro hectáreas, me cubre dos.  Entonces ahí tendría que meter dos camiones. Si de cepellón todo y de la misma variedad, ahí son dos. Son dos diferentes lotes del vivero que nos entrega la planta.
+
+49:47 - SALA VIP
+  Así es. Sí.
+
+49:52 - Edder Palacios
+  Pero nos la está entregando al mismo...
+
+49:57 - SALA VIP
+  Productor. Productor. en el mismo sector. ¿En el mismo sector y de la misma variedad? Sí, correcto. Por ejemplo, allí en el de agrícola cerda, es decir, que solamente vamos a recibir de un solo vivero?  ¿Que trae raíz desnuda?
+
+50:24 - Edder Palacios
+  Sí, sí, es un solo vivero. Es que ahí entonces está más fácil, Robert, porque si solamente... ahí, ojo ahí, son 20 hectáreas, estás hablando de un millón de plantas, el trailer no trae un millón de plantas.  Van a ser varios lotes. Sí, sea, van a ser muchísimas centradas.
+
+50:46 - SALA VIP
+  Van a ser diferentes lotes. Sí, pero... Pero eso no... Ajá, eso yo creo que a Emiliano y Alejandro no le preocupa tanto, porque pues son los lotes de recibo que...  Está entregando el vivero hacia el rancho, y pues son n cantidad de lotes de planta. El chiste es, esos lotes que van a caer, ¿a qué número?  ¿A cuál? Por ejemplo, en la cerda, ¿a cuál? 807 al 807.1, en este caso, pues solamente va a ser uno, el 807.1, nada más.  Y vamos a identificar que viene del vivero fulanito. Como que te trato de tachar esa parte. Por ejemplo, en la agrícola Gamma Fields, que son tres, entonces solamente vamos a tener tres viveros que nos van a surtir, o un solo, o dos.  Gamma Fields.
+
+51:49 - Edder Palacios
+  Se va a surtir uno, dos, dos viveros.
+
+51:54 - SALA VIP
+  Dos viveros. Dos viveros y dos variedades. Es que ahí, Robert, por ejemplo, ahorita comentaba, ahorita lo que comentaban ustedes, ¿no?
+
+52:13 - Emiliano  Lorenzano
+  Por ejemplo, el que dice el de agrícola serra, ¿no? Tiene el de bounty raíz y comentaban que hay que por el efecto, bueno, sí son 20 hectáreas, ¿no?  Y, pero solamente veo que va a recibir bounty raíz. Y a lo que escuché, ahí me corrigen si a lo mejor entendí mal, pero solamente un vivero le va a entregar la planta de bounty raíz a este productor de agrícola serra.  Si es así, Robert, digo, no sé si aplica así con todos los demás productores, pero si es así, entonces tú ya tendrías la identificación de qué vivero está también entrando la...  La fruta, aunque sea del, ya el rancho va a ser caja grande, pero ya tendrías, podríamos tener como por ejemplo la relación o identificarlo con algo del vivero, porque solamente es uno.  El problema sería, Robert, si para caja grande, dos viveros le entregaran la planta de bounty raíz.
+
+53:23 - SALA VIP
+  Como es el caso de Agrícola Gamma Fields, Agrícola Gamma Fields, que es el 31775, va a recibir de dos viveros.  Ahí nada más quisiera entender un poquito, ¿por qué el de arriba dice bounty raíz y el de abajo nada más dice bounty?
+
+53:41 - Emiliano  Lorenzano
+  Por el vivero. Son de cepellón. Por la planta.
+
+53:46 - Gloria Araceli Ceja Olivares
+  ¿Es bounty cepellón?
+
+53:49 - SALA VIP
+  Así es, acuérdate que son dos diferentes plantas, la de raíz desnuda y la de cepellón. Me quiero imaginar aquí cuando le ponen raíz, significa raíz, y si no...  Dice Raíz, es de Cepellón, ¿correcto? aquí dice que son tres hectáreas para una y otras dos hectáreas.
+
+54:09 - Emiliano  Lorenzano
+  Si la columna F la manejamos con un número que diga sector por parte del productor o del rancho, pues yo creo que también aquí pudiéramos identificarlo, porque ya sabemos que en Bounty le entregó, volví a decirlo así, el sector 52 le entregó el vivero X y en el sector 51 le entregó el vivero A, que era así el raíz.  Entonces ahí sí pudiéramos posiblemente identificarlo a la devolución ya cuando vienen las frutas. O no sé, Alex, ahí sí me escuchaste.  La idea de, creo que ahí podría quedar un poco más fácil, ¿no? Sí, sí podría quedar así. Porque incluso, Robert, hasta podríamos hacer las restricciones, como te comentaba hace rato, de que por sector solamente puedan recibir cierta variedad.  No lo sé si Edder quisiera como que se restringiera.
+
+55:33 - SALA VIP
+  No, pues no quedaría fijo, puede ser, no quedaría fijo, Robert, sino...
+
+55:39 - Emiliano  Lorenzano
+  Y no, nomás no te deja recibirla.
+
+55:41 - Edder Palacios
+  Sí, ¿verdad?
+
+55:41 - Emiliano  Lorenzano
+  Pues ahí podríamos configurarlo de que si no está dentro del sector que pueda recibir otra fruta, pues simplemente que no se haga la entrega.  Que no permita hacer la entrega, pues, en sistema. O ya físicamente, pues ahí sabemos que sí se puede hacer, pero en sistema no quedaría esa entrega completable.  ¿Pero de qué nos serviría esa restricción, Emiliano?
+
+56:04 - SALA VIP
+  De no metas otra variedad.
+
+56:08 - Edder Palacios
+  ¿Por qué?
+
+56:08 - SALA VIP
+  ¿Perdón, Debe? Que no metas otra variedad, que no tiene el productor.
+
+56:19 - Emiliano  Lorenzano
+  Porque si pudiéramos controlar, Robert, ustedes comentaban o han hecho hincapié en que quieren tener identificado a la devolución de la fruta, de qué vivero correspondía a la planta, ¿no?  Así es, de qué vivero correspondía a esa caja de fruta. Entonces, con esa restricción por sector, aquí ahorita hacemos el ejemplo con Agrícola Gamma, ¿no?  Tiene dos bounties, bounties raíz y bounties, el peyón lo voy a indicar así. Pero para bounties raíz solamente le va a entregar un solo.  ¿O lo vivero? ¿O ahí sí le entregarían dos viveros?
+
+57:09 - Edder Palacios
+  ¿A quién? ¿A Gama Fields, Bounty Raíz?
+
+57:14 - SALA VIP
+  Aquí en el Rancho La Fortuna, tengo Bounty Raíz.
+
+57:19 - Emiliano  Lorenzano
+  No, más es un vivero. De raíz de nueva, solamente es un vivero.
+
+57:24 - Edder Palacios
+  ¿Y en Cepellón sí pudieran entrar varios viveros?
+
+57:27 - Emiliano  Lorenzano
+  Sí, así es. Por eso ahí tendrá que hacer nuestra chamba el decirte de qué vivero.
+
+57:34 - Edder Palacios
+  Por eso ahí, yo creo que sí sería lo bueno, como dices, hacer un paquete de variedades por vivero.
+
+57:50 - Emiliano  Lorenzano
+  Porque incluso el Rancho si tiene identificado, bueno, voy a imaginarme, no estoy seguro. Pero que así pase. Pero el Parabontis, el Pellón, dice que tiene dos hectáreas.  ¿Puede ser que se mezcle en una hectárea la planta de dos viveros?
+
+58:25 - Edder Palacios
+  Sí, en dos hectáreas. No, no será pura raíz oposición y diferente y del mismo vivero. No, ajá, sí, pero ahorita platicando en la fila, creo que es la 10, creo que es la de...
+
+58:40 - Emiliano  Lorenzano
+  Ah, la de Bonti y Cepellón de dos hectáreas.
+
+58:43 - SALA VIP
+  Ahí vas a tener, en esas dos hectáreas, vas a recibir de dos viveros diferentes y va a estar mezclado, este...  Ah, en caso de que tuviera dos viveros diferentes, tendría que hacer dentro del paquete.
+  ACTION ITEM: Define variety-by-vivero packages w/ Rafa; then Emiliano & Alex implement Odoo sector/lot - WATCH: https://fathom.video/calls/665010386?timestamp=3550.9999
+
+59:00 - Edder Palacios
+  meter Bounty Planasa, una hectárea y Bounty Finca San Vicente, una hectárea. Ahí se tendrá que hacer como paquete. Porque si lo dividen así, pues creo que también podría ayudarnos.
+
+59:18 - Emiliano  Lorenzano
+  Sí, yo creo que lo podemos dividir por paquete.
+
+59:21 - Edder Palacios
+  Sentarnos con Rafa y ver la mejor manera.
+
+59:26 - Emiliano  Lorenzano
+  Sí, porque aquí entiendo que, pues buscan tanto que sea funcional en la operación, como también en la parte ya administrativa, con aquí con el equipo de contabilidad.  Sí, así es. Y el contrato, bueno, no sé, Alec, de aquí, ¿algún otro, alguna otra pregunta, Alec? Gracias. Gracias.  Gracias. De momento no, todo bien. El contrato, Edder, que tú llevas tu gestión por fuera y haces contratos con los viveros, ¿los viveros deberían estar relacionados a NVG o sería un contrato muy independiente?  Ese tendría que estar relacionado a NVG, pero ese tema lo vería a compras.
+
+1:00:32 - Edder Palacios
+  No, nada más para que nosotros acá también veamos para el registro, entonces estarían ligados.
+
+1:00:40 - Emiliano  Lorenzano
+  Cuando tú haces tu contrato, lo haces, viene relacionado a NVG, pero viene ahí con qué vivero estás tú pactando tal cantidad de plantas, ¿no?  Sí. Y de acuerdo a ese pacto que tú armas con ellos, supongamos, ¿no? Son mil plantas. Te entregaron 100 y te van quedando 900.  Te entregaron 500 plantas y te quedan todavía 400 que te entreguen. ¿Ahí qué pasaría, Edder, si no te entregan todas las plantas?  Ah, por eso era lo que te decía.
+
+1:01:25 - Edder Palacios
+  Yo la lista final, para que tú puedas vaciar todas estas variedades, te las estaría pasando más o menos a finales de agosto.  Con lo real. Este es un pre. No, como un wish list. Pero para los...
+
+1:01:41 - Emiliano  Lorenzano
+  Este sería de esta temporada, pero pensando en el futuro, para la siguiente temporada tendrías que armar un contrato, ¿no?  Sí, es que los contratos se tienen.
+
+1:01:52 - Edder Palacios
+  Con todos ya se tienen contratos.
+
+1:02:02 - Emiliano  Lorenzano
+  Porque a nosotros nos ayudaría como tener ese contrato acá en el sistema para saber cuánto es de la temporada y saber cuánto tenía que entregarte, si te entregó completo, te entregó de menos o te entregó, bueno, no sé si llega a darse el caso también de que te entregue de más, si la recibe.  era lo que veíamos el otro día en la reunión con compras.
+
+1:02:27 - Edder Palacios
+  Pero no rechazan, ¿verdad? Sí reciben la planta. No, sí rechazamos planta, cuando viene en mal estado se rechaza.
+
+1:02:34 - Emiliano  Lorenzano
+  Ajá, pero en mal estado, pero supongo, el ejemplo ahorita que manejamos, tenías pactada mil plantas, ya te llegaron a mil plantas, ya te llegaron llegaron a mil plantas y llegó el productor, llegó el vivero otra vez a darte otras, no sé, trescientas plantas, ya pasaría del contrato iniciando, ahora se podría decir que serían mil trescientas plantas, si aceptarían esa.  ¿Es adicional de las $300? Si se ocupan, sí, y se hacen un anexo al contrato.
+
+1:03:06 - Edder Palacios
+  Un anexo. Y en dado caso que no, pues la rechazan.
+
+1:03:11 - Emiliano  Lorenzano
+  Así es. Aparte, independientemente, pues, de que cuando hacen el control de calidad dentro del contrato, si viene mal la planta, pues ahí hacen la gestión de calidad y rechazan, Pero ya sería dentro de lo que estaba pactado.  Sí. Bien, voy a hacer unas anotaciones. No sé, Alex, si quieres agregar algo más, Alex.
+
+1:03:42 - Victor De La Parra
+  Ahí, Emiliano, ¿entonces ocuparías los contratos? Pues a mí me serviría nada más como referencia, pues, para tener lo que era el inicial.
+
+1:03:55 - Emiliano  Lorenzano
+  Con eso, ¿cuánto ha estado? A lo mejor posiblemente con la central. pues vamos a saber cuánto ingresó, cuánto salió, pero no tendríamos ese número inicial de cuánto estaba pactado con ese, con ese, este.  O sea, el papel no, o sea, qué es el número de cuánto se pactaron nada más con ese vivero y de qué variedad.
+
+1:04:18 - Victor De La Parra
+  Ajá.
+
+1:04:18 - SALA VIP
+  Sí, pero ese dato sí lo va a tener, Edder, lo va a tener en, creo que como lo menciona en agosto, saber cuánta planta va a tener disponible por cada vivero.  ¿Es correcto, Edder? No, eso ya lo tengo desde ahorita.
+
+1:04:38 - Edder Palacios
+  Los contratos ya están desde ahorita. Lo de agosto es cuánto le entregué realmente al productor.
+
+1:04:44 - SALA VIP
+  Ajá, el periodo inicial ya lo tiene. Ok, el de hecho ya hay órdenes de cómplito.
+  ACTION ITEM: Send plant contracts/orders to Emiliano & Alex; then they configure NVG POs + plant-out alerts - WATCH: https://fathom.video/calls/665010386?timestamp=3891.9999
+
+1:04:52 - Edder Palacios
+  El dato, Emiliano, de saber cuánta planta nos va a surtir el vivero, ese dato ya está.
+
+1:05:02 - SALA VIP
+  Entonces sería de compartírselo al equipo de Inflexion para que lo tenga.
+
+1:05:14 - Victor De La Parra
+  ¿Sí, Emiliano? Sí, bien, entonces ya tienen ese número, ¿no?
+
+1:05:53 - Emiliano  Lorenzano
+  Tienen el número, el partado, ya después con las entradas vamos a... Vamos saber cuánto ya nos entregó nuestro productor y con la salida vamos a saber cuánto ya tenemos entregado de ese vivero.  Sí. Eso sería para el control de la planta, ¿verdad? Y ya cuando llegue el productor y ahora sí con la fruta, ¿eso también entraría adentro para la planeación, Edder o solamente sería el puro control de la entrada de planta?  y la salida de planta. No, es entrada de planta, salida de planta, pero sí serviría para la parte de planeación, porque a nosotros nos serviría cuándo salen las fechas.  Ah, sí, sí, perdón, sí, porque ahí tú vas a empezar a, bueno, se va a empezar a contar la cosecha cuando se le entregó la planta.  planta al productor. ¿Y cómo le llamabas el otro término, Edder, cuando ya te entregaba la fruta? La cosecha, ya la empaque.  La cosecha, perdón, y cuando entregabas tú la planta, es que otra vez teníamos manejados los dos términos, que justamente era para medir, ¿no?, el tiempo.  Sí, cuando entregaba la planta, a partir de ahí, era plantación.
+
+1:07:32 - SALA VIP
+  plantación, la plantación.
+
+1:07:34 - Edder Palacios
+  Ahí yo tenía que, yo arrancaba a hacer mi forecast para que me entregar a la caja 1 y empezaba a ver desviaciones.  Sí, sí, ya recordé que sí era importante la recepción de la fruta.
+
+1:07:50 - Emiliano  Lorenzano
+  Sí, Alex, creo que tenés comentario, Alex. Ah, sí, nomás te voy a decir que era la fecha de plantación.  Bien, entonces, nos mandan el archivo, el contrato y... Pero el contrato, ¿qué necesitarías para qué te servirías? El puro dato, nada más el...  Ah, ok. Sí, y con quién nos están pactando, ¿no? Con qué vivir. Sí, ok.
+
+1:08:57 - SALA VIP
+  No sé, Alex, ¿algo que me esté pasando, Alex?
+
+1:09:00 - Emiliano  Lorenzano
+  ¿O que tú impliques que no estamos contemplando? Parece que no. Con ese reporte que te vamos a dar para la planeación, Edder, ahí nada más ocupaba las puras gráficas, ¿verdad que había mostrado?  ¿No va a desencadenar el sistema una orden de compra para las plantas para el próximo año? Eso sí tendría que hacerlo, ¿correcto, Salvador?
+
+1:09:44 - Edder Palacios
+  Para que compras agarrando los abasteciendos.
+
+1:09:53 - Salvador Bustamante
+  Sí, sí, pienso que también debería ser así, pero vamos a ver, Robert, que eres el que has estado configurando todo.  ¿Cómo funcionaría para la solicitud de la compra?
+
+1:10:14 - SALA VIP
+  Bueno, hay que preguntar, perdón, Rubén.
+
+1:10:18 - Emiliano  Lorenzano
+  Cada temporada tienen ustedes viveros ya pactados o aceptados. En este caso, si hacemos que se desencaiga una orden de compra y ya entra la temporada, por decirlo, 26-27, y si no hay ningún vivero autorizado, pues tendríamos que rechazar esa creación de esa compra, ¿no?  O no sería así, Robert. Cualquier vivero que esté en registrado en el sistema se le pudiera ya comprar. ¡Gracias!  ¡Gracias! ¡Gracias! ¡Gracias! ¡Gracias!
+
+1:11:00 - SALA VIP
+  No, no, ahí se hace gestión para que se dispare la solicitud de compra hacia el vivero, pero recuerda que Naturberry no hace la, como tal, la compra o se le debe al vivero desde Naturberry, nosotros le pagamos a NVG Estados Unidos.
+
+1:11:27 - Emiliano  Lorenzano
+  Ah, la, ah, bueno, entonces las compras se harían, se podría simular la compra a NVG como principal, para que lo tengan ahí contemplado y tengan el dato de cuánto le van a comprar a NVG, y ya NVG hace su, pues sí, ya su chamba con los, este, con los viveros.
+
+1:11:52 - SALA VIP
+  Ajá, exactamente, el, si bien la, la gestión física. Esta operativa la hace Edder, Gloria y Cesar con los viveros, pero esa negociación arriba o los pagos se hace de NVG Estados Unidos.
+
+1:12:16 - Emiliano  Lorenzano
+  Creo que al final de cuentas cuando ya NVG realice todo el tema ahí con los viveros, nosotros ya cuando nos entreguen acá a Naturberry, sí tendríamos que registrar de qué vivero viene.  Así es. Pero ya sería con los que diga o con los que haya autorizado NVG, ¿no? Así es.
+
+1:12:37 - SALA VIP
+  Por eso digo que no sé, ese tema de disparar la orden de compra, pues sería, no sé, como tipo ficticia porque nosotros no le vamos a deber al vivero como tal.  Sí, para que nos haga esa entrega, pero no como para nosotros. ¿Otros deberles directamente al vivero? No, al que le estaríamos debiendo sería a NVG.  Sí.
+
+1:13:06 - Emiliano  Lorenzano
+  Sí, porque NVG va a ser nuestro proveedor principal, pero ya para las entregas vamos a tener que meter a los viveros.  Correcto. Sí, ahí pudiéramos manejarlo, Robert, que se mande una orden de compra general al grupo de NVG. No estaríamos tocando a ningún vivero.  General, pero por tipo de planta, ¿no, Emiliano?
+
+1:13:31 - SALA VIP
+  Emiliano.
+
+1:13:32 - Salvador Bustamante
+  Sí, sí, pudiera, sí, realmente, ustedes le llaman ítem, ¿no?
+
+1:13:36 - Emiliano  Lorenzano
+  Cada línea de un documento, entonces sí sería un ítem por cada, bueno, puede ser que en la compra general se metan todos los tipos de planta o ya sea que se genere una orden de compra por cada tipo de planta.  Pudiera ser una sola, una sola con diferentes líneas adentro de la orden de compra y ya.
+
+1:13:59 - Salvador Bustamante
+  Diferente. Enseñamos cada SKU de planta.
+
+1:14:02 - Emiliano  Lorenzano
+  Sí, ya no sé, tendríamos que revisar cuando se hagan las entregas.
+
+1:14:07 - Salvador Bustamante
+  Sí, pero como yo lo veía, Emiliano, se las compramos a NVG Estados Unidos, las recibimos en inventario virtual porque físicamente no las tendríamos y conforme estemos entregando a los productores, pues vamos haciendo ahí el movimiento de planta a cada productor, ¿no?  Sí, y ahí jugaría esa parte.
+
+1:14:34 - Emiliano  Lorenzano
+  Bueno, es que prácticamente la orden de compra sería como, quedaría en tránsito. En tránsito ya las recepciones pues se harían ya mediante cada vivero.
+
+1:14:52 - SALA VIP
+  Sí, acuérdate que ahí ya habíamos platicado de es una entrada y una salida porque solicitamos la planta. planta al productor, solicitamos la planta al vivero, pero inmediatamente entra ya como venta al productor.
+
+1:15:12 - Emiliano  Lorenzano
+  Sí, sí, sí, ahí tendríamos que hacer la entrada del vivero y ya darle la salida al productor para que ahí se genere la orden de venta, ¿no?
+  ACTION ITEM: Resend plant-delivery/receipt formats to Robert & Alex; then they review - WATCH: https://fathom.video/calls/665010386?timestamp=4516.9999  Sí. ¿Hacia el productor? Sí. Ahí nada más quedaron de pasarnos la papeleta que tenían ustedes para hacer la entrega y para hacer la salida.  Creo que sí, la compartió este link.
+
+1:15:42 - SALA VIP
+  Lo checamos entonces porque ahí trae varios temas de formatos que queremos revisar, pero lo revisamos.
+
+1:15:47 - Emiliano  Lorenzano
+  Igual si no, se los vuelvo a compartir sin problema. Para esa parte, Mileno, también falta que nos pasen el archivo que estaba mostrando Eder sobre su planeación.
+
+1:15:57 - Alejandro Magaña (Inflexyon)
+  Ah, es cierto. Eso dice que nos van a compartir creo en...
+
+1:16:00 - Emiliano  Lorenzano
+  Con datos, a lo mejor, no reales, pero a nos serviría tener la información de las columnas para saber, bueno, ya checamos y si tenemos dudas, pues les vamos a consultar de dónde estaríamos consultando la información a llenar en ese Excel.  Ese archivito, ¿cuándo nos lo puedes compartir, Edder?
+
+1:16:24 - SALA VIP
+  Ahorita, que nos los comparta ahorita, ahí mismo.
+
+1:16:27 - Edder Palacios
+  Ah, pero ya con el, no lo sé si ya traería el, el dato del, del lote.
+
+1:16:36 - SALA VIP
+  No, es que no traería el número del lote, era lo que les decía.
+
+1:16:40 - Edder Palacios
+  El número del lote a lo mejor sí pueden ponerlo, pero nada, es que homologuemos con Rafa, que hagamos el, el paquete de variedades por vivero.
+  ACTION ITEM: Press Ana for lot IDs; then Edder share w/ Emiliano & Alex - WATCH: https://fathom.video/calls/665010386?timestamp=4608.9999  Ok, sí, pero, no, yo digo el lote de, el que te agarró, el que te manda a Nolech.
+
+1:16:59 - SALA VIP
+  Ah, ese me lo. Manda Ana por ahí por junio, Julio, pero ahorita presiono a Ana para que no lo mande.  Sí, porque ese dato va a ser el que vamos a necesitar para que de allí se arme el paquete, pues, pero es el principal con el cual vamos nosotros a identificar cada vez que esté llegando la fruta.  Y ya Odoo va a ligar el paquete de lo del vivero y por los lotes ya lo va a ligar a ese número que todavía está pendiente por entregar.  Así es.
+
+1:17:42 - Edder Palacios
+  ¿Una otra pregunta, Emiliano, Alex, referente a...?
+
+1:17:56 - SALA VIP
+  No, estoy revisando aquí mis notas que tenía de la vez. Pasada. Ahí sería la creación.
+
+1:18:03 - Emiliano  Lorenzano
+  Bueno, van a querer medir lo de la plantación y cuándo ya debería de producir de acuerdo a la entrega de la primer caja de fruta.  Quería ir a también unas gráficas, creo. Sí, así como salen más o menos en lo de calidad. También querían ahí que se generaran una, mandar una alerta en caso de que algún producto se vaya quedando rezagado de las plantas.  Pero yo creo que vamos a tener que agregar entonces algunos otros campos adicionales, Robert, a lo que platicamos ayer del tema de los productores.  Ves que nos van a pasar el tema de la plantilla. De contrato que tienen con ellos para sacar unos campos de ahí.
+
+1:19:05 - SALA VIP
+  Sí, pero fíjate que ahorita hablando con Luis, me indicaba que esos datos que vienen en el contrato no siempre son los que se cumplen o se anexan para que Rafa o Chema hagan la liquidación o retención.  Es una base solamente, pero no indica de que sobre de esos valores se vaya a hacer esa retención o liquidación, porque todo va dependiendo del modelo de negocio que tiene cada productor y eso va variando.
+
+1:19:47 - Emiliano  Lorenzano
+  Entonces, ahí sí nos pueden compartir como qué campos sí tendríamos que crear en alta del productor y ahorita con lo que revisamos aquí con Edder, vemos que vamos a agregar pues otros campos para la retención.
+  ACTION ITEM: Send contract field mappings to Emiliano & Alex; then they implement producer fields - WATCH: https://fathom.video/calls/665010386?timestamp=4789.9999  ¡Gracias! por ver
+
+1:20:00 - SALA VIP
+  Ajá, te voy a mandar las plantillas de los cinco o seis contratos que necesitamos que se llenen en automático, cuando, en este caso, Luis del Legal va a llenar los datos, la información de los datos los va a llenar como en una sola plantilla, y ahí se va a identificar estos datos son para este contrato, estos otros campos, aparte de los primeros, son para este otro, estos otros campos, aparte de los del general, más a estos, son para este otro contrato, yo así lo dimensiono que pueda ser, y de esa manera se generen las plantillas, pero aparte, se va, vamos a tener que manejar con lo que ya habíamos platicado la vez pasada, en el, en el, la sesión de liquidaciones, en la que Rafa y Chema ingresan esos datos de decir, ah, ahora yo le voy a retener el dos por ciento, ahora yo le voy a retener, tanto, y en este caso.  En caso es sin intereses o sin financiamiento, sin intereses y financiamiento y lo del reciclo también, que si lleva o no lleva.  O sea, ese sería, yo lo llamaría como modelo de negocio, que es el que va muy de la mano para el tema de las liquidaciones, retenciones y compensaciones.  Ese, ese, yo creo que todo eso lo vamos a tocar todavía más a profundidad cuando tengamos la sesión de compensaciones y retenciones que está pendiente.
+
+1:21:47 - Emiliano  Lorenzano
+  También, sí, para ya tener una base, para ir planeando ya este tema del alta de los productores. Sí.
+
+1:22:00 - SALA VIP
+  Aprovechando que está Gloria, no sé Emiliano si podemos ver porque teníamos pendiente de que con ella revisaríamos la parte de los requisitos que va a llevar en inocuidad que ahora queríamos contemplar.  ¿Es correcto, Edder, que queríamos hacer esa parte?
+
+1:22:17 - Edder Palacios
+  Sí, la parte de inocuidad lo que queríamos hacer era, así como va a tener bloqueo de las variedades, que Gloria a lo mejor pueda bloquear al productor por algún pesticida o algún, algo que no esté bien y que le evite que se recepcione.  Porque no sé si vayan a querer que todos los datos también de inocuidad se suban al acknowledge, al acknowledge, perdón, al look, porque traemos el azule.  ¿Es el bloqueo?
+  ACTION ITEM: Send Inocuidad block reasons to Alex; then he implement block/release w/ evidence - WATCH: https://fathom.video/calls/665010386?timestamp=4984.9999
+
+1:23:02 - Alejandro Magaña (Inflexyon)
+  Ah, perdón. ¿Ese tipo de bloqueo que hablan? Supongo que puede ser por varios motivos. ¿Sería importante para ustedes que identificaran el motivo por el cual se bloqueó?  Sí. Sí, para nosotros sería muy importante.
+
+1:23:15 - Edder Palacios
+  A lo mejor te podemos pasar la lista de motivos, Alejandro, y ya nada más que a lo mejor Gloria le ponga en una casilla pesticidas o falta de muestra de agua o Estados Unidos o otros y ya.  Sí. Sí, estaría muy bien si me pasaran esa lista.
+
+1:23:32 - Alejandro Magaña (Inflexyon)
+  Y supongo que puede haber excepciones de que la reciban aunque esté bloqueada. La idea es que no hay excepciones, pero sí.
+
+1:23:43 - Edder Palacios
+  Ok, darle la posibilidad para no dejarlo tan cerrado.
+
+1:23:48 - Alejandro Magaña (Inflexyon)
+  Muy bien.
+
+1:23:50 - SALA VIP
+  Y lo que mencionaba, Ceder, de la plantilla de lo de Azure o Azule.
+
+1:24:01 - Edder Palacios
+  Es que llevamos ahí todos los análisis de fruta, de agua, análisis de riesgos, pre-harvest, toda la información del productor la tenemos dentro de ese sistema.  Bueno, actualmente es Kiwi Connect, pero ahora lo que va a hacer, vamos a trabajar con un laboratorio en el cual en automático todas las muestras se van a estar subiendo a ese sistema para que Estados Unidos tenga la visibilidad.  ¿Y crees que en Oldwood tengamos que tener algo? Yo, según yo, no.
+
+1:24:42 - SALA VIP
+  Nada más eso son los bloques que podemos hacer.
+
+1:24:57 - Edder Palacios
+  No sé si Gloria ocupe que haya algo de... ¿Y no cuida dentro del sistema?
+
+1:25:03 - Gloria Araceli Ceja Olivares
+  No, nada más lo de los bloqueos que tanto almacén, cooler y administración sepa que el productor está bloqueado por temas de pesticidas o agua o lo que comentabas.  Y ya todo manejarlo en azul.
+
+1:25:18 - SALA VIP
+  Sí, porque esta parte también se ayuda a nosotros para poder tener los pagos en lo que se soluciona la situación.
+
+1:25:29 - Edder Palacios
+  Sí, Emiliano, Alejandro.
+
+1:25:31 - Emiliano  Lorenzano
+  Sí, y ¿quién debería activar ese bloqueo con algún control de calidad? ¿Tendrían que considerar ese parámetro? Gloria. Gloria, Gloria sería la encargada.
+
+1:25:45 - SALA VIP
+  Sí. Muy bien.
+
+1:25:47 - Edder Palacios
+  A lo mejor a Gloria le llegó hoy en la noche un análisis de pesticidas de un productor y está mal que en ese mismo momento se pueda meter Gloria y lo bloquee.  Al decir bloquear, ¿qué detendríamos?
+
+1:26:05 - SALA VIP
+  La recepción. Que no nos pueden entregar el flujo. Recepciones, pagos. Inclusive hasta el embarque.
+
+1:26:10 - Edder Palacios
+  Si quisieran sacarlo del cooler, ese lote, no van a poder, porque va a estar bloqueado. Entrega de material también.
+
+1:26:19 - SALA VIP
+  Ah, ya todo, realmente todo el productor. Ya, ya, ya escuchaste Emiliano, Alejandro, o ¿hasta dónde va ese, ese dato?  ¿Hasta dónde viajar? hasta los lotes que tengan actualmente no los van a poder sacar.
+
+1:26:40 - Alejandro Magaña (Inflexyon)
+  Sí, correcto. Sí, porque sería un riesgo.
+
+1:26:42 - Edder Palacios
+  Si lo tenemos aquí en nuestras manos y es un riesgo para inoculidad alimentaria en Estados Unidos y aún lo tenemos aquí, pues qué mejor, qué mejor que dárnoslo aquí.  Pregunta, Gloria.
+
+1:26:58 - SALA VIP
+  Dependiendo de cada... Cada vez que tú actives algo, ¿se tendría que detener todo o única y exclusivamente con alguno de esos tipos de problemas o con cualquiera que tú actives?
+
+1:27:20 - Gloria Araceli Ceja Olivares
+  Pues sería con cualquiera porque casi en la mayoría de los temas es de pesticidas, entonces ahí se tiene que parar pago, se tiene que, o sea, Cooler no los puede ingresar, no los puede sacar y material tampoco se le puede entregar porque en lo que volvemos a tomar la muestra, equivale como a dos, dos o tres días.
+
+1:27:39 - SALA VIP
+  Ok, y tú serías la misma que lo pudiera reactivar, pero, pero tendrías que agregar algún dato para que se pueda activar o nada más jugaríamos entre sí y no, pero ¿quién te estaría auditando?  Me imagino, te lo digo por. Por Alejandra, porque en alguno de control interno te va a decir, ah, pues tú estás entre como juez y parte al mismo tiempo.  Entonces, ¿qué manera sería la que tú tendrías que esperar a que te pasen el dato para ahora sí permitir nuevamente?  Pues ahí no sé si necesitarían el resultado de pesticidas ya correcto.
+
+1:28:24 - Edder Palacios
+  Exactamente. Sí, que Gloria sería en base a documentos, el bloqueo.
+
+1:28:32 - SALA VIP
+  En base a, va a haber todos los documentos.
+
+1:28:38 - Edder Palacios
+  Ok, entonces la auditoría cuando le llegue a Gloria a decirle, oye, no puede ser juez y parte, porque estoy siendo juez y parte, aquí están las evidencias.  Ah, entonces ahí te van.
+
+1:28:47 - SALA VIP
+  Para evitar esa parte, podrías, Alex, agregar ahí, cuando vaya nuevamente a reactivar, que no lo reactive si no sube el archivo de, ¿cómo se llama?  Liberación de pesticidas. ¿Cómo le dijiste, Gloria? ¿Algo así? Sí, el resultado de pesticidas. Ándale, resultado, que hasta que no esté en un archivo de resultados de pesticidas, ahora sí ya le active el botón de liberado.  Pero hay todos los motivos de bloqueo. ¿Perdón?
+
+1:29:20 - Alejandro Magaña (Inflexyon)
+  Te digo, pero hay todos los motivos de bloqueo requerirían subir un archivo. Ah, no le expliqué.
+
+1:29:28 - SALA VIP
+  ¿Qué, perdón? Ah, perdón, otra vez.
+
+1:29:31 - Alejandro Magaña (Inflexyon)
+  Te comento que si todos los motivos de bloqueo, ahorita hablan específicamente del resultado de pesticidas, pero si fuera cualquier otro motivo de bloqueo, también deberían subir un archivo o una evidencia del por qué se desbloqueó.
+
+1:29:45 - SALA VIP
+  Sí, sí, así es. ¿Al bloquearse también?
+
+1:29:49 - Alejandro Magaña (Inflexyon)
+  Sí, sí. Muy bien.
+
+1:29:52 - SALA VIP
+  Sí, que diga ahí subir evidencia y hasta que ya esté. Archivo, arriba del archivo, ahora sí se active para liberarlo.  Lo digo por el tema de ahí nos cubrimos por todas partes, ¿no? Que puede haber un error humano en que Gloria sin querer lo bloquee y después por algo se vuelve a activar y todo se permita y después, ¿cómo si yo lo había bloqueado?  ¿No? Evitar ese error humano. Y la segunda, pues también tener la evidencia de que quedó ya algo asentado. Creo que así también estarías tú tranquila, ¿no, Gloria?  De que únicamente si lo bloqueo, ahí está bloqueado y ya no hay poder humano para que se pueda desbloquear.  Ok, yo creo que te leo la mente y creo que me dices que sí. Aquí nos agregaron, ¿quién nos agregó?  Es otra cosa, Luis se está mandando otra cosa. ¿Qué más, Gloria, quisieras de parte de inocuidad, tener control? No, nada más sería de esta parte.
+
+1:31:24 - Gloria Araceli Ceja Olivares
+  Y ya como comentaba Edder, ya todo lo demás estaría en azul, tanto certificados como resultados de pesticidas y de agua.  Ok.
+
+1:31:33 - SALA VIP
+  Ahorita que tenemos también a César, César, en la parte de tus procesos, ¿quieres que tengamos algún control específico o un reporte también en específico?
+  ACTION ITEM: Define and implement Odoo fields for merma/replant; then Cesar upload field evaluations - WATCH: https://fathom.video/calls/665010386?timestamp=5509.9999  ¿O quisieras alimentar algo en Odoo para que el equipo de operaciones lo tenga? ¿O tú recibir algo, algún dato?  No sé, Edder.
+
+1:32:00 - Cesar Octavio Aguilar Munoz
+  Como veas, la parte, o qué tan importante sea la parte de las mermas en las evaluaciones de planta, ese sería un punto, porque como comentaban hace ratito, podría ser que le entreguemos a un productor, no sé, una hectárea de planta, pero a lo mejor tiene mucha mortandad y le tenemos que dar más planta y se retrasa en el tema de producción.  Entonces, para ponerle como que sabes que este productor toma esta situación y que esté se vea reflejada en caso de que sus números no lleguen por algún tema de sanidad de la planta, no sé si se pueda incluir algo como eso, como un reporte de mermas de la calidad de la planta que se le entrega al productor.
+
+1:32:52 - SALA VIP
+  Porque si tiene merma y la que está en reposición, no le va a plantar posterior, por lo tanto ya no va a tener una producción.  Porque siempre la hayas. Que tiene merma, por ejemplo, esa planta ya no, ya no la plantó, ya se perdió, pero por ejemplo, a veces el vial se la repone, es lo que dice, ya no vas a plantar prácticamente a las mismas fechas de la primera entrega, cuando la repone la planta y va a tener una producción diferente.  Pero si, o sea, ¿se acepta la merma? ¿Se rechaza? No, en la merma probablemente no se le ocurre al productor.  Sí, porque a lo mejor le podemos dar la planta, se planta y usualmente, bueno, no usualmente, pero en algunas ocasiones.
+
+1:33:31 - Cesar Octavio Aguilar Munoz
+  Si el lote viene enfermo, pues la planta se empieza a morir a los 20 días, los 30, los 40, y a lo mejor nosotros podemos actuar y decirle, bueno, pues te damos planta para que replantes.  Pero obviamente esos números de producción, pues ya no van a ser los mismos, porque ya lleva un retraso por esa planta que pudo haber llegado mala.
+
+1:33:47 - SALA VIP
+  Sí, que ya no produjo en esa fecha, se la entregamos a la mejor, no sé, 15, 20 días después, y en lo que es la plantación.  Y tiene la cosecha, ya se retrasó todo ese tiempo. ¿Qué pudiera afectar? ¿La producción? ¿La producción? Sí, la producción.  Pero ahí creo que los chicos de Odú pudieran ayudarnos en que si se reduce el número de plantación, se recorriera ese podcast.  ¿Actualmente tú lo mueves manualmente, Edder? Cuando sabes que hay una merma, ¿correcto? Sí, sí, sí.
+
+1:34:45 - Cesar Octavio Aguilar Munoz
+  Ah, ya se salió Edder. No sé.
+
+1:34:53 - Emiliano  Lorenzano
+  Creo que ya no está. Sí. Sí. Bueno.
+
+1:34:59 - SALA VIP
+  Gracias. Pero entonces ahí, Emiliano, ¿sí cachaste esa idea? Sí, sí, sí, sí la alcanzo a entender también.
+
+1:35:11 - Cesar Octavio Aguilar Munoz
+  Pero sí en su momento, cuando se vea por qué el productor no está alcanzando sus números y que sea un tema de fechas de plantación, pues que se vea reflejado.  Sí.
+
+1:35:24 - SALA VIP
+  ¿Y tú ahí qué tendrías que activar? ¿O solamente sería visual? Vale. Pues nada, no sé, tal vez hacer alguna observación, ¿sabes qué?
+
+1:35:36 - Cesar Octavio Aguilar Munoz
+  Tuvo un merma del 20%, se sube el reporte desde lo que se hace en campo de la evaluación de la pérdida de la planta, la montanda, ¿ya?  Para ver, ah, ¿sabes qué? Pues se plantó 100.000, pero se perdió el 20%. Ah, pues sabes que va a tener que replantar otras 20.000 plantas.  Ok, esas observaciones no solamente las quieres tener.
+
+1:36:00 - SALA VIP
+  Para las mermas, sino me imagino que también quisieras hacer otro tipo de observaciones en la planta a los ranchos, dependiendo de otros factores, ¿correcto?  Sí, podría ser.
+
+1:36:11 - Cesar Octavio Aguilar Munoz
+  Podría haber factores como inundaciones, granizadas, plagas, no sé, ahí hay más temas que podrían hacer que el forecast se vaya recorriendo, sí, sobre todo reduciendo más que nada.
+
+1:36:29 - SALA VIP
+  Con el forecast se refiere a la fecha de plantación, ¿verdad?
+
+1:36:33 - Alejandro Magaña (Inflexyon)
+  No, a la producción de la planta.
+
+1:36:35 - Cesar Octavio Aguilar Munoz
+  Ajá, a la estimación de producción. Exacto, a la cantidad de fruta que va a sacar el productor. Muy bien, a la producción que va a tener el productor.
+
+1:36:49 - SALA VIP
+  Sí, ajá, es el que mostró, ver que tenía, donde le mostró la tabla, de cuánto iba a producir cada productor en cada una de las semanas, la proyección.  correcto. Por ahí ese archivo nos lo harían llegar.
+
+1:37:03 - Cesar Octavio Aguilar Munoz
+  Sí, porque si ya lo habíamos visto.
+
+1:37:16 - SALA VIP
+  Y ahí, Emiliano, Alejandro, ¿cómo crees que pueda funcionar el Odu para recorrer este tipo de números?
+
+1:37:34 - Cesar Octavio Aguilar Munoz
+  Yo creo que ahí primero lo vamos a tener que analizar, ya teniendo el archivo en la mano y viendo las fórmulas que utiliza.
+
+1:37:41 - SALA VIP
+  Digo, porque la otra sería que simplemente entrara Edder, que fuera el único y que pudiera hacer la modificación. Si, al menos de que ya nos pase.  Como tú indicas, la fórmula de cómo se recorrerían, dependiendo de tantas plantas, cuánto tendrías que recorrerte.
+
+1:38:18 - Emiliano  Lorenzano
+  Checaría, no, Robert, porque tendríamos que considerar el dato inicial de la cantidad, en la salida cuánto estaban entregando, y creo que habíamos platicado en otra sesión que en la salida de ese producto, más bien en la recepción, ahí sí va a estar ajustando la merma.
+
+1:38:39 - SALA VIP
+  No, pero, pero esa es otra merma, esa es otra merma, la merma de la planta, pero no, pero César está mencionando ya una vez que se plantó, una vez que ya se recibió y el productor plantó la planta.  Y van pasando los días o las semanas y de repente se muere, nos indica, nos llama a nosotros, Cesar hace la evaluación, verifica, hace la anotación y le dice a Edder, Edder, pues se murieron tantas plantas, hay que reponérselas.  Entonces el forecast de producción de ese rancho de que nos iba a entregar la fresa, pues ya no va a cumplir en esa semana, sino se va a tener que recorrer.  Ese es el de la merma que estábamos hablando ahorita. El que hablábamos anteriormente en las sesiones anteriores es cuando recibimos la planta de recién al vivero, ahí es cuando los asesores en campo verifican y están con el rancho recibiendo y haciendo el porcentaje de merma rechazada en ese momento.
+
+1:39:59 - Emiliano  Lorenzano
+  Bien. Y van pasando los días o las semanas y de repente se muere, nos indica, nos llama a nosotros, Cesar hace la evaluación, verifica, hace la anotación y le dice a Edder, Edder, pues se murieron tantas plantas, hay que reponérselas.  Entonces el forecast de producción de ese rancho de que nos iba a entregar la fresa, pues ya no va a cumplir en esa semana, sino se va a tener que recorrer.  Ese es el de la merma que estábamos hablando ahorita. El que hablábamos anteriormente en las sesiones anteriores es cuando recibimos la planta de recién al vivero, ahí es cuando los asesores en campo verifican y están con el rancho recibiendo y haciendo el porcentaje de merma rechazada en ese momento.  Bien. Entonces ahí pues yo creo que sí sería con un porcentaje agregarlo en alguna parte porque realmente la planta ya no es de nosotros, la planta ya es del productor.
+
+1:41:11 - SALA VIP
+  Al momento que sale del sistema, al momento que sale de Naturberry, pues la planta pasa a ser del productor.  Entonces como tener una merma de esa planta, pues realmente no pudiéramos controlarla porque ya no está en nuestra posesión.
+
+1:41:32 - Cesar Octavio Aguilar Munoz
+  Ahí como comentan con algún porcentaje, algún reporte que suban. No sé cómo lo tenías pensado, Robert, pero esa planta ya no es de nosotros.
+
+1:42:09 - SALA VIP
+  Sí, ya se le vendió al productor, pero si por una de estas causas que menciona César, la planta se muere y nosotros tenemos que reponérsela.  Pues tal vez no, tal vez no reponérsela, pero al final de la temporada pues nos va a pegar en los números.  Digamos que con los viveros tenemos cierto periodo de tiempo para que esa merma sea válida, eso es ahí, sí estoy de acuerdo, o sea, se la entregamos al productor y aunque ya no sea directamente de nosotros, pues al final sí nos va a pegar en la producción.  Entonces, sí, sí es importante tenerla ahí como contemplada en caso de que haya pasado, esperemos que no, pero sí, sí es importante tener ese número.  Al final de lo que estamos buscando aquí, pues es que el número se ve reflejado porque nos va a terminar pregando la producción del productor, del sector, de la variedad, inclusive hasta del rendimiento de la planta de vivero.  Esa merma, Rafa, que menciona César, si se la reponemos o no, ya se la cobramos al productor porque ya se la mandamos.  Pasan semanas y nos dice, esta planta no sirve, y dice, decide César, dice, sí, esta planta murió, estaba, venía mal.  Ok. Ya no se la, tú le haces una nota de crédito a esa planta.
+
+1:43:42 - Emiliano  Lorenzano
+  Sí, me das de cuenta que con la planta manejamos dos tipos de mermas, que es la merma de trailer, la que llega exactamente, esa no se factura, nada más se reconoce por parte del vivero.  Si posterior, ahí se manejan dos mermas posteriores, una si no recuerdo, son a los 15 días. O 20 días y otros a 45 días, dependiendo de la planta que sea.
+
+1:44:03 - SALA VIP
+  Ahí es donde ya se reconoce si tienen mermas posteriores, una de dos, si se le va a reponer la planta o se le va a hacer una nota de crédito, que ya no se le va a reponer esa planta.  Pero son justamente esas dos variantes que podemos tener. Entonces sí puede haber una nota de crédito. Sí nota de crédito o replanten su defecto, pero ahí ya nos da la pauta prácticamente operaciones.  Donde nos pasa ese dato.
+
+1:44:34 - Cesar Octavio Aguilar Munoz
+  Sí, Emiliano. Sí, sí, pues quería no, Robert, dónde ponerte ese porcentaje. Porque si ya se nota de crédito, pues ya no pasa nada.  Y si reponen, pues prácticamente harían otra salida.
+
+1:44:54 - SALA VIP
+  Y se sobrecargaría. Bueno, pues sí, no nos haría otra salida de la planta. Sí, a lo mejor en esta parte solamente podríamos ingresar a lo mejor el lote para generar el margen de producción de que va a ser posterior, pero ya no tendríamos, eso quedará como informativo, pero ya no habría otro proceso adicional a lo como yo lo veo, porque ya no facturaría, realmente solo se repondría la misma que ya tuvo en su momento.  Es correcto, sí. ¿Qué otro dato, César, se te ocurre que tú quisieras poner o tener identificado en el sistema?  Gloria. Gloria. Gloria, adelante. Sí, yo nada más tenía un comentario acerca de lo que hablábamos ahorita de los bloqueos.
+
+1:46:38 - Gloria Araceli Ceja Olivares
+  Nada más que cuando inicia temporada, hablando de recepción, ahí todos los productores sí necesitarían estar bloqueados.
+
+1:46:46 - SALA VIP
+  Y ahí ya se van desactivando conforme nos vaya liberando Estados Unidos. Sí, ese dato sí recuerdo que ya lo tiene por ahí apuntado Emiliano y Alejandro, que...  Así como tú liberas este tipo de situaciones por pesticidas o X, Y o Y razón, tú también activas al rancho dependiendo si ya pasó una auditoría.  Que creo que, me imagino, tendríamos la misma situación, que tú, para evitar algún error de dedo, también activarías el rancho una vez que tengas un archivo adjunto.  Sí, también pasaría esa. ¿Y ahí qué tendría que subir? ¿Nada más como la liberación por Estados Unidos? Porque ellos nada más levantan un correo.  Sí, yo creo que con eso sería suficiente, pero que al menos sea la pauta para que el sistema no lo haga en automático por algún error de dedo.  Ok. ¡Gracias! ¡Gracias!
+
+1:48:00 - Emiliano  Lorenzano
+  El que esté bloqueado a esa liberación, creo que así le vamos a llamar a esa opción, liberación de productor, y que tengas que apuntar cualquier archivo.  El archivo ya sea el correo, una captura de pantalla, que ya esté lo que tú quieras, pero que se pueda activar únicamente cuando tú subas ese archivo.
+
+1:48:26 - SALA VIP
+  Ok, muy bien. Sí, sí, sí, recuerdan ese, gracias Gloria, sí, recuerdan ese, ese tema, verdad, Emiliano, Alejandro, que los productores cuando van a llevar su, cuando van a ir por su material, no nada más pueden ir a la, a la buena de Dios, sino que en el almacén lo vamos a identificar y vamos a decir, ah, sí, tú ya estás aceptado para poder sustituirte material.
+
+1:48:54 - Gloria Araceli Ceja Olivares
+  Ese ya lo habíamos contemplado hace, cuando vimos el tema de los almacenes.
+
+1:49:00 - SALA VIP
+  Sí, pero ¿a quién sería nada más para los productores o también para los proveedores? Para los viveros, perdón, para cuando inicia la temporada de la...  Beta comentó algo, Gloria, de cuando inicia la temporada que Estados Unidos libera para la... Sí, nada más es para recepción.  Sí, Estados Unidos libera al productor para la recepción que podamos tener de su fruta y para eso pues tienen que ir por material.  Entonces pueden ir y tocar la puerta para llegar por material, pero si no está liberado previamente no le podemos surtir.  Igualmente sería para cooler, ¿verdad, Robert? O sea, ellos no pueden ingresar fruta si no está liberado.
+
+1:49:56 - Victor De La Parra
+  Así es, sí, o sea, es completo, digo. Digo el material porque sería como lo primerito que van a pedir, pero si algún vivaz ya tenía material de la temporada pasada y quiere llevar el producto, pues también.
+
+1:50:13 - Cesar Octavio Aguilar Munoz
+  Entonces, igual para que quede asentado ahí con los chicos de Emiliano y Alejandro, que hasta que no se active esa casilla de liberación de productor, también es todo completo, tanto para ir por material o como para llevar su fruta.  Para Gloria y para Edder, no sé si para este caso, igual ahorita que estamos en restricciones, vayan a poner para la entrega de planta, para los ranchos, si no cumple todavía con algunas especificaciones.
+
+1:51:08 - Emiliano  Lorenzano
+  Sí, ahí Cesar, no sé, ¿y cómo pudiera ser? Si se sube una imagen del rancho, hablando pues de que quieren que se pongan como evidencias.
+
+1:51:21 - Gloria Araceli Ceja Olivares
+  Pues sí, podría ser también, de hecho nos podría servir que tengan lo básico, vamos a hablar que esté preparado, acolchado, con citilla y que funcione su sistema de riego para garantizar la plantación.
+
+1:51:41 - Emiliano  Lorenzano
+  Entonces, también podría ser, fíjate, la verdad no se me había ocurrido, pero sí nos podría ayudar esa parte de a quién sí le damos planta estando listo y a quién no y lo echamos a la cola.
+
+1:52:00 - Cesar Octavio Aguilar Munoz
+  ¿Pero sería igual con este bloqueo o se va a considerar algún, o van a subir algún dato adicional?
+
+1:52:16 - Gloria Araceli Ceja Olivares
+  Ahí sería, pues, tal vez una foto. ¿No? Ahí sería preparación del rancho. Hacer como un bloqueo en tema de plantación y otro bloqueo ya en temas de producción, de recepción, pues, de fruta.
+
+1:52:32 - Emiliano  Lorenzano
+  Porque sí son dos etapas, pues, muy diferentes. Ok, sería bloqueo para liberar planta y bloqueo para inicio de temporada para recibir materiales y para recepción de fruta, ¿no?  Sí, es correcto. Sí.
+
+1:53:02 - Victor De La Parra
+  Bien, ya lo tengo anotado. ¿Algún otro dato a considerar en la parte de los bloqueos? No, de mi parte ya sería todo.  Ah, de mi parte creo que no.
+
+1:53:30 - Emiliano  Lorenzano
+  Bien, entonces nosotros nos quedamos con esto.
+
+1:53:33 - SALA VIP
+  Nos envían los archivos de planeación que tiene Edder.
+
+1:53:39 - Alejandro Magaña (Inflexyon)
+  ¿Qué otro archivo nos iban a enviar?
+
+1:53:43 - Emiliano  Lorenzano
+  El de los campos del contrato. Ah, sí, los campos del contrato, los campos que van a tener la parte del productor para poder avanzar con este tema.
+
+1:53:56 - SALA VIP
+  ¿Sí, Víctor? En referente a ese último... No sé si les sirva, ya por ahí también en la carpeta que nos compartió Raúl, está la verificación para el alta de productores y el checklist, junto también con los históricos de planta, y también está lo de los puntos del clima, también, está en formato para Google Earth Pro, para que lo puedan importar.  Sí, entonces déjanos revisar la información y ya si no nos traigo un dato, pues ya mandamos un seguito en el grupo.  ¿Algo más, Alex? De momento creo que no. Creo que sería todo por esta ocasión.
+
+1:54:47 - Cesar Octavio Aguilar Munoz
+  Ok. Sí, por mí no hay ningún problema, ya te viene a rober, no es que en algún otro punto que tocar.
+

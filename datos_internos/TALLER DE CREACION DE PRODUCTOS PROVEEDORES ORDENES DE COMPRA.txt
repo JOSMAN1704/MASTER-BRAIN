@@ -1,0 +1,672 @@
+======================================================================
+ID DE SESIÓN: TALLER DE CREACION DE PRODUCTOS, PROVEEDORES, ORDENES DE COMPRA
+FECHA: 2026-05-13
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/x7PvezL_RJnwfL3aEtr1aRrynseHWCXo
+======================================================================
+
+RESUMEN
+
+Odoo & NBG  - Taller de creación de productos-proveedores-gestión de órdenes de compra - May 13
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar las funciones de Odoo para creación de productos, gestión de proveedores y órdenes de compra.
+
+Puntos clave
+
+  - Odoo v19 admitirá tres empresas: Naturberry, Naturagui y Naturprime, con catálogos compartidos para mayor eficiencia.
+  - La configuración del producto es la base de todas las operaciones: Define el seguimiento de inventario (por lote para costos reales), las políticas de venta/compra y los datos críticos para documentos de exportación.
+  - La plantilla estándar de Odoo es insuficiente; se requieren campos personalizados para necesidades específicas como pesos neto/bruto en facturas de exportación y seguimiento de origen para cumplimiento IMEX.
+  - Plan de acción: Formar tres grupos de trabajo (Ventas, Materiales, Servicios) para definir requisitos de datos personalizados, creando un catálogo de productos sólido que evite problemas de datos del pasado.
+
+Temas
+
+Descripción general de la implementación de Odoo v19
+
+  - Versión: Odoo v19 (versión estable actual).
+  - Empresas: Naturberry, Naturagui, Naturprime.
+  - Catálogos compartidos: Productos, clientes y proveedores se compartirán entre empresas para agilizar operaciones.
+  - Objetivo: Entender la creación manual de productos, la base de toda la gestión de compras e inventarios.
+
+Creación y configuración de productos
+
+  - Tipos de producto:
+      - Almacenable: Bienes tangibles (plantas, clamshells) que se rastrean en inventario.
+      - Consumible: Artículos no rastreados (material de oficina); su valor de compra va directamente a una cuenta de gastos.
+      - Servicio: Artículos intangibles (renta, internet).
+      - Combo: Un conjunto de productos (p. ej., un "paquete" de materiales para una venta).
+  - Campos clave de configuración:
+      - Indicadores de Venta/Compra: Habilitar/deshabilitar un producto para venta o compra.
+      - Seguimiento de inventario:
+          - Por cantidad: Conteo simple.
+          - Por lote: Rastrea lotes específicos, permitiendo el seguimiento de costo real por lote (p. ej., Lote A @ $5, Lote B @ $5.50). Esto es crítico para una contabilidad de costos precisa.
+      - Política de ventas: Facturar según "Cantidad Entregada" para coincidir con los envíos reales, no con el pedido inicial.
+      - Política de compras: Facturar según "Cantidad Recibida" para pagar solo por bienes aceptados físicamente.
+      - Categorías: Agrupar productos (p. ej., "Plantas", "Cepellón") para aplicar contabilidad y métodos de costeo predeterminados (p. ej., FIFO).
+      - Información de proveedores: Vincular productos a proveedores específicos, incluyendo su precio y tiempo de entrega.
+
+Requisitos de personalización y plan de acción
+
+  - Problema: La plantilla estándar de productos de Odoo carece de campos críticos para las operaciones específicas de la empresa.
+  - Brechas identificadas:
+      - Datos de exportación: Se necesitan campos separados para Peso Neto y Peso Bruto en facturas de exportación.
+      - Seguimiento de origen: Se requiere un campo dedicado para distinguir el origen del producto (p. ej., México vs. EE. UU.) para cumplimiento y reportes IMEX.
+      - Lista de materiales (BOM): Se necesita una BOM para definir los componentes de un producto final vendible (p. ej., un pallet de fresas = fruta + caja + clamshell + pallet).
+  - Solución: Crear plantillas personalizadas definiendo todos los campos requeridos desde el inicio.
+      - Grupo de trabajo 1 (Ventas): Definir requisitos para todos los productos de fruta vendibles (p. ej., fresas, arándanos).
+      - Grupo de trabajo 2 (Materiales): Definir requisitos para todos los materiales comprados (p. ej., cajas, clamshells, plantas).
+      - Grupo de trabajo 3 (Servicios): Definir requisitos para todos los servicios y artículos no inventariables (p. ej., renta, intereses).
+
+Próximos pasos
+
+  - Robert:
+      - Organizar las tres reuniones de grupos de trabajo para definir requisitos de datos personalizados de productos.
+      - Confirmar la disponibilidad de Emiliano para unirse a las reuniones.
+  - Todos los participantes:
+      - Preparar una lista de campos personalizados requeridos para sus respectivas categorías de productos.
+      - Usar la plantilla estándar de Odoo como base, agregando columnas personalizadas en un color distintivo para facilitar su identificación.
+
+======================================================================
+
+ONE-ON-ONE
+
+Odoo & NBG  - Taller de creación de productos-proveedores-gestión de órdenes de compra - May 13
+VIEW RECORDING: 
+Propósito de la reunión
+
+Taller práctico para entender en Odoo v19 la creación y configuración de productos y proveedores, y cómo esto habilita la gestión de compras, inventarios y trazabilidad; además, alinear qué datos adicionales requieren para su operación (comercial, IMEX, contable).
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Facilita taller en entorno de pruebas; propone trabajar estándar primero y luego ajustar campos.
+
+Progreso en prioridades desde la última reunión
+
+  - Demostró alta de producto en Odoo v19: tipos (bien/servicio/combo), impuestos, UoM, categorías, costos, tracking (cantidad/serie/lote), listas de precios, proveedores, cuentas contables.
+  - Explicó accesos a productos desde Compras/Inventario/Ventas/Contabilidad.
+  - Configuró categorías con cuentas y método de costeo (PEDS/FIFO) y estrategia de remoción.
+  - Mostró flujos de recepción con código de barras y gestión de lotes.
+
+Prioridades hasta la próxima reunión
+
+  - Compartir enlace del entorno de pruebas y coordinar sesión de creación de usuarios y permisos.
+  - Recibir plantillas enriquecidas con campos adicionales por tipo de producto (venta, planta, materiales, servicios) para parametrización.
+
+Necesita asistencia / Está bloqueado en
+
+  - Falta definición de campos no estándar (peso neto/bruto, origen, vida útil, ficha técnica, IMEX, etc.) por parte del equipo NBG.
+
+Robert (SALA VIP)
+
+Registro
+
+  - Lidera sesión; busca estandarizar catálogo y controlar accesos/roles para altas.
+
+Progreso en prioridades desde la última reunión
+
+  - Enmarcó necesidad de detectar campos faltantes que impactan cuentas por pagar, contabilidad y aprobaciones.
+
+Prioridades hasta la próxima reunión
+
+  - Convocar micro-reuniones por dominio para definir plantillas y “ADN” de producto.
+  - Asignar tareas internas para completar pesos de materiales y datos críticos.
+
+Necesita asistencia / Está bloqueado en
+
+  - Pendiente insumos de áreas (comercial, compras, almacén, contabilidad) para cerrar plantillas.
+
+Juan Pablo Cholico
+
+Registro
+
+  - Enfatiza que el alta de producto debe ser ficha técnica operativa (logística/comercial/IMEX), no solo catálogo.
+
+Progreso en prioridades desde la última reunión
+
+  - Aterrizó requerimientos: origen (MX/US), pesos neto y bruto, vida en anaquel ligada a recepción, listas por tipo de operación (export/nacional), simplificar SKUs y delegar trazabilidad a lotes/ADN.
+
+Prioridades hasta la próxima reunión
+
+  - Liderar grupo “productos de venta” (Prime/Naturberry) para definir campos obligatorios/opcionales y homologación con catálogo de Alfredo.
+  - Entregar ejemplos reales (3 productos) con campos adicionales marcados.
+
+Necesita asistencia / Está bloqueado en
+
+  - A la espera del catálogo de Alfredo para nombres/códigos finales; no bloquea definir estructura.
+
+Tania Ortega Laureano
+
+Registro
+
+  - Aporta criterios de control de consumibles (UoM como galones, etc.).
+
+Progreso en prioridades desde la última reunión
+
+  - Validó que se puede llevar inventario de consumibles y mermas con ubicaciones virtuales y cuentas analíticas.
+
+Prioridades hasta la próxima reunión
+
+  - Liderar grupo “compras/materiales/almacén” para catálogo de materiales (cajas, clamshells, tarimas) con pesos, UoM, mínimos/máximos, trazabilidad y reglas de reabasto.
+
+Necesita asistencia / Está bloqueado en
+
+  - Requiere definición de cuentas/ubicaciones y proceso de bajas por consumo interno.
+
+Jorge Obregón
+
+Registro
+
+  - Enfocado en control de inventarios de materiales de empaque y consumibles con mínimos/máximos.
+
+Progreso en prioridades desde la última reunión
+
+  - Identificó necesidad de rastreo por cantidad y reglas de reorden.
+
+Prioridades hasta la próxima reunión
+
+  - Apoyar a Tania en definición de control de existencias y consumo interno por área.
+
+Necesita asistencia / Está bloqueado en
+
+  - Parámetros de reorden y políticas contables para consumo interno.
+
+Víctor De La Parra
+
+Registro
+
+  - Avanza en plantillas; tiene pesos base de materiales y parte del catálogo.
+
+Progreso en prioridades desde la última reunión
+
+  - Preparó pesos individuales (cajas 1 lb/2 lb, 10x12 oz, tarimas CHEP, etc.).
+  - Avanzó en catálogo preliminar (cajas, tarimas, plantas).
+
+Prioridades hasta la próxima reunión
+
+  - Consolidar insumos de todas las áreas y marcar en plantilla campos adicionales (colores/etiquetas).
+  - Coordinar entregables por grupos y preparar ejercicio de flujo E2E con datos reales.
+
+Necesita asistencia / Está bloqueado en
+
+  - Falta la lista de productos de Alfredo (US) para homologación.
+  - Definiciones finales de IMEX y ficha técnica por producto.
+
+Temas
+
+Odoo v19 y multiempresa (Naturberry, Naturagui, Naturprime)
+
+  - Trabajarán en base de pruebas; luego producción. Catálogos pueden compartirse entre empresas. Configurar 2FA y roles; limitar quién crea productos/proveedores.
+
+Alta de productos: cobertura y campos clave
+
+  - Tipos: bienes (almacenable/consumible), servicios, combos; ventas/compras activables por producto.
+  - UoM alineada a SAT; impuestos venta/compra; precio vs costo; proveedores por producto con plazo de entrega y política de facturación (sobre recibido).
+  - Tracking: cantidad/serie/lote; recomendación por lotes para costo real por lote y trazabilidad.
+  - Categorías: definen costeo (PEDS/Promedio/Estándar), cuentas contables, estrategia de remoción (FIFO).
+  - Códigos/SKUs y potencial códigos de barras (EAN); uso en recepciones/entregas.
+
+Costeo y valorización por lote
+
+  - PEDS en categorías; opción de valuación por lote para costo específico de cada entrada; útil para importaciones y variaciones de costo entre viveros.
+
+Control de consumibles y materiales
+
+  - Dos enfoques: gasto directo (sin rastreo) vs inventario por cantidad con bajas a “consumo interno” por área (ubicación virtual + cuenta contable + analítica).
+  - Mínimos/máximos y reglas de reorden aplican si se rastrea inventario.
+
+Requerimientos comerciales/IMEX y ficha técnica
+
+  - Catálogo de venta simplificado (pocos SKUs: 8x1 lb, 2 lb, stem, orgánica, greenhouse, etc.); el “ADN” (variedad, productor, origen, pesos, pallets, BOM) vive en atributos/lotes/BOM.
+  - Necesarios campos: origen (MX/US), peso neto/bruto por SKU, vida útil/consumo preferente (ligada a recepción), BOM para materiales de empaque por pallet/caja.
+
+Listas y homologación de productos
+
+  - Esperan catálogo de Alfredo (US) para nombres/códigos; homologar resto (blueberries, arándano, etc.) a esa lógica; evitar divergencias en pesos/datos.
+
+Permisos y aprobaciones
+
+  - Restringir creación de productos/proveedores a roles específicos; módulo de Aprobaciones para compras por área.
+
+Próximos pasos
+
+  - Definir grupos de trabajo y responsables (Robert)
+      - Grupo “Productos de venta (Prime/Naturberry)”: Juan Pablo + Tania + Edmundo -> definir ficha técnica y campos obligatorios/opcionales; 3 ejemplos reales con campos marcados. Fecha límite: 2 días.
+      - Grupo “Compras/Materiales/Almacén”: Tania + Jorge -> catálogo de materiales con pesos, UoM, mínimos/máximos, consumo interno, cuentas/ubicaciones. Fecha límite: 3 días.
+      - Grupo “Servicios/Contabilidad”: Rafa + Contabilidad -> catálogo de servicios y cuentas contables por producto/servicio. Fecha límite: 3 días.
+  - Plantillas enriquecidas (Víctor)
+      - Consolidar plantilla por tipo (venta, planta, materiales, servicios) con columnas estándar y columnas adicionales resaltadas; incluir etiquetas para compartido/empresa. Fecha límite: 3 días.
+  - Datos de pesos de materiales (Víctor)
+      - Integrar pesos ya levantados (con César/Leti) en la plantilla de materiales; validar con Sergio faltantes. Fecha límite: 2 días.
+  - Catálogo US (Alfredo, seguimiento por Víctor)
+      - Solicitar y recibir lista de productos para homologación; si no llega, avanzar con mock y luego sustituir. Fecha límite: cuanto antes.
+  - Configuración Odoo (Emiliano)
+      - Enviar URL CUA, preparar sesión de usuarios/permisos; sugerir estructura de ubicaciones y cuentas para consumo interno; proponer ejemplo de valuación por lote vs promedio. Fecha límite: coordinar esta semana.
+  - Taller de flujo E2E con datos reales (Emiliano + Víctor + equipos)
+      - Simular: compra (importación), recepción (lotes, códigos), reabasto, venta, entrega y factura; validar impactos contables. Programar después de recibir plantillas. Responsable: Robert para la agenda.
+
+======================================================================
+
+TRANSCRIPCION
+
+Odoo & NBG  - Taller de creación de productos-proveedores-gestión de órdenes de compra - May 13
+VIEW RECORDING - 100 mins (No highlights): 
+
+---
+
+0:00 - SALA VIP
+  Para que... ¿Cómo? ¿Aquí? ¿Aquí? ¿Aquí? ¿Aquí? ¿Aquí? te van? No, así también. ¿No pasa nada? ¿Qué te quieres mover?  Es que luego están hablando de entre ellos y yo estoy aquí o no. No, no, no, que se despega hasta por de todas las vacinas.  Dígame así, ¿cómo es? Te llevo un
+
+4:13 - Emiliano  Lorenzano
+  Hola, Robert. Buenos días. ¿Qué hay, Emi? Buenos días.
+
+4:22 - SALA VIP
+  Bien, ya. ¿Vamos a esperar a alguien más o...? Allá están todos. De nuestro lado, casi estamos todos. De tu lado, ¿qué onda?  Nada más, ¿tú vas a liderar? Sí, esta ocasión yo creo que sí. Raúl no me comentó nada, si va a ingresar.
+
+4:42 - Emiliano  Lorenzano
+  Pero por ahora sí estaría yo nada más. Muy bien. Ya si sale algún tema adicional de lo que han mandado para el tema del alta de los productores o de los productos, pues ya yo le comparto a Alex qué campos se van
+
+5:00 - SALA VIP
+  Ok, ok, entonces esta sesión es para que nos indiques cómo sería la creación de estos productos, proveedores y también el crear y gestionar las órdenes de compra.  Sí, hoy vamos a estar revisando en esta sesión.
+
+5:28 - Emiliano  Lorenzano
+  Bueno, primero que nada, creo que no hemos entrado con todos a alguna sesión como la que tuvimos con Víctor y Chema, creo, para el tema de las plantillas.  Vamos a estar trabajando con la versión 19 de Odu. Actualmente es la versión más reciente, ¿no? Y si es la más reciente, también es la...
+
+6:00 - SALA VIP
+  ¿La más estable? Sí, ya está más estable.
+
+6:03 - Emiliano  Lorenzano
+  Ya cuando se libera la versión rover, que viene siendo como por octubre, noviembre, que se libera el primer, por decirlo, el relive de la versión 19, ahí pues sí traen todavía como a lo mejor algunas fallas técnicas, ¿no?  Pero ya conforme van pasando los meses, el producto ya va madurando y ahorita pues ya, la verdad, ya está más maduro ya el producto.  Entonces estamos trabajando, vamos a trabajar en la versión 19 de Odu, dentro de esta implementación con ustedes, vamos a trabajar con tres empresas, igual les voy compartiendo un poquito la pantalla, serían tres empresas, que serían Naturberry, Naturagui y Natur...  Naturprime. Esta de acá supongo que la presentaron con Yuri, ¿no? Creo, la de Reporteo Naturberry. Pero las tres principales serían Naturberry, Naturagui y Naturprime, con las que vamos a estar trabajando.  En algunas de las empresas, pues se van a estar compartiendo información, ya sea catálogo de productos, catálogo de clientes, catálogo de proveedores.  Y puede ser común, Porque pues son, casi tienen la misma operación. Y como bien lo comentaba, Robert, la idea de este taller es que puedan entender cómo se utiliza la herramienta para crear un producto, cómo crear un proveedor.  Porque a partir de la creación de un producto, bueno, si no tenemos un producto o un proveedor, realmente no pudiéramos gestionar.  Nada en el área de compras, ¿no? O así, o bien, también en la parte de inventarios, no pudiéramos gestionar nada de control de inventarios ni para la venta.  Entonces, principalmente, pues muchas de las cosas parten, pues de la alimentación de los catálogos. Entonces, sí, sí es, sí es importante que conozcamos cómo se crean estos productos de forma manual, aunque sabemos que, que para la implementación, Robert, o la salida en vivo, pues vamos a hacer la carga mediante una plantilla.
+
+8:31 - SALA VIP
+  Y tal vez yo creo que esa parte, digo, no está aquí alejando el control interno, pero yo creo que para dar de alta cualquier tipo de, de artículo, proveedor, contacto, lo que sea, yo creo que va a pasar por algún filtro.  Es decir, pues no todos podrán tener el acceso para la creación de, de, de artículos o de productos o de productores.  Sí, claro. Eso ya justamente podríamos revisar cómo se crea.
+
+9:06 - Emiliano  Lorenzano
+  Ahorita no está Alejandra, pero si alguien de ustedes sabe que se tiene que hacer la restricción para que solamente, por decirlo, Víctor tiene que crear los productos.  Nadie más. Ok, Víctor se le da el permiso para crear los productos. Entonces, la intención de esta reunión del día de hoy, pues es justamente eso, ¿no?  Conocer cómo crear y configurar productos correctamente, cómo registrar y administrar a los proveedores. Y si nos da, si nos alcanza el tiempo, pues ya vemos cómo poder gestionar solicitudes y órdenes de compra ya directamente desde la plataforma.  Esto sería todo con lo estándar, Robert. Ahorita no tenemos ninguna adecuación, nada. Sería todo con lo estándar, porque sí me interesaría que vayan conociendo también ustedes ya o vayan interactuando con la plataforma.
+
+10:00 - SALA VIP
+  Sí, sobre todo aquí, qué bueno que está todo el equipo para que lo que nos vayas mostrando, también nosotros podamos detectar en dónde pudiéramos tener ese campo que nos va a ocupar o a necesitar para una, no sé, donde caiga después a cuentas por pagar o a contabilidad o a una aprobación, etcétera, etcétera.  O sea, sí, sí les pido un poquito de mucho ojo a todos, no nomás a, por ejemplo, a Tania cuando veamos orden de compra, sino a todos los demás para que sepan y puedan levantar la mano de indicar en dónde podríamos aplicar algún otro campo y que si bien Víctor y Chema están trabajando en las plantillas verificando qué campos adicionales deberían de tener conforme a lo estándar, también sería bueno que ustedes levanten la mano y nomás nosotros ya tenerlo verificado.  También puede ser agregado en esas plantillas. Sí, por favor. Gracias, Emiliano.
+
+11:08 - Emiliano  Lorenzano
+  Gracias, Robert. Y sí, con toda confianza. Y si tienen alguna duda, me pueden interrumpir. Bien, vamos a trabajar con un entorno de pruebas.  Igual yo luego les puedo pasar el enlace o ya me pongo en contacto con Robert para tener una sesión sobre creación de usuarios.  Y que ya les puede ir liberando, por ejemplo, algún usuario, aunque esté abierto ahorita el sistema para todos, ¿no?  Ya lo vamos a ir delimitando con algunas acciones. Esta es la pantalla principal que vamos a ver o a obtener cuando nosotros ingresemos al sistema.  En el sistema, cuando nosotros vayamos a entrar por primera vez, a cada usuario que vamos a tener dentro de la plataforma, le va a llegar vía correo electrónico un enlace para...  Que puedan registrar su contraseña. Una vez que se registre la contraseña, pues prácticamente este sería el inicio de sesión que nos va a arrojar, ¿no?  Ahorita la URL aparece como grupo NVG. Aquí se le agrega que es CUA y pues algunos números. Esta hace referencia que es una base de datos de prueba.  La de ustedes, ahora sí la plataforma oficial, por decirlo, sería grupo NVG. Ay, perdón. Sería así. Esta ya la vamos a liberar cuando ya tengamos todo configurado correctamente y cuando se vaya a salir ya en vivo con ustedes, ¿no?  En la operación. Pero de entrada, este sería lo que vamos a estar utilizando para pruebas. Aquí nos piden correo y la contraseña.  También nos pide usar una llave de acceso o también podríamos configurar la parte de la autentificación en dos pasos, por si quieren que sea más seguro el inicio de sesión.  Igual eso ya lo vería con Robert en una sesión más técnica, pero ya cuando nosotros iniciemos sesión, esta es la pantalla principal que vamos a estar visualizando.  Son todos los módulos que vamos a utilizar. Posiblemente falte alguno en instalar, pero ahorita para nuestra presentación, pues nos ayuda.  Tenemos el módulo de conversaciones, es una red interna para llevar una comunicación prácticamente como si fuera tipo WhatsApp. El módulo de ventas para gestionar toda la parte de los servicios que vayamos a vender, la fruta que vayamos a vender con los mercados nacionales, extranjeros.  Esta parte de tabaco, Pues corresponde a un módulo de reporteo. En de contabilidad, donde van a caer todos los movimientos que nosotros realicemos de una compra, de una entrada, de una salida, de una venta, ¿no?  Todos los movimientos que ahora sí realicemos dentro del sistema, pues todo va a caer directamente en la parte de contabilidad.  Y para la reunión del día de hoy, pues vamos a estar enfocándonos un poquito ahorita en el módulo de compras y un poquito en inventario para la alta de los productos.  Tenemos lo de código de barras, empleados, este de aprobaciones sería para mandar a gestionar las compras por área. Y ya esto viene siendo más para temas ya administrativos o de sistemas, estos dos módulos.  Esto los vamos a ocultar para que no estén visibles. Entonces, esta sería la interfaz principal y ahora vamos a ingresar un poquito al módulo de compras.  Bueno, aquí ya veo que ya tienen algunas compras. Cuando nosotros ingresemos al módulo de compras, principalmente vamos a tener esta vista, donde nos va a hacer referencia a las solicitudes de cotización que nosotros estemos generando dentro del sistema.  Una orden de compra se va a diferenciar por tres estados, ¿no? ¿A qué me refiero el estado dentro del sistema?  A esto me refiero. Aquí en la parte, bueno, aquí es como si tuviera un Excel, esto podríamos llamarles como las columnas principales, lo que dice referencia, proveedor, empresa, comprador, fecha de límite, actividades, total estado.  Esto, el estado corresponde al estatus que tiene una orden de compra, ¿no? Cuando nosotros creamos una orden de compra, en primer estado se pone que es una solicitud de cotización o presupuesto.  Si se envía por correo... Electrónico, pues ya se pone que está enviado por correo electrónico. Cuando se confirma, ya pasa como una orden de compra.  La orden de compra ahora sí ya que estaría afectando. Ya nos crea una recepción en inventario para esperar a recibir el producto.  Entonces son tres estados los que manejan. Bueno, ahorita no me voy a meter mucho a esta parte, pero esta es la pantalla principal que me da cuando yo ingreso al módulo de compras.  Después tengo acá los menús principales, donde es la navegación. Si se dan cuenta, aquí dice órdenes. Si yo le despliego, me da pues algunos footmenús.  Y si me paso a productos, aquí tengo la opción de los productos. Entonces ahorita vamos a revisar el alta de los productos.  Voy a ingresar acá a productos. Es decir, Emiliano, que el único lugar para entrar a productos es por medio de...
+
+17:00 - SALA VIP
+  ¿Puedo entrar al módulo de compras? No, no necesariamente. Ahorita, haciendo referencia a lo que vamos a platicar, puedo hacerlo directamente desde el módulo de compras.
+
+17:11 - Emiliano  Lorenzano
+  Incluso le mencionaba que también pudiéramos utilizar el módulo de inventarios. En el módulo de inventarios, igual si ingreso, pues me va a dar el resumen de todas las operaciones que tenemos, pero aquí tengo el menú principal que dice productos.  Acá en productos le doy y acá me va a dar, pues igual el registro de los productos que tenemos.  Incluso si lo hago yo desde ventas, aquí en productos, igual puedo crear, puedo ver los productos. En contabilidad también, aquí en el menú de clientes o proveedores, aquí está la opción de los productos.  Entonces, desde varios módulos puedo yo acceder a la parte de los productos. Bien, aquí estoy de nuevo en el menú de los productos.  Puedo usar aquí en el módulo de compras o puedo venirme acá en el módulo de inventario, en productos. Para la alta de productos nosotros podemos registrar productos que son almacenables, productos consumibles, productos de tipo servicio o productos que son de gastos, ¿no?  Por ejemplo, en la parte de un producto almacenable, pudiera entrar la parte de la planta, de la fresa, los materiales como serían los clanchels, las tarimas, los empaques.  Eso podría ser material almacenable. Ya por ejemplo, un material consumible pudiera entrar las hojas, hojas blancas, los lapiceros. Material de limpieza, todo lo que no queramos tener nosotros inventariado ni tener un control, eso lo podemos manejar como o categorizarlo como consumibles.  En la parte de servicios, nosotros pudiéramos registrar, por ejemplo, pago de renta. Si ustedes van a pagar renta a algún proveedor, agregan la renta, el servicio de internet, el servicio telefónico.  Gasolina, si alguien sale de viaje y ustedes tienen tarjetas para viáticos, pudiera entrar la gasolina, pudiera entrar la parte que vendría siendo comida, el hospedaje o cualquier otro gasto que se considere en la parte de los viáticos.  Entonces, no nada más, en la parte de los productos se puede tener información de productos almacenables. ¿No? Que nos interesa tener en inventario.  Para poder registrar un producto, tendríamos que considerar también sus impuestos. ¿Qué impuestos les vamos a relacionar a ese producto?  Si van con la tasa 16, si van exento, si llevan alguna retención. Tendríamos que tener la parte de los impuestos.  El costo, el costo del producto, en cuanto nos los venden a nosotros, para tener pues el valor en inventario.  También el sistema nos ofrece la parte de las categorías o que vendrían siendo las familias, ¿no? Un ejemplo, nosotros vamos a un supermercado, no sé, el Walmart.  Vamos al Walmart y vemos que están divididos por áreas, ¿no? Que el área de refrescos y bebidas, que el área de frutas, que el área de que es hogar, de ropa.  Eso lo pudiéramos nosotros considerar como familias o categorías de productos. Entonces acá para registrar un producto pudiéramos ponerle su familia a la que pertenece o la categoría o pudiéramos generar una que diga general, ¿no?  Donde se incluyan todos. La unidad de medida también es importante. La unidad de medida si va en piezas, si va en metros, en centímetros.  La unidad de medida también va relacionada con la parte para el timbrado en el SAT, ya que recordemos que la unidad de medida también trae un código especial para el timbrado.  Entonces si el producto desde un inicio no está bien configurado, cuando nosotros vayamos a vender ese producto o ese servicio, pues puede ser que nos vote...  ¡Gracias! Un error de que la clave de la unidad de medida está incorrecta, ¿no? O la clave que ya tiene el producto.  Bueno, entonces acá tengo el botón de nuevo, acá le puedo dar clic acá en nuevo, y lo que me pide principalmente es el nombre que le voy a dar a mi producto.  Estaba revisando acá la parte de las plantillas, pero creo que no enviaron el de los productos, Víctor. No, no alcancé en ver la de productos.  Bien, sí, no hay problema. Bien, acá en el producto, lo que nos pide principalmente es el nombre. Por ejemplo, vamos a agregar una que se llama, creo que es Bounty.  Creo que era raíz, si es así, Robert, o...
+
+23:08 - SALA VIP
+  Ponte, le pusiste una vela, y sin la Y, Sí, es con Y.
+
+23:19 - Emiliano  Lorenzano
+  Bueno, aquí nos pide principalmente el nombre del producto, y se dan cuenta, si nosotros vamos, si la operación principalmente está en español, aquí pudiéramos agregar el producto en español, ¿no?  Y aquí, como tiene el idioma también en inglés, aquí tiene esta parte que dice es. Si yo le doy clic acá, yo puedo poner acá, miren, en inglés, ¿cómo se va a escribir si fuera en inglés?  Cuando nosotros enviamos un correo desde el sistema... va escribir si inglés? Podemos enviar un correo al crear una orden de compra o una venta, entonces si yo elijo la plantilla que sea en idioma inglés, toda la traducción me la va a cambiar, pero aquí tendría que poner el significado en inglés, en dado caso pues que estuviera en español.  Después acá también me dice que puedo agregar yo una imagen, si tuviera una imagen de nuestro producto, pudiera yo agregar acá la imagen.  Vamos a ver si tenemos una imagen acá. Ahí está. Entonces ya le puedo agregar una imagen. Después nos dice, ¿no?  Aquí dice ventas o compras. Si tiene activo estas dos opciones, ¿a qué va a ser referencia? Compras es que si yo lo palomeo, este producto yo lo puedo mandar a comprar.  Si yo no compro este producto, pues le quito la... Lo de selección ya no va a estar disponible para las compras, pero como es una planta, probablemente sí la mandamos a comprar.  Miren, si se dan cuenta, si yo quito compras, se me quitan algunos campos y lo vuelvo a habilitar, ya se me habilita la opción de compras.  Igual pasa con las ventas. Si este producto yo no lo voy a vender, le quito esta opción y me quita lo que vendrá siendo para la venta.  En este caso, como sí lo voy a vender, pues le dejo ventas. Después aquí viene el tipo de producto, que es un bien, un servicio y es un combo.  Si se dan cuenta, aquí en el tipo de producto tiene como un signo de interrogación. Si yo le doy clic al signo de interrogación, me dice, los bienes son productos, materiales, tangibles que usted proporciona.  Los servicios son productos inmateriales que usted proporciona. Entonces la parte de los bienes lo podemos utilizar para dos cosas.  Para almacenar producto en nuestro inventario y que vamos a rastrearlo ya sea por cantidad, por número de serie o por lotes.  O bien, puedo utilizar la opción de bienes para marcar un producto que vendría siendo un consumible y simplemente le quito que no necesito que rastreé inventario.  Al momento que le quite yo la opción de rastrear mi inventario, este producto solamente lo voy a poder utilizar para generar compras, pero no me va a afectar nada en mi inventario.  No voy a tener una entrada, no voy a tener un historial de movimientos, nada, nada. Eso acá es lo que les comentaba, ¿no?  Si ustedes quieren llevar el control de todo lo que viene siendo material de oficina, material de limpieza, en la planta, no sé si dan botas.  Los chalecos, la copia, ¿cómo le llaman eso cuando le ponen en la cabeza? Todo eso, si ustedes no lo quieren tener almacenable, lo ponen como un bien, le quitan arrastrar el inventario, y esa parte se va directamente al gasto, o bueno, a la cuenta que ustedes quieran, al momento que se haga la compra se va directamente al gasto, sin necesidad de darlo de baja.  Pero ahorita, como es una planta, sí le voy a poner que es un bien. Bueno, el servicio, el servicio, pues ya son los que les había comentado.  Oye, Emiliano, una pregunta ahí.
+
+28:37 - SALA VIP
+  ¿Y podemos tener el control de los mínimos para poder lanzar algún tipo de orden? Si es así, ¿se tendría que rastrear el inventario o no?  sí, porque eso ya se basa en movimientos.
+
+28:51 - Emiliano  Lorenzano
+  Sí, ya se basa en movimientos, y ahí en dado caso, Robert, si lo quieren manejar... ¿Eso sería para las plantas?  No sé, no sé.
+
+29:07 - SALA VIP
+  Una pregunta para saber si algún, por ejemplo, las cofias o algún otro tipo que manejan en el cooler que lo quieran tener bien controlado y saber cuánto se está gastando que pudiera estar controlado.  Mira, Roberto, buenos días.
+
+29:27 - Jorge  Obregon
+  Yo lo manejaría uno para el material, como tú dices, de las cofias, a lo mejor el material de limpieza, pero también yo le vería aplicación a la parte de inventarios de material de empaque para manejar mínimos y máximos.
+
+29:42 - SALA VIP
+  Sí, material de empaque, es decir, nos queda claro, creo que hasta incluso hasta las grapas, ¿no? Que son las que se necesitan.  Entonces, a esa parte sí. Yo me refería más a, no sé, a otro tipo de artículos que a lo mejor...  No sé si te alimentario, pero tal vez sí quisieran llevar, que te lanzara el control de mínimos, pudiera ser.  Sí, yo creo que sí sería el tema, como comentas, de las copias y el tema de las sanitas, material de limpieza, no sé, cloro, cuestiones de ese tipo.
+
+30:21 - Jorge  Obregon
+  ¿De eso del cloro también los quisieras tener como controlados?
+
+30:27 - SALA VIP
+  Para ver los consumos.
+
+30:31 - Jorge  Obregon
+  Emiliano, ¿cómo pudiéramos tenerlos? ¿Pudiéramos rastrear el inventario o pudiéramos quitarlo como para manejarlo de otra forma?
+
+30:39 - SALA VIP
+  Dime, Tania.
+
+30:42 - Tania Ortega Laureano
+  Sí, se pueden manejar los inventarios, normalmente es por unidad de medida, galones, dependiendo del tipo de bidón en el que se usan los líquidos de esta forma.  Sí, Robert, sin tema se puede llevar ese control, así como lo requieren.
+
+31:13 - Emiliano  Lorenzano
+  Y si quieren tener trazabilidad, también se le puede dar que tenga la trazabilidad solamente por cantidad. Hacemos la entrada en el sistema y lo que pudiéramos hacer ahí es que creamos una ubicación virtual de desecho para darlo de baja.  En esa ubicación virtual lo que se agregaría sería una cuenta contable, Chema, para afectar ahí a dónde se va esa salida.  Puediéramos agregar una cuenta analítica para ver a qué departamento se fue ese gasto. Y si se pudiera llevar, Robert, con eso damos el control para darlo de baja.  Al momento que... A verlos. Contadores, ¿no? Es que al final, si vamos a llevarla, si ahorita dicen que, bueno, lo que comentaba Jorge y Tania, que sí sería importante llevar eso, pues tendríamos que darlo de baja de alguna manera.  De eso no los podemos dar de baja por una venta, porque no los vendemos, es consumo interno. Entonces, ahí crearíamos un tipo de operación, ya sea consumo interno o, y se establece nada más la ubicación por área, por decirlo, sabes que este producto lo ocupó contabilidad, este producto lo ocupó este almacén, este producto lo ocupó el área de limpieza.
+
+32:44 - SALA VIP
+  Sí, en este caso debe de haber una persona encargada almacenesta de, que lleve el control de todos estos productos, pero.  Pero, pero no es para inventarios, es para el control interno. Sí, sería para control interno. Entonces, ¿cómo quedaría ahí, Emiliano?  ¿Así como lo estás poniendo, por cantidad o cómo sería?
+
+33:11 - Emiliano  Lorenzano
+  Es que si es para control interno, pues sí debería llevarse, para llevar el control interno, pues sí sería que se rastreen el inventario nada más por cantidad.  Porque si le quito esto, aquí lo único que tendría sería el control del gasto nada más. Sí tendría la compra y tendría la factura del proveedor para pagar, pero no habría registro de entrada ni a dónde se fue el producto.
+
+33:44 - SALA VIP
+  Pues sí, sí se necesita. En cuestión de naturagui, yo digo que ahí sí. No, no sé aquí en naturagui, no.  No, según yo sí. También para cuando nos va a dar un dato, pero también seguro que se requiere esa parte que no...  Nosotros tenemos un registro rápido de algún producto consumible y vemos y hago un ejemplo de cómo se ve la afectación sin tener rastreo de inventario y otro ya con rastreo de inventario y ya ustedes me dicen cuál escenario les les agrada más.
+
+34:20 - Emiliano  Lorenzano
+  Sí, ok. Bien, entonces aquí ya tengo el Bounty. El combo se aplica un poquito más, bueno, le he visto más uso en la parte de un restaurante o cocina, ¿no?  Sabes que vamos y voy a pedir un combo. ¿Qué voy a pedir? Una hamburguesa. Una hamburguesa, unas papas y un refresco.  Ese es mi combo. Bueno, en nuestro caso, el naturagui sería como el paquete de materiales que usamos para facturar.
+
+34:54 - SALA VIP
+  ¿Cuál sería el paquete? Pero ahí sería como el paquete de las... Pero ahí lo harías aquí o lo harías como en el billete de materiales.  También es el billete de materiales. Más que sea, sé si es en esa parte también, o eso es independiente.  Sería parte, sería parte, lo que comenta Robert sería parte de la lista de materiales, sería parte, y eso lo veríamos ya, creo que más adelantito, porque vamos a contemplar costos de los insumos, ¿no?
+
+35:26 - Emiliano  Lorenzano
+  Para sacar el costo final de, ya de lo que se arma. Después tengo una política de facturación. Esta política de facturación es para la parte de ventas, dice, sobre cantidad ordenada o sobre cantidad entregada.  Yo genero un pedido de venta a un cliente y la facturación, si la dejo sobre cantidad ordenada, yo le voy a estar facturando sobre lo que él me pidió, no por lo que yo entregué.  Por ejemplo, no sé, al cliente de Walmart... Le voy a vender mil cajas de fresa. Solamente le entregué 800 cajas.  Mi facturación va a salir por las mil, no por las 800 que le entregué. A mí me conviene que me pague las mil, ¿no?  Pero al cliente no le conviene que yo le cobre las mil y que nada más le haya entregado 800.  Caso contrario, ¿no? Si lo pongo sobre cantidad entregada, es que el cliente me va a pagar realmente solo por lo que yo le estuve entregando, ¿no?  En este mismo ejemplo, si él me pidió mil cajas, pero solamente le entregué 800, entonces mi facturación saldría con 800 cajas.  Es lo correcto. No hay punto de ver.
+
+36:42 - SALA VIP
+  Aquí, ¿cómo lo manejan ustedes? Prácticamente lo he entregado. Ah, bien.
+
+36:48 - Emiliano  Lorenzano
+  Entonces lo dejamos así sobre cantidades entregadas. Aquí viene la opción de rastrar inventario. Pero y la merma, por ejemplo, hablando ahí del multirale.
+
+36:59 - SALA VIP
+  La merma. Merma, no, la merma ni siquiera se factura. O sea, tú vas a tener como recibido prácticamente mi entrega menos merma es lo que voy a recibir.  No la estoy contemplando al momento de darle ingreso a mi sistema. La primera merma, que es la de traer.  Bien.
+
+37:21 - Emiliano  Lorenzano
+  Entonces, aquí en Rastrario Inventario, si yo le pongo Rastrario Inventario, si le activo la palomita de Rastrario Inventario, lo que va a generar el sistema, voy a duplicar un poquito mi página, y me va a generar justamente ese historial de movimientos.  Me va a decir, ah, mira, este fue por un ajuste de inventario, esto fue por una entrada. Entonces, aquí tendríamos todos los movimientos del producto.  De dónde entró, si se pasó de un almacén a otro, si se fue a un productor. Aquí quedaría el historial.  Para eso nos sirve el rastrar el inventario. Y si lo pongo por cantidad, pues me va a tener el inventario por cantidad.  Si lo pongo por número de serie único, esto creo que viene un poquito más aplicado para electrodomésticos. Por ejemplo, una computadora tiene un número único que no se comparte con otra computadora.  Ahí sí pudiera entrar el número de serie único. Pero para nuestro caso, nosotros ocupamos más lo que vendrían siendo los lotes.  ¿Por qué? Porque nuestro vivero nos manda un camión completo de plantas. Y ese camión completo de plantas pertenecen a un solo número de lotes.  Entonces, ustedes van a aplicar más por lotes. Esta parte no... ¿Sí? Adelante. Perdón, Emiliano.
+
+38:52 - SALA VIP
+  Duda. Por ejemplo, ahí sí lo tenemos que tener identificados por lotes, como comentas. Pero también, por ejemplo, no... Todos los lotes traen la misma cantidad de plantas en ocasiones.  ¿Cierto, Victor? O añadiendo ahí a Rafa, nos pueden entregar de diferentes lotes en el mismo camión.
+
+39:13 - Victor De La Parra
+  No, no hay problema.
+
+39:14 - Emiliano  Lorenzano
+  Cuando se hace la recepción, ustedes establecen, si les traen una hoja ellos, ¿sabes qué? Te traemos la planta Bounty y traemos tres lotes con tal cantidad, ustedes en el sistema registran los tres lotes y especifican la cantidad que trae cada lote.  No, no hay problema. Y al momento que lo rastremos, ¿me va a aparecer el número del lote y cuántas plantas fueron?
+
+39:38 - SALA VIP
+  Sí.
+
+39:41 - Emiliano  Lorenzano
+  Ok, aunque ya.
+
+39:43 - SALA VIP
+  Entonces tendría lo mismo, bueno, es como combinado al momento de rastrarlo porque te va a identificar lote y cantidades, ¿cierto?
+
+39:52 - Emiliano  Lorenzano
+  Sí, incluso esta parte, bueno, ahorita no lo tengo habilitado, pero la parte... Los lotes también nos puede ayudar mucho para el tema, bueno, contable.
+
+40:05 - SALA VIP
+  ¿Por qué?
+
+40:07 - Emiliano  Lorenzano
+  Para que ustedes tengan el costo real de cada entrada. No sé si se habrá platicado con Yuri cuál va a ser el método de costeo que van a utilizar, si va a ser promedio, el PEDS o estándar.  Pero si nosotros tenemos una evaluación de inventario por lotes, cada lote va a traer su costo real. Si, por ejemplo, yo hoy compré planta Bounty, por decirlo así, me la vendieron en 5 pesos la planta y fui con otro vivero y él me la vendió 5.5, ya no se va a promediar, sino me va a dar el costo real de la planta.  Cada lote, por ejemplo, el lote A me costó 5, el lote B me costó 5.5. Creo que eso les iba a ayudar mucho para los temas que tienen de importación y la cantidad a mano, pues vendría siendo la cantidad que tenemos en inventario.  Ahorita tengo cero porque pues no he comprado nada. El precio de venta, ese es el precio que vamos a establecer.  Recuerdo en una sesión que platicaba Rafa, sí, no. Ah, ¿me recuerdas el nombre Robert del contador? La parte de Chama.  Chama. No, el que está ahí con ustedes, el que tiene la tallera blanca.
+
+41:37 - SALA VIP
+  Ah, Rafa. Ah, sí, Rafa, ¿no? Sí. Que ustedes establecían un precio.
+
+41:46 - Emiliano  Lorenzano
+  Así es. precio, ¿no? Que no era el final, pero era el que le servía para poderle como presentar al cliente.  Entonces aquí deberíamos de ponerle el precio de la planta. No sé, Robert, o qué sería el Precio, así, el que tienen, el que no es real, el que utilizan como sugerencia.
+
+42:08 - SALA VIP
+  Eso, o sea, 5.60, un ejemplo, cada una de las plantas. Ahí está. Aquí me dice que es por unidad.
+
+42:18 - Emiliano  Lorenzano
+  Aquí le puedo cambiar, le puedo poner pieza, o lo dejo unidad, como ustedes gustan. Después me dice los impuestos de venta.  Aquí por default viene al 16, no sé qué impuesto se maneje para las plantas. ¿Viene tasa cero o exento?
+
+42:40 - SALA VIP
+  Sí, Hay diferencia entre cero y exento. Ningún es impuesto, pues, pero no te generan algo justo. Acá está, mire.  El impuesto de venta es...
+
+43:00 - Emiliano  Lorenzano
+  Vas a hacer, el costo, el costo, si tendrán que agregar un costo inicial, este, si, por ejemplo, cuatro pesos, ejemplo, cuatro, les platico un poquito por qué el costo sí es importante, cuando nosotros vayamos a hacer la carga de los productos, tiene que traer un costo, yo sé que puede variar, dentro del transcurso de estos meses puede cambiar el costo, a lo mejor de la planta no, pero de los que son de materiales sí puede cambiar el costo.  Antes de que se haga la carga de inventario, tendríamos que hacer actualización del costo, porque cuando nosotros apliquemos el inventario en sistema, acá en la parte de las ubicaciones, nos va a  El valor que tiene nuestro inventario y prácticamente este valor debería coincidir con lo que ustedes tienen en balance. Puede que ahí vaya a haber algunas diferencias, pues, pero siempre hay diferencias y ahí lo van a ajustar con Yuri y no sé, lo van a mandar a otra cuenta, pero, pero sí, para eso nos sirve este costo y nos va a dar el valor.  Por ejemplo, aquí dice, ¿no? Tengo una libra nacional con el lote tal y me dice que en valor tengo 700, pero ahora tengo una libra nacional con el lote 12.35, tengo 10 en existencia y el valor son 1.400.  Entonces, para eso nos sirve el costo.
+
+44:51 - SALA VIP
+  Ah, sí. Por ejemplo, Liliano, duda, ¿ese costo nos tendremos que estar metiendo a cada uno de los productos para modificarlo o al momento que le demos entrada podemos ingresar?  ¿Cuál costo?
+
+45:01 - Emiliano  Lorenzano
+  Si manejamos el método de costeo promedio, cuando nosotros realicemos una compra, se va a estar promediendo con lo que hay en el inventario y con lo que viene la última compra.  Entonces, sí se actualizaría este costo. Ok, las cartas que vamos a utilizar, ¿se podría decir qué es el específico en su defecto?
+
+45:23 - SALA VIP
+  ¿Cuál sería el específico? Pets. Bueno, el Pets y el estándar. Ajá, Pets.
+
+45:30 - Emiliano  Lorenzano
+  Déjame checarar si por aquí lo tengo, el método de costeo. Mira, el método de costeo voy a manejar precio estándar, que ese se queda fijo y yo lo modifico cuando yo quiera.  El Pets, que serían las primeras entradas, primeras salidas y el costo promedio. Sería Pets. Entonces, ahorita yo le puedo poner el que sería el Pets y ya lo dejamos así.
+
+45:57 - SALA VIP
+  Ok, por ejemplo, ahí... Ajá, sí, regresamos. Entonces, prácticamente me tendrá que estar, bueno, mi duda es, ¿vamos a cambiar el costo en cada uno de los productos o cuando le demos entrada vamos a ingresar el nuevo costo si es que cambió?  Esa es mi duda. Eso ya lo tomaría en base a la compra.
+
+46:16 - Emiliano  Lorenzano
+  A la entrada, se podría decir. Sí, Irta, igual veríamos unos ejemplos porque para ver si lo manejamos así o manejamos la evaluación por, por, por lotes para que tengan el costo real de cada, de, de cada lote.  Ok. Bien. Ahorita entramos un poquito a ver esta parte de las categorías. Ahorita no lo voy a tocar, pero sí lo vamos a, a, a revisar.  Después tengo el impuesto de la compra. Ahora, prácticamente debería ser el mismo de la, de la venta, ¿no? Vamos a poner acá, este...  Acá está. Va a la tasa cero. Si llevara otro impuesto, aquí podemos agregar, ¿no? Incluso una retención. Ok.
+
+47:33 - SALA VIP
+  Viene del 10.
+
+47:41 - Emiliano  Lorenzano
+  Ya incluso si algún impuesto no estuviera creado acá, pues ya los podemos crear, ¿no? Para agregarlos. Sí, Víctor. No, me respondiste ahí.
+
+47:53 - Victor De La Parra
+  Si se podía hacer un impuesto o alguna retención específica, en el dado caso que no estuviera. Sí, eso ya lo.
+
+48:00 - Emiliano  Lorenzano
+  Estaríamos creando en contabilidad, ya daremos la configuración y agregamos su cuenta contable, correctamente. Después viene la opción de la categoría.  En la categoría, ¿qué nos pide? Es lo que les comentaba, ¿no? Bounty, pues yo lo considero que viene siendo una planta.  Entonces le puedo poner aquí categoría plantas. O aquí podemos agregar raíz desnuda o cepellón para separar esos dos tipos de plantas que manejan.  Voy a irme a la otra página. Voy a entrar a Inventario. Voy a dejar pausado un poquito esta configuración porque la categoría va relacionada con esta parte.  Voy a entrar aquí, Inventario, Configuración, Categorías, Aquí. categorías voy a dar de alta el nombre que le voy a aplicar.  Aquí puedo agregar eso, que decía cepellón, creo que era así, o raíz desnuda. Aquí en cepellón yo quiero que el método de costeo aplique que sean primeras entradas, primeras salidas.  Esta devaluación del cierre, esto viene para la parte de la generación de la póliza. Esta le voy a poner que sea permanente al facturar.  En este punto lo van a platicar bien con Yuri en la parte de contabilidad. Aquí en la cuenta de ingresos está la 401, que es ventas y servicios grabados a la tasa general.  La cuenta de gastos, la que se va a utilizar por default, Sería la 601, que dice otros gastos generales, pero aquí regularmente ustedes usan la que dice costo de venta, no la 501.  Igual que tal, le voy a poner esta, pero esto ya se puede configurar. Y aquí dice la cuenta de inventario, pues sería la 115.  Y esta variación del inventario dice que es la 501. Y ahí en el tema de las cuentas contables, esto ya lo rehusaríamos en el plan que van a, en el plan contable que le van a pasar a Yuri.  Aquí en la estrategia de remoción, yo puedo poner que son primeras entradas, primeras salidas, últimas entradas, primeras salidas, la ubicación más cercana, bueno, aquí son menos paquetes, primero en expirar, primero en salir.  Entonces, para ustedes sería... Lo primero que entra es lo primero que tiene que salir, ¿no? Bueno, aquí tendríamos que checar si vamos a manejar embalajes, que vengan por, no sé, paquetes de 6, paquetes de 12.
+
+51:23 - SALA VIP
+  Pero si no, ahorita lo dejamos así. Ya tengo mi categoría, que se llama CPEYON, y puedo crear otra.
+
+51:32 - Emiliano  Lorenzano
+  Le puedo poner que sería la raíz desnuda. Raíz, perdón, raíz. Igual aplicaría lo mismo, sería PEDS, al facturar. Aquí nada más le quito que sería la 501, costo de venta.  Ahí está, ya tengo dos. Dos familias para la parte de las plantas. Aquí el Bounty, creo que sí lo tenían en una presentación que tuvimos la semana pasada, creo, una de las que tuvimos.  ¿A qué familia entraría? ¿Sería Cepellón? Tanto Cepellón como Raíz. ¿Ah, sí aplica para las dos? Puede aplicar para las dos.  Entonces aquí lo que pudiera yo manejar, pudiera ponerle aquí, está para el ejemplo, planta, ¿no? Y aquí para no poner otra Cepellón o Raíz de Nuda, le puedo poner entonces planta.  Sí, que quede como general. Así. Ya después aquí viene la referencia que vendría haciéndole SKU. ¿Qué SKU tiene el Bounty?  ¿Con el código corto cómo lo diferencia? En algún SKU. Creo que es un código de tres dígitos, creo que es 651 o algo así.
+
+53:22 - SALA VIP
+  651. Ah, perdón, ya, 030. Bounty 030.
+
+53:30 - Victor De La Parra
+  ¿Así?
+
+53:33 - Juan Pablo Cholico (naturprime.mx)
+  Bueno, sí, es el nombre que le ponen al, ¿cómo se llama?
+
+53:36 - Victor De La Parra
+  ¿No? La variedad es el código que tiene. Bien, 030. Aquí pudiéramos agregar el código de barras.
+
+53:44 - Emiliano  Lorenzano
+  Por ejemplo, cuando nosotros recibimos la planta del vivero, ¿ellos traen alguna etiqueta que venga con código de barras? Mmm.  Lo que yo recuerdo.
+
+54:02 - Victor De La Parra
+  Bueno, es que si. Posiblemente en la caja, posiblemente en la caja.
+
+54:07 - Emiliano  Lorenzano
+  Ah, si traen un código de barras, lo pudieron establecer acá, el detalle que si ese código de barras no es genérico dentro de todos los viveros, pues no nos pudiera como ayudar mucho, porque.  código de barras toma el sistema EAN o qué es? Ay, no recuerdo cuál era el que tomaba, játelo, te lo averiguo acá, creo que aquí está.  Porque hay uno máster que es por caja, hay otro que es por producto.
+
+54:39 - Juan Pablo Cholico (naturprime.mx)
+  Por ejemplo, los materiales con plantas va a decir, esta caja tiene 100 plantas adentro de esta caja o de esta, y ahí el otro, ese EAN 13 y el EAN 16, creo, si no me recuerdo.  Pero nada más a ver qué código de barras es el que identifica alguno. Sí, igual ahorita te lo averiguo porque si lo.
+
+55:00 - Emiliano  Lorenzano
+  Tiene acá, para no tardarme ahorita en buscarlo, pero acá en la parte del código de barras, si nosotros le ponemos, no por ejemplo, acá esto, supongamos que este es el código, este es el número que nos da en el código de barras que trae el, la caja o que nos da el vivero, perdón, una vez que nosotros tengamos esto, aquí tengo este módulo que se llama código de barras, aquí en las operaciones tengo esta que se llama recepciones, y aquí tengo el, bueno, tengo ahorita que se llama, el almacén lo puse como Berry, ¿no?  de Naturberry, esta es la entrada 3, y aquí yo pudiera escanear el lote que tiene el producto, entonces aquí ya lo va a agregar.  O pues pudiera usar este y aquí nada más le voy dando, ¿sabes qué? Y aquí valido la entrada. ¿Es como darle entrada a esa orden de compra?
+
+56:15 - SALA VIP
+  Sí, es para dar la entrada a la orden de compra.
+
+56:20 - Victor De La Parra
+  Ya si lo queremos utilizar también para las salidas, para el embarque, también lo pudiéramos utilizar.
+
+56:27 - Emiliano  Lorenzano
+  Tenemos este de órdenes de entrega. Aquí va a estar la operación de embarque. La abrimos y escaneamos todo lo que vamos a enviar, ¿no?  A nuestro cliente. Y ahí podríamos utilizar el mismo código de barras que trae del... Ah, no, ya ahí tendríamos que crear un código de barras.  Uno sería para la recepción y otro sería para la salida, porque la planta trae un código de barras diferente y la fruta ya...  Y ahora sí, la fruta como tal, tendría otro código de barras.
+
+57:08 - Juan Pablo Cholico (naturprime.mx)
+  Emiliano me pregunta, esa plantilla que es tan plantilla, ¿es la plantilla básica donde damos de alta un producto? Sí.  ¿Y a esa plantilla se le pueden agregar campos si fuera necesario? Sí, justo así como comentó Robert.
+
+57:24 - Emiliano  Lorenzano
+  ¿El origen de la mercancía, por ejemplo? ¿El origen de la mercancía qué vendría siendo? Si es de Estados Unidos, si es de México.  Porque vamos tener fresa, por ejemplo, ahorita tienes bonti, ¿no?
+
+57:43 - Juan Pablo Cholico (naturprime.mx)
+  Y esa bonti la puede hacer un vivero en México o la puede hacer, a nosotros no se nos da mucho el caso, pero si tuviéramos en un futuro plantaciones en Baja California, sería más factible que tomáramos la planta de California que del centro del país.  Entonces tendríamos planta que viene... Tiene de origen americano y planta que es mexicana. Por temas de IMEX, va a tener materiales que están importados en Estados Unidos, como cajas o clamshells o alguna situación de algún producto de allá y otros que sean de aquí.  No digo que sea el caso, pero puede ser que en algún momento, por alguna estrategia, nos convenga más tener producto de origen americano que producto nacional.  Entonces, y en el caso específico de un servidor, nosotros tenemos fresa 8x1 libra de origen nacional y fresa 8x1 de origen americano.  Es la misma descripción, pero es diferente origen y diferente tratamiento. ¿Pudiera agregar algo adicional? Porque si no, pues lo podemos agregar en el mismo código del producto como lo hace Farms o como lo hace NBG que le pone 8x1 y al final le pone una MX o una US para identificar.  ¿Cuál es? Pero si al momento de hago una tabla, yo les digo, dime todos los productos que importé, tenemos la oportunidad de decir por origen, entonces ya me puedo meter al origen y puedo decir todas las de México o todas las de Estados Unidos.  Sí, o incluso ahorita vemos otra opción, a ver si nos puede ayudar también.
+
+59:19 - Emiliano  Lorenzano
+  Gracias. La empresa, aquí viene que dice, si no le pongo nada, está visible para todas las empresas. Si esta planta solamente la voy a ocupar en Naturberry, le pongo Naturberry.  Y estaría bloqueada para Naturberry y Naturberry. Entonces, esta la voy a dejar libre porque creo que sí se van a ocupar.  Aquí en notas internas, pues yo puedo agregar alguna información de esta planta, ¿no? Pero sería nada más para puro interno, no tendría algún oso esta nota.  Ahora viene aquí la opción de ventas. En ventas viene aquí una descripción para la cotización. Por ejemplo, cuando nosotros compramos una computadora o un celular, viene con las especificaciones, ¿no?  Ah, pues la computadora tiene, no sé, 16 de memoria RAM, un tera de disco duro, tiene una tarjeta gráfica, no sé, y la pantalla es HD, ¿no?  Aquí ustedes podrían agregar alguna descripción si ustedes quisieran que aparezca en la parte de cuando le estén cotizando al cliente o cuando le vendan, ¿no?  Aquí en la etiqueta pudiera crear, este, no sé, esto es lo que decían, ¿no, Juan? Voy a ponerle nacional.  Le agrego un color. Y ya está como nacional. Voy a guardar este registro y vamos a visualizar qué función tiene eso.  Ya que en la parte de... Aquí tengo esta barra de búsqueda donde puedo buscar por el nombre de producto, por tipo de producto, categoría.  Y aquí me da otras opciones para buscar. Entonces le puedo aquí poner por etiqueta. Y aquí me aparecen los que son nacional y me dice que solamente tengo un producto.  Esto lo pudiera yo poner en forma de lista y también me lo da, ¿no? Nacional. Incluso pudiera yo exportar solamente lo nacional.  Vengo acá y lo exporto.
+
+1:01:43 - Juan Pablo Cholico (naturprime.mx)
+  La ficha técnica también del producto supongo que se puede hacer a nivel campo, no solamente nota. Sí, sí, sí se puede agregar un campo.
+
+1:01:54 - Emiliano  Lorenzano
+  Yo lo mostraba pues por si se pudiera ocupar esta de la función de las etiquetas.
+
+1:02:00 - Juan Pablo Cholico (naturprime.mx)
+  Sí, o sea, pensando en una cotización, es importante para el cliente, por ejemplo, decirle, fresa de 8x1 empacadas en pales de 120 cajas, en el caso comercial.  Y en el caso contable, Rafa, yo recuerdo que ustedes hacían paquetes, ¿no? De cuántos, cuánta caja, cuánto clamshell, cuántos, el palet y todo el paquete que conforman los 120 cajas de fresa, ¿no?  Sí, es el billete de materiales.
+
+1:02:34 - SALA VIP
+  El billete de materiales. Exactamente. Ya al momento de que salga la factura, probablemente te va a decir cuántas cajas y cuántos materiales necesitaste para poder completar esas cajas.
+
+1:02:45 - Juan Pablo Cholico (naturprime.mx)
+  Y tomando ese billete de materiales como ejemplo y pensando en el IMEX, no es importante tener como el billete de materiales, pero configurado en cada producto.  Sí, sí vamos a tener una lista de materiales, pero ahorita estamos en la creación como tal de los productos.
+
+1:03:08 - Emiliano  Lorenzano
+  Todavía no entramos a ese detalle de la lista de materiales. A ver, explícame ahí qué diferencia hay, no más para entenderlo.  Es que para nosotros poder hacer operaciones dentro del sistema, pues tendríamos que tener un catálogo de productos, ¿no? Ajá.  Una vez que ya tenga el catálogo de productos, ahora sí yo puedo crear la lista de materiales, para lo que tú dices.  De qué se va a llevar tarima, de qué empaque va a tener, de cuántas cajas se va a conformar ese producto para la venta.  Ok, gracias. Bien. Después tenemos acá la parte de los productos opcionales. Ustedes entran a una tienda en línea, ¿no?  Por decirlo, Mercado Libre. Van a comprar, no sé, un celular y abajo les dice productos opcionales, que con ese celular pueden comprar unos audífonos, pueden comprar un cargador o una mica, no sé, para el celular.  Entonces, esta de productos opcionales, yo le puedo dar ese uso. ¿Sabes qué? Le voy a vender al cliente el bounty raíz, pero también me puede comprar también una libra nacional.  Sería como sugerencia, pues, en dado caso, que enviáramos por correo electrónico la cotización. Ah, sí, Jorge.
+
+1:04:41 - Jorge  Obregon
+  En este caso, ¿se podría aplicar, por ejemplo, en la planta para el cobro de la caja de plástico en la que va la planta, por así decirlo?  El cobro de la caja, este...
+
+1:05:01 - Juan Pablo Cholico (naturprime.mx)
+  No, yo creo que ahí más bien lo que me están enseñando es como si fuéramos a estar publicados en Mercado Libre y decirle, si no se lleva esto, pues llévese esto, que no es nuestro caso.  Como accesorios, pero no aplicaría como eso. Sí, pues no, es como para abrir una tienda en línea y decirle, si no te llevas los audífonos, te puedes llevar un cargador para tus audífonos también, como cuando haces ten, este, pero, pero no, por lo que entiendo, no es el billete de materiales, eso va aparte.
+
+1:05:32 - Emiliano  Lorenzano
+  No, no, entonces, pues no nos serviría nada más, lo expliqué y en los embalajes comentamos que no íbamos a utilizar por el momento.  Después aquí viene la parte de los precios, este precio, pues ya tenemos uno principal acá, ¿no? Con el cual vamos a hacer referencia.  Si nosotros utilizáramos listas de precios en el sistema de decir, ¿sabes qué? Por cliente, por software. Por zona, por estado, vamos a manejar diferentes precios, entonces si agregaríamos por ejemplo una lista de precios, sabes que para la zona norte el precio de la planta estaría en 7 pesos, para la zona centro el precio de la planta estaría en 5 y para la zona sur el precio de la planta estaría en 9 pesos.  Ahí pudiéramos usar lo que vendrían siendo las listas de precios.
+
+1:06:37 - SALA VIP
+  Aplica como para los viveros, si los viveros, cada vivero nos vende de diferente precio. Es que este es un precio de venta, no un precio de compra.  Sí, este sería para la venta, para la venta. la venta, sí, para la venta.
+
+1:06:55 - Emiliano  Lorenzano
+  Después tenemos esta opción que dice compras, aquí puedo agregar un... Por ejemplo, aquí puedo agregar un proveedor, tengo a Xochitl Casas, que es el proveedor principal, y después tengo, bueno, aquí creo que el proveedor principal debería ser NVG, ¿no?  En este caso, sí. Sí, entonces, aquí tendríamos que crear NVG. La cantidad, pues vamos a poner que a partir de uno, en qué presentación, pues sería sobre piezas, y el precio unitario que nos vende la planta NVG sería de cuatro pesos.  La moneda, si es en pesos mexicanos o en dólares. Se va a hacer en, serían pesos mexicanos y el plazo de entrega, cuánto tiempo tarda NBG para enviarnos la planta, no sé, una semana, un mes, tres meses, la N cantidad de días que se tarda el proveedor, aquí lo podemos establecer, 10 días.  Ahorita voy a poner a este, a este como ejemplo nada más, Xochitl, Xochitl Casas, ahí está. Para una pieza, él nos lo va a cobrar en cuatro pesos.  Aquí nos pide la política también de facturación con la parte de los proveedores. Política de control sobre cantidades ordenadas o sobre cantidades recibidas.  La factura en sistema se estaría creando dependiendo de esta configuración. Por ejemplo, supongo que ustedes van a aplicarla de sobre cantidades recibidas, ¿no?  Ustedes pagan sobre lo que están recibiendo. Sí, no por lo que solicitaron en un inicio y no les entregaron.  Entonces vamos a dejar sobre cantidad recibida. Incluso aquí también pudiera agregar una descripción de la compra. ¿Sabes qué? No sé.  Ahí está un ejemplo, ¿no? Cuando ustedes le envíen al proveedor una orden de compra por esta planta, va a salir esta descripción, que la planta pues debe traer eso, ¿no?  Pueda recibir. Después en inventario, aquí dice que quién es el responsable. Aquí tendríamos que dejar, pues yo supongo que va a ser Víctor, O ahorita voy a dejar aquí al administrador.  Si nosotros dejamos un responsable y manejamos lo que vendrían siendo fechas de caducidad para saber cuándo hay que dar de baja ese producto, el sistema va a generar una alerta de decir, sabes que este producto ya hay que sacarlo del inventario.  entonces para eso sería el responsable, para que le llegue la notificación. Aquí nos pide el peso. ¿Cuál sería el peso aproximado de una planta?  No, es irrelevante eso.
+
+1:10:52 - Juan Pablo Cholico (naturprime.mx)
+  ¿Es irrelevante? Sí. Bueno, entonces creo que también el volumen.
+
+1:11:01 - Emiliano  Lorenzano
+  Sí, porque eso es como para las paqueterías que sacan peso, volumen y te cobran ahí el envío. Sí, esto también se utiliza dentro del sistema si generarános una carta aporte, por allá que se ocupa el peso.  Pero ¿sabes qué? Aquí sí el peso sí nos vas a, sí lo vamos a ocupar para los productos que nosotros mandamos de exportación, lo que vendemos en Estados Unidos.  No, tampoco. En la factura de comercio exterior trae ahí una parte del peso.
+
+1:11:34 - Juan Pablo Cholico (naturprime.mx)
+  entonces necesitaríamos peso neto y peso bruto, pero es una ficha, por eso te decía que es importante que tengamos el catálogo, o sea, para nosotros el alta del producto no es una ficha comercial nada más, es la base del control operativo que tenemos en la compañía, logístico, comercial, de trazabilidad.  Entonces, si el producto se da como un catálogo simple, pues sí, ahí el sistema no nos va a funcionar.  Pero si lo hacemos como una ficha técnica que te ayude a dar la información que va a necesitar Tania en las exportaciones o el mundo de las exportaciones en donde vamos a declarar peso bruto y peso neto de la caja de una libra que tiene 8 libras de peso neto y 9.5 libras de peso bruto, tendríamos que mover esta plantilla porque no podemos poner un solo peso.  Sí, justamente como Robert lo comentó al inicio de la reunión, que aquí pudieran exponer qué campos iban a ocupar para la alta.  Aquí lo importante del ejercicio es ver cuáles son los campos que tienes ya en plantilla y nosotros tomando nota de lo que vamos a necesitar pasarte de información para que la alta, el producto quede completa.  No es lo mismo un producto exportado que la planta o que un material cada tipo de producto. Para mí serían productos que vendemos, plantas que compramos, de materiales que compramos y productos de servicios.  todo lo que hemos facturado en alguna ocasión dentro de contabilidad, algún servicio contable, intereses o algo, tendríamos que tener nuestras plantillas personalizadas para poder subirlas al sistema.
+
+1:13:22 - Emiliano  Lorenzano
+  Sí, ya desde que tuvimos la reunión con Víctor ya hace tiempo, se les comentó que ahí en la plantilla también agregaran las columnas adicionales, haciendo referencia a qué eran campos que iban a ocupar en el sistema.  Ok.
+
+1:13:38 - Juan Pablo Cholico (naturprime.mx)
+  Pero si querías poner un kilo o un kilo, ¿no? Sí, vamos a ponerle un kilo. Bien.
+
+1:13:46 - Emiliano  Lorenzano
+  Los plazos de entrega del cliente, lo voy a dejar en cero porque cada cliente tiene un plazo distinto de entrega.  Realmente creo que va más por urgencia que respetar un plazo de entrega. No, no, no, no, no. Bien, esto es lo que les comentaba.  Esto viene un poquito más para el tema de los contadores. Dice evaluación por lote o por número de serie.  Si yo marco esta opción que este producto va a tener una evaluación específica, cuando yo genere una compra, se va a crear un lote en el sistema y ese lote va a guardar el costo real que tuvo en esa compra.  tendríamos que ver un ejercicio ya completo para que lo, bueno, para que se logre entender un poquito más. Ahorita no lo voy a marcar.  Esta parte del número de serie personalizado, realmente pues tampoco no lo vamos a ocupar nosotros porque pues ya nosotros ingresamos el número de lote que nos trae el vivero o el productor, pero lo que sí pudiéramos establecer vendría siendo una fecha de caducidad.  Aquí no sé si aplique tanto para la fruta, pero le puedo poner una, establecer esta fecha de caducidad y le pongo.  Aquí pues realmente yo no pudiera establecer un parámetro donde se pueda arrancar para establecer la fecha de caducidad, porque esa en teoría el productor cuando nos entregue la fresa o la fruta, él tendría que traer una fecha de caducidad, ¿no?  Pero lo que sí pudiéramos manejar nosotros es el consumo preferente. ¿Sabes qué? Antes de la fecha de caducidad tienes 10 días para el consumo.  Antes de la fecha de caducidad tienes 3 días para darlo de baja. Y la fecha de alerta de caducidad quiero que me la arroje con un mes de anticipación, con 30 días de anticipación.  Entonces cuando ya llegue a los 30 días, Antes de que llegue a la fecha de caducidad, el sistema nos va a mandar una alerta, en este caso al que esté marcado como responsable, de decirle, sabes que este producto ya está próximo a caducar, Aquí no sé si vaya a aplicar con ustedes, Víctor, para el tema de las fresas o de la fruta.
+
+1:16:24 - Victor De La Parra
+  Corrígeme si estoy mal, Juan Pablo, pero sí se maneja en la etiqueta una fecha de caducidad, ¿no? Pero como es, perdón, es que es el alta del producto, ¿no?
+
+1:16:34 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, el alta del producto, podemos, podemos revisarlo más adelante, si es necesario que lo pongamos ahí, donde podemos dar una fecha de vida en aquel, pero va a tener que ir ligado con la fecha de recepción.  A partir de que recibí, no en Bunting, pero sí en una fecha La que recibí el día de hoy, de ahí tendríamos que contar que tenemos 12 días de vida en aquel, ¿no?  Entonces, cuando la vea en la tienda y vea que la caja fue el lote tal, en el sistema podría yo atrasarlo y decir cuándo la recibí, ¿no?  Este, pero lo podría yo identificar desde el mismo sticker físicamente, ¿no? Entonces, como no tenemos stocks de inventarios, no tenemos la preocupación de que se nos vaya a echar a perder en el cooler, ¿no?  Pero... Sin tema, sin tema, Juan Pablo. Podemos buscarle un muro, ¿no?
+
+1:17:33 - Emiliano  Lorenzano
+  Si ahorita no se ocupa y más adelante ven que sí es factible, se puede activar y ya es como para activarlo.  Sí, para activarlo ya nos daría la opción de ocupar esa funcionalidad. Sí. Y para la última parte que sería la de contabilidad, aquí puedo establecer una cuenta de ingresos directamente sobre el producto.  Y una cuenta de gastos sobre el producto. Ahorita revisábamos que la parte de la cuenta contable yo la establecí directamente sobre la categoría de producto, ¿no?  Que vendrá siendo la planta. Aquí puse su cuenta de ingresos y la cuenta de gastos. Todos los productos que se relacionen a la categoría de planta van a utilizar estas dos cuentas.  Pero, por ejemplo, para un servicio, no sé, pago de renta o internet, ustedes pudieran establecer aquí una cuenta de ingresos o una cuenta de gastos para esos productos.  Y en la categoría, ustedes pudieran establecer... Ah, bueno, aquí ya tengo la de servicios. Bueno, tengo... Ah, sí, está.  Servicios. Ese creo que sí estaría con costo estándar. Sería al facturar. Y aquí ya pueden ustedes establecer... Pueden hacer omisión de estas cuentas y ya la pueden agregar directamente acá cuando sea un servicio.  Esta parte que dice de la categoría, que esta viene siendo la que ocupamos para el timbrado, aquí debería agregar el tema de la planta, ¿no?  ¿Cuál sería la clave que utilizan ustedes para las plantas o para las frutas? Bueno, ahorita le voy a poner que no existe en el catálogo, más para ejemplo.  Entonces le voy a poner que no existe en el catálogo, ya con esto ya me va a dejar timbrar en el sistema.  Y ahí está. Este ya lo habíamos revisado con Victor, serían los campos estándar que trae el sistema. Y claro que sí.  Si falta algún campo adicional a contemplar, se pueden agregar. Ahí entonces, Víctor, si nos pueden ayudar a gestionar, como lo que dice Juan, una plantilla para la parte contable, por todos los servicios que ellos tienen, qué campos ocupan, aparte del estándar, lo que tú ocupas para la parte de las plantas, y Juan, para lo que él ocupe, no sé si va a ser también para las Las plantas o frutas, y ahí sí, para que nos hagan la separación de qué campos van a utilizar.  Y faltan también los materiales. Sí, entonces ya tenemos...
+
+1:20:44 - SALA VIP
+  En el tema, perdón, Eni, Cholico, en el tema de los productos, como lo hemos platicado, se quiere estandarizar para que todo sea uniforme.  ¿Crees que tenga que haber alguna diferencia de los productos que... ¿Vayas tú a manejar en Naturprime? Conforme a los que nosotros vayamos a hacer como cuando sacamos o identificamos la fresa.
+
+1:21:11 - Juan Pablo Cholico (naturprime.mx)
+  Comercialmente no, o sea, va a ser fresa de una libra para Estados Unidos, exportada por Naturberry, fresa de una libra entregada por Naturprime.  O tienes dos clientes que le vas a entregar fresa de una libra, pero aquí viene el buen perro. Si esa fresa de una libra no tiene su ADN, ¿qué variedad es?  ¿De qué productor es? ¿Dónde la recibimos? Así, en las entrañas. No, no sirve. ¿Me explicó? No, no, no. Eso simplifica mucho, simplifica mucho el catálogo de productos porque yo te voy a tener Naturberry vende fresa de una libra, punto.  ¿Sí? ¿A quién se la vende? Ya eso es en la factura comercial. Entonces, te lo digo porque, por ejemplo, en SAP de Naturry Farm sí dicen fresa de una libra.  Tal variedad y al final le ponen en la descripción MX, ¿no? Que viene de México. Y además en el ADN del producto vienen los pesos, la ficha técnica del producto, el origen, la variedad, X o Y, ¿no?  El catálogo de productos se puede hacer tan grande o chiquito como realmente podamos simplificar la operación, porque al final de cuentas el cooler va a escoger un código que va a subir al cambio.  Entonces, ese código va a tener un palet de 120 cajas con diferentes variedades o diferentes productores. ¿Sí me explico?  O sea, depende todo lo que venga en las entrañas del producto y de los lotes, va a ser lo simple que puedas hacer el código o lo complicado que tienes que hacer el código para darlo de alta.
+
+1:22:55 - SALA VIP
+  Sí, yo creo que eso, tanto los chicos de Google Millán... Yo creo que ya lo tienen bien dimensionado de todo, la trazabilidad que debe de tener cada uno de los productos, pero me refería más como al nombre o a la estandarización.  No, eso está sencillo.
+
+1:23:13 - Juan Pablo Cholico (naturprime.mx)
+  Es fresa de una libra, fresa de dos libras, fresa stem, fresa 8.8, fresa orgánica, fresa greenhouse, fresa greenhouse, H&B.
+
+1:23:24 - SALA VIP
+  La Mikey dice Giovanna. Sí, pero la Mikey no la tienen aquí, o sea, Naturberry no la tiene, nosotros la agregaríamos, pero como fruta de importación, pero sí.  A eso, a eso, justamente a eso me refiero, o sea. Pero la podemos vender como fresa Mikey, porque en algún, por eso vuelvo a lo mismo, depende del ADN, de cómo se conforma el sistema.
+
+1:23:48 - Juan Pablo Cholico (naturprime.mx)
+  Yo te puedo decir si uso una sola fresa Mikey o tengo que usar dos, la de importación y la nacional.  Porque qué tal si en el futuro tenemos una variedad que nos da el tamaño y el dulzor y podemos...  Vamos a Mayris, o decidimos hacer Mayris. Blueberries? Sí, las Blueberries es igual que la fresa, o sea, nosotros teníamos que darle un catálogo de, estos son mis productos, pero ya, el cómo vamos a conformar el código, si le tengo que poner variedad, o no le tengo, la ideal es que no se le tiene que poner variedad, ¿no?  Punto, ¿sí? Porque si no sería un pergamino cada factura, pero sí son, estamos hablando de 30 SKUs, aproximadamente, en productos de venta, productos que vendemos.  Incluyendo Blueberries, Arzamo, ahora sí. Todo. ¿De todo?
+
+1:24:40 - SALA VIP
+  No, por eso. Recuerda, Cholico, que la idea es traernos el catálogo que nos va a liberar Alfredo de los productos de Estados Unidos, entonces ahí nos necesita.  ¿Tendríamos también que tú nos indiques, aparte de los que vamos a traer de Naturipe, alguno que tendrías que considerar de Farms?  Sí, ya viendo el de Alfredo voy a entender cómo va ser el esquema, lo que se va a necesitar, ¿no?
+
+1:25:19 - Juan Pablo Cholico (naturprime.mx)
+  Y entonces homologaría los de los restos de las Berries o de Hortifrut a ese catálogo, si tiene algún código y si tiene alguna lógica ese código para meterlo.
+
+1:25:39 - SALA VIP
+  Victor, todavía no te han dicho, Alfredo, cuándo te va a entregar la lista de productos. No, no me ha comentado.
+
+1:25:45 - Victor De La Parra
+  De hecho, pues yo tenía, no la tengo, pues yo muy avanzada la de productos. Sí tengo, por ejemplo, lo que es caja compresa de una libra, con dos libras.  También tengo por ahí lo que son las tarimas, Chep, algunos otros productos, pero de Alfredo no. Ok, está bien, muy bien, gracias.
+
+1:26:09 - SALA VIP
+  Gracias, Cholico. Ya, es eso.
+
+1:26:16 - Juan Pablo Cholico (naturprime.mx)
+  Depende de la estructura del sistema.
+
+1:26:21 - Emiliano  Lorenzano
+  Incluso con lo que tienen, Victor, pudieron hacer ejercicios, les pudiera ayudar. Ya después se actualiza o se archivan esos y se suben lo que ya les mandaron, ya que lo que va a ser correctamente.  O sea, aquí mi recomendación es que pudiéramos ver, Robert, cómo es que el producto viaja por todos los flujos, ¿no?
+
+1:26:46 - Juan Pablo Cholico (naturprime.mx)
+  Es una compra de importación, la recepción en calidad, la venta, la entrega, la factura, o sea, sí, información. Dale de la alta del producto y cuál va a tomar de la alta del cliente para al final de cuentas ejecutar la operación.  Entonces yo creo que lo básico de aquí es identificar cuántos tipos de productos vamos a dar de alta. Que cada uno de los responsables, digamos, esta es información básica que necesito en la plantilla para dar de alta la fresa o la planta o la caja o el servicio que facturamos.  Y eso sería, porque ahorita, por ejemplo, lo que nos mostró es lo que tienen ellos como genérico. Ya habrá campos que ya tienen en la plantilla que podríamos usarlos o no, como en la vida de Ana Ket, pero a lo mejor ni los necesitamos y mejor quitarlos.  Y el peso sí, pero lo necesitamos más específico. Y así cada una de las cosas para que ellos se puedan poner a trabajar y decir, ok, esta es la plantilla y esto es.  Con los datos, esto es obligatorio, esto es opcional, ¿no?
+
+1:28:10 - Emiliano  Lorenzano
+  Sí, pues podemos revisar un flujo. Ahorita mi intención era justamente eso de crear una compra, revisar cómo se recepciona, pero pues ya no nos alcanzó el tiempo.  No, es que tenemos que trabajar, tenemos que tenerla con un ejemplo ya real, porque una planta y así lo estamos forzando porque no está hecha para una planta ni para una fresa.
+
+1:28:33 - Juan Pablo Cholico (naturprime.mx)
+  Sí, pero...
+
+1:29:03 - SALA VIP
+  Podríamos tener a lo mejor una reunión para ver si bien ya algunos datos ya lo tenemos atacado, por ejemplo, el tipo de variedad y cosas que tú Emiliano nos estás diciendo, sí, el peso puede ser afectado para comercio exterior y X, Z, como que nos vayas identificando en dónde pudieras estar esos datos y tal vez tener un poquito más el panorama de, en la plantilla, qué datos más pudiéramos agregar si es que sería en la plantilla del producto o en alguna otra parte de Odoo que ya no lo pudiera cubrir, no tanto del mismo producto.  Yo creo que sí, sí sería bueno tener esa reunión, Cholico, junto con los chicos de Odoo y... Y a armar la vida de un producto, todo lo que llevaría, porque ahorita sabemos que lleva el billete de materiales, sabemos que lleva el peso, pero a lo mejor esos otros datos puntuales que tú también quisieras controlar, a tenerlos bien identificados en el producto.
+
+1:30:22 - Juan Pablo Cholico (naturprime.mx)
+  Es que para sacarle como jugo a estas reuniones, ya todos los que estamos aquí, está involucrado Tania en compras, está Kiosvaldo, está Rafa, sabemos cuáles son los datos que necesitamos en nuestro catálogo, el que no sabe es Odu, Odu sabe cómo va a funcionar ese catálogo de productos dentro del sistema.  Entonces, nosotros tenemos que decirle, este es mi catálogo de productos que yo facturo, o que le doy entrada a una compra, y estos son los requisitos básicos de cada producto que debe.  De tener la plantilla de ese producto cuando le ingreso al sistema, para que él tenga la dimensión de sobre lo que va a trabajar.  No es lo mismo dar una orden de compra de caja que una orden de compra de fresa o de planta.
+
+1:31:16 - SALA VIP
+  O facturarle intereses a un productor, por dar una idea.
+
+1:31:21 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, ahorita ya vieron todos qué es lo que ofrece Odoo. Entonces, hagamos cada quien nos tratará de decirle, este es mi catálogo, estos son los requisitos, esta es la ficha técnica que tiene que estar.  si me dice Odoo, esta información va en esta parte del sistema y esta información va en lo que nos presentó ahorita, está bien.  Pero sí sabemos que ya tenemos toda la información completa del producto dentro del sistema. Y homologar, está fácil, no son muchos productos.  Recibir la lista de productos de Alfredo, lo único que... Es para ponerle nombre y apellido al producto, pero los datos que necesita ese producto, Edmundo, Tania y yo sabemos lo que necesitamos cuando hacemos una factura, hacemos una exportación o una importación y los debe de traer el producto o la compra.  Ya nos va a decir Emiliano, esto lo vas a meter cuando hagas la compra, esto ya lo va a traer el ADN del producto.
+
+1:32:22 - SALA VIP
+  Sí, sí, sí, justo al inicio en la reunión justamente les comentaba eso que, esto que nos está mostrando, nosotros levantáramos, levantáramos la mano para decir dónde yo necesito algún dato extra.  Entonces, tal vez sería, como indicas, Cholico, el que a lo mejor cada uno de nosotros se acercara con Víctor o con Chema para indicarle, ah, mira, esto es lo que yo tengo que tener a consideración.  Esto es lo que yo tengo que tener a consideración. Y con eso... Poder armarle ya un previo a los chicos de UDU y no nada más entregarle pues el estándar, ¿no?  Que ya no lo mostró.
+
+1:33:16 - Juan Pablo Cholico (naturprime.mx)
+  Es que justamente esa indicación, Robert, ya se tenía desde hace rato.
+
+1:33:21 - SALA VIP
+  No lo hemos hecho.
+
+1:33:23 - Emiliano  Lorenzano
+  De que en las tantillas nos pasaran los, agregaran columnas adicionales. Si ahorita están esperando de Alfredo, creo que comentaron, si no les han enviado, ustedes tienen información de lo que ocupan.  No importa que sea, mándenme dos, tres productos. Si Tania tiene tres productos, que nos mande tres, Juan que nos mande tres y Víctor que nos mande tres.  Cada quien que ponga en una plantilla de los que te pasamos, Víctor, sabes que estos productos sí se van a compartir en ambas empresas.  Entonces, estos productos solamente van a ser para nosotros. Prime o para la empresa. Y en la columna principal de los campos que son de estándar, hasta el final agreguen y póngalos en un color amarillo, verde, los campos que hacen falta para nosotros poder revisarlos y ver cómo lo pudiéramos manejar acá en el sistema o si realmente sí los vamos a crear como campos nuevos.  Sí. ¿Qué te parece, Robert?
+
+1:34:27 - Juan Pablo Cholico (naturprime.mx)
+  hacemos como tres, para sacar esta chamba es hacer tres grupos de trabajo. Uno en donde hablemos de pura, quienes venden fresas, ¿no?  Prime y Naturberry. Juntémonos con Tania, con el mundo y nosotros para cuidar que todos los datos que tenemos que tener cuando vendemos o exportamos, importamos o nacional una fresa estén dentro del sistema.  Y hacemos un catálogo. Ya al ponerle el nombre final donde vamos a homologar, eso nos lo va a dictar Alfredo y lo ajustamos y lo hacemos rápido.  Tania con compras y almacenes. El catálogo de todos los productos, cajas, frates, todos los materiales que ustedes utilicen, ok, es la misma, que esa creo que es la más larga, ¿no?  Tania otra vez con Eder y con ellos para la parte de compras. Tania con todo lo que necesita Naturagui, ¿no?  Ahí es donde entra Jorge, ¿no? Precisamente. Entonces, y así ya le entregamos un trabajo a ICO y falta contabilidad.  Todos los servicios o cosas que facturan, que también tienen que estar en el catálogo de servicios y sus datos que debe de tener.  Así ya le entregamos carnita a Uru para que se ponga a trabajar en las plantillas y cuando tenga una plantilla provisional, podamos hacer este ejercicio y ver cómo funciona y creo que estaríamos del otro lado.
+
+1:35:51 - SALA VIP
+  Sí, sí, creo que ya Víctor había trabajado en alguna plantilla de esa y hacemos las reuniones. Cada una de estas de cada uno de los sectores que veamos y vamos identificando ese dato para pasárselo tal vez en esta misma semana, entregárselos a los chicos de Odu, si nos juntamos el día de mañana, estaría suave.  Esto es para cuidar lo que no nos pasó con NVG y con FARMS, ¿no?
+
+1:36:20 - Juan Pablo Cholico (naturprime.mx)
+  Que están mal hechas esas bases y cuando sale el dato, sale con pesos diferentes, no jala bien el dato, hay unos que no tienen peso.  Entonces, esa matriz es bien importante para que ellos puedan trabajar porque ese es el primer dato que vamos a meter, la compra.  Sí, claro que sí.
+
+1:36:37 - SALA VIP
+  Sí, ahorita mando algunas tareas, sobre todo, por ejemplo, bueno, ya luego platico, pero por ejemplo con Sergio, que nos vaya dimensionando el peso de cada uno de sus materiales y se vaya identificando con cada uno de los productos y al menos para ya en la reunión que tengamos de cada uno, ya lleve.  Hemos adelantado ya ese catálogo.
+
+1:37:03 - Victor De La Parra
+  Ya por ahí, lo de los pesos, ya como se llama, lo del bebalo, ya tengo los pesos, por ahí me apoyé con César, ya tengo los pesos bases de una pieza de casi de cada uno de todos los materiales, caja de cartón de dos libras, de una libra, de 10 por 12 onzas, ya tengo los pesos individuales.  También, por ejemplo, Cepillón, Raíz, los de los arcos de Macrotúnez, de lo que se ha tenido. También con Leti me apoyé para la parte de lo que son también los de las cajas de fetezas.
+
+1:37:42 - SALA VIP
+  Vemos la reunión, vemos en la reunión cada uno de estos detalles, lo que ya se ha adelantado, porque creo que ya Emiliano se tiene que mover a otra reunión, pero para nosotros ya dejarlo ya identificado, si bien no todos pasarle a ellos, pero...  Pero que nosotros sí ya los tengamos todos ya identificados. Y como dice Cholico, ya cuando llegue Alfredo con la lista de productos, pues nomás ponerle el nombre y el apellido a ese producto.  Igual yo estaré libre en la tarde, Robert. A ver, no sé quién va a tener su reunión.
+
+1:38:18 - Emiliano  Lorenzano
+  Igual si lo tienen a lo interno o quieren que me sume a la reunión, me avisan. Pero ahorita, nada más estaría libre la hora de la comida, que sería de 3 a 4.  A los 4 creo que estaría libre.
+
+1:38:33 - SALA VIP
+  Muy bien, yo te aviso, digo, si pudiera estar integrado en la reunión y si es que también nosotros tenemos libre para tocar ese tema.  Sí, dado el caso, si lo quieran ir revisando antes, ya lo podrían revisar el día de mañana también.
+
+1:38:52 - Emiliano  Lorenzano
+  Sí, nos mandamos ahí mensaje en el chat.
+
+1:38:56 - SALA VIP
+  Sí, para ir avanzando, porque dice Juan, pues sí, ya con que...
+
+1:39:00 - Emiliano  Lorenzano
+  Que tengamos esa información que es real de ustedes, este, aunque no estén en los campos, sí, pudiéramos ya hacer algún ejercicio de una compra y a dar la entrada para que vean cómo, cómo se comporta, pues, el sistema.  Ok, va, perfecto.
+
+1:39:14 - SALA VIP
+  Sí, bueno, pues muchas gracias. A ustedes.
+
+1:39:19 - Emiliano  Lorenzano
+  Gracias. Gracias. Gracias.
+
+1:39:50 - SALA VIP
+  La tarde tienen libre para hacer. No, se viene nada. Y bueno, el plane ha llevado a se van a ocupar las...  Que tengamos esa información que es real de ustedes, este, aunque no estén en los campos, sí, pudiéramos ya hacer algún ejercicio de una compra y a dar la entrada para que vean cómo, cómo se comporta, pues, el sistema.  Ok, va, perfecto. Sí, bueno, pues muchas gracias. A ustedes. Gracias. Gracias. Gracias. La tarde tienen libre para hacer. No, se viene nada.  Y bueno, el plane ha llevado a se van a ocupar las... 5, a las 4, o 3,4. ¡Ah!

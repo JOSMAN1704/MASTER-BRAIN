@@ -1,0 +1,367 @@
+======================================================================
+ID DE SESIÓN: SEGUNDA MESA DE TRABAJO ERP
+FECHA: 2025-12-15
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/VBsFvqN9o2HBsrUUtWE3Exo7wQCForVo
+======================================================================
+
+RESUMEN EJECUTIVO
+
+Segunda mesa de trabajo ERP  - December 15
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir la estructura, el cronograma y los roles clave del proyecto ERP.
+
+Puntos clave
+
+  - Lanzamiento de nuevas entidades: Naturagi y Naturberry cesarán operaciones el 30 de junio de 2026, lanzando nuevas entidades (p. ej., NBG México) el 1 de julio de 2026 para iniciar con un ERP limpio.
+  - Cronograma agresivo: La puesta en producción será el 1 de julio de 2026, requiriendo una decisión final del ERP para el 15 de febrero de 2026, a fin de garantizar una transición fluida durante un período de temporada baja.
+  - Rol de arquitecto del ERP: Se propone a José Manuel (Chema) como "Master User" para actuar como arquitecto del ERP, asegurando un diseño unificado en todas las unidades de negocio.
+  - Presupuesto aprobado: El consejo aprobó una inversión de $300,000 para el ERP y un presupuesto anual de $120,000 para solicitudes de cambio, lo que permite seleccionar la solución más robusta.
+
+Temas
+
+Contexto estratégico: lanzamiento de nuevas entidades
+
+  - El ERP se lanzará con dos nuevas entidades, simplificando la implementación al evitar la migración de datos de sistemas heredados.
+  - Cronograma:
+      - 30 de junio de 2026: Naturagi y Naturberry cesan operaciones.
+      - 1 de julio de 2026: Las nuevas entidades comienzan a operar en el ERP.
+  - Estrategia de datos:
+      - Los datos históricos de Naturagi y Naturberry permanecerán en Compaq.
+      - Natur Prime será la única empresa existente integrada en el nuevo ERP.
+
+Cronograma del proyecto y decisión
+
+  - La fecha de puesta en producción se movió de octubre al 1 de julio de 2026, para alinearse con el lanzamiento de las nuevas entidades y aprovechar un período de temporada baja para una transición más fluida.
+  - Camino crítico:
+      - Enero 2026: Completar el análisis de necesidades por departamento (brechas, GAP).
+      - 15 de febrero de 2026: Decisión final del ERP (SAP Business One vs. Odoo).
+      - 1 de junio de 2026: Sistema listo para pruebas previas a la puesta en producción.
+      - 1 de julio de 2026: Puesta en producción para las nuevas entidades.
+
+Rol clave: Master User del ERP (Arquitecto)
+
+  - Se propone a José Manuel (Chema) como "Master User" para actuar como arquitecto del ERP, traduciendo requisitos de negocio en un diseño de sistema cohesivo.
+  - Responsabilidades:
+      - Unificar procesos: Imponer un proceso único y estándar en todas las unidades de negocio para habilitar reportes consolidados.
+      - Tender puentes de comunicación: Servir como el vínculo central entre los departamentos, la dirección y el desarrollador interno del ERP.
+      - Asegurar el cumplimiento: Alinear el diseño del ERP con los requisitos de control interno.
+  - Plan de incorporación:
+      - La próxima semana: Reunión fundamental con Alfredo, Juan Pablo y Chema para establecer la visión estratégica del ERP.
+      - Dentro de 10 días: Alfredo proporcionará una descripción formal del puesto para que Chema la revise.
+
+Selección del ERP y presupuesto
+
+  - El consejo aprobó un presupuesto que permite seleccionar la solución de ERP más robusta.
+      - Inversión: $300,000 para el costo inicial del ERP.
+      - Presupuesto anual: $120,000 para solicitudes de cambio y módulos adicionales.
+  - Definición del alcance:
+      - El proyecto inicial se centrará en las "necesidades" y "preferencias" del negocio (p. ej., ventas, recepción en cámaras de frío, calidad).
+      - Los "Deseos" (p. ej., un módulo de tickets de TI) se tratarán como módulos opcionales separados con sus propios costos.
+
+Próximos pasos
+
+  - Alfredo:
+      - Redactar y enviar la descripción del puesto de Master User a José Manuel dentro de 10 días.
+      - Agendar la reunión fundamental de visión del ERP con Juan Pablo, José Manuel y él mismo para la próxima semana.
+  - José Manuel:
+      - Revisar la descripción del puesto de Master User al recibirla.
+  - Roberto:
+      - Continuar con el análisis de brechas (GAP) con todos los departamentos, integrando a José Manuel en el proceso.
+
+======================================================================
+
+ONE-ON-ONE
+
+Segunda mesa de trabajo ERP  - December 15
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Alinear la selección de ERP y el plan de implementación, confirmar cronogramas, roles (Usuario Maestro), aprobaciones de presupuesto y próximos pasos para completar el análisis de brechas (GAP) y decidir entre SAP B1 vs Odoo para mediados de febrero.
+
+Actualizaciones
+
+SALA VIP (Naturberry)
+
+Registro
+
+  - Charla ligera; confirma la intención de sincronizar el progreso y la estructura del ERP
+
+Progreso en prioridades desde la última reunión:
+
+  - El consejo aprobó el presupuesto del ERP: $300k CAPEX + $120k/año para cambios (aprobada la estimación del nivel más alto)
+  - Cambio organizacional aprobado: Naturagi y Naturberry cesan operaciones el 2026-06-30; dos nuevas entidades inician el 2026-07-01 transaccionando en el nuevo ERP
+  - Los datos históricos permanecerán en CONTPAQi; salida en vivo día 0 para las nuevas entidades (inicio limpio)
+  - Análisis de brechas (GAP) en marcha: sesiones realizadas (incl. NaturPrime); se definió el enfoque consolidado de Necesidades/Deseos/Anhelos; objetivo de finalizar los insumos por departamento a fin de enero
+
+Prioridades hasta la próxima reunión:
+
+  - Enviar la descripción propuesta del rol y responsabilidades del Usuario Maestro a José Manuel en ~10 días
+  - Agendar sesión de “visión” la próxima semana con Juan Pablo + José Manuel (+ posiblemente Eder) para establecer principios de arquitectura
+  - Coordinar sesiones de GAP por departamento en enero (Operaciones, Finanzas, Ventas, Calidad, RH, etc.); asegurar separación entre lista de deseos y “imprescindibles”
+  - Preparar un único Gantt/ruta crítica hasta la decisión en febrero y construir el plan para la salida en vivo en julio
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmar la disponibilidad de José Manuel; puede requerirse backfill/asignación de apoyo y calendarización
+  - Finalizar las estructuras de comité (Decisión vs Operativo) y límites RACI (Usuario Maestro vs diseñador de ERP vs Dirección)
+
+Juan Pablo Cholico (Naturipe Farms)
+
+Registro
+
+  - Enfatiza claridad y rigor para la selección del ERP y su preparación para el futuro
+
+Progreso en prioridades desde la última reunión:
+
+  - Revisó los aprendizajes previos de la sesión de IA aplicados al ERP: definir claramente lista de deseos, imprescindibles y estado futuro
+  - Validó el enfoque de independencia entre compañías dentro de un mismo entorno ERP, evitando plantillas forzadas (lección de Farms/Prime)
+
+Prioridades hasta la próxima reunión:
+
+  - Realizar la primera reunión de arquitectura/visión con José Manuel y Alfredo la próxima semana
+  - Definir los comités de ERP y el flujo de decisiones; asegurar que cada función tenga voto informado y su justificación
+  - Priorizar el cronograma buscando estar listos para pruebas el 1 de junio y cambio a producción el 1 de julio (preferentemente 1 de junio para preparación de recepción/materiales)
+
+Necesita asistencia / Está bloqueado en:
+
+  - Requiere hallazgos GAP consolidados para fin de enero para impulsar ajuste del proveedor/diferencial de costos (base vs personalizado)
+  - Asegurar que el Usuario Maestro comprenda los flujos de extremo a extremo para los tres negocios y evitar “listas de deseos” fragmentadas
+
+José Manuel “Chema” (Usuario Maestro propuesto)
+
+Registro
+
+  - Abierto e interesado; busca claridad sobre alcance, cronogramas y balance con funciones actuales
+
+Progreso en prioridades desde la última reunión:
+
+  - N/A (nuevo en el rol); ya cuenta con conocimiento sobre etiquetado/cuentas por pagar; punto de vista central para conectar procesos
+
+Prioridades hasta la próxima reunión:
+
+  - Unirse a la sesión de visión de la próxima semana; luego acompañar la “gira” de GAP de enero por los departamentos (iniciando con sesión tri-director)
+  - Revisar las responsabilidades propuestas (en ~10 días), evaluar la distribución de tiempo, identificar tareas a delegar/reducir
+  - Comenzar a mapear los traspasos entre compañías (Prime → Berry → Ag → bucles de regreso) y los estándares comunes del catálogo de cuentas (CoA)
+
+Necesita asistencia / Está bloqueado en:
+
+  - Claridad sobre compensaciones de carga laboral y posibles recursos de apoyo
+  - Acceso a líderes de operaciones (Víctor, César, Eder, Ventas, Finanzas) y a control interno para validar diseños
+
+Temas
+
+Proceso de decisión de ERP y cronograma
+
+  - Fin de enero: finalizar GAP/Necesidades-Deseos-Anhelos por departamento; entregar a SAP B1 y Odoo
+  - Inicios de febrero: 15 días de preguntas y respuestas con proveedores + propuestas finales (qué es estándar, qué no lo es, costo de brechas)
+  - Objetivo de decisión: 15 de febrero; permite configuración/construcción, pruebas para mayo/junio, salida en vivo 1 de julio
+  - Enfocar el gasto en Necesidades/Deseos; Anhelos como módulos/presupuestos separados y opcionales
+
+Reestructuración organizacional y estrategia de datos
+
+  - Naturagi y Naturberry detienen operaciones el 2026-06-30; dos nuevas entidades inician el 2026-07-01 en el nuevo ERP
+  - Corte limpio: sin migración de saldos iniciales; los históricos quedan en CONTPAQi
+  - Implicación: implementación simplificada; definir acceso a históricos para comparativos
+
+Rol de Usuario Maestro y gobernanza
+
+  - Propuesta: José Manuel como Usuario Maestro; Víctor como co-arquitecto de operaciones; se contratará un diseñador de ERP interno
+  - El Usuario Maestro actúa como arquitecto/traductor entre departamentos, control interno y proveedor; no es el único decisor
+  - Establecer dos comités: Comité de Decisión (selección/gobernanza) y Comité Operativo (diseño de procesos)
+  - Estandarizar elementos compartidos (p. ej., catálogo de cuentas unificado) manteniendo la independencia del negocio por compañía
+
+Gestión de alcance: Necesidades vs Deseos vs Anhelos
+
+  - Necesidades: procesos centrales (atomización de ventas, recepción en cuarto frío, calidad) deben estar en el alcance base
+  - Deseos: fuertes preferencias que apoyan la eficiencia; se costean si son personalizados
+  - Anhelos: “nice-to-haves” (p. ej., módulo de tickets de TI) rastreados por separado, excluidos del presupuesto central
+
+Ruta crítica de implementación y fechas
+
+  - Ideal: preparación para recepción/pruebas el 1 de junio; productivo el 1 de julio
+  - Plan hacia atrás: arquitectura para feb/mar; configuración/construcción mar–may; pruebas SIT/UAT may–jun
+  - Estacionalidad considerada: temporada baja para Berry se alinea con el corte; alinear con flujos de siembra/recepción
+
+Plan de involucramiento por departamento
+
+  - Primera sesión: visión tri-director (Berry/Ag/Prime) para establecer principios e independencia dentro del ERP compartido
+  - Debate de secuencia: iniciar con Berry (más complejo; impulsa la copia de Prime) vs iniciar con Prime (avances más rápidos); decisión de iniciar con visión conjunta y proceder según hallazgos para evitar un “Frankenstein”
+  - Recopilar reportes/controles concretos temprano para impulsar campos del modelo de datos aguas arriba
+
+Presupuesto y gestión del cambio
+
+  - Aprobado: $300k de implementación + $120k/año para cambios
+  - Evitar costos ocultos aflorando brechas en talleres con proveedores; fasear elementos avanzados
+  - Control de cambios a través de comités; alinear con control interno antes de desplegar
+
+Próximos pasos:
+
+  - Alfredo: Enviar calendario para la sesión de visión tri-director de la próxima semana; incluir a Juan Pablo y José Manuel
+  - Alfredo: Entregar a José Manuel el documento de rol/responsabilidades del Usuario Maestro dentro de ~10 días para revisión/aceptación
+  - Roberto: Construir Gantt/ruta crítica consolidada hasta el 1 de julio, incl. sesiones GAP de enero y ventanas de PyR con proveedores
+  - Roberto + José Manuel: Planear e iniciar la “gira” de GAP por departamentos en enero; registrar Necesidades/Deseos/Anhelos con responsables y evidencias
+  - Juan Pablo: Proporcionar principios de arquitectura y capacidades prioritarias para NVG México previo a la sesión de visión
+  - Finanzas/Contabilidad (Alfredo + Giovanna/Fabiola/Rafa): Proponer estructura de catálogo de cuentas unificado para todas las entidades
+  - PMO/Configuración de comités (Alfredo + Roberto + Juan Pablo): Definir Comités de Decisión y Operativo, membresía, votación y RACI
+  - TI/Contratación de Diseñador de ERP (Alfredo): Avanzar con la requisición/línea de tiempo del diseñador de ERP interno alineado a la decisión de febrero
+  - Plan de datos/históricos (Roberto + Finanzas): Documentar el enfoque de acceso a históricos en CONTPAQi; definir necesidades de reportes comparativos fuera del ERP
+  - José Manuel: Evaluar la carga de trabajo y proponer plan de apoyo/backfill; confirmar la distribución de disponibilidad y plan de rampa para la fecha límite de revisión del documento de rol
+
+======================================================================
+
+TRANSCRIPCION
+
+Segunda mesa de trabajo ERP  - December 15
+VIEW RECORDING - 48 mins (No highlights): 
+
+---
+
+0:00 - SALA VIP
+  De hecho, de por el momento. ¿Sí nos escuchas bien? Perfecto.
+
+0:18 - Juan Pablo Cholico
+  Sí, me peiné.
+
+0:32 - SALA VIP
+  ¿Lo que pasó en Las Vegas se quedan en Las Vegas? ¿Cuál es Vegas?
+
+0:38 - Juan Pablo Cholico
+  ¿No fuiste? No. Esta vez no fuiste. Fue apnesia.
+
+0:50 - SALA VIP
+  Tengo apnesia desde el miércoles.
+
+0:54 - Juan Pablo Cholico
+  Ah, ok, ok.
+
+0:56 - SALA VIP
+  Las perdiste esos días. Thank you. I couple of recommendations and recommendations that I have with Roberto, but I don't know if there's anything else to define with you and with Roberto for us, like Jose Manuel, like for me.  ¿Te refieres a las de...
+
+1:51 - Juan Pablo Cholico
+  Ahí vamos por partes. ¿Mandaste tus recomendaciones de la... ¿Y ya? ¡Gracias! ... Gracias.
+
+2:00 - SALA VIP
+  ¿Esa es la junta del ERP o del IA? De ERP. Ah, ok, perdón, disculpa, entonces es mía. Sí, la otra mañana.  Queríamos darle a la actualización, tanto a ti como a José Manuel, para empezar a estructurar esta parte del ERP.  Y creo que Roberto lo platicado contigo, Juan Pablo, en ciertos aspectos del ERP y de las recomendaciones, y de, que te gustaría observar en la parte de Needs, Wands and Desires de los departamentos, ¿correcto?  ¿Correcto? Sí. Y quería escuchar las juntas del ERP para ver qué operaciones, contabilidad, todos los departamentos están buscando sus necesidades, lo que ellos quieren y los deseos del ERP para estar formando la decisión de aquí a febrero.  Gracias.
+
+3:02 - Juan Pablo Cholico
+  Ok, lo que le comenté en la sesión de IA, es que en las puntas del ERP, cuando se decidía el ERP, sí era importante que todos los involucrados tuviéramos bien claro el wishlist, el must be y el futuro del ERP.  Entonces, me atreví a pedirle la minuta a Ángeles para ver en qué iban. Entonces, lo que estoy entendiendo es que van a hacer un diagrama de GAT para poder poner todo en un solo documento y tomar la decisión de qué ERP se va a utilizar.  Están agregando a Chema como usuario clave y están contemplando la contratación de un designer del ERP. ERP, in-house, para los desarrollos futuros.  Ahí es a voy, es donde me quedé de lo que están haciendo. Entonces, en esta reunión van a terminar de definir el GAR y me imagino que una ruta crítica para cuál sería el reporte final para la toma de decisiones en febrero, ¿no?  Y tú me habías dicho que iba a haber una decisión en Vegas, pero no supe si se hizo o no se hizo.
+
+4:37 - SALA VIP
+  Sí, entonces, nada más para el final de ese pensamiento es, Roberto se va a juntar con las diferentes áreas de aquí hasta el final de febrero, ¿cierto?  Para terminar ese GAR análisis de las mismas, ¿no? Para que al final del mes se enviamos tanto a SAP como a Odu, y ellos terminen finalizando su propuesta y todo el...  Sí, La cantidad de inversión final y qué vamos a terminar haciendo con cada uno de ellos, ¿correcto? Sí, porque estábamos pensando que si en octubre íbamos a inicializar operaciones, octubre 2026, tendríamos que salir ya de antemano cinco o seis meses atrás para la configuración ya de Business One o ya sea Odu, que ellos ya empiecen a generar lo que es la transacción.  Entonces, para esto necesitaremos como en abril ya saber y definir exactamente con quién. Para antes de abril es cuando tenemos que desarrollar todas esas necesidades.  ¿Días tenemos nada más aquí? Ahora tenemos y que solamente serían puntualizar. También tenemos algunos ya con Natur Prime, ya tuvimos una sesión.  Y también Cholico nos compartió cuáles eran los puntos claves a seguir, tanto en el aspecto de RH como en el analista.  Bueno, nos pasó varios puntos. Sería conjunta nada más a Naturai en ese aspecto y aterrizar bien lo que es en todas las operaciones, sobre todo con las actualizaciones que se pudieron haber salido en ese tiempo.  Y con la experiencia que ya tenemos ahorita de lo de la recepción de fruta, más el wish list que lo que deseamos.  Nosotros platicamos con Juan Pablo que es mejor desde ahorita plasmar todo lo que queremos, todos nuestros reportes, todo el diagrama, todo lo que necesitemos para que cuando ya llegue en su momento, simplemente ya lo tengamos y no tengamos que analizar.  O pedir y que nos hagan nuevamente horas de trabajo o portales para generar. Entonces, para esa fecha, no sé si a lo mejor tienes las fechas, Ángeles, de la minuta pasada, pero creo que algo así era, ¿no?  Del octubre 2026, habíamos dicho que unos cinco o seis meses antes, era como abril, y para ser de abril para enero, febrero, ya empezar a hacer estas mesas de trabajo con las personas que necesitamos, sacar los updates.  Sí, vamos a recordar que enero, a final de enero, tener todo el ODE con todos los departamentos para entregárselo a los dos y tener esas 15 días con ellos para que los dieran la propuesta final.  Ok. Y ya, este, tener hacer la decisión en ese mes, ya que comparo con él. Algo que ahorita recordé sobre todo porque estamos casi para finalizar el año del 2026, algo me comentó Javi y Rafa que por lo del año fiscal, por la carga de la información, por toda la documentación, la base de datos, entonces, cargarlo todo desde enero hasta septiembre y movernos ya a un sistema en octubre, sería algo, si no muy riesgoso, algo como que a tomar en consideración.
+  ACTION ITEM: Email board-approved ERP proposal + processes to Juan Pablo - WATCH: https://fathom.video/calls/506272549?timestamp=509.9999  Bueno, muy buen punto de Fabiola, pero hablamos con el board la semana pasada y uno se autorizó primero que nada el presupuesto, entonces los procesos que me mandaste, te los envío con la propuesta que aprobó el board, entonces...  ya están, nos aprobaron el más costoso y de ahí nosotros tenemos que definir. en el world ya aprobó el presupuesto.  Y dos, aprobaron la nueva organización en México. Es decir, como nosotros, básicamente, tanto Naturagi como Naturberry van a dejar de hacer operaciones.  Entonces, para este año, en el 2016, existirán dos nuevas entidades. En estas dos nuevas entidades estarán transaccionando en el ERP.  Entonces, va a ser una cuestión mucho más fácil, tanto para el ERP, como para Naturberry y Naturagi, porque dejarán de hacer operaciones físicamente y estarán transaccionando en una empresa nueva.  ¿Y ese cambio es, o Naturagi va a dejar de operar? Naturagi como empresa, como razón social, como razón social, deja de operar a junio 30 de 2026 y empieza como...  alOOS, minuto que Y once En el ejecuido de julio 1º de 2026. Ok. ¿Que no cargas saldos iniciales? Exactamente.  Entonces te empiezan a operar básicamente limpio del app. ¿El histórico en dónde lo vamos a mantener? En Compaq. Ok.  ¿Y Prime? En Compaq, sí. Esa sería una compañía que sí tenemos que ser la única empresa que tendríamos que transmitir dentro de ahí.  Ok. Entonces, es que mencionaste dos. Ah, perdón. Naturberry y Naturberry. Naturberry y Naturberry serán las únicas empresas que empezarían desde cero.  ¿Igual impuniente? ¿Termina Naturberry? Sí, 1.30 de 2000. ¿Y cómo se llamaría Naturberry? Estamos esperando los monjes. Ah, ok. Vamos a llamarlo ahora en NBG México.  NBMX. Naturripe. Naturripe, sí. Entonces, igual Naturberry mantendría su histórico en Compa. Y es algo que eso sería un want con ojo para hacer comparativos.  Bueno, que serán nuevas sorpresas, pero de todos modos. Es una pregunta que tengo que poner en el gap de cómo haríamos esa información.  O sea, ya no transaccionaríamos nada a partir de julio en Compa. O ya todo a partir de julio ya sería en el nuevo ERP.  En el nuevo ERP y en las razones sociales. Ah, ok. Entonces, nos estamos adelantando todavía más. O ya no esperamos hasta octubre, sino recorremos hasta julio.  Ya lo habíamos hablado de julio, estaba en la minuta, ¿verdad? Porque ya lo habíamos hablado de julio y empezamos planta.  También quedaron fechas como muy concretas. En el cronograma no hay que estar finales de enero. O sea, ya presentar como toda la...  Sí, la febrera del departamento, ¿verdad? Sí. Pero así como fechas... Ah, las otras no, ¿verdad? hay, no hay, no hay todavía interpretado.  Porque el julio es cuando empezamos a relacionar con el inventario de plazo. Sí. Y si lo tenemos, cuando hagamos, cuando platicamos con Odullar y ISAB, si es necesario recorrerlo, tenemos que platicar con ellos y con el equipo.  Pero idealmente, ahorita idealmente es julio 1º, 2026. Ok. Ok, bueno. Entonces... Tenemos, pues, un poquito más de un mes para terminar lo que es el análisis.  El análisis... Sí, creo que esta es la parte de platicar con José Manuel. Creo que es una parte de platicar con José que si te gustaría participar en la parte del RP, en la parte de ingeniería, y básicamente con la experiencia que tienes, tanto en la parte de logística, de administración, de contabilidad, estamos platicando a Roberto, yo y Ángeles en la parte de, queremos proponerte que fueras el master user, y más...  Master User no es que tomes la decisión final, sino con el entendimiento de cada uno de los departamentos, tanto en operaciones, con la ayuda de Víctor, César, Eder, ellos, la parte de ventas como Pablo, Giovanna, Carl, igual aquí en contabilidad, que básicamente seas el Master User en cuestiones de que tanto conozcas el ERP, que tanto implementemos el ERP, con las decisiones que cada equipo esté tomando, y tú básicamente es traer la decisión de ese equipo, y vamos a definirlo, creo que tenemos que definirlo, Roberto, y yo, cuáles son las responsabilidades, hasta dónde llegas, hasta dónde llega el ERP, hasta dónde llega José Manuel, hasta dónde llega dirección, y definir el comité del ERP, pero para mí es proponerte que seas el Master User, la conexión entre el ERP, la persona, el ingeniero que contratemos el ERP, y Roberto, para comunicarte.  Con todos los departamentos, porque es una labor que Robert tiene que tener una mano derecha en cuestiones de, los dos van a entender, los dos van a ser capacitados, pero si damos una mano que esté siempre pendiente de las operaciones y de eso, porque también vas a tener comunicación con la parte del control interno.  Entonces, al momento que hagan esa decisión, sí, platicar con el control interno, hace match, ok, está bien, podemos implementarlo.  Entonces, básicamente, tú serás la conexión de todos los departamentos, incluyendo el control interno, y dirección, que en efecto, que la decisión que tomamos en el RP, en la operación, esté de acuerdo, tanto a lo que buscamos, como internamente en el control y realmente en la operación.  Y tener la misma comunicación con el in-house que vayamos a tener, ya sea el de UDU o de Sabines One, para que puedas tener ese entendimiento, ¿no?  Tú ya entiendes la operación total de la empresa y finalmente se lo transmite. Dimos a Link House para que también empiecen a captar cuáles son las necesidades y que las plasmen en el RP.  Lo platicamos, no es tanto que nosotros queramos meternos y programar y hacer todo el lenguaje, no. Sí conocerlo, como ya vimos en el Visual Studio y todos esos programas, sí conocerlo, pero ya el Link House sería el que tomaría, el que haría un proceso y nosotros nada más guiándolo para decirle cómo es, cómo lo queremos.
+  ACTION ITEM: Draft + send Chema's Master User responsibilities/scope to Chema; then Chema reviews/proposes time split - WATCH: https://fathom.video/calls/506272549?timestamp=979.9999  Entonces en una semana, yo digo que en 10 días, tendremos la propuesta de todas las responsabilidades que traería a cabo este impuesto.  Sí, sí está bien. Y eso sería a partir de... Creo que empezarías a... Ahorita en ese momento sería su trabajo, hasta probablemente finales de marzo, pero tanto Roberto como yo queremos que te empieces a apuntar con Roberto en esta parte del GAP, que lo conozcas.  Así que... Empeza a ver la parte de operaciones, cómo vamos en ese gap que lo compartimos a José María y empieza a ver este, pues ya es bastante el trabajo que hemos hecho, como Roberto con el equipo ha hecho, en definir responsabilidades, en definir procesos, ¿no?  Que ya están muy avanzados. Sí. Nada más es, como dice Roberto, puntualizar ciertos temas. Y obviamente vamos a tener la red que dicen, oye, no puedes hacer esto, o puedes hacer una eficiencia, o puedes hacerlo de esta manera, y eso hay que transmitirlo al equipo, ¿no?  A veces te va a tomar uno o dos departamentos, ¿no? Por ejemplo, vamos a hablar de órdenes de compra, ¿no?  Departamento de compra, contabilidad y operaciones que tienen que estar de acuerdo en el mismo proceso, ¿no? Entonces, es esa capacidad que un master user tiene que tener el entendimiento de cómo estamos, vamos a tener que hacer el organigrama total del RP, ¿no?  Quién autoriza, vamos a hacer el comité que nos había hablado también. Lujo, ¿no? También. El SAP y Odoo, de que tenemos que crear ese comité.  Y lo bueno es que vamos a apuntar con ellos para que nos den esa visualización, ese comité. Ellos nos van a apoyar a establecer toda esta parte, pero nosotros lo tenemos que llevar a cabo.  Entonces, cuando escojamos ya sea SAP o Odoo, ellos nos van a dar lo que tienes que tener el comité, tienes que tener esto, todas las bases necesarias.  Ahorita nada más es pura plática con ellos que hemos tenido, pero ellos nos van a establecer los puntos a seguir, qué temas, cómo se hace la aprobación.  Entonces, es algo que ahorita nada más contigo en la plática, pero los consultores, por eso están contratados, para que nos den desde A a la Z.  Y a la Z, básicamente, es dejarnos corriendo a Naturberry con su RP. Una parte importante es cómo vamos a definir ya sea un RP o el LOC.  O sea, si bien ya vamos a tener a finales de enero este análisis, este... Estos hallazgos, lo que un ERP ya nos puede dar, lo que el otro ERP no nos puede dar.  ¿A quién juntaríamos para definir esa respuesta? Tendríamos ya también que definir ese comité ERP desde antes para que a finales de enero, principio de febrero, podamos dar esa respuesta.  ¿Está? Obviamente estaríamos nosotros. Sí. Eder, Juan Pablo, tu servidor, tú como el head del ERP, con Ángeles, José Manuel y los departamentos, las partes principales del departamento para que cada uno tenga su voto débil.  Porque ahí tienen que tener, si no lo tienen, ¿por qué no lo tienen? Porque tienen que ser unir un cuarto.  Ajá. ¿Esas partes serían las que conformarían el comité también? ¿O sería...? ¿Te acuerdas de una presentación que viene de los dos comités?  Uno, el comité de decisión y estaba el comité de operación de arreglo. A lo mejor podemos usar esa presentación para definir los errores.  Ok, ok. ¿Tú qué opinas, Juan Pablo?
+
+20:25 - Juan Pablo Cholico
+  Estaba cachando lo que estaba diciendo Alfredo. Para mí, ahorita lo más importante es que si Chema, bueno, ya dijo que sí.  Bueno, tiene que decir que sí.
+
+20:44 - SALA VIP
+  No, que ver con sabidades y definitivamente que sucede. Bueno, a mí ya me había dicho que sí. Ya no se puede echar para atrás.  O sea, a él le tiene que quedar bien claro que es un master user, ¿no? Sí. Primero que nada, ¿no?
+
+20:57 - Juan Pablo Cholico
+  Y para ser un master user, pues tiene Tiene que conocer completamente los tres negocios. Entonces, a mí me gustaría que empezara el Master User con los tres directores.  Sí, que les expliquemos, así como platiqué con Roberto, que les expliquemos cuál es la visión que tenemos de ERP para NVG México.  Pero, aunque es un ERP que va a tener actividades transversales en las tres compañías, tenemos que tenerlo bien definido de la independencia que tiene que tener cada negocio dentro de ese sistema, de esos sistemas que están en el mismo ambiente.  Podemos compartir información, pero no compartir la idea del negocio, porque es muy diferente el negocio de Naturberry al de Naturag y no se le llega a Naturpray.  Entonces, una de las cosas que me quedó bien marcado cuando hablamos con SAP, es que hablaba mucho de que podíamos hacer esa independencia sin ningún problema.  Entonces, para no quedar súper editado... A lo que nos pasó con Farms y Prime, ¿no? Que quisimos poner a Prime bajo la columna vertebral que ya está de Farms y estábamos empujando y forzando y forzando.  Entonces, para que Chema entienda el negocio completo y los escenarios futuros sobre todo, que no sé qué, nada más en una sola área, porque él se va a tener que meter a echarse el clavado a la parte de operaciones también, no solamente la financiera y la contable.
+  ACTION ITEM: Schedule ERP vision mtg w/ Juan Pablo, Chema, Víctor; then hold mtg - WATCH: https://fathom.video/calls/506272549?timestamp=1339.9999  Y la de liquidaciones, o sea, ¿qué te parece si tenemos una primera plática con José Manuel la próxima semana para que estemos, platiquemos con él en el ERP, tanto tú como yo?  Sí, que le demos una guía de, mira, esto es lo que se hace ahorita, esta información que usamos, en dónde, qué pasa cuando nos ha fallado, cómo se liquida.  Ahorita, ¿cómo va a liquidar Natur Prime? ¿Cómo funciona un cooler? O sea, él prácticamente tiene que ser un master user, ¿no?  Él tiene que saber completamente todo y ya en base a eso ya puede empezar a explorar en cada área para que no se le convierta en una lista interminable de deseos que no tienen nada que ver con lo mejor con lo que les estamos buscando y los que estamos en el comité.
+
+23:28 - SALA VIP
+  En esa idea general podríamos poner a los tres, Natur Prime, Naturagi, Naturberry, invitaríamos a Jorge también para que él al menos dé también su punto de vista, decir, no, pues si yo quiero también que me pasen la orden de compra, me la hagan aquí, yo regresarlo y visualizar.  Eso sería más el departamental, entonces sería un nuevo departamento, pero la cuestión de Juan Pablo y yo es lo que es más general.  La misión es básica y creo que con eso se puede comunicar con los departamentos y es donde ahí José Manuel va a decir, a lo mejor nos faltan más datos aquí o a lo mejor no estamos terminando el proceso acá o no vamos a tener suficiente información para reportes o a lo mejor, bueno, un ejemplo claro.  Contabilidad te va a pedir que todas las cuentas contables sean las mismas, tanto Naturagui, Naturberry y Naturprime. Eso va a ser de contabilidad.  Eso es parte de mí y Alfredo y obviamente cuando llegues a la contabilidad con Naturagui y te dicen, oye, queremos nuestras cuentas contables diferentes, es cuando se me diría, no podemos hacer eso porque de acuerdo a la misión de Juan Pablo de Bé, tenemos que tener esos dos contables iguales.  ¿Por qué? Porque tenemos que consolidar, ¿no? Entonces, José Manuel, ¿quién puede dar el mensaje de los tres a todos los departamentos?  Porque él se va a estar contigo, se va a estar reuniendo. Claro. Ok, ok. Entonces, sí me parece bien que...  Que sea una reunión con ustedes tres, y conocer esa visión general de qué es lo que queremos atacar, qué es lo que queremos ver, y ya después puntualmente, como lo dice Juan Pablo, ahora sí ir a cada uno y recolectar lo que se desea tener en ese rete.
+
+25:25 - Juan Pablo Cholico
+  Sí, yo veo como, ya ven que me gustan mucho como los ejemplos, José va a ser el arquitecto, ¿no?  En donde el arquitecto dice, en este cuarto va a vivir Giovanna, Fabiola y Rafa, ¿sí? Y evitar que cada muro sea pintado diferente si son el mismo cuarto.  Exactamente. Sí, este, porque ahí es donde nos atoramos en la vez pasada, ¿no? Obdulia tenía una... Forma de cocinar la contabilidad, Giovanna tiene otra, Nelly tenía la suya, ¿no?  Al final de cuentas tenemos que tener una que se aplique a todas, sin que ninguna se superedite a otra, ¿no?  Que no gane Naturberry sobre Prime ni Prime sobre Naturberry, o como se vaya a llamar después, ¿no? La buena ventaja que me acabas de decir es que no hay que hacer muchas interfaces, sino un día cero para empezar la nueva compañía.  Entonces, esa nueva compañía tiene que empezar el día cero, ya con toda esta arquitectura hecha desde febrero, marzo, para que en mayo, junio estuviera en prueba y en julio en productivo, ¿no?  Entonces, no, parece lejos, pero... No, ya estamos así.
+
+26:44 - SALA VIP
+  ¿Sí?
+
+26:45 - Juan Pablo Cholico
+  Entonces, por eso para E, para José, va a ser muy, muy, muy importante el tener una guía de qué es para nosotros prioritario, qué es lo que queremos que desarrolle.  Y el sistema después, que no salgan costos ocultos y que digan, ah, eso no estaba contemplado cuando contratemos el LRP.  ¿Y cómo lo vemos en el futuro? Pensando, acabamos de ver la presentación de Farms y Jim Roberts era algo completamente cuadrado y ya se cuenta que me pusieron otro Jim Roberts en la presentación.  O sea, y ya, y data, y marketing, dije, what? ¿Y de dónde me salió este muchacho? Porque el señor que conocí el año pasado, eso habla de cómo se están actualizando hasta los más clásicos del negocio a lo que viene en el futuro, ¿no?  Y si no tenemos una ERP que vaya a ese ritmo y más en este momento, híjole, me daría mucha pena que en tres años digamos, ¿qué creen?  Ya se nos acabó la cuerda y esto ya no va a funcionar, ¿no?
+
+27:48 - SALA VIP
+  Y sí, justamente creo que lo que estamos haciendo, Juan Pablo habla mucho, replica ese eco de Farms, datos, innovación.  No estamos nada lejos de lo que ellos quieren hacer. Creo que vamos por el mismo camino. ¿Te acuerdas, Juan Pablo?  Sí, sí, sí.
+
+28:11 - Juan Pablo Cholico
+  Si los muchachos nos dicen, oye, si agregamos esto y si agregamos esto, sí, todo es bienvenido, pero lo vamos a poner en una lista de...  Todo se lo tenemos que presentar al ERP. ¿Se puede? Sí. ¿Cuánto costaría? Ya las fases, pues las definiríamos cuando...  Pero me late que hayan pensado en Chema, en Víctor, como master users, como arquitectos de este rollo. Sí, creo que Víctor nos va a apoyar mucho en la cuestión de operaciones.
+
+28:39 - SALA VIP
+  Mucho en las operaciones y básicamente tú en la parte tanto de las operaciones como de financiación y administración. Sí.  Y obviamente creo que con esas partidas que tengamos, esas son las fichas que les menciono, yo primero. Pero no estamos, o sea, si tú dices, Alfredo...  No tenemos que aguantarnos a esta fecha o esa parte. Estamos abiertos, no vamos a revertirles una fecha para tenerlo concreto, pero igual, tanto aceptivos como mensurados en esta parte.  En fin, no nos tomen como una regla final, pero ¿cómo podemos llegar ahí? Y si al final del día dicen, ¿sabes qué, Alfredo?  Es imposible. Juan Pablo va a decir, Alfredo, ¿cómo podemos llegar? Ok, está bien, está bien, pero no quiero que lleguemos a Jui primero y digas, es que nos dijiste, no, no, es la oportunidad de platicar, es la oportunidad de cambiar, y andas pensando en lo que te sucedió.  Sí, sí es nuestro ideal, ¿no, Alfredo?
+
+29:44 - Juan Pablo Cholico
+  sea, nuestro ideal por plantación de planta, compra de planta, empezar a distribuir, porque de ahí empieza el sistema, ¿no?  Desde cuánta planta compramos, quién la tiene y a quién se le distribuimos, es la primera carga. ¿Qué le vamos a hacer a ese sistema?  Entonces, y pensando en una prueba de plantaciones tempranas, sí estoy de acuerdo que no está escrito en piedra, pero sí es el ideal tenerlo antes del primero de julio por todo.  Y además es temporada baja para ustedes, ¿no?
+
+30:21 - SALA VIP
+  Sí, es temporada baja y ahí es temporada alta para ti.
+
+30:27 - Juan Pablo Cholico
+  Ah, sí, pero si tú ya tienes, si lo ves como un caminito, la planta se planta, se distribuye, se cobra, se financian contratos, se cosecha, llegan las certificaciones, se empieza a entregar a Natur Prime.  Ya estamos hablando de tres meses más que tienes para terminar Prime, ¿sí?
+
+30:57 - SALA VIP
+  Pero Naturberry sí tiene que estar de preferencia.
+
+31:03 - Juan Pablo Cholico
+  Porque, dada la experiencia que tuvimos, arrancamos en abril primero, ya por necesidad, porque ya queríamos empezar, ¿no? Pero no fue lo ideal por estos retrabajos que hicimos en la implementación del sistema.  Y aún estamos todavía esperándolo. Entonces, yo sí trataría de que las fechas que nos pongamos, les pongamos con el ahínco de llegar al primero de junio, si usted me apura, para poder arrancar con la recepción de materia.  Primero de junio, para que el primero de julio estuviera en productivo. Sí.
+
+31:40 - SALA VIP
+  Ok. Ese sería mi deseo.
+
+31:47 - Juan Pablo Cholico
+  No, no estamos para este...
+
+31:51 - SALA VIP
+  Ok, entonces... Sí, entonces, bueno, uno es, ya empezamos los departamentos, dos, ya quedó la aprobación de la asamblea, cuando tenga herramientas.  Creo que la aprobación cuesta es de 300.000 dólares por el costo del ERP y hacer cambios de hasta 120.000 dólares por presupuesto.  ¿Anuales? Anuales, sí. Son 300.000 por costo de inversión y de 120.000 por costo de cambio. Sí, pues por el más alto.  Sí. Bueno, eso ya quedaron. Cero es lo de Chevrolet. Entonces, lo de restaurante, lo que vamos a hacer es, en el día, ya estoy terminando una propuesta que la tengo que negociar con todo el, como Juan Pablo, y obviamente Roberto, para que vean el Master User, cuáles son tus responsabilidades, cuál es el alcance, y esa te la presentaremos para tu propia información.  Bueno, lo podemos entusiasmar con la siguiente semana que tengamos la visión. En general, lo podemos entusiasmar más para que darles más responsabilidades para lo que se viene, ¿no?
+
+33:13 - Juan Pablo Cholico
+  No, me quedé pensando en las responsabilidades de Chema, o sea, las actuales. Me imagino que es una de las preguntas que me trae en la cabeza, ¿no?  Esto lo voy a hacer paralelo a lo que tengo.
+
+33:35 - SALA VIP
+  Sí, sobre todo en tiempos, o sea, que puedan seguir haciendo las dos cosas al máximo de su rendimiento.
+
+33:46 - Juan Pablo Cholico
+  ajá. Sí, o o si se va a necesitar alguien que le apoye en una u otra lado, este... Pues hasta él mismo nos podría definir, ¿no?
+
+33:56 - SALA VIP
+  Yo creo que hasta él podría decir, sí... Sí, esa veo la responsabilidad. Bueno, creo que con lo que actualmente tengo me puedo dividir bien el tiempo.  Adelante, ¿no? Digo, le puedo dejar de los cinco días de la semana a tres a una cosa y dos a otra y no me sobrecargo yo.  Bueno, creo que estaría bien. Ahí nada más es sopesar la importancia que le damos a las dos sin perder el foco a las dos.  Sí. Sí. sí. Bueno, me arrepentí, me arrepentí a las dos. Yo, como empezamos, queremos cargarte las dos. No vamos a cargarte, pero sí asegurar que tengamos tanto tu voz, decías, ¿sabes qué?  Y eso me lo verás con la responsabilidad. Y ya teniendo un calendario, sí. No, y aparte no va a estar solo, vaya.  O sea, va a estar, voy a estar yo, este, o bueno, el burro antes. Puede estar Víctor y después puede estar yo O sea, el equipo puede estar bien conformado Y algo que podamos cubrir Pues el otro lo puede cubrir  No sería toda la responsabilidad de Chema, no tanto así. O sea, sí queremos darte ese rol principal, pero no saturarte de todos los procedimientos, ¿no?  Es eso. Sí, necesitaría también ver las actividades, las fechas, lo que nos están compartiendo, porque sí, como comenta Juan Pablo, necesito conocer bien la...  Sí, la operación y pues como el tiempo, bueno, yo lo veo como ya está un poco ya encima, o sea, más bien como para conocer bien cada una de las actividades, digo, aquí pues donde estoy, pues ya, o sea, no es que sea un máster, pero ya conozco bien las necesidades, o ya hay más acercamiento con esta parte, pero sí, por ejemplo, son más departamentos, y no es solo bien empresas, sino son tres.  Entonces, entonces, más que nada es eso, ¿no? Ver las actividades, fechas... y ver cómo, qué puedo dejar de hacer en lo que estoy haciendo actualmente, que no nos pueda afectar tanto en cumplimientos de entregas, o qué puede repercutir si dejo de hacer algo, también como para no dejar descuidado esta parte.  Sí, porque ahorita tus responsabilidades son exclusivamente etiquetaciones, como líneas de pago. Sí, cuando tengamos la responsabilidad, te las envío, espero ser menos 10 días, pero para que la revise, y ya nos digas.  Sí, pues de hecho sí, estoy interesado, nada más es conocer eso, cuando platiqué contigo ya es que te dije que sí, y también pregunté qué visión tenías de este puesto, de esta persona que se iba a quedar, pues también para yo ir aventajando.  o ir como, llegar como más preparado a... So, a esta parte, pues, que digo, pues, con el tiempo uno, pues, va adquiriendo más conocimiento y toda esta parte, pero sí también como para, como para darme un impulso más a llegar a hacer esto de más de uso.  Sí, creo que ha sido una excelente experiencia, precisamente desde las cajas, desde los cubres, las variedades, creo que son los temas más importantes que tenemos como negocio, pero obviamente están las responsables alrededor, ¿no?  Tanto en operaciones como los productores, como su curva de producción, etcétera. Entonces, creo que estás en el mero centro.  Sí, sí, mira, en la visión general vas a ver, obviamente, lo que Juan Pablo y Ede y Alfredo quieren andar en los mares, ¿no?  Tú vas a estar ahí en el barquito viendo de todos lados. Lo interesante va a ser cuando queramos unir esa información de las tres empresas y...  Que se puedan también compartir. También cuando vayas a cada uno de los datos y ya recolectes, esto es lo que hace la planta, esto es lo que hace el asesor, bueno, ya más puntual.  pero el unir, el decir que después de Natur Prime sigue después Naturberry, que después de Naturberry se va para Naturag y que tiene que Naturag y después regresar, eso está muy padre.  Eso va a estar muy padre y te va a ayudar muchísimo en entender sobre todo más la operación.
+
+38:37 - Juan Pablo Cholico
+  Oye, Alfredo, entonces, pensando en el, que le llamaron ustedes designer, ¿no? El diseñador del ERP, ¿no? La analista. Y esa persona después se convierte como en el propietario del producto que es el ERP, ¿no?  Porque solo va... ¿Cuándo es la fecha?
+
+39:15 - SALA VIP
+  ¿Cuándo es la fecha que tenemos que decidir el IRP? Febrero 15. Febrero 15.
+
+39:24 - Juan Pablo Cholico
+  ¿Por alguna situación se va hasta febrero?
+
+39:28 - SALA VIP
+  Bueno, habíamos planteado que en enero Roberto se va a presentar con todos los departamentos de nuevo para terminar definiendo el GAP y después le entregaremos eso a los dos, IRP, Odu y SAP, para que terminen su cotización, definen puntos y con eso tengamos la cotización final con ellos y obviamente las preguntas que tenemos que hacerle a ellos.  De todos modos en esos 15 días tenemos que tener tanto las juntas con ellos y obviamente su propuesta final.  Sí, o saber si lo hace, si no lo hace, o si no lo hace, cuánto costaría hacerlos, y si también ellos tienen y si están preparados para el futuro, ¿no?  Y en esa, perdón, Robert, y en esa gira, ¿ya va Chema contigo? Sí, sí, no, sí, Chema ya se une desde la siguiente semana con las mesas generales, con la visión general.  Luego en una semana más, Alfredo le va a compartir lo que es la responsabilidad y el nuevo puesto, y ya después de ahí, pues ya partimos en hacerlos, las, este, como la fiesta en grande, ¿no?  Ir a cada uno de los departamentos, ir con Juan Pablo en específico, ir con, con Eder, con Rafa, ir con Gloria, ir con Rigo, ir con, hacer la gira, pues, para recobrar.  Para retomar lo que ya habíamos hecho del gap analysis y nada más darle puntual atención a lo que es y a lo que se quisiera en algún momento, ya una vez definiendo todo esto.  Me gustaría que la primera fuera contigo, porque tú tienes muchas ideas, Juan Pablo, y sobre esas ideas podemos contemplar ya lo que después podríamos ver en la recepción de la fresa o en el cooler o en la integración y ya cuando Juan Pablo nos dice es que yo quiero que mi reporte salga así, ah, es porque en la recepción tenemos que ponerle así, ah, es porque cuando hagamos lo de la planta tenemos que ponerle este otro dato y a mí sí me gustaría que fuera de esa manera.
+
+41:50 - Juan Pablo Cholico
+  Yo lo que proponía era, la primera con los tres, ¿no? Sí, sí, sí.
+
+41:55 - SALA VIP
+  La primera con las tres, ¿no? Ajá.
+
+41:58 - Juan Pablo Cholico
+  De esas tres, Robert. Entonces, empiecen con Naturberry. Esa sería mi propuesta, porque va a ser la más larga y de ahí se desprende todo.  Empieza desde el productor, que es Naturberry, porque va a ser la más compleja. si el ERP nos cubre a Naturberry, Naturpre puede ser una copia de Naturberry, porque Naturpre puede negar tener una proveeduría propia de uva, de productos terceros.
+
+42:32 - SALA VIP
+  Ok, ¿sabes ahí donde yo poquito difiero? Porque si bien Naturberry ya lo tenemos como contemplado, analizado en estos gaps, cuando yo me acerqué contigo, tú traías un chorro de cosas nuevas.
+
+42:50 - Juan Pablo Cholico
+  No, no, no, eso no quiere decir que ninguno de los tres nos podamos meter ahí, oigan, estas ideas, estas ideas, sí, sí, sí, pero yo me refiero como, como, como los...
+
+43:08 - SALA VIP
+  ¿Sabes por qué? Porque creo que Natur Prime, como es más pequeño, es más rápido de ser ingenio. Bueno, hasta lo que es hasta ahorita.
+
+43:20 - Juan Pablo Cholico
+  A lo mejor es que Natur Prime nació de Naturberry. Entonces, al final de cuentas, la ventaja, sí te entiendo, que la ventaja que tenemos, por ejemplo, Alfredo y yo, es que le echamos un ojo a la operación y también le entendemos a los números y también le entendemos a las ventas.  Y a lo mejor la desventaja que yo tengo es que no puedo ver, como imagino los reportes financieros que le encantaron a Rich, como los presenta Alfredo, pero sí me puedo imaginar cómo quiero que opere el negocio.  Y luego ya entra Eder en la parte de inocuidad y también, entonces, sí, sí te entiendo la idea, pero...  En cualquier momento, la primera va a ser básica, porque ahí voy a escuchar a Alfredo y voy a escuchar a Eder, ¿sí?  Y de ahí ya sale, sale con nombre del niño.
+
+44:10 - SALA VIP
+  No nos adelantamos tanto y vemos, vemos las ciencias. Exacto. De ahí, de ahí a partir. Sí, para que no, lo que no quiero es que salga un Frankenstein.  Sí. Sí. Bueno, aunque la película estuvo muy buena, si tenemos un arquitecto como ese director, yo creo que nos va a salir muy buena.
+
+44:30 - Juan Pablo Cholico
+  exacto, si sale como la película, estoy completamente de acuerdo, o sea, eso es lo que quiero, que salga como la película, no como el mono, ¿sí?
+  ACTION ITEM: Email updated ERP timeline to Juan Pablo - WATCH: https://fathom.video/calls/506272549?timestamp=2679.9999
+
+44:40 - SALA VIP
+  No como el mono. Vale. Ok, entonces creo que son las actualizaciones importantes de esta. Entonces, nos quedamos, vamos a hablar aquí, a tiempo, era para la próxima semana, te lo paso mañana, después de que platico con Juan Pablo.  Adiós. Adiós. Adiós. Adiós. Adiós. Y para que te mande la fecha de esa junta, y también Víctor. Muy bien.  Bueno, creo que lo que le comenté a la board es, van a ser nuestros needs más altos, y no los want.  Ones that we necesitamos ahorita atomizar, que ya lo hacemos, pero no está en el sistema, como en sales, como la recepción del cooler, como la parte de calidad.  Entonces, son our needs y desires, son cosas como mandarle una pregunta al RP para que me diga, ¿no? Eso de ella, eso es diferente, es un desire.  Entonces, yo les dije que eso, por supuesto, es enfocado en el needs and wants y que nosotros le entregaremos a ellos finalmente un RP con los needs and wants.  El RP del GAP y si hay módulos adicionales, vamos a hablar del modo adicional, el ticket para IT, ¿no?  Pues eso no es ni la necesidad de negocio, ni lo que quiere tener que hacer, es un desire del negocio.  Entonces, ese va a ser un modo adicional que yo diría, bueno, hey, nos cuesta tener IT en un ticket por 2.000 dólares el módulo.  Gracias. Gracias. Gracias. Gracias. Gracias. Entonces, para cuando vayas esos desires, esos son aparte. No quiero que sean parte de ese presupuesto.  Sí, ok. Bien. Bueno, ¿algo más, compadre? No, señor, gracias por la invitación. Gracias a gracias. Gracias, Salico. Buenas tardes, Ángeles.  Con Pablo, nos vemos. Buen día. Nos vemos.
+
+47:39 - Juan Pablo Cholico
+  Gracias.

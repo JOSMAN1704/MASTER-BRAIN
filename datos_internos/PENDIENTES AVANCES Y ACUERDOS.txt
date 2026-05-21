@@ -1,0 +1,634 @@
+======================================================================
+ID DE SESIÓN: PENDIENTES, AVANCES Y ACUERDOS
+FECHA: 2026-05-19
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/q8A-hHCVo7AAdA4Mm-9Wsh8CtnoJddA8
+======================================================================
+
+RESUMEN
+
+Odoo - pendientes, avances y acuerdos. - May 19
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar el estado del proyecto Odoo, desbloquear dependencias y alinear los próximos pasos.
+
+Puntos clave
+
+  - Las plantillas de datos son el principal bloqueador. El progreso del proyecto está detenido por las plantillas atrasadas de productos, productores y plan de cuentas.
+  - Acción inmediata requerida. Para desbloquear el desarrollo, se requieren hoy plantillas de muestra (5 productores, 2 productos) y el plan de cuentas final esta semana.
+  - Nuevo taller programado. Se agendó un taller de proceso comercial para el jueves a las 2 PM para analizar el flujo de ventas y definir requisitos.
+  - Proceso de flete definido. El equipo unificará las solicitudes de flete en un solo formulario, que disparará una OC de servicio desde la orden de venta.
+
+Temas
+
+Bloqueadores del proyecto: Plantillas de datos
+
+  - Plantilla de productos:
+      - Se envió una plantilla de muestra, pero su estructura no coincide con el formato requerido para la importación al sistema.
+      - Decisión: Emiliano adaptará la muestra a la estructura correcta para desbloquear el desarrollo.
+  - Plantilla de productores/proveedores:
+      - Hay una versión final en curso, pero se necesita una muestra de inmediato para construir los flujos de trabajo.
+      - Decisión: Víctor entregará hoy una muestra con ~5 registros.
+  - Plan de cuentas:
+      - Este documento crítico está atrasado, lo que impide la configuración completa y las pruebas de los ciclos financieros.
+      - Decisión: Salvador escalará internamente para asegurar la entrega esta semana.
+
+Análisis de procesos y sistema
+
+  - Análisis de procesos:
+      - La matriz de análisis de Emiliano se actualizará con los nuevos requisitos de los talleres recientes.
+      - Acción: Emiliano se reunirá con usuarios clave para priorizar estos nuevos desarrollos.
+  - Desarrollos complejos:
+      - Procesos clave (p. ej., liquidaciones) requieren sesiones dedicadas y profundas para evitar redefiniciones costosas más adelante en el proyecto.
+  - Bitácora de ventas:
+      - Juan Pablo confirmó que el Excel de la bitácora de ventas ya fue enviado a Emiliano y Roberto.
+  - Cuadrantes geográficos:
+      - Víctor confirmó que el archivo del mapa ya está en la carpeta compartida del proyecto.
+
+Nuevo taller y acceso de usuarios
+
+  - Taller de proceso comercial:
+      - Objetivo: Analizar el flujo de ventas y definir requisitos.
+      - Cuándo: Jueves a las 2 PM.
+      - Asistentes: Juan Pablo, Karla, Jorge, Emiliano.
+      - Preparación: Revisar el Excel de la bitácora de ventas para informar la discusión.
+  - Acceso de usuarios:
+      - Decisión: Se crearán todos los usuarios clave en el entorno de calidad para el viernes a fin de habilitar la práctica práctica.
+
+Definición del proceso de flete
+
+  - Objetivo: Unificar el proceso de solicitud de flete para ventas y entregas.
+  - Flujo de trabajo:
+    1.  Se utilizará un único formulario de solicitud de flete en todos los departamentos.
+    2.  El formulario disparará una Orden de Compra (OC) de servicio para la fletera.
+    3.  La OC se vinculará a la orden de venta o entrega original.
+  - Gestión de datos:
+      - Decisión: El sistema mantendrá una base de datos de unidades de transporte (camiones, placas) para reutilización, ya que se repiten con frecuencia. No se almacenarán nombres de conductores debido a la alta rotación.
+
+Próximos pasos
+
+  - Víctor:
+      - Entregar la plantilla de productores de muestra (~5 registros) → Entrega: Hoy
+      - Consolidar los formularios de solicitud de flete en una sola versión vigente → Entrega: Hoy
+  - Salvador:
+      - Asegurar y entregar el plan de cuentas final → Entrega: Esta semana
+  - Emiliano:
+      - Adaptar la muestra de la plantilla de productos a la estructura correcta → Entrega: Esta semana
+      - Reunirse con usuarios clave para priorizar nuevos desarrollos en la matriz de análisis → Entrega: La próxima semana
+  - Raúl:
+      - Agendar el Taller de Proceso Comercial (Jue @ 2 PM) → Entrega: Hoy
+  - Equipo NBG:
+      - Proveer borradores de los 3 contratos de productores restantes y el anexo de liquidaciones → Entrega: Esta semana
+      - Asegurar que todos los usuarios clave estén creados en el entorno de calidad → Entrega: Viernes
+
+======================================================================
+
+ONE-ON-ONE
+
+Odoo - pendientes, avances y acuerdos. - May 19
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar estatus del proyecto Odoo, destrabar pendientes críticos (plantillas, contratos, contabilidad), acordar entregables y programar talleres para avanzar análisis y desarrollos.
+
+Actualizaciones
+
+Raúl Núñez
+
+Registro
+
+  - Conduce revisión quincenal de estatus y bloqueo de puntos.
+
+Progreso en prioridades desde la última reunión
+
+  - Talleres estándar impartidos: Compras; Creación de productos y proveedores.
+  - Sesión express 11:30 sobre contratos/productores y liquidaciones.
+  - Coordinación para sesión de aprobaciones (hoy 4 pm).
+
+Prioridades hasta la próxima reunión
+
+  - Programar y conducir taller Comercial (jueves 2 pm) y siguientes estándar (Almacenes).
+  - Alinear sesión con financieros sobre reportes multimoneda y luego presentar estrategia al cliente.
+  - Consolidar matriz de desarrollos con prioridades del cliente.
+
+Necesita asistencia / Está bloqueado en
+
+  - Plantillas (productos, productores/proveedores) aún con retraso; requiere muestras con estructura correcta.
+  - Catálogo de cuentas contables (homologación pendiente).
+
+Pablo Valero
+
+Registro
+
+  - Enlace con equipo financiero.
+
+Progreso en prioridades desde la última reunión
+
+  - Avance interno en estrategia de reportería multimoneda.
+
+Prioridades hasta la próxima reunión
+
+  - Validar con consultores financieros y agendar presentación (esta o próxima semana).
+  - Enviar primer bloque de diseños de desarrollos para planificación.
+
+Necesita asistencia / Está bloqueado en
+
+  - Plan de cuentas para configurar y probar asientos con validación real.
+
+Emiliano Lorenzano
+
+Registro
+
+  - Lidera análisis funcional y matriz de desarrollos.
+
+Progreso en prioridades desde la última reunión
+
+  - Revisión de plantilla de productos enviada (agregados campos requeridos); puede mapear a estructura Odoo y cargar muestra.
+  - Avances en documento de alta de productores y liquidaciones; definición de distinción campos productor vs proveedor.
+
+Prioridades hasta la próxima reunión
+
+  - Ajustar formulario/campos en Odoo según columnas adicionales y cargar muestra base de productos.
+  - Actualizar y circular matriz de desarrollos con prioridades para validación.
+  - Definir flujo solicitud de flete (correo plantilla desde pedido/entrega), base de transportistas/unidades en sistema.
+
+Necesita asistencia / Está bloqueado en
+
+  - Recibir formatos definitivos/únicos de solicitud de flete y programación, y depurar duplicados en carpeta.
+  - Bitácora de ventas ya compartida; requiere confirmación de uso para taller.
+
+Víctor De La Parra
+
+Registro
+
+  - Punto de contacto en plantillas y cuadrantes.
+
+Progreso en prioridades desde la última reunión
+
+  - Versión 2 temporal de plantilla de productores con campos nuevos; mapas/cuadrantes geográficos cargados en carpeta.
+
+Prioridades hasta la próxima reunión
+
+  - Subir hoy V2 con 5+ registros reales de productores.
+  - Limpiar carpeta de documentos de flete (dejar 1 vigente) y compartir a Emiliano/Roberto.
+  - Seguir completando plantilla final (productores).
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A (requiere tiempo hoy para completar).
+
+Juan Pablo Cholico
+
+Registro
+
+  - Comercial; coordina datos para talleres.
+
+Progreso en prioridades desde la última reunión
+
+  - Confirma envío de bitácora de ventas (extracto) a Emiliano/Roberto.
+
+Prioridades hasta la próxima reunión
+
+  - Enviar hoy formato de solicitud de flete de ventas (campos actuales).
+  - Preparar insumos para taller Comercial (pedidos, precios, gastos, OC por factura, facturas por camión).
+  - Alinear con Víctor formato de flete aplicable a ventas.
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A.
+
+Salvador Bustamante
+
+Registro
+
+  - Interlocutor con dirección/Legal.
+
+Progreso en prioridades desde la última reunión
+
+  - Gestión interna del plan de cuentas.
+
+Prioridades hasta la próxima reunión
+
+  - Escalar hoy con director adjunto para destrabar y compartir plan de cuentas.
+
+Necesita asistencia / Está bloqueado en
+
+  - Resistencia interna a liberar plan de cuentas.
+
+Roberto (SALA VIP)
+
+Registro
+
+  - Coordina sesiones, grabaciones y accesos.
+
+Progreso en prioridades desde la última reunión
+
+  - Accesos y permisos base creados; 3 usuarios ya con acceso a plantilla de usuarios.
+
+Prioridades hasta la próxima reunión
+
+  - Crear antes del viernes todos los key users en ambiente de pruebas.
+  - Enviar invitación al taller Comercial (jueves 2 pm) y asegurar grabación.
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A.
+
+Jorge Obregón
+
+Registro
+
+  - Ventas/Naturagui.
+
+Progreso en prioridades desde la última reunión
+
+  - N/A.
+
+Prioridades hasta la próxima reunión
+
+  - Preparar info Naturagui para taller Comercial.
+
+Necesita asistencia / Está bloqueado en
+
+  - N/A.
+
+Temas
+
+Plantillas de productos y productores/proveedores
+
+  - Cliente compartió archivo con cajas de fresa (1 y 2 lb) y columnas extra (conversiones, comercio exterior).
+  - Debe respetar estructura de carga Odoo; Emiliano mapeará y cargará muestra.
+  - Separar plantillas/campos: fruta vs empaque/planta; y productor vs proveedor genérico.
+
+Contratos y anexos (liquidaciones)
+
+  - Recibidos 2 borradores; faltan 3 contratos + anexo de cálculo.
+  - Drafts sirven para levantar campos/reglas sin esperar cierre legal; compartir esta semana.
+
+Matriz de desarrollos y talleres
+
+  - Talleres estándar permiten validar/detectar desarrollos; algunos requerirán sesiones profundas (p.ej., liquidaciones).
+  - Emiliano actualizará matriz con prioridades; se agendarán revisiones específicas.
+
+Catálogo de cuentas contables
+
+  - Crítico para configuración y pruebas con asientos correctos.
+  - Salvador escalará para liberar; entre más pronto, mejor para ciclos de prueba.
+
+Bitácora de ventas y forecast
+
+  - Bitácora compartida (extracto) servirá de base para taller Comercial y para entender pedido->gastos->facturas/camiones.
+  - Histórico de ventas para forecast: compartir cuando esté listo.
+
+Accesos y práctica en ambiente
+
+  - Crear todos los key users esta semana; promover práctica en creación de catálogos básicos aunque sigan talleres estándar.
+
+Reportes multimoneda
+
+  - Equipo financiero afina estrategia; revisión interna hoy; presentación a cliente esta o próxima semana.
+
+Cuadrantes geográficos
+
+  - Víctor subió avance (mapas/ranchos). Homologar nomenclatura.
+
+Fletes: solicitud y programación
+
+  - Definir plantilla única de solicitud (correo desde pedido/entrega); ventas enviará formato hoy.
+  - Base en Odoo de transportistas/unidades/placas; chofer puede ser dinámico.
+  - Confirmar si habrá “programación” central o todo desde venta/embarque; si aplica, compartir Excel actual.
+
+Próximos pasos
+
+  - Víctor: Subir hoy V2 plantilla de productores con 5+ registros reales; limpiar documentos de flete y dejar 1 vigente.
+  - Emiliano: Mapear columnas extra a Odoo y cargar muestra de productos; actualizar matriz de desarrollos con prioridades; definir flujo de flete (correo/OC) y estructura de catálogos (transportistas/unidades).
+  - Juan Pablo: Enviar hoy formato de solicitud de flete de ventas; preparar insumos para taller Comercial; coordinar con Víctor formato final de flete.
+  - Salvador: Escalar y compartir plan de cuentas esta semana.
+  - Roberto: Crear todos los key users antes del viernes; enviar invite y asegurar grabación del taller Comercial (jueves 2 pm).
+  - Raúl/Pablo: Reunirse con financieros hoy; agendar presentación de reportería multimoneda (esta o próxima semana); coordinar siguientes talleres (Almacenes) tras Comercial.
+  - Equipo NBG: Compartir drafts restantes de contratos y anexo de liquidaciones esta semana.
+  - General: Jueves 2 pm taller Comercial (Cholico lidera disponibilidad; Jorge/Karla preparados).
+
+======================================================================
+
+TRANSCRIPCION
+
+Odoo - pendientes, avances y acuerdos. - May 19
+VIEW RECORDING - 55 mins (No highlights): 
+
+---
+
+1:22 - Raúl Núñez (Inflexyon)
+  ¿Qué tal equipo? Buenas tardes a todos.
+
+1:25 - SALA VIP
+  Ahora sí ya. Buenas tardes. Que ya estamos, ya estamos completos, faltaría, falta Tania por ingresar, no sé si ya está por aquí, no está todavía, ¿verdad?  No, o sea, está. Ah, ¿no está la vecina? No, ok, bueno, entonces, faltaría Alfredo, pero 30. Entonces, adelante, Raúl.
+
+2:46 - Raúl Núñez (Inflexyon)
+  Yo también estoy esperando a mi equipón, vamos a dar un par de minutos para que se conecte.
+
+2:55 - SALA VIP
+  ¿Me escuchan bajito? A ver. Ahí está, perfecto. ¿Ah, ya me escuchan mejor? Ok.
+
+3:03 - Raúl Núñez (Inflexyon)
+  ¿Qué tal? Buenos días a todos. ¿Qué, Pablo? ¿Qué tal, Pablo?
+
+3:10 - SALA VIP
+  Sí, está aquí, sí, ¿verdad? Sí, sí, Aquí estoy, Robert, nomás que no me puedo mover ahorita, pero aquí estoy conectado, ¿va?
+
+3:19 - Salvador Bustamante
+  Ah, ok. Gracias.
+
+3:28 - SALA VIP
+  Adelante, Pablo, Raúl. ¿No los escuchamos o se quedaron congelados? Yo sí los escucho a ustedes. Yo, sí, no, sí se escuchan, sí se escuchan.
+
+3:53 - Pablo Valero (Inflexyon)
+  Perfecto.
+
+3:54 - SALA VIP
+  Adelante, Pablo, Raúl, no sé quién vaya. A presentar. Adelante, Raúl.
+
+4:04 - Raúl Núñez (Inflexyon)
+  No, no vamos a esperar a, no veo a Miliano. Ah, claro, a ver. Ay, ese es Miliano, o diario es lo mismo.
+
+4:23 - SALA VIP
+  Y no preocupes. Pero eso es para lo menos vas a usar. Para eso, para eso. Y Sintero, vamos con el grupo.  tal, tú también. Y no se preocupa. Y no.
+
+5:08 - Pablo Valero (Inflexyon)
+  Listo, Sebasti. ¿Qué tal, Emiliano, Alex? Buenas tardes. Buenas tardes. Buenas tardes.
+
+5:16 - SALA VIP
+  ¿Qué tal? Buenas tardes. Buenas tardes a todos.
+
+5:21 - Raúl Núñez (Inflexyon)
+  Muchas gracias por conectar a equipo. ¿No nos falta nadie más? Creo que no. Si no que se vayan sumando.  ¿Sí me escuchan bien, verdad? Sí, sí. Ok. Bueno, la sesión del día de hoy, como más o menos cada 15 días que vamos a estar teniendo, es para ver el estatus general del proyecto, dónde estamos parados, en dónde estamos atorados y qué se necesite para ir desatorando los puntos, así como tener fecha.  Eches compromiso de las entregas de los pendientes para poder seguir avanzando y empezando con el primero, nos gustaría preguntarles cómo van con el tema de la plantilla de productos, al menos la muestra que les comentábamos que nos pudieron hacer llegar como para, digo, sabemos que están en espera de homologación con, también con Estados Unidos, pero nos, la verdad es que nos está atorando para poder terminar de armar el flujo.  Recuerden que, eventualmente, se cargarán las plantillas de productos ya definidas, pero si nos pudieran hacer llegar una muestra, la que tengan ya ahorita para poder desatorar, estaría buenísimo.  No sé cómo van con el tema de la plantilla.
+
+6:41 - SALA VIP
+  El día de ayer les cargué un documento en donde pusimos lo que vienen siendo las cajas de fresa, lo que es una libra y dos libras, y fue donde les agregamos columnas que, en base a lo que vimos nosotros internamente con las necesidades en cuanto a comercio exterior, ventas y en...  Entre otras áreas. Se agregaron ahí y ver si se podían hacer campos calculados por el tema de conversiones de kilogramos a libras.  Y también se tocó la parte de que si los otros productos, como el tema de material de empaque o planta, que no se requieren tantos campos como el tema de la fruta, que si podríamos utilizar otra plantilla o ver la forma para no, o no tener tantas columnas que no vamos a llenar y que no se requieren para dar el alta de esos productos.
+
+7:37 - Raúl Núñez (Inflexyon)
+  Ok, porque estoy viendo lo que mandaron, pero ahí tengo mis dudas porque, no sé, Emiliano, si estás por acá, pero creo que no respeta la estructura de la plantilla que se compartió.  eso sí es importante para poder hacer la carga de los productos. No sé si tuviste oportunidad, Emiliano, de revisar lo que compartieron, pero me parece que eso no...  Bien, es que más que nada, Raúl, el tema que mandaron es para validar qué campos que ellos quieren en el sistema.
+
+8:16 - Emiliano  Lorenzano
+  Ahorita de lo que revisé, pues hay algunas cosas que no trae por default, pues, el sistema para la alta de los productos.  Pero ya con esa plantilla, pues, justamente nos va a ayudar a nosotros a conocer qué campos vamos a agregar en el formulario para el registro, pues, de un producto.  Entonces, sí, ya lo revisé, pero pues ahorita no he entrado a detalle acá para ver cómo se va a completar eso, porque estaba revisando el tema de las liquidaciones.  Pero sí, tenemos esa... Se puede decir que esa muestra y ya la acomodo a la plantilla, pues, realmente ya sería...  Ya creo que, pues lo de menos, digo, eso se puede dar más rápido la estructura y en base a con lo que ellos mandaron y ya con eso se pudiera subir ya la información completa al sistema.
+
+9:13 - Raúl Núñez (Inflexyon)
+  Ok, va.
+
+9:13 - Victor De La Parra
+  Ahí solo una pregunta, Raúl, antes de la plantilla que le compartí por ahí a mi compañero Manuel, fue la que me había compartido Emiliano, nada más que justamente como dicen, tanto Emiliano como Manuel, solo se agregaron lo que las columnas, por eso quizás no sale, pues el, ¿cómo se llama?  El mismo orden, o por lo que mencionas, pero de que es la misma plantilla, nada más se agregó lo que se ocupa, pues.  Ok, va.
+
+9:42 - Pablo Valero (Inflexyon)
+  Entonces, aquí preguntaría, perdón, ¿creen que esta semana, Emiliano, pudiéramos tener una carga de productos base, al menos esta muestra?  Sí, generalmente son dos, digo, no me, eso hasta se puede crear.
+
+10:01 - Emiliano  Lorenzano
+  Manualmente, directamente en el sistema. Ahorita realmente lo que sí es importante pues es las columnas adicionales que ellos agregaron y que nosotros entendemos que son los campos que se van a ocupar.
+
+10:18 - Pablo Valero (Inflexyon)
+  Sí, sí, yo creo que sería muy importante pues ya tenerlo, ¿verdad? Para no tener también limitantes en materiales o productos.  Bien, gracias.
+
+10:36 - Emiliano  Lorenzano
+  Igual lo contemplo ahorita en la parte del documento que estamos generando para la alta de los productores y el tema que va relacionado pues con la liquidación.  Lo que vimos ahorita también con Robert en una reunión así express de los contratos y todo eso. Entonces ahí, para ya no dejar pasar ese tema de los productos, yo creo que de una vez incluimos ahí el registro.  Muy bien.
+
+11:16 - Raúl Núñez (Inflexyon)
+  Un segundo nada más. Ok, en cuanto a la plantilla de, me puse aquí doble productores, proveedores. De productores, vi que mandaron un en el grupo.  ¿Es la muestra o es la versión final? No, no. La versión final justamente ahorita en la reunión express se acaba de agrandar un poquito más con algunas columnas más que se le van a agregar.
+
+12:11 - Victor De La Parra
+  Dame chance de trabajar porque, pues, bueno, vengo trabajando con lo que se acaba de agregar para esa. Este, a ver, y, pues, este, te envío, este, ¿cómo se llama?  Como un demo de la plantilla con algunos 15 proveedores, ¿te parece?
+
+12:33 - Raúl Núñez (Inflexyon)
+  Con, incluso con 5, O sea, la idea es ya tener la estructura que va a tener esa plantilla y que representa cuáles son los campos que se van a tener en el sistema para empezar a armar estos flujos.  Entonces, evidentemente, pues, no nos vamos a esperar, no nos podemos esperar a que terminen toda la plantilla, porque, pues, imagínense, ¿no?  Esa, esa ya, ya en su momento se entregará, este, previo a la, a la salida en vivo, pero con unos 5, eh...  Este, datos que nos puedas compartir con, ya con estos campos adicionales, estaría buenísimo para, para terminar de montar el flujo.
+
+13:08 - Victor De La Parra
+  Va que va, entonces, actualizo en la carpeta la versión 2 de esta plantilla temporal, este, y pues bueno, sigo trabajando en la final.  Ok, ¿cuándo crees que nos pude? Ajá, adelante.
+
+13:21 - Raúl Núñez (Inflexyon)
+  De la, ah, paso, adelante.
+
+13:23 - Victor De La Parra
+  No, no, hola, sí, es justo la, la pregunta, Raúl, y ahorita hago el comentario, para ponerle fecha a esa plantilla.
+
+13:33 - Pablo Valero (Inflexyon)
+  Sí, si nos pudieras comentar más, ¿cuándo pudieras tener estos cinco registros?
+
+13:37 - Victor De La Parra
+  Agrego los registros, ya tengo, ya se tienen por ahí ya algunos contratos firmados, me pongo a trabajar, dejarlo, y se las paso el día de hoy.  Ok.
+
+13:46 - Pablo Valero (Inflexyon)
+  Muchas gracias, y sí, lo que les iba a comentar es la muestra, digo, cinco, quince, entre más completa mejor, ¿verdad?  Al final, el, el, es material que se va a usar en los, en. En los talleres, este, pero de todas maneras, como, como bien decías, Victor, este, no, no, no significa que hasta ahí quedó la tarea, ¿verdad?  O sea, sí, seguirla trabajando, este, porque sí, o sea, conforme se va acercando la fecha de la salida en vivo, etcétera, hay muchas más cosas que probar, hay más temas que revisar, y si la plantilla se deja ahí, pues, dejamos que, que se junte, ¿verdad?  Entonces, sí, mejor irla avanzando, y cuanto antes cerremos esos temas, mejor.
+
+14:34 - Victor De La Parra
+  Sí, pues, de hecho, justamente hace unos minutitos a las, hace pico, doce, fue cuando entramos por ahí con Emiliano, y creo que fue Alejandro también, este, se pusieron, pues, los nuevos campos, de, esta sería la versión dos de la plantilla, este, temporal, no final, pero sí, sigo trabajando en la plantilla para, este, irla aumentando, nada más si venme al día de hoy, porque, pues, sí, son bastantes más campos.  Gracias. Gracias.
+
+15:00 - Raúl Núñez (Inflexyon)
+  Justo el siguiente punto lo estoy actualizando porque ya lo actualicé previo a esta sesión, pero tuvimos una sesión, nos mandaron el correo con los contratos el día de hoy en la mañana, y tuvimos una sesión a las once y media para entrar un poquito más a detalle, más en un momento.
+
+15:24 - Victor De La Parra
+  Ah, y en cuanto aquí, Emiliano, este, igual quizás no es este, la, bueno, no, mejor me espero al taller de, al segundo taller de proveedores, creo que, creo que va a ser más fácil ahí, porque ahí hay alguna observación, pero bueno, me espero ahí tantito, no me adelanto.
+
+15:52 - Raúl Núñez (Inflexyon)
+  Va, que bueno. Ya nos faltaban, lo voy a poner por acá, para tenerlo en radar. Faltaban tres contratos más por definir con su departamento legal, ahí si nos pudieran actualizar en algún momento cuándo creen que pudieran estar compartiendo los cartas.  parte, Rami, iban a ser cuatro, en la sesión anterior salió otro que comentaban del anexo. Tres de los que estaban ya previstos y el anexo serían cuatro.
+
+16:27 - SALA VIP
+  Ok, va que va.
+
+16:33 - Pablo Valero (Inflexyon)
+  Que igual, miren, no sé, ahí no tengo el detalle de si el contrato, digamos, se va a utilizar en algo a nivel desarrollo dentro de Odu, o si es una referencia como para los campos e información que se requiere, digo, porque sé que las validaciones de contratos con el área legal, pues, suelen requerir, ¿no?  Su revisión, su tiempo, entonces... Si hay algún draft que de cara a darnos la información de los campos, de lo que se puede requerir, ya vean que sea compartible, pues igual, ¿verdad?  Adelante, compártanosla y vamos avanzando con eso para evitar, ¿no? Esperar a que quede, digamos, la revisión legal súper depurada.
+
+17:22 - SALA VIP
+  Más bien, más bien sale, del contrato tomamos la base o, y junto con el modelo de negocio para poder hacer el cálculo de proyección.  Entonces, eso sí es importante. Robert, como Luis andaba en los contratos, tú dime y desaturamos su pregunta. No, ya, ya los, ya les compartimos el draft como por mail me los mandó y me comentó que sí había, iba a haber alguna modificación, pero justamente lo que menciona Pablo es, si ya tenemos un draft, se lo podemos.  Si se va a ver actualizaciones, pues nada más en el trayecto se los vamos diciendo. De esos dos contras que nos compartió Luis, faltan tres para tenerlo completo de lo que él necesita por cada productor, más aparte un anexo que es donde se especifica el cálculo para las liquidaciones.  Sí, sí, sí, pero ya no más estamos en la espera de que me mande esos tres, pero si tú los tienes, adelante.  Sí, sí, sí. Pues se los compartimos, yo creo que están en la semana.
+
+18:50 - Raúl Núñez (Inflexyon)
+  Ok, va, muy bien. bien. El siguiente punto tiene que ver con Emiliano y el entendimiento global o estatus actual del análisis de la operación, solamente para ver si nos pudieras comentar, Emiliano, en qué punto estás.  Me parece que ya se tiene un entendimiento mucho más completo del flujo general y, de hecho, la intención es poder avanzar con el resto de talleres, pero no sé qué nos puedas comentar, Emiliano, al respecto.  ¿Pero de qué tema, Raúl? O sea, el estatus actual del análisis que has hecho con, de lo que has encontrado y, digamos, un porcentaje de entendimiento o cómo has visto el estatus actual del análisis.
+
+19:49 - Emiliano  Lorenzano
+  Pues fue lo que ya hemos mostrado con Robert en un documento de los puntos que venían como por estándar, que...  ¿Qué adecuaciones se iban a realizar en las diferentes áreas? Con el desglose de lo que se ocupaba y realmente dentro de los talleres han salido algunos otros comentarios de alguna modificación en el flujo, pero no sé ahí si a qué detalle quieres que entre.
+
+20:30 - SALA VIP
+  Sí, es muy general la pregunta que haces ahí, Raúl, y ayudando un poquito a Emiliano, si bien hemos tenido creo que dos o tres talleres en los que son los análisis que hemos tenido, tanto de compras, almacén y de producción, eso es como el análisis, y hemos tenido dos talleres en el cual nos han especificado cómo se hace la compra, la cotización, la creación de productos y de proveedores, pero sí hace falta más.  Vamos hacer el énfasis del análisis de nuestro proceso un poco más a detalle. Ya tiene algo de alcance Emiliano y a lo mejor sería como lo mencionaste en una reunión Emiliano donde nos decías qué prioridad tenía cada uno de ellos.  Eso estaba muy padre porque a cada uno de nosotros, de los key users, podemos ya especificarte qué sí va como prioridad o qué pudiera quedarse.  Entonces, ese taller está muy bien. Si lo puedes generar conforme a los últimos análisis que has visto, sería muy bueno.  Sí, yo igual sigo actualizando la última matriz que revisamos, Robert, donde se especificaron justamente esas prioridades.
+
+21:58 - Emiliano  Lorenzano
+  Igual lo... lo... Lo reviso para ver qué me falta ahí agregar y sí, sí lo podemos seguir llevando así.
+
+22:07 - Raúl Núñez (Inflexyon)
+  Sí, de hecho, ya que lo tengas, Emiliano, igual y para juntarnos y que marquen la pauta de prioridad de los adicionales que han salido para tener, digamos, el panorama global de desarrollo ya bien definido en la matriz.
+
+22:23 - SALA VIP
+  Todavía falta, Raúl, puesto que falta ver, por la parte de Naturagui, un poquito más a detalle, también lo que vamos a ver de las talleres de las aprobaciones, también no hemos detallado bien esa parte, cómo sería el flujo, pero yo creo que en el taller pudiera darse algo de avance, pero todavía hace falta un poquito más de análisis.
+
+22:53 - Raúl Núñez (Inflexyon)
+  De hecho, justo la intención de los talleres es precisamente esa, incluso lo comento por acá. La importancia de los talleres está muy clara dentro de nuestra metodología.  Y adicional, me comentaba Emiliano que ya pudiéramos empezar a tener talleres estándar para detectar otros desarrollos que pudieran ser importantes, ya sea en el área comercial o en almacenes para el día jueves.  Igual ahorita entramos a los puntos de los siguientes pasos de esta semana y de la siguiente, pero para que lo tengan en radar, o sea, para eso precisamente es la intención de los talleres, afianzar los desarrollos detectados, detectar nuevos desarrollos y seguir completando la matriz de desarrollos para que ya nos puedan ustedes también marcar la pauta en prioridad.  También, y lo comentábamos en el equipo, en cuanto a los desarrollos, habrá desarrollos que muy seguramente requieran un análisis más robusto y profundo en el, por ejemplo, en toda la parte de liquidaciones que se necesita un mayor...  Hay un diseño y un entendimiento que no es solamente que cambio ciertas reglas de Odu y cambio el flujo, sino que ya requieren un análisis mucho más profundo, para eso vamos a necesitar sesiones específicas para entender esas partes, ¿no?  Entonces, ya los iremos buscando en su momento para entender esos desarrollos más robustos que son fundamentales para la operación y que además, pues, tienen cierto grado de complejidad, ¿no?  ¿Y vas a comentar algo, Pablo?
+
+24:30 - Pablo Valero (Inflexyon)
+  No, esto mismo, Raúl, sea, que sí, digamos, la parte del análisis, por ejemplo, de estos temas de proceso natural y importante concluirlo, pero efectivamente los desarrollos de esa matriz, cada uno requerirá su propia validación fina y entendimiento para poder planificarlo, ¿verdad?  sea, el... Ya hay unos, un primer bloque de desarrollos que les vamos a enviar ahí el diseño para su planificación y bueno, estando en canal con el alcance, pues proceder con su liberación, pero bueno, es irlo complementando con los talleres y con la planificación.
+
+25:21 - Raúl Núñez (Inflexyon)
+  Sí, y va a ser muy importante esas reuniones específicas de desarrollos muy complejos, entrar muy a detalle porque también los cambios de definición, ya cuando se tiene el desarrollo avanzado o incluso entregado y que se cambie algo o que digan, no, es que siempre en una hora sí va a ser de esta forma, esos no se imaginan el retraso que es dentro del proyecto, entonces, incluso si internamente pueden ir visualizando, por ejemplo, el tema de liquidaciones, que lo tengan muy muy claro de cómo debe de quedar, eso nos puede ayudar a...  A mitigar al más, lo mayor posible las redefiniciones, ¿verdad? Va, también el catálogo de cuentas, no nos los han hecho llegar, me parece que era también de los puntos que estaban homologando, si mal no recuerdo, con Estados Unidos, no sé, ahí nos pueden comentar al respecto.  Sí, no, no lo han proporcionado. Adelante, Robert, adelante.
+
+26:24 - SALA VIP
+  No, no, justamente te iba a decir que tomaras la palabra.
+
+26:27 - Salvador Bustamante
+  Sí, Raúl, ahí tenemos dificultad, no sé, no sabemos por qué no nos lo quieren pasar, entonces estamos peleando con esta parte, este, dame chance, aquí ama nuestro director adjunto y tengo pendiente ver eso con él hoy.  Gracias, chaval. Bueno.
+
+26:52 - SALA VIP
+  Y no tienen un aproximado del tiempo.
+
+27:00 - Salvador Bustamante
+  No, o sea, yo entiendo que más bien es al revés, este, para con ustedes deberían de estar para ayer, ¿no?
+
+27:09 - Pablo Valero (Inflexyon)
+  Sí, es importante porque entre más, digamos, rápido tengamos esto que es, digamos, la columna vertebral, ¿verdad? ¿De dónde cae, dónde deben de caer los asientos contables?  Pues mejor validados podemos, podemos ir primero avanzando la configuración, este, que los ciclos de prueba ya contemplen las validaciones de cuenta, pero de que se puede avanzar, se puede, pero, pero el tema es que, este, pues los ciclos de prueba no van a, no necesariamente van a contemplar el plan, el plan de cuentas como debe de ser.  Y, bueno, eso luego nos va dejando menos tiempo al final para hacer esas validaciones. Entonces, ideal, cuanto antes mejor para, para que ya también podamos continuar.  Y ampliar todo eso, ¿verdad? Va, perfecto, lo reviso.
+
+28:04 - Raúl Núñez (Inflexyon)
+  Sobre todo tengan en cuenta que, pues estos, los que ya han pasado por implementaciones, lo podrán corroborar, que pues van saliendo pendientes, sobrependientes, y luego al final se nos termina siendo una bola de nieve.  Entonces, entre más rápido podamos ir despejando temas, siempre es mejor, ¿no? Así nos quedamos sin pendientes. Ahora, otro punto que yo tenía esta duda, en alguna de las sesiones se habló sobre que manejaban un Excel de registro de ventas, por ahí compartieron en la carpeta del proyecto un formato de entradas y salidas, no sé si estemos hablando de lo mismo o sea algo diferente.
+
+29:02 - SALA VIP
+  No sé a cuál, a cuál te refieres, porque registro de ventas y es muy diferente a un formato de entradas y salidas.  Sí. Si nos puedes como recordar cómo era ese, ese registro de ventas o ese Excel. Es la bitácora, ¿no, Robert?  Ah. Que queramos enviarle. ¿Era la bitácora? Ah, ya. Sí, donde tiene toda la... Sí, ya sí. Ese, ¿con quién sería para...  Esa es la bitácora, ¿quién me ha compartido?
+
+29:47 - Juan Pablo Cholico (naturprime.mx)
+  Déjame revisar, aquí está Carla, pero déjame revisar si ya la tienen ustedes o... Porque vamos a mandar un extracto para que tengan una idea en general y no toda la información que los haga como más, este, confuso.  Gracias. Punto. Pero hoy la tienen, sin falta. Si es que no la han mandado, hoy la tienen. Ok. si sí, ahorita te confirmo durante la reunión quién tiene el correo.
+
+30:12 - Raúl Núñez (Inflexyon)
+  Va que va. Ok. ¿Sí es contigo, verdad, Chulico? Sí. Ok, va.
+
+30:24 - Juan Pablo Cholico (naturprime.mx)
+  Sí, yo creo que va a ser eso, porque comentamos en la reunión de los productos.
+
+30:31 - Raúl Núñez (Inflexyon)
+  También mencionaron en la sesión, y no sé si ya detuvieron o ya lo mandaron, la definición de cuadrantes geográficos con agrupación de productores.  No sé si nos pueden detallar a qué se refiere, o si tú, Emiliano, ya lo tienes claro, y si ya mandaron algo al respecto.
+
+30:53 - SALA VIP
+  Ahí vi, era el que nos iba a apoyar en revisar cada uno de estos cuadrantes. Así. Y pasárselos a ustedes, hacer referencia a qué ranchos estaban y así de esa manera identificarlo.  También te iba a mandar como el link de la página en donde veía Vic esa parte. ¿Sí recuerdas, Vic?  Sí, de hecho eso ya se los había compartido.
+
+31:19 - Victor De La Parra
+  Les había compartido un buen avance ahí porque todavía no se tienen todos los mapas, pero ya está en la carpeta que por ahí nos hizo llegar Raúl.  ¿Sabes qué?
+
+31:27 - Raúl Núñez (Inflexyon)
+  Creo que también pudiera funcionar que homologuemos términos para identificarlos más rápido, pero bueno, si ya está, entonces para identificarlo y cambiarle el nombre.  También comentaron para llevar el tema del forecast, el histórico de ventas pasadas, a lo mejor ahorita no es tan urgente, pero también sí, en cuanto lo tengan nos lo pudieran compartir, estaría buenísimo.  Adelante, Cholico. Ajá, ya, confirmo, el correo ya lo tienen Emiliano y Roberto, por la bitácora. Ok, va. Gracias, Cholico.  De nuestro lado, queda pendiente ahorita el envío de la plantilla de usuarios, sobre todo, no sé, iré a confirmar con ustedes si han tenido acceso a la rama de pruebas o tienen acceso para ir practicando un poco de lo que ya se ha visto.  Este, sobre todo, el tema de la creación y el llenado de las fichas de productos y proveedores. Si no, pues me imagino que, Emiliano, que con esta plantilla lo  que se busca es darles un acceso para que puedan hacer algunas prácticas, ¿no?
+
+33:09 - Emiliano  Lorenzano
+  Sí, pues más bien la plantilla sería, pues yo creo que ahorita no para las pruebas, pero sí para la parte de la salida en vivo, porque ahorita pues pueden ellos crear manualmente los usuarios, si en realidad no pueden alguno para pruebas.
+
+33:27 - SALA VIP
+  Sí, la semana pasada vimos el acceso al sistema de calidad, cómo registrábamos usuarios, y mandábamos también, o configurábamos cada uno de los usuarios con los permisos, y en base a eso, actualmente solamente Víctor, Chema y yo tenemos el acceso a esa plantilla.  Ok. Y bueno, ese es el Adelante, Pablo.
+
+34:01 - Raúl Núñez (Inflexyon)
+  Sí, aquí mi sugerencia con esto, Robert, sería, digo, qué bueno que ya tienen acceso a la creación de usuarios y que se dio un taller inicial.  Sabemos que seguramente durante las pruebas y demás pueden salir permisos nuevos que no son estándar, cosas así. Este, eso se, se pueden agregar y alimentar en esa matriz de usuarios que, como dice Emiliano, va más hacia, hacia, hacia la salida en vivo, pero de momento sí es bueno que, por ejemplo, esos talleres que se van teniendo, aunque sean estándar, este, pues también, por ejemplo, si ya hay ciertos, ahorita son talleres estándar para que conozcan el sistema, pero si ya hay ciertos procesos que se pueden ir practicando, como por ejemplo, oye, vamos a crear proveedores, productores, vamos a, a.
+
+35:00 - SALA VIP
+  A revisar algún flujo, aunque sea de creación de catálogos, vale la pena, vale la pena ir practicando y revisándolo.  Quizás sé que haya todavía, o sea, se requieran los talleres más en forma y como capacitación, pero cuanto antes se pueda ir, digamos, perdiendo el, el, el, el, el, fin, no hay miedo, pero el ir teniendo, ir interactuando con el sistema es mejor.  El, ponlo ahí, Raúl, que en esta misma semana, antes del viernes, todos los usuarios, los key users van a estar creados para que cada uno pueda entrar al, al portal.
+
+36:04 - Raúl Núñez (Inflexyon)
+  Ok, buenísimo. Por otro punto importantísimo que surgió en estos días fue el tema de los reportes multimoneda. El equipo de consultores financieros estuvo haciendo una revisión a detalle de los alcances y de este punto para tener una reunión con ustedes y presentarles las estrategias y los alcances a tomar.  Primero que necesitamos tener una validación con ellos. El día de hoy estamos ya buscando la sesión para aterrizar bien estos puntos y ya posteriormente los buscamos para presentarles el escenario.  No sé si... si... si... sé sé sé si... No No Pablo, ¿quieres comentar algo aquí al respecto que estabas un poquito más metido en?  Sí, o sea, esta semana sería cuando nos pudiera presentar algo.
+
+37:11 - Pablo Valero (Inflexyon)
+  Miren, hoy vamos a revisar cómo, o sea, entre los financieros, los consultores financieros, qué tanto se avanzó, se aterrizó, se tiene ya el planteamiento, ellos ya han estado trabajando en eso.  Con base en eso nosotros los buscaríamos. En todo caso, si no fuera esta, sería la siguiente semana. Sé que ya van avanzados, pero tenemos que revisar que, pues digamos que la estrategia esté ya presentable para ustedes en el planteamiento.  Sé que es reportería, o sea, podemos seguir avanzando, pero no, no, digamos, no nos, o sea, podemos seguir avanzando sin detenernos, pero tampoco dejamos de lado el punto porque sabemos es, es muy importante.  Gracias.
+
+38:06 - Raúl Núñez (Inflexyon)
+  Este punto lo voy a cambiar para acá y tiene mucho también que ver con lo que les comentaba de las sesiones para tanto para tener este el la prioridad que nos marquen ustedes de los desarrollos como tener sesiones específicas para desarrollos muy complejos.  Bueno, en cuanto a hechos destacables, siempre hay que mencionarlos, pues ya tuvimos un taller estándar del módulo de compras, un taller de creación de productos y proveedores y ya se tiene un entendimiento mayor del flujo general de la operación.  Con esto en mente ya podríamos arrancar, como les comentaba, con algún taller estándar comercial o almacenes el día jueves y consultarles.  El horario, si están aquí los involucrados y una vez definirlo, ¿cuál de las dos sería? Y si no, pues para que nos indiquen ahí en el grupo.  No sé si lo pudiéramos, si lo tengan claro, tengan disponibilidad el día jueves. El jueves, si vamos a ver el tema de comercial y almacenes o nada más uno.
+
+39:25 - SALA VIP
+  ¿Hay qué sugieres, Emiliano?
+
+39:27 - Raúl Núñez (Inflexyon)
+  ¿Sería primero uno y ya después vemos para el otro o el mismo día dos o qué sugieres aquí? sí, sería uno, Raúl.  Ok. ¿Cuál sugieres?
+
+39:40 - SALA VIP
+  Ajá, si es el jueves, Cholico, Karla, ¿tienen libre el jueves? Si es la parte de comercial.
+
+39:50 - Juan Pablo Cholico (naturprime.mx)
+  Jueves o viernes después de la una. Aquí, equipo, ¿cómo ven su calendario?
+
+40:04 - SALA VIP
+  ¿Tú está bien? Dicen, si no van ir a las tortillas, no van ir a... Sí, jueves, entonces, está bien, tú nos indicas, Cholico, jueves a las 2 de la tarde, igual ya, ya para, ya comiste a la 1.  Bueno, te estoy dando chance de que comas temprano. Este, sí. Ok, a las 2, este, ponemos esa de comercial, muchachos.
+
+40:39 - Juan Pablo Cholico (naturprime.mx)
+  Necesito que vaya preparando alguna información, algunos datos, algo, para avanzar más rápido.
+
+40:49 - SALA VIP
+  Sobre todo, George, que es la parte de Naturagui, también de ventas, que puedas tener algún, para cubrir. Bueno, si va ser para la cuenta de...
+
+41:00 - Juan Pablo Cholico (naturprime.mx)
+  Pedidos, por eso enviamos la bitácora que ya tienen ustedes, era para que chequen toda la información que ingresamos en un pedido vaya, desde productos, cantidades, precios, gastos que van en esa unidad, cuántas órdenes de compra van por, es una orden de compra por factura, cuántas facturas van en un camión, eso que les enviaron Excel es precisamente para, si lo pueden revisar un poquito antes, nos va a ayudar más para avanzar ese día.  Ok, sí, lo reviso entonces y ya le mando comentarios en el grupo.
+
+41:36 - Emiliano  Lorenzano
+  Por mi parte estoy de acuerdo, el jueves también tengo libre, gracias Dios.
+
+41:45 - Jorge  Obregon
+  Va, que va, tú nos apoyas Robert con el envío de la sesión, me gusta que yo se las mande.
+
+41:51 - Raúl Núñez (Inflexyon)
+  Sí, sí, yo se las mando. Ok, va. Ahí como sugerencia.
+
+42:00 - Pablo Valero (Inflexyon)
+  Robert, creo que tú estás generando las grabaciones, las sesiones, entonces de cara a las grabaciones, pues ahí como tip, ¿no?  No dejar de grabar y para que puedan tener la memoria de las sesiones también, ¿verdad? Se grabó en automático, ¿no?  Con Fathom.
+
+42:26 - SALA VIP
+  Sí, lo mandan automático y se les envía, creo que sí han tenido acceso a esa reunión, ¿no, muchachos? Sí, sí, sí, ya me llega el resumen y la sesión grabada.
+
+42:43 - Raúl Núñez (Inflexyon)
+  Ok, hoy a las cuatro se tiene una sesión para ver el tema de solicitudes de compra de las áreas y aprobaciones, esa la tenemos el día de hoy.  El siguiente paso, siguiente semana, ya lo que comentamos. Vamos a revisar los alcances de los reportes multimoneda. Muy seguramente quede la siguiente semana, entonces lo pongo de una vez.  Ok, esto es lo que agregué. Y, ok, desarrollos críticos de proyecto próximos a enviar. Va. Y bueno, recordar, ¿no?, que puntos importantes de riesgo y puntos críticos de riesgo de cara al éxito del proyecto, recordando que el éxito del proyecto es que se mantenga en tiempo, alcance y presupuesto.  Es el tema de, este, las plantillas, el envío expedito y pronto, lo más pronto posible de las plantillas, de la información, o de incluso muestras, como lo comentábamos.  La importancia, resaltar la importancia de los talleres estándar. Ya que nos ayudan dentro de nuestra metodología a detectar desarrollos adicionales o a validar los desarrollos que ya tengan detectados y es importante mantener los avances ya que hay algunos puntos que se han comentado que ya tienen más de tres semanas de atraso y son críticos para el avance del proyecto.  No sé si tengan algún otro comentario, equipo. ¿Cuál es el que más atraso tiene, Raúl, de información de nosotros entonces?  Yo diría que las plantillas, ya que tuvimos previo al kick-off, incluso tuvimos una sesión donde se entregaron, se dio un taller del correcto llenado de las plantillas, se entregaron la base de las plantillas y esas son las más, las que tienen mayor retraso todas.  Estamos hablando de que ese taller se tuvo hace aproximadamente dos meses. Ok, el de cuentas, ¿no?
+
+45:10 - Pablo Valero (Inflexyon)
+  Sí, no, es importante, como decía Raúl, evitar que se acumulen los pendientes, porque sí, en la experiencia pasa, ¿no?  Se van dejando algunos en una chance, etcétera, y conforme va avanzando el tiempo de proyecto, pues ya llega un punto en el que la experiencia de las pruebas sin los catálogos cambia mucho, sin los catálogos ya completos, sin el plan de cuentas, sin una muestra relevante, y bueno, así se empiezan a acumular, acumular, y bueno, sabemos que es muy importante.  El tema de la fecha, ¿verdad? Por la temporalidad que tiene el negocio, etcétera. Entonces, es importante ponernos al día con eso para ir recuperando tiempos.  De todas maneras, queda claro que seguimos avanzando en un tema o en otro, pero bueno, hay que ponernos al día con eso para no tener stoppers, ¿verdad?  Creo que de las plantillas, entonces, el único que nos estaría todavía, que no tenemos a ciencia cierta cuando podríamos tener, sería el de las cuentas contables.
+
+46:37 - SALA VIP
+  El de los otros, como lo mencionamos en esta reunión, creo que al menos con los previos que podemos entregar, que Chema ya las ha compartido de productos, que ya también tienen de proveedores, el tema nada más de algunas columnas que tenemos para los productores, que vayamos a agregar, si bien lo hacemos en esta semana, creo que al menos con, con esa.  Con esa plantilla y la identificación de los nuevos datos, creo que podríamos estar más cubiertos en ese entregable. Y ya no más sería en la espera de tener ahora sí completo toda nuestra base de datos de cada uno de ellos.  Pero al menos en esta semana, yo creo que en NVG sí puede comprometerse en entregar esos cinco o seis que podían estar ya al menos en el sistema.  Muchas gracias. Muy bien.
+
+47:42 - Pablo Valero (Inflexyon)
+  Bueno equipo, no sé si tengan algún otro comentario adicional.
+
+47:50 - Raúl Núñez (Inflexyon)
+  Compañeros, no.
+
+47:52 - SALA VIP
+  Allá, este, Carla, George, Gloria, Eder, Cholico. Checo.
+
+48:05 - Juan Pablo Cholico (naturprime.mx)
+  Simplemente aplicarnos con la información que ellos necesiten para que nosotros no hacemos nada. Muchas gracias.
+
+48:13 - SALA VIP
+  Muy bien, perfecto. Muy bien, seguimos avanzando y en comunicación. Muchas gracias a todos y buena tarde.
+
+48:19 - Pablo Valero (Inflexyon)
+  Gracias a todos.
+
+48:22 - Emiliano  Lorenzano
+  Habían enviado el tema de la solicitud de carta aporte. Y van a revisar si se iba a unificar el proceso de solicitud, tanto en la entrega como en la venta.  No sé si lo pudieron checar y creo que no nos enviaron el formato de solicitud del plete o ferial mismo, porque nosotros estamos considerando crear una plantilla de correo electrónico para enviar justamente ese formato, o esa solicitud que se haga desde la venta  O de la entrega que se envía, pues, mediante una plantilla de correo electrónico hacia el proveedor, ¿no? Del, del, del flete.  Sí. Una vez que, una, una vez que tengamos eso, pues vamos a mandar a crear la orden de compra por el servicio de flete, ya que tengamos respuesta, pues, de la fletera.
+
+49:21 - Juan Pablo Cholico (naturprime.mx)
+  Nosotros, de la parte comercial, te mandamos hoy nuestra solicitud que tenemos ahorita, ya si después quieren homologar el resto para la plantilla de la planta y eso, pues, creo que se puede tomar.  Como base, es la misma solicitud de un flete. Entonces, ya desde donde se, se detona la, la acción de la orden de compra del flete, ya eso lo veríamos con ustedes en el sistema, pero sí, el del flete de la venta, sí, la idea sería que salga desde el pedido y te mandamos hoy mismo, Emiliano, la, la solicitud de flete que tenemos ahorita con los campos que llenamos.  Sí, entonces, ahí, Víctor, hay un favor, Si, si pueden copiar a Víctor y ya me ayudas, Víctor, a comentar, porque.
+
+50:00 - Emiliano  Lorenzano
+  Tú habías enviado uno, ¿no? Habías subido uno.
+
+50:03 - Victor De La Parra
+  El que es el de los transportes y el que es el de, el que por ahí me había, ay, no me acuerdo cuál fue el otro, y creo que me lo había compartido en un mundo, el que se utiliza también, no, el, perdón, el de almacenes, perdón, y el que se utiliza para, con Leti para transportes, son esos dos los que subí.  Ah, bien.
+
+50:25 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, si quieres, Víctor, más, márcame ahorita terminando la reunión para que me enseñes qué es lo que tienes, y si alguno de esos se acopla de lo que necesitamos en ventas, te digo, ah, ok, agárrese para nosotros, o si nos falta algún dato, ¿va?  Sí, justamente, así como dice Juan, Víctor. Va, va.
+
+50:42 - Emiliano  Lorenzano
+  puedes, en el interno, igual ahí, por favor, si me pudieras eliminar los que no se vayan a ocupar y dejar el que sí va a estar funcionando o el que va a estar vigente, para que también no tengamos tantos documentos y nos vayamos a perder, ¿no?  Mejor que quede ya uno y eso. Este vemos y lo utilizamos tanto para los embarques, las salidas y para las ventas, porque ya en teoría pues nosotros ya revisamos al interno cómo quedaría toda la estructura para la parte de los fletes.  A lo mejor no sería mucho de entrar a dimensionar, pero la parte ahí, Juan, del flete como tal, debería existirse realmente un registro en el sistema para que se pueda ligar como en la venta y en el embarque de saber que el nombre del camión, el nombre del chofer, como tener esa base que posiblemente se pueda seguir utilizando en alguna otra solicitud o realmente si cambian, pueden cambiar también así que solamente una vez te manden un chofer y un camión y después ya no te lo vuelvan a mandar.
+
+52:00 - Juan Pablo Cholico (naturprime.mx)
+  La unidad y las placas sí se puede repetir, lo que no, a lo mejor sería muy útil es el nombre del chofer porque eso sí cambia muchísimo y después también haríamos con una base muy grande, pero las unidades regularmente sí se repiten, transportistas y unidades, placas, ¿no?  Número comercial, número de placas. Ah, bien, entonces sobre eso sí les gustaría tener una base de datos de los LED, bueno, sí, de los LED, ¿no?
+
+52:26 - Emiliano  Lorenzano
+  Los camiones en sistema. Sí, que lo registremos y después veremos si lo podemos seleccionar de una base.
+
+52:33 - Juan Pablo Cholico (naturprime.mx)
+  Y también me quedé pensando, plantilla de proveedores, ¿ya la revisaron?
+
+52:43 - Emiliano  Lorenzano
+  ¿Los proveedores? Ajá. Sí, sí estamos revisando con Víctor esos temas. Ahí nos van a identificar ellos, pues, qué campos se van a utilizar.  Ahorita estamos viendo el de los productores, ¿no? Pero se va a hacer una distinción de si es productor te vamos a habilitar.  Ciertos campos. Si es un proveedor, otros campos, ¿no? Porque no todos los campos van a funcionar para todos los registros.  Pero sí, ya lo hemos convicto.
+
+53:11 - Victor De La Parra
+  Sí, y eso solo en productores que son nuestros clientes, porque también están los proveedores que nos entregan servicios o alguna otra cosa y prácticamente esos campos no se utilizarían para ellos, que era lo que quería mencionar hace ratito.  Sí, sin tema se puede hacer esa separación para que no se muestren todos los campos.
+
+53:43 - Emiliano  Lorenzano
+  Entonces nada más quedo en espera de ese formato, Victor, si me mandan ahí el correo con Robert o tú lo puedes compartir, elimines los documentos que no van a quedar y solamente dejes el que siga estar vigente y con eso ya pudiéramos empezar a trabajar.  También con la parte de la gestión del plete, ya nada más quedaría pendiente que también compartan la programación que hacen, o si ya no va a ser a través de una programación y que si se va a manejar todo desde la, desde la venta o la, o la entrega, que vendría siendo el embarque, pues ya no sería tan, tan, tan necesaria a mejor la programación, pero ustedes nos indican si se va a llevar esa programación, pues nos mandan el Excel o como lleven la, la programación.  Sí, está bien. Va, gracias, gracias, Raúl.
+
+54:36 - Raúl Núñez (Inflexyon)
+  Gracias a todos, que pasen un excelente día y buen provecho. Gracias, gracias, igualmente. Gracias, hasta luego.

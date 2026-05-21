@@ -1,0 +1,695 @@
+======================================================================
+ID DE SESIÓN: MPS PLANEACION DE PRODUCCION NBG
+FECHA: 2026-05-05
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/esSRxyM1KicbHWL5wayEy_KxDLzpzsqq
+======================================================================
+
+RESUMEN
+
+MPS planeacion de produccion Edder - Odoo - May 05
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir los requisitos de planificación de producción y trazabilidad en Odoo.
+
+Puntos clave
+
+  - Necesidad central: Odoo debe automatizar el flujo de trabajo manual en Excel de Edder para la planificación de producción, pronósticos y seguimiento del desempeño.
+  - Trazabilidad crítica: El sistema debe vincular la fruta a su vivero de origen (vivero) para analizar el desempeño por variedad (por ejemplo, ciclo de plantación a cosecha).
+  - Destino de mercado: La fruta se identifica como Nacional o Exportación solo en la venta, no en la recepción, para mantener flexibilidad de inventario ante cambios de pedidos de último minuto.
+  - Inventario de plantas: El sistema debe gestionar el inventario de plantas con lógica FIFO, rastreando la antigüedad de los lotes para evitar el uso de stock antiguo.
+
+Temas
+
+Planificación de producción y pronósticos
+
+  - Objetivo: Automatizar el proceso manual en Excel de Edder para la planificación de producción y los pronósticos.
+  - Pronóstico de siembra: La grower list de Edder será el plan de siembra del sistema, detallando:
+      - Variedad
+      - Vivero (vivero)
+      - Calendario de entregas semanales
+  - Pronóstico de cosecha: Edder cargará un pronóstico semanal (cajas/hectárea/variedad) para las próximas 6 semanas.
+      - Este pronóstico requiere actualizaciones semanales para reflejar las condiciones reales.
+  - Seguimiento del desempeño: Odoo debe comparar la producción real vs. el pronóstico.
+      - Alertas: Notificar a Edder cuando la entrega real de un productor se desvíe significativamente del pronóstico (por ejemplo, 600 cajas vs. 1,300 pronosticadas).
+      - Tablero: Generar un tablero gráfico y sencillo similar al reporte actual de Power BI de Edder, mostrando resúmenes semanales por productor, variedad y empaque.
+
+Trazabilidad: Planta a fruta
+
+  - Objetivo: Vincular la fruta cosechada con su vivero de origen para analizar el desempeño por variedad.
+  - Desafío: La fruta de un productor puede provenir de múltiples viveros, lo que dificulta la trazabilidad directa lote a lote.
+  - Solución: Los productores identificarán el vivero en la entrega de fruta.
+      - Método: El personal de recepción ingresará manualmente el ID del vivero (por ejemplo, una letra) desde la etiqueta del productor.
+      - Justificación: Este método es factible porque los productores suelen segmentar sus campos por vivero.
+      - Acción: Víctor coordinará con el equipo de Gloria para implementar este nuevo requisito de etiquetado con los productores.
+
+Gestión de inventario de plantas
+
+  - Requisito: El sistema debe rastrear el tipo de planta (a raíz desnuda vs. en plug) desde el pedido inicial al vivero.
+      - Justificación: Estos datos son críticos para la facturación de Rafa y para analizar diferencias de desempeño entre tipos de planta.
+  - Lógica FIFO: El sistema debe aplicar Primero en entrar, primero en salir (FIFO) para plantas a raíz desnuda en almacenamiento en frío.
+      - Justificación: Esto evita que se pase por alto el stock antiguo y asegura una rotación adecuada del inventario.
+
+Lógica de destino de mercado
+
+  - Proceso: La fruta se recibe como un producto genérico (por ejemplo, "Fresa 1 libra").
+      - Justificación: Esto mantiene la flexibilidad del inventario ante cambios de pedidos de último minuto.
+  - Identificación: El destino de mercado (Nacional/Exportación) se asigna solo en la venta.
+      - Mecanismo: El sistema identifica el mercado según el cliente en la orden de venta.
+      - Salida: Odoo debe generar manifiestos de envío para cada embarque Nacional y de Exportación.
+
+Datos históricos e integración climática
+
+  - Datos históricos: Se cargarán datos pasados sobre entregas de plantas y cosechas de fruta para construir una base para futuros pronósticos.
+  - Datos climáticos: Integrar datos climáticos semanales (temperatura, humedad, lluvia) en el análisis de desempeño.
+      - Justificación: Para comprender cómo el clima afecta el desempeño por variedad.
+      - Método: Definir cuadrantes geográficos específicos (por ejemplo, Chavinda, Jacona) para la recolección de datos, ya que los climas locales varían significativamente.
+
+Próximos pasos
+
+  - Edder: Refinar el archivo Excel grower list y compartirlo para el viernes.
+  - Víctor:
+      - Definir con Edder los cuadrantes geográficos para datos climáticos.
+      - Mapear los productores a sus respectivos cuadrantes.
+      - Encontrar y compartir la fuente de datos climáticos históricos.
+      - Coordinar con el equipo de Gloria para implementar el requisito de etiquetado con ID de vivero con los productores.
+  - Robert: Programar una reunión extendida para el viernes para revisar el archivo final de Edder e incluir a Gloria para discutir requisitos de inocuidad.
+  - Inflexyon (Emiliano, Alex): Revisar los requisitos y analizar cómo implementarlos mejor en Odoo.
+
+======================================================================
+
+ONE-ON-ONE
+
+MPS planeacion de produccion Edder - Odoo - May 05
+VIEW RECORDING: 
+Propósito de la reunión
+
+Alineación de requerimientos para planeación/forecast de producción en Odoo: trazar planta→cosecha, dashboards semanales por productor/variedad, alertas de desvío y trazabilidad hasta mercado (nacional/export).
+
+Actualizaciones
+
+Edder Palacios
+
+Registro
+
+  - Con agenda apretada; propone revisar archivo pulido el viernes.
+
+Progreso en prioridades desde la última reunión
+
+  - Muestra su Lista de Productores (variedad/vivero vs semanas) como indicador de plantación.
+  - Presenta forecast por hectárea/variedad con actualización semanal (móvil de 6 semanas).
+  - Comparte ejemplo de dashboard actual (por semana, productor, embalaje 1/2 lb, nacional/export).
+
+Prioridades hasta la próxima reunión
+
+  - Entregar archivo pulido: plan de entregas por vivero (semanas, cantidades) y esquema de forecast.
+  - Definir cuadrantes climáticos con Víctor (Chavinda, Jacona, Romita, etc.) y variables: Tmax/Tmin, HR, lluvia.
+
+Necesita asistencia / Está bloqueado en
+
+  - Requiere en Odoo:
+      - Vincular planta entregada (semana/vivero/variedad/tipo: raíz/cepellón) → primera recepción de fruta para medir días y alimentar históricos/forecast.
+      - Dashboards nativos (no Excel) con KPIs por semana/productor/variedad/embalaje/mercado y alertas de desvío vs forecast.
+      - Manifiestos de embarque automáticos en salida (nacional/export).
+      - FIFO y control de antigüedad en cámaras de planta de raíz desnuda.
+
+SALA VIP (Rafa)
+
+Registro
+
+  - Modera y consolida necesidades de operación/comercial.
+
+Progreso en prioridades desde la última reunión
+
+  - Confirma procesos actuales: recepción como “1 libra” y destino se define en salida; dos clientes/mercados facilitan identificación.
+
+Prioridades hasta la próxima reunión
+
+  - Coordinar reunión del viernes con Edder y agregar a Gloria (Inocuidad).
+  - Validar con productores etiquetado/segmentación por vivero para recepción de fruta.
+  - Cargar históricos (plantas entregadas a productores y cajas recibidas) al nuevo modelo.
+
+Necesita asistencia / Está bloqueado en
+
+  - Definir mejor punto de marcaje de mercado (entrada vs salida) para alimentar dashboard sin retrabajo.
+
+Emiliano Lorenzano (Inflexyon)
+
+Registro
+
+  - Evalúa enfoque: el MPS estándar no cubre; se requiere diseño ad hoc.
+
+Progreso en prioridades desde la última reunión
+
+  - Aclara facturación de exportación con nodo específico; puede servir para clasificar mercado en el dashboard.
+
+Prioridades hasta la próxima reunión
+
+  - Analizar viabilidad en Odoo de: vínculo planta→cosecha, dashboards/alertas, manifiestos, trazabilidad por vivero, lotes dobles (planta y fruta).
+  - Revisar carga de histórico (ventas/producción/plantas) para arrancar modelos.
+
+Necesita asistencia / Está bloqueado en
+
+  - Definición operativa de trazabilidad por vivero en recepción de fruta (etiqueta/campo obligatorio).
+
+Alejandro Magaña (Inflexyon)
+
+Registro
+
+  - Valida que Odoo tiene reporting nativo; Power BI es opcional.
+
+Progreso en prioridades desde la última reunión
+
+  - Señala complejidad de trazar lote de planta → lote de fruta cuando hay múltiples viveros/entregas por productor.
+
+Prioridades hasta la próxima reunión
+
+  - Proponer modelo de datos: producto único “1 lb” + atributo de mercado en salida, o grupos por mercado; subgrupos para reporting.
+  - Diseñar dashboard por semana/productor/variedad/mercado y alertas vs forecast.
+
+Necesita asistencia / Está bloqueado en
+
+  - Reglas de negocio para etiquetado de vivero en recepción de fruta y definición de cuadrantes climáticos.
+
+Víctor De La Parra
+
+Registro
+
+  - Tiene históricos de entregas de planta por productor; trabaja mapas.
+
+Progreso en prioridades desde la última reunión
+
+  - Confirma 5–6 viveros principales; asesores ya mapean productores.
+
+Prioridades hasta la próxima reunión
+
+  - Definir y documentar cuadrantes climáticos y asignar ranchos a cada uno.
+  - Compartir fuente/aplicación de datos climáticos e histórico.
+  - Consolidar archivo de planta entregada (vivero/variedad/fecha/cantidades) para carga.
+
+Necesita asistencia / Está bloqueado en
+
+  - Validación con productores para segmentación por vivero y esquema de etiquetado (letra por vivero).
+
+Jose Manuel Espinoza (Chema)
+
+Registro
+
+  - Alineado con agrupar por mercado en salida para dashboard.
+
+Progreso en prioridades desde la última reunión
+
+  - Sugiere usar información de facturación de planta al productor como apoyo a trazabilidad vivero→productor.
+
+Prioridades hasta la próxima reunión
+
+  - Revisar consistencia entre archivos de Operaciones y facturas (vivero/variedad/cantidades) para control.
+
+Necesita asistencia / Está bloqueado en
+
+  - Definir si el punto de control será “entrega” o “factura” para descontar contratados vs reales.
+
+Temas
+
+Trazabilidad planta→cosecha y forecast
+
+  - Objetivo: medir días planta→primera cosecha y construir histórico por variedad/tipo/plaza.
+  - Requiere: registrar semana de plantación por productor/vivero/variedad/tipo; ligar a primera recepción; generar forecast por patrón histórico.
+
+Dashboards y alertas en Odoo
+
+  - Objetivo: vista semanal de cajas por productor/variedad/embalaje/mercado y desvíos vs forecast.
+  - Necesario: alertas por rango estimado vs real; filtros por productor/semana/mercado; soporte a 1 lb/2 lb; vista global y por productor.
+
+Clasificación de mercado (nacional/export)
+
+  - Objetivo: identificar mercado en salida para reportes y timbrado de exportación.
+  - Alternativas: producto único + atributo de mercado en salida; grupos/etiquetas por mercado; usar cliente de exportación para clasificación.
+
+Manifiestos de embarque automáticos
+
+  - Objetivo: emitir Conocimiento de Embarque/Manifiesto al generar salida nacional/export.
+  - Acción: configurar documentos automáticos por tipo de salida para información operativa y de retenciones.
+
+Control de planta de raíz desnuda en cámara
+
+  - Objetivo: FIFO y antigüedad por lote de planta en cámaras (Naturagui/Redea).
+  - Requiere: lotes con fecha de recepción; cierre de lote al agotar; reportes de edad de lote.
+
+Tipo de planta (raíz desnuda vs cepellón)
+
+  - Objetivo: costos/liquidaciones y análisis de desempeño.
+  - Acción: capturar tipo desde pedido al vivero y arrastrarlo en toda la cadena hasta resultados.
+
+Lotes: planta vs fruta y límite de trazabilidad
+
+  - Objetivo: viabilidad práctica de enlazar múltiples lotes de planta a fruta.
+  - Decisión técnica: dos lotes distintos (planta y fruta) y capturar “vivero” como atributo en recepción de fruta para trazabilidad razonable.
+
+Cuadrantes climáticos y datos meteorológicos
+
+  - Objetivo: enriquecer análisis con clima por zona (Tmax/Tmin, HR, precipitación semanal).
+  - Plan: definir 3–5 cuadrantes (Chavinda, Jacona, Romita, etc.); asignar ranchos; conectar fuente histórica.
+
+Históricos a cargar
+
+  - Objetivo: acelerar insights y comparativas.
+  - Datos: plantas entregadas a productor (vivero/variedad/semana/cant); cajas recibidas por productor (semana/variedad/embalaje/mercado).
+
+Próximos pasos
+
+  - Edder: Entregar archivo pulido de lista de productores/forecast por vivero/semana y estructura deseada de dashboard (viernes).
+  - Víctor: Definir cuadrantes climáticos y asignación de ranchos; incluir fuente de clima e histórico (viernes).
+  - Rafa: Coordinar reunión del viernes e invitar a Gloria (Inocuidad); validar con productores etiquetado por vivero en cosecha (antes del viernes).
+  - Inflexyon (Emiliano/Alejandro):
+      - Proponer modelo en Odoo:
+          - Registro de plantación por semana con campos: productor, vivero, variedad, tipo de planta, cantidad.
+          - Enlace a primera recepción para medir lead time.
+          - Clasificación de mercado en salida y manifiestos automáticos.
+          - Dashboards y alertas vs forecast; soporte a cargas históricas.
+      - Evaluar campo obligatorio “vivero” en recepción de fruta y esquema de grupos/etiquetas de mercado (previo al viernes).
+  - Chema: Validar cruce Operaciones vs facturas de planta para trazabilidad vivero→productor (semana en curso).
+  - Equipo: Preparar archivos históricos de plantas y cajas para carga inicial (semana en curso).
+
+======================================================================
+
+TRANSCRIPCION
+
+MPS planeacion de produccion Edder - Odoo - May 05
+VIEW RECORDING - 59 mins (No highlights): 
+
+---
+
+0:00 - SALA VIP
+  Hola, ¿qué tal? Buenos días a todos. Buenos días. Buenos días. Chema, estoy aquí en la sala, si te quieres venir, adelante.  Pues aquí están muchachos, está Edder con nosotros. Sé que Edder anda súper apurado con muchos y otros asuntos, y nos regaló estos minutitos para estar con nosotros y platicarnos cuál es el esquema que él está previendo para que en Odu, pueda visualizar su producción.  Edder, todo tuyo, ¿qué es lo que nos quieres compartir? Y Emiliano, Raúl, pues siéntanse en confianza de preguntar cualquier detalle.  Gracias.
+
+1:00 - Edder Palacios
+  Roberto, buen día a todos. Prácticamente lo que yo decía, Roberto, que por la parte de producción lo que ocupamos es desde que nosotros vamos a meter la planta a la UDU, a nuestra almacén, así como lo platicábamos, y la saca el productor, se quede a lo mejor el historial de que esa planta la saque el, voy a poner una fecha, 15 de agosto, 15 de agosto, y de ahí, en cuanto empiece producción, se ligue a la primera recepción, ¿Para qué?  Para nosotros estar viendo más o menos los tiempos que dura entre plantación, mira, les voy a compartir, yo también voy a poner a trabajar en una, en un archivo, ya pueden ver mi pantalla, ¿verdad?  Sí. No, mira, aquí yo tengo una grower list. ¿La puedes hacer un poquito más grande? A ver, espérame, espérame, ahí hacia el más grande o no?  De allá de abajo, ándale, ahí me das. Bueno, en esta grower list, lo que yo busco es tener, por ejemplo, esta lo tengo por variedad y por vivero, aquí en esta parte voy a poner todas las variedades que yo voy a distribuir y los viveros, de aquí abajo le voy a poner la semana.  ¿Esto para qué? Este va a ser mi indicador de plantación para mí. Yo ya sé qué fechas me va a entregar cada uno de los viveros y qué cantidad de planta.  Pues en base a eso yo voy a distribuir la planta a cada uno de los productores. Lo que quiero que me haga Odu es de que en cuanto yo la saque.  En automático yo ya sepa que el productor la plantó y en cuanto reciba la primera caja, el mismo sistema ya la cruce con la parte de la variedad.  En su caso, por ejemplo, un bumpio raíz que la voy a plantar la última semana de julio y va a empezar a cosechar en la primera semana de octubre.  Entonces lo que busco es que la ligue a esa y ya ligándola yo ya voy a tener un forecast de comportamiento global para el futuro.  Yo ya sé que plantando bumpi en la última semana de julio empieza mi producción en la primera de octubre.  Si la planto a lo mejor en la segunda semana de agosto, empieza en la segunda semana de octubre. Empezar a ser un histórico y de ahí nosotros lo que vamos a hacer.  Es, voy a dejar de compartir, para compartirte una, déjame ver, podcast, ¿qué tal? Mira, déjame ver, comparto esta, yo voy a subir este forecast, ya la pueden ver, ¿verdad?  Sí, sí.
+
+4:42 - SALA VIP
+  Yo voy a poner este forecast por hectárea y por variedad, dos.
+
+4:48 - Edder Palacios
+  Entonces, de aquí, lo que también necesito, que UDUM me dé, es la parte de desviaciones que puede haber. Este yo lo tengo que estar actualizando por semana a seis semanas.  O sea, yo cada martes me voy a estar metiendo y voy a actualizar la semana 45, 46, 47, 48 y 49.  Cada martes. Me meto aquí otra vez el martes y si yo veo que en la 47, 47, 48 no me van a dar los números que yo ya tengo, tengo que modificarlos.  ¿Esto para qué? Para que también financieramente y toda la parte de retenciones, empecemos a ver cómo se están moviendo las curvas reales.  ¿Pero ese dato qué es, Edder? La cantidad de cajas por semana.
+
+5:41 - SALA VIP
+  ¿Cantidad de cajas entregadas por cada uno de los productores? Ah, este es tu forecast. Sí, este es mi forecast por productor.
+
+5:53 - Edder Palacios
+  Si te fijas, me voy a promedios de 4,500 cajas. No me voy a... a... 2,500 zonas orgánicas y 4,500 zonas convencionales.  Entonces, lo que tiene que tener la capacidad de UDU es de decirme, ¿sabes qué? A lo mejor una alertita.  Este productor está fuera de su rango en producción. Tú le estimaste la semana 47, 1,300 cajas y te metió 600 cajas.  ¿Ok? Todo ese tipo de alertas a nosotros nos serviría y bajar un reporte global en el cual nos diga, por ejemplo, este, este, tú lo llenas manualmente en el Excel, ¿no?
+
+6:58 - Emiliano  Lorenzano
+  Y tú supongo que... Los datos, los jalas de lo que te pasan en inventario y de todo lo que recibiste de cajas.  Así es.
+
+7:09 - Edder Palacios
+  En sistema, pues ya tendríamos la entrada de los productores.
+
+7:14 - Emiliano  Lorenzano
+  Bueno, sí, de los productores. Con eso ya podríamos llenarte, pues, a la semana cuánto entregó cada productor. Exactamente.
+
+7:31 - SALA VIP
+  Faltaría solamente ligarlo al inicio, el que nos mostraba Edder, el de saber de qué vivero fue esa planta que entregó para que tuviera el dato completo Edder.  Así es. Sí, porque aquí yo tengo esto. Aquí lo tengo por productor y por semana también. El real. real.  El
+
+8:00 - Edder Palacios
+  Aquí yo le puedo poner la semana, el dashboard que tengo el global, de cajas por semanas, por variedades, cuántas fueron de una libra, dos libras, todo el resumen.  Pero todo viene de aquí, de esta base de datos. Entonces lo que a me gustaría es que a lo mejor me aviente esto, un dashboard así, lo más sencillo que se pueda, aparte de UDU.  No que me aviente algo así, porque me va a salir la misma que si yo estoy lleno del Excel.  Si ellos, si tienen una capacidad de mandarme este dashboard así, será lo ideal. Porque con ese yo me, yo me adaptaría rápidamente a hacer nada más un resumen.
+
+8:54 - SALA VIP
+  Ahí únicamente le vas, y le vas diciendo por semana que te dé ese dashboard por semana.
+
+9:00 - Edder Palacios
+  Así es, mira, me da todos los datos por semana y todo, por embalajes, distribuciones, producciones totales, me da por variedades, las caracas, o me da todo este dashboard.  Y si yo me quiero ir por productor, aquí ya le pongo por productor, qué semana es la que quiero y qué productor es el que quiero.  Aquí está, mira, Agricola Naberri, embalaje me dio, si yo quiero saber, bueno, el medio puro orgánico, me dio este el total y me da las gráficas.  Si yo me cambio el productor y me voy a Agricola Arturo Ferri, me voy a este, aquí me da todo el global, Arturo, que soy.  Yo sí quiero saber qué mala cosa. ¿Cuánto de Road Levels es la semana del año?
+
+10:04 - Alejandro Magaña (Inflexyon)
+  ¿Eso? Sí, eso de 40 hasta el 52. Sí, es la semana del año. Sí, hasta la 52, que es cuando cierro el año.
+
+10:13 - Edder Palacios
+  Y de aquí empiezas, si te fijas, aquí tuvo su pico de producción, en la 2. Y de aquí se fue para abajo.  Entonces, si yo le pongo así por embalaje, ahorita todos los embalajes, si quiero saber cuánto me dio de una libra de exportación, una le pongo y me dice que dio 44.943 cajas de una libra.  Y así te las dio durante toda la temporada. Si digo que a ver cuánto me dio de dos libras de exportación, me dio 797.  Lo que sí me quiero es que Lodú me evite hacer todo esto. Que yo le ponga, aviéntame el resumen de la víncula.  Arturo de Jesús. Ahí te va su resumen. Graficado, si me lo puede dar como te los enseñé en este.  Aquí está Arturo de Jesús, con sus gráficas, y así fue como se comportó. Odul si tiene esa capacidad, Emiliano, Alejandro.
+
+11:22 - SALA VIP
+  Estaba ligado con Power BI, ¿no? Creo.
+
+11:27 - Alejandro Magaña (Inflexyon)
+  De hecho, tiene sus propias gráficas y su propia manera de reportar. Ajá. Así que sí, se puede hacer con Odul a su cierta manera.  Ok.
+
+11:41 - SALA VIP
+  Ahí vi, Edder, que todavía manejabas el tema del embalaje de una libra y lo separabas nacional y exportación. Vamos a seguir haciendo esa misma mecánica o vamos a manejar solamente un producto o un embalaje que se llama...  Una libra y después tendremos otro subgrupo, el que digamos si se va al mercado nacional o se va a exportación.
+
+12:10 - Edder Palacios
+  Es que era lo que platicábamos, tendría que ser una libra y cuando yo lo saque, ya le pondría el destino, si se fue a nacional o se fue a exportación.  Si no, Rafa. Sí, entonces lo recibimos como una libra.
+
+12:27 - SALA VIP
+  Exactamente, después ya le das el destino. Y la venta, la venta sería la que destinen, no desde el recibo.  No, por ejemplo, Edder, ¿no hay una forma de antes de la venta ya poderlo destinar para poder hacer el traspaso a un almacén en específico?  Sí, a mi cierre del día. Sí, que a lo mejor ya, como ya tenemos destinadas las cajas o vendidas, se podría decir, ya realmente tenemos el almacén en tránsito, que es donde llegan todos y distribuimos a exportación y nacional al momento de facturar que salen.  Entonces ahí Odoo tendría que tener la capacidad de definir si el cliente o la venta fue nacional o extranjera, poderla identificar también aquí en este dashboard.  Exacto. Cuando Edder solicite una libra, pues tendría que especificar nacional de extranjera o exportación y que se la pueda graficar.  Sí, Emiliano, Alex. Sí, que en realidad...
+
+13:33 - Alejandro Magaña (Inflexyon)
+  Ah, no, iba a preguntar que si la planta se iba...
+
+13:37 - Emiliano  Lorenzano
+  Bueno, perdón, el producto se iba a identificar con alguna etiqueta o el mismo producto se puede... Bueno, creo que sí se puede vender tanto nacional como de exportación, ¿no?  Era como lo que ya teníamos, Robert.
+
+13:55 - Alejandro Magaña (Inflexyon)
+  Ya ves que se te hizo por ahí un desarrollo para que en el momento de la recepción tú des...  Decidías a qué mercado iba a ir, si iba a ir a exportación o nacional. Que desde un inicio comentaban, sabían a qué mercado se iba a ir, pero podía cambiar en un futuro.  No era como que era ya fijo.
+
+14:15 - SALA VIP
+  ¿Y cómo lo habíamos dejado? Porque no está así actualmente, ¿no? Sí. Sí, ¿no te acuerdas que en la recepción de cuando es exportación?
+
+14:28 - Alejandro Magaña (Inflexyon)
+  Bueno, cuando lo recibes la fresa de tus productores locales, tú decides si es nacional o exportación.
+
+14:34 - SALA VIP
+  El destino. Pero actual, no, es que en Odoo, cuando estamos haciendo la recepción, pues únicamente le ponemos una libra y ya la identificamos con una fresa de una libra.  Y lo que muy, muy al inicio, sí. teníamos esa separación, fresa una libra nacional y fresa una libra exportación.  Y ahí fue donde dijimos, no, espérame, solamente hay que dejar un solo producto que sea fresa de una libra y que ya la salida sea la que indique si se va nacional o si se fue a exportación.  O sea, al inicio sí te lo teníamos definido, los productos, así como lo mostraba Edder. Pero si lo manejamos de esa forma, nos arriesgaríamos, no sé, qué sería más fácil si dejarlo desde un inicio así y después cuando queramos hacer algún ajuste en el inventario, los almacenes, de que uno no fue nacional, sino se fue a exportación, hacer el cambio si fuera de una manera rápida y fácil de hacer.  El cambio o más bienes, pero lo identificamos todo fácilmente desde el inicio como una libra y solamente la salida que sea la que defina si es exportación o nacional.  Pues yo ahora sí que como ustedes lo deciden, ambos se pueden hacer. Ok, aquí lo comento nada más por el tema de tu reporte, el reporte que lo mostraba el dashboard, Edder, que pueda tener esa visión y esa visibilidad.  Bueno, es que ahí, Robert, puede ser que entre el producto, ¿no?
+
+16:31 - Emiliano  Lorenzano
+  Por ejemplo, entra, que es una libra, creo manejan, vamos a poner el nombre de fresa de una libra, ¿no?  Ajá. Entra al sistema y ustedes todavía no saben a dónde se va a ir, Si va a ser un mercado nacional o va a ser un mercado internacional.  Cuando se hace una venta al mercado nacional, pues eso se va normalito, no lleva ningún identificador en el sistema.  Pero cuando ya se hace una venta a exportación, al cliente se le pone que vamos a utilizar la exportación porque lleva un nodo en la factura de algunos datos que pide para la parte de exportación.  Posiblemente eso nos pueda ayudar.
+
+17:22 - SALA VIP
+  Ahora sí que se los dejo a ustedes, pero actualmente lo identificamos fácilmente porque solamente tenemos dos mercados y dos clientes.  Si es exportación, solamente es un cliente el que se tiene fácilmente para identificar y ya. O sea, no son muchos clientes, ¿no?  Solamente para exportación es un solo cliente y así sería muy fácil hacer la identificación. Sí, Alex.
+
+17:49 - Alejandro Magaña (Inflexyon)
+  Pero ahí lo importante sería en qué momento quieren identificar eso. Si lo dejamos así, se identifica hasta el momento de la salida.  Antes de que salgan no van a saber a qué mercado va. Y creo que comentaban que sí sabían en realidad.  Hacían como un cierto aparado, ¿no? Que se tienen que aventar hasta el final por cualquier cancelación que nos haga Prime.
+
+18:19 - Edder Palacios
+  Porque si nos cancelan y nosotros tenemos ya el destino del mercado nacional previsto, vamos a tener que cancelar toda la entrada.  Hacerlo como lo hacíamos con el... Sí, hacerlo como lo hacíamos hace dos años, ¿fue, Rafa? Que todo lo metíamos al sistema y cuando lo sacábamos, sacábamos la orden de compra nacional y la orden de compra exportación.  Sí, de hecho lo seguimos manejando así, Edder.
+
+18:52 - SALA VIP
+  Aquí el tema es argumento de la recepción, nosotros argumento de hacer la liquidación, ya ves que tenemos que identificar cuánto se fue a la parte nacional y cuánto se fue a la parte nacional.  A la parte de exportación. Eso lo podemos traer por semana. Aquí en el detalle de City Prime no me ha solicitado la factura, a lo mejor de los últimos días.  Ahí ese va a ser como el detalle, ¿no? Que no sabrá en mercado se fue hasta que lo facturen.  Pero es que nosotros sabríamos en cuanto lo sacamos de Odoo.
+
+19:23 - Edder Palacios
+  En cuanto nosotros lo sacamos de Odoo, sabemos a dónde se fue. Sí, cuando sale ya del cooler y se hace la venta, ahí ya se identifica qué es.
+
+19:39 - SALA VIP
+  Pero hasta ese momento, tú, Edder, tendrías ya el dato correcto para alimentar tu dashboard. No tanto así unas horas antes cuando llega la recepción.  sea, tú sabes que te entregó y que lo tienes ahí en el inventario, pero todavía no sabes. ¿A qué mercado se fue?  ¿A lo mejor al fin del día o hasta el siguiente día? Odume tiene que aventar en automático un manifiesto de embarque.
+
+20:13 - Edder Palacios
+  En cuanto yo lo saque a Nacional, Odume tiene que aventar el manifiesto, como me lo avienta el otro sistema que manejamos, Acknowledge, que me avienta el Bill of Lady.  Odume tiene que aventar uno tanto para exportación como para Nacional. ¿Por qué? Porque los voy a estar sacando en el momento.  Ya no va a ser como le hicimos este año en la prueba. ¿De qué hora el Leti? Y sacaba el Leti en un embarque todo el puño.  Bueno, ahora sí va a ser. Estos se fueron, estos salieron, y Odume tiene que arrojar ese manifiesto para yo poderle decir a Rafa, este es el manifiesto de Nacional, Rafa, y estos productores iban en este embarque.  Y aquí están.
+
+20:56 - SALA VIP
+  Sí, sí. La orden de venta, la salida, el delivery, pero hasta ese momento es cuando tú ya tendrías conocimiento de a qué mercado se fue, entonces hasta ese punto es cuando ya los chicos de Inflexion, ahora sí, con ese dato van a hacer el IGE para presentarte en tu dashboard el dato correcto de qué se fue a exportación y qué se fue a nacional.  Porque vas a tener previamente tu inventario, eso sí, tu inventario de cuánto, ajá, el productor, recibiste por cada productor su fruta, pero hasta después es cuando tú vas a identificar hacia qué mercado se fue, es ahí donde tendríamos que poner el cuidado de que Inflexion te ligue a ese dashboard, esa...  Ese tipo de mercado. Chema, ¿querías decir algo? Hola, buenos días.
+
+22:08 - Jose Manuel Espinoza
+  Buenos días. A mi punto de vista, así como se está trabajando actualmente en la recepción de la calidad, con la pura identificación del producto se me hace bien.  Posteriormente, para el dashboard que necesita Edder, con la salida del embarque, lo puedes identificar. Bueno, no sé si a Edder le funcione que se lo agrupe, porque me imagino que es una de las formas de que te lo vaya a agrupar y ya nos va a dar la información.  A lo mejor tal cual no va a parecer como una libra de exportación o una libra nacional, pero a lo que yo veo sería como hacer como dos grupos, uno que diga exportación, bueno, ya hay que le pongan una etiqueta de exportación y nacional, y ya dentro de ese, en los subgrupos, y ahora sí ya van a venir las presentaciones.  Así como se hizo la recepción, que pues al final de cuentas presentamos la misma información, solamente que con una vista diferente.  Sí, justamente lo que platicamos.
+
+23:17 - SALA VIP
+  Esa gráfica creo que también Alejandro, Emiliano, creo que no tienen problema en tenerla. La primera gráfica, o el primer Excel que nos presentó Edder, que es el presupuesto, la planeación de las plantas que va a entregarnos los viveros.  Es decir, creo que esa la tendría que alimentar Edder en un inicio, así como el forecast. Y una pregunta, Robert.
+
+23:49 - Emiliano  Lorenzano
+  En ese primer documento que mostró Edder, ahí viene todo el general de cuánto va a entregar el vivero. gráfica, o sea que me
+
+24:00 - SALA VIP
+  ¿Y cuánto ha ido entregando?
+
+24:02 - Emiliano  Lorenzano
+  ¿O solamente es el puro general de cuánto, por decirlo así, ¿Cuánto se le compró a ese vivero?
+  ACTION ITEM: Enviar a Robert/Emiliano/Alex grower list + forecast; luego agendar sesión de revisión - WATCH: https://fathom.video/calls/661047653?timestamp=1447.9999
+
+24:12 - Victor De La Parra
+  El primero viene por cantidad de hectáreas, nada más.
+
+24:18 - Edder Palacios
+  Es que en ese, dame chance, lo estoy apuliendo y te lo comparto yo, esta semana yo creo que lo tengo, te lo comparto si quieres y nos podemos sentar el viernes y te digo, mira, ¿sabes qué?  El total de los viveros que yo le compré, voy a decir, 11 millones a Finca San Vicente. Finca San Vicente me empieza a entregar desde la semana 29, un millón y medio, y de aquí para acá se va.  Ese va a ser como mi forecast. Y tú, nosotros tendríamos que meter dentro de ese sistema de Odu cada que vaya recibiendo las plantas.  Yo las tengo que meter hacia el comparativo para ver cómo se está moviendo de acuerdo a lo a lo contratado contra lo real.  Ah, ya bien, ese de lo contratado era él.
+
+25:17 - Emiliano  Lorenzano
+  Sí, porque habíamos platicado contigo, Edder, pues ya te acuerdas de hace ya un buen rato, ¿no? Sí. Y creo que no ha cambiado mucho el tema de lo platicado anteriormente.  Sí, no. Entonces ahorita lo que tú comentas es lo contratado, por decirlo, ¿no? De todo lo que lo que tiene que.  que eso que eso al final lo lleva, por ejemplo, compras.
+
+25:42 - Edder Palacios
+  A mí lo que me interesa es lo contratado, lo vamos dejar a un lado. A mí lo que me interesa es poner en la semana veintinueve agrícola Arturo de Jesús plantó cien mil plantas de Bounty San Vicente.  Y ahí, que quede ahí ya grabado en el sistema tuyo. Esa cien mil que plantó él en la semana veintinueve.  Y en cuanto empiece la cosecha, en automático, Dú, diga, ajá, ya empezó Bonti. Y es la Bonti que él plantó en la semana veintinueve.  Cuando dices ahí, cuando dices ahí, perdón, Edder, cuando dices ahí cosecha, significa cuando ya te entregó.
+
+26:33 - SALA VIP
+  Sí, cuando ya me entregó cajas con fresa. Ajá, ajá. Ok, ok. Y eso, ¿por qué me va a servir?
+
+26:41 - Edder Palacios
+  Primero, para nosotros medir los días que se tardó desde plantación hasta cosecha, y eso nos mide también en toda la parte de las variedades, saber cómo se están comportando las variedades en las diferentes etapas de tanto de plantación.  Como de cepellón contra raíz desnuda. Y eso en un futuro, en dos, tres años, haciendo estos históricos, nos va a permitir también, no sé si Odú tenga la capacidad ahí, Emiliano, de que Odú nos esté marcando a lo mejor, por zona y por semana, un promedio de temperaturas.  ¿Esas temperaturas de dónde las vamos a obtener, Edder?
+
+27:34 - SALA VIP
+  Será temperatura global del clima.
+
+27:37 - Edder Palacios
+  Ah, ok, del clima. Como un promedio.
+
+27:40 - SALA VIP
+  Un promedio de mes a semana.
+
+27:43 - Edder Palacios
+  Sí, o sea, semana 29, el promedio máximo de temperatura fue 28 grados y el mínimo fue 15. Tuvo una humedad relativa promedio de 15% y una llovizna.  El 2%, vamos a decir. ¿Esto por qué? Porque esto también nos ayuda a nosotros para tomar decisiones en futuro.
+
+28:08 - SALA VIP
+  ¿Qué tan cercano quieres que esa geolocalización del dato te lo pueda dar? ¿Solamente de la región de Zamora o sí de lo que pasa más cerca de la región?  Sería, por ejemplo, Chavinda, para hacerlo más aceptado, y Jacona.
+
+28:27 - Edder Palacios
+  Chavinda y Jacona, y la parte de Irapuato, que es Romita, y la parte de centro de Irapuato. ¿Lo que es a Totonilco?
+
+28:37 - SALA VIP
+  Podríamos entonces nosotros como hacer una delimitación del mapa de nuestros productores, y tal vez con eso los chicos de Inflexyon y Emiliano y Alejandro puedan sacar el dato del clima y podérselo poner.  A cada una de esas zonas identificados por el cuadrante. Me quiero imaginar que pudiera ser de esa forma.
+
+29:10 - Victor De La Parra
+  Justamente ahorita, qué bueno que lo dice Robert, todos nuestros compañeros de ahí, de los asesores en campo, creo que ya están por terminar o ya terminaron todos los mapas de todos los productores en donde están localizados.  Sí, que también se los pudiéramos compartir a Inflexyon.
+
+29:26 - Edder Palacios
+  Sí, pero es que aquí lo que tendríamos que hacer, Víctor, es nosotros imprimir el mapa global de la zona y decir, aquí están los productores en este centro, en este cuadrante, lo que dice Robert.  Entonces, ciérrame este cuadrante Inflexyon en las temperaturas. No me interesa porque sabemos que Chavinda se comporta muy diferente a Zamora.  Sí, que está aquí a 20 minutos. Entonces, darle ese cuadrante. Inflexyon y decirle, es este mi cuadrante de productores aquí, este es mi otro cuadrante que te vas a enfocar, este es mi otro, para que ellos empiecen a cerrar ese cuadrante, porque si nos vamos por productor, no, Inflexyon nos va a decir que son 120 productores, 120 localizaciones, y a lo mejor está uno junto al otro.
+
+30:22 - SALA VIP
+  Sí, si a lo mejor en la siguiente reunión que tengamos, Edder, que cuando compartas esa, tal vez definir cuántos cuadrantes queremos tener, y que sean como más efectivo, más práctico, el poder tener esa visión.  ¿De dónde podríamos sacar los datos? ¿Tú has visto si en alguna aplicación venga exactamente hasta esas regiones que tú indicas?  Sí, una vez la sacó este Víctor, Víctor nos apoyó una vez, ¿te acuerdas, Víctor?
+
+30:55 - Edder Palacios
+  Sí. Víctor sacó históricos del 94, el 94, el 94, por allá.
+
+31:00 - SALA VIP
+  O si hay históricos. Va, ok. Entonces, si hay ese histórico, pues creo que Alejandro podría sacarlo de esa área y hacer el cruce en la ubicación de dónde está cada uno de los ranchos, el cuadrante, y poder dar el dato.  Muy bien. Suena fácil, ¿verdad, Alejandro? No, sí, suena fácil. No, para nada.
+
+31:36 - Alejandro Magaña (Inflexyon)
+  Ok, ok. ¿Qué más, Edder? ¿Algo querías decir, Victor?
+
+31:41 - SALA VIP
+  Ah, Emiliano.
+
+31:43 - Emiliano  Lorenzano
+  Entonces, para nosotros controlar el tema de la plantación, sería cuando ustedes entreguen la planta al productor, ¿no? Sí, desde ahí ya tiene que contar.
+
+31:59 - SALA VIP
+  either. ¡Gracias! El tiempo, como dice Edder, de que ya el rancho ya está produciendo. Entonces, ahí quisieras tener control de tiempos, de días también, Edder, o no?  Estás en mute.
+
+32:23 - Edder Palacios
+  Perdón, ¿de días de la fruta en inventarios y de la planta?
+
+32:29 - SALA VIP
+  De cuando el rancho ya tiene la planta. Ah, sí. Sí, porque ahí, nada más con que me lo ponga por semana.
+
+32:41 - Edder Palacios
+  Semana 29 se recibió. El día no me importa. Ah, ok. Al final de cuentas, nosotros tenemos una variable ahí más o menos de 5 o 3 por ciento.  Ok.
+
+32:53 - SALA VIP
+  Entonces, identificar solamente en qué semana está recibiendo, de qué vivero. ¿Y de qué variedad? A ese rancho, ok.
+
+33:06 - Edder Palacios
+  Sí, otra de las partes que no vi si, es sincero, no me metí mucho a la parte de calidad, nada más me metí a sacar los tres reportes, pero no me metí a ver si me marcaba la parte de inventarios, o la parte de días que tenía ya dentro del cooler, las cajas.  Ok, creo que también ya habíamos platicado en alguna reunión, yo creo que posterior vamos a tenerla cuando hablemos de las cámaras las plantas, sí, por las plantas, ya cuando hablemos con las cámaras frías, porque en las plantas se daba mucho eso, de que me estaban sacando lotes nuevos y los lotes viejos los estaban dejando dentro de las cámaras.
+
+34:00 - SALA VIP
+  Para sacarlos más rápido.
+
+34:03 - Edder Palacios
+  Entonces sí, que todo eso se vaya ligando. Ya salió este lote de planta, se cierra.
+
+34:10 - SALA VIP
+  Ya salió este lote, se cierra.
+
+34:11 - Edder Palacios
+  Porque el pobre Víctor lo tenía que estar haciendo todo adivinándole.
+
+34:18 - SALA VIP
+  Ok, pero ¿hablas de las plantas, Ceder? Ahí sí, de las plantas. Ok, de la planta que se entrega al cooler.  La de raíz desnuda. La de raíz desnuda. Ok. Sí. Y que de ahí esté identificado por lotes y que empiecen a ser la primera entrada, primera salida.  Exactamente. La recepción fue tal día que empezaron a sacarla así.
+
+34:43 - Edder Palacios
+  Porque el Víctor ahí anda haciendo un cuadres cuando no necesita hacer ese tipo de cuadres.
+
+34:51 - SALA VIP
+  O sea que el mismo sistema nos arroje esos cuadres. Sí, ahí Emiliano, Alejandro, acuérdate que cuando es desnuda... ...  Enviamos esa planta hacia el cooler, bueno, no sé cuántos, pero creo que nada más es a dos, a Naturagui y a Redea, y ahí tener identificación de ese inventario.  Ahí también quieres que se verifique cuánto tiempo, bueno, el lote ya lo va a traer, porque cuando se hace la recepción en el cooler, vamos a identificar día, mes y año de recepción.  Ahí creo que ya podríamos tener el tema de la antigüedad, que pueda tener ese lote. Entonces, también tenerlo identificado.  Vic, ¿querías decir algo?
+
+35:47 - Victor De La Parra
+  No, justamente lo que acabamos de decir era lo de que el tipo de planta que se recibe en los coolers era la de raíz desnuda.
+
+35:56 - SALA VIP
+  Quisieras en algún momento... Digo, porque estamos hablando de variedad, de fruta y de presentación. No hemos hablado de raíz desnuda o cepellón.  ¿Te interesaría que ese dato también estuviera en Odú? Porque actualmente no lo tenemos. Actualmente solamente identificamos ese tipo como de grandes grupos y ya.  No hablamos del tipo de planta, se podría decir. De eso no lo hemos manejado. No, sí tendría que estar dividido, raíz y cepellón.
+
+36:34 - Edder Palacios
+  Porque eso le va a servir a Rafa, la parte de los cobros que tienen que hacer las facturaciones a productores.
+
+36:43 - SALA VIP
+  Ok, ok. ¿En qué momento identificamos si es desnuda o cepellón? ¿Cuando el vivero ya entrega? No, nosotros hacemos el pedido al vivero, y ya desde el vivero sabemos cuánto llega.  No, por eso lo tenemos desde que hacemos el pedido, ¿no, bebé? Ah, sí, ahorita es lo primero. A lo que voy a eso, en la primera gráfica que nos mostraste, las hectáreas y el total de plantas, ahí ya sabes cuánto es de cepellón y cuánto es de raíz, o es un total, total.  Sí, no, ahí ya sé cuánto. Ah, ok, entonces, desde ahí, Alex, Emiliano, creo que ya podríamos hacer esa agrupación de variedad, vivero y tipo de planta, para que desde ahí ya traiga embebido ese dato, y que continúe su trayecto hasta la recepción al rancho, y después hasta la entrega al cooler, y después hasta la entrega...  ¡Gracias! ¡Gracias! La salida, perdón, la salida de la venta y ya traiga toda esa traceabilidad ya embebida. Sí, Emiliano, Alex.
+
+38:29 - Emiliano  Lorenzano
+  No, es que para repetir otra vez, por favor. ¿Están tomando apuntes?
+
+38:34 - SALA VIP
+  Sí, sí, yo estoy escribiendo. Ok, ok. Ah, sí es necesario que el tipo de planta se ha identificado desde el inicio cuando Edder está haciendo su primer pronóstico del vivero.  Ahí en el vivero identificamos tipo de planta. identificamos tipo de planta. Raíz de Nudo o Cepellón, identificamos variedad, identificamos el nombre del vivero, identificamos cuántas plantas, y desde allí ya trae el dato para hacer la trazabilidad, hasta entregar al cooler o al productor, y entregar al rancho, entregar al cooler ya con la fresa, con el lote de trazabilidad de esa fresa, y hasta la salida, para identificar si es exportación o nacional, ese lote ya debe de estar viajando para hacer fácil la identificación.  Pero ahí estaríamos manejando dos lotes, ¿no, Robert?
+
+39:43 - Emiliano  Lorenzano
+  Uno cuando entra la planta y otro cuando ingresa ya la fruta.
+
+39:50 - SALA VIP
+  De alguna manera nos tendrán que ayudar para que cuando se venda, cuando... Lo que nos mostraba ahorita, Edder, de cuánto es lo que había vendido a exportación o nacional, sepan una caja, toda la trazabilidad que tuvo.  Esa caja fue de tal productor, de tal productor de este día, y esa fresa justamente fue de la variedad que le entregó el vivero, finca San Vicente, en tal fecha.  Esa es la trazabilidad que se necesita para tener el dato correcto. Bien, gracias, Alex.
+
+40:41 - Alejandro Magaña (Inflexyon)
+  Yo creo que iba a ser complicado, porque primero, no sé si manejan un solo lote, imagínate, a un vivero le hacen diferentes entregas de planta, ¿no?  No le entregan toda la planta en un solo embarque o un solo camión. No, son varias. Así es.
+
+41:00 - SALA VIP
+  Cada entrega es un lote, ¿no? Así es, sí.
+
+41:04 - Alejandro Magaña (Inflexyon)
+  Entonces no podemos saber exactamente de qué lote viene. Y ahora, ¿a un solo productor le entrega un solo vivero?
+
+41:17 - SALA VIP
+  No, puede ser que le entregamos de dos viveros diferentes. Es que ahí ya no tendríamos la trazabilidad. Estaríamos adivinando.
+
+41:24 - Alejandro Magaña (Inflexyon)
+  Ahí ocuparía a alguien que dijera de qué viene.
+
+41:27 - SALA VIP
+  Es que, Alex, ahí tendríamos que registrar dos lotes.
+
+41:31 - Emiliano  Lorenzano
+  Uno para la planta, cuando llega el vivero a dejar la planta. Y esa planta también se va a quedar allá con el productor.  Sí. Ahí pues ya se quedaría el, bueno, si queríamos comprarle esa parte de la trazabilidad, pues tendríamos que meter sí o sí un lote para la planta, ¿no?
+
+41:55 - SALA VIP
+  Ya después llega el productor y te entrega a ti ya la... La fruta, ¿no?
+
+42:00 - Emiliano  Lorenzano
+  Las cajas. Pero ya cuando te entregues la fruta, ya no llevaría el mismo lote de la planta, ¿no? Ya tendría que tener su propio lote.  Sí, correcto.
+
+42:13 - SALA VIP
+  Sí, vaya, sí, es entendible que no vamos a saber de cuál lote. Podríamos asumir que fueron de las primeras entregas que hicimos, pero no es un dato correcto.  Lo único que se me ocurre es que desde la recepción, en fin, indicando de qué vivero viene.
+
+42:33 - Emiliano  Lorenzano
+  Es que esa parte, sí, en la recepción de las frutas, sí, podríamos identificar la variedad, podríamos identificar el productor que está entregando.
+
+42:42 - SALA VIP
+  Eso no habrá de estar. Ahí sí tendríamos esa presencialidad. O que yo no tengo qué vivero viene. Ajá, yo creo que justamente sería eso.  Y sí es correcto lo que mencionas, Alex. Sí sería muy complicado el hacerlo, pero con que ahorita nos dicen...  Dice, Rafa, con que nos identifiquen de qué vivero es, creo que ya la trazabilidad pudiera estar ya amarrada. Sí, porque, perdón, ¿es que es fuera?  Sí, sí. Victor, duda, ¿sabes si el productor identifica su rancho o lo tiene segmentado por vivero?
+
+43:24 - Victor De La Parra
+  Depende del productor, hay veces que productores sí los tienen segmentados, pero una de las cosas que yo tenía entendido que esta temporada se quería hacer era tener letreros, se los entregamos al productor y ya justamente ahora sí ya está todo segmentado.  O porque, por ejemplo, en el campo experimental, en donde se desarrollan nuevas variedades, en lo de I más D, sí viene segmentado.  sí, es así. Entonces, perdón, eso es una de las cosas que se quiere también para la parte de inocuidad por ahí con Gloria y compañeros en campo, que ya quede también para hacer la trazabilidad más.  Simple. O bueno, ayudar a la trazabilidad.
+
+44:03 - SALA VIP
+  Porque ahí lo que podríamos hacer es que el productor, si ya lo tiene segmentado, así como nos dice qué variedad está entregando, que nos diga de qué vivero viene.  Porque ya lo va a tener segmentado en su rancho, realmente sabe a qué cajas corresponden a qué vivero o a qué cosecha.  ¿Podríamos especificárselo, que no nos lo diga verbalmente, sino lo entregue o lo ponga en la etiqueta? Eso sí, no sé.  Porque la etiqueta ya ves que pone, actualmente pone tu rancho y la fecha, ¿no? Sí, eso sí, ya lo sé.  Tal vez sería muy bueno poner un otro identificador. Que sea el vivero. Que sea el vivero. Una letra, tal vez.  ¿Cuántos viveros son? Si los viveros empiezan de diferente letra, con una letra, ya sabríamos de dónde es. Y para el productor puede decir, si esta es.  F, Finca, San Vicente, pudiera ser. No, no tenemos muchos viveros. ¿Qué son, Victor? ¿Cuatro o cinco?
+
+45:09 - Victor De La Parra
+  Vivex, Latinberry, Finca San Vicente, Planacea y algún otro. De cinco a seis viveros.
+
+45:14 - SALA VIP
+  Y lo que preguntaba Alejandro es, ¿el productor le entregamos de varios viveros a un solo productor? Sí. O sea, sí, tiene variedad.  Sí, variedad. Y se puede dar el caso de que el mismo productor pueda tener confusión en decir si este es de un vivero o de otro cuando está entregando.  Es que si lo tienes aumentado, no. Porque al momento que empaca, pues etiqueta. Ajá. Tendrá que identificar exactamente qué viveros en ese momento.  Sí. Pues sería una buena labor preguntárselo a Eder y al equipo de Gloria, que puedan hablar con cada uno de los productores y que puedan hacer esa idea.  Y de esa manera pudiéramos ya en la recepción amarrar exactamente de qué vivero viene. Creo que ahí sí quedaría mejor, ¿no, Alex, Emiliano?
+
+46:15 - Emiliano  Lorenzano
+  Sí, sí pudiera funcionar, pero también cuando hacen la recepción realmente saben qué, ah, no, el vivero sí se perdería ahí.  No, pues sí, si se implementan esa parte ya con el productor, puede ser que sí les funcione.
+
+46:31 - SALA VIP
+  Sí, sí, porque allí el equipo de recepción, ellos identifican para poner el lote, se acuerdan que lo ponen el manual, tendrían que poner allí la letra dependiendo del vivero y así poder ser identificable para hacer el tema de la trazación.  Pues Edder se tuvo que retirar otra reunión, me dijo que a las 11 tenía otra reunión, dice Robert, nomás tengo 45 minutos, entonces pues esta reunión queda aquí grabada, les va a llegar a ustedes para que puedan sacar sus comentarios, conclusiones, y platico con Edder para saber si el viernes que nos comentó pudiéramos tener otra reunión para que nos comparta ese argumento.  archivo de Excel y podamos también definir este otro punto.
+
+47:41 - Emiliano  Lorenzano
+  Sí, sí, porque comentó que no iba a pulir más ese archivo, entonces ya con esto que platicamos también a nosotros ya nos da una, bueno, a lo mejor no completo, pero sí ya en general de cómo pudiéramos llevar acá las cosas en el sistema.  Ah, perfecto. Perfecto. Sí, Vic.
+
+48:02 - Victor De La Parra
+  Perdón, le estaba enviando mensaje a Gloria de una vez para ver si ahorita le hago una llamada. Justamente con ella, ¿pudiéramos agregarla el viernes o que se pudiera agendar una reunión también para escuchar la parte de inocuidad?
+
+48:19 - SALA VIP
+  Ah, pudiera ser el mismo viernes y la hacemos un poquito más extensa para que los dos puedan darnos su punto ya cuando Edder nos muestre el esquema final, que Gloria nos indique qué datos pudiéramos sacar de inocuidad y que tengamos que tener cuidado en el sistema para verlo reflejado.  ¿Te parece? Me parece. Ok, perfecto. Emiliano, Alex, ¿alguna otra pregunta? No, nos quedamos con las generales.
+
+48:57 - Emiliano  Lorenzano
+  Sí.
+
+48:58 - SALA VIP
+  Vamos ahorita a...
+
+49:00 - Emiliano  Lorenzano
+  Vamos revisar en lo interno porque al parecer lo que teníamos pensado del MPS yo creo que no nos va a ayudar para esto que requiere Edder, va un poquito más separado a esto y de momento pues ahorita quieren generar historial en el sistema para de aquí a dos años por decirlo, que ya se saque ahora sí el pronosticado que requiere Edder para el tema de las plantas porque ahorita ahí si me corriges Robert pero creo que de momento no va a haber como tal un pronosticado de plantas porque no se tiene ese historial al menos pues que se cargue algún historial que tengan de un año anterior ahí si pudiéramos ayudarles.
+
+49:53 - SALA VIP
+  Yo creo que eso sería eso sería lo que les estaríamos pidiendo tal vez como Edder. Ya lo tiene lo de uno o dos años atrás.  Es un mismo datos poderlo subir. Si ya la base de datos ya va a estar creada con la actual, poder subir como el histórico, el acomodo que ustedes nos pidan, subirlo y que ahora sí pueda quedar como esa comparativa contra el historial.  Sí, sí nos pudiera servir.
+
+50:30 - Emiliano  Lorenzano
+  Ya lo hemos hecho también ahí en algunos otros proyectos de subir un histórico. Hemos subido en la parte de ventas, historial de ventas para pronosticar, por ejemplo, producción de un año anterior.  Entonces, yo creo que sí pudiéramos revisar algo de esto. Pero pues yo a lo que entendí es que Edder no genera compras, ¿no?  Solamente lo que le interesa es saber lo que... Así es. El tema de sus plantas, pero sí, entonces si hay chance el viernes, pues lo revisamos, mientras nosotros vamos analizando qué se puede hacer de este lado.  Adelante, Leto.
+
+51:13 - Alejandro Magaña (Inflexyon)
+  Ahí para esa parte sería importante para ustedes identificar ambos historiales, historial de cajas de fresas entregadas por el productor y historial de plantas entregadas al productor.
+
+51:29 - SALA VIP
+  Sí, sería el historial, como ahorita nos lo mostró, el historial completo, de tanto la parte del vivero lo que entrega hacia el productor, como la parte de lo que el productor nos entrega a nosotros.  ¿Y eso lo tienen ya, tienen ese histórico?
+
+51:48 - Alejandro Magaña (Inflexyon)
+  Es decir, identificado por cliente, por vivero y por cantidad y por fecha.
+
+51:53 - Victor De La Parra
+  Sí, lo de las plantas cada temporada, tanto yo como César o Leti, siempre ahí lo hemos tenido. Todo lo que le entregamos a los productores.
+
+52:02 - Alejandro Magaña (Inflexyon)
+  Y de cajas entregadas del productor a ustedes.
+
+52:06 - SALA VIP
+  También. Es más, ya ni me digas, Alex, porque ahí lo tienes, lo de este año, ahí lo tienes. Ya nomás sería agregar a lo mejor el vivero, fíjate, estaría padrísimo de toda esa producción que hicimos de este año de la temporada, poderla identificar de qué vivero, digo, sí sería algo muy loco.
+  ACTION ITEM: Definir cuadrantes de productores; compartir con Emiliano/Alex y link de clima en presentación - WATCH: https://fathom.video/calls/661047653?timestamp=3159.9999  Pero al menos ya tenemos cuántas fueron las cajas que cada productor nos entregó. Ahí la tenemos ya en el sistema.  Esa la gran ventaja. Y también queda de nosotros, Vic, si puedas trabajar en esta semana antes de la reunión del viernes.  Entonces, el... Tener los cuadrantes, platica con Eder, saber cuáles son los cuadrantes principales que tenemos que tener y que tú puedas identificar a cuáles ranchos pertenecen a cuál cuadrante y de esa forma pasarles ya algo más específico a Alejandro y Emiliano que lo puedan definir en el Odu.  Sin problema, déjamelo aquí. Sí, y ahí les pasas el tip de la aplicación o la página web en donde sí te daba ese dato más real de por zonas, estos datos que quería Eder ver.
+  ACTION ITEM: Enviar a Emiliano/Alex históricos de cajas y plantas por productor/vivero/variedad/semana - WATCH: https://fathom.video/calls/661047653?timestamp=3209.9999  Y el histórico. Sí, sin problema, Robert.
+
+53:42 - Victor De La Parra
+  Muy bien.
+
+53:43 - Emiliano  Lorenzano
+  Pues dicen que quieren bloquear los ranchos, ¿verdad? O los productores. ¿Cómo bloquear, perdón? Para que no es tan factible la cosecha ahí en ese rancho, ¿no?  Por el clima. Bueno. ¿O solamente es el puro, la pura información?
+
+54:04 - Victor De La Parra
+  Ahí sería, para mí, la más la pura información, porque pues al final el productor es el que busca el rancho, nosotros no se lo indicamos.
+
+54:12 - SALA VIP
+  Sí, sería solamente información para nosotros.
+
+54:17 - Emiliano  Lorenzano
+  Está bien, entonces si nos puedes echar la mano con eso, que nos pase el enlace en el grupo y para también darle una revisada de este lado.
+
+54:25 - Victor De La Parra
+  Sí, me pongo a buscar el sitio, se los comparto en el grupo y me pongo a trabajar con todos mis compañeros para lo de los cuadrantes, para el viernes, ya tenlo listo.
+
+54:35 - SALA VIP
+  Si quieres, Vic, no lo mandes en el chat, cuando hagas tú lo de los cuadrantes, ahí ponlo en una parte de lo que nos vas a presentar, ahí pones la página en donde está.  Ah, ok. Y ya para poder entregar como todo el paquete completo. Va, sin problema. Muy bien, Chema, ¿alguna duda o pregunta o algo que quieras agregar?  No, de mi parte, todo bien.
+
+55:03 - Jose Manuel Espinoza
+  Pero, oye, Rafa, lo de los viveros y los ranchos, ¿no lo identificamos con la facturación de nosotros al productor?  ¿El viveros y los ranchos?
+
+55:14 - SALA VIP
+  Bueno, el vivero, más bien.
+
+55:17 - Jose Manuel Espinoza
+  Bueno, solamente cuando le facturamos la planta, que es realmente lo mismo que le entregamos.
+
+55:22 - SALA VIP
+  De ahí en más, no tenemos otra forma de identificarlo.
+
+55:25 - Jose Manuel Espinoza
+  Y eso nos lo comparte operaciones, que es lo que va a hacer como Víctor esa tarea, para que sea más fiable.
+
+55:32 - SALA VIP
+  Pues en esta ocasión, no sé quién nos vaya a pasar estas solicitudes de facturación, para la planta, pero prácticamente es el mismo dato.  Creo que ya era, este Víctor tiene un archivo, donde identifica qué productor se le dio, qué variedad y cuántas.
+
+55:50 - Victor De La Parra
+  Sí, que era el final el que me habías pedido, Rafa, pues el resumen que tú querías ver como un resumen.
+
+55:57 - SALA VIP
+  Exactamente.
+
+56:00 - Jose Manuel Espinoza
+  Empata con lo que nosotros le timbramos al productor, ¿no? Porque yo me acuerdo que hay un archivo en comercial que viene ahí en el producto, o bueno, viene identificado, no sé en qué apartado, pero sí viene identificado el vivero.  Sí, o sea, ese es el momento de facturar.
+
+56:18 - SALA VIP
+  O sea, en el momento en que facturamos, o sea, metemos por vivero y por variedad. ¿Pero le facturas a quién?  A los productores. ¿A los productores? ¿Cuándo le entregamos la planta? Le facturamos por entrega. Ah, ok. Sí, es como el primer.  Exactamente. Lo primero que sí sabemos, ¿no? Sí.
+
+56:37 - Jose Manuel Espinoza
+  Sí, no sé si eso nos pueda servir como parte de trazabilidad o de identificación de qué vivero está entregando el productor.  sea, en teoría ya cuando nos entregue la fruta, nosotros ya tenemos la factura. Entonces, pues ya con lo nosotros emitido hacia ellos, pues podríamos analizar de qué vivero y qué variedad es la que nos están entregando.
+
+57:12 - SALA VIP
+  Justamente yo creo que ahí ayudaría el tema de la comparación, porque Edder va a tener pronosticado cuántas plantas va a entregar de un vivero hacia un productor.  Y cuando ya se reciba, podríamos hacer ese cruce, es decir, muy bien, si nos estás entregando de este vivero y empieza a descontarse del otro lado.  Sí, es correcto. Pero ahí es donde identificaríamos cuál sería la mejor identificación, Rafa, desde que se está entregando o desde que le estamos facturando.  No, en el de la entrega. En el momento de la entrega. Yo le falto, o porque ya tenemos la entrega tal cual, y aparte, o mi facturación es posterior.  Ah, no, ya, y cierto, ya habíamos platicado con Emiliano que iba a ser esa entrada-salida directamente, se iba a generar.  O sea, de hecho, nosotros vamos a facturar con una orden de venta que van a generar. La persona que vaya a generar esa orden de venta tiene que tener esa edad, o lo tiene antes que nosotros, tal cual.  Ok, ok, muy bien. Emiliano, Alex. Todo bien, Robert.
+
+58:42 - Emiliano  Lorenzano
+  Perfecto, muy bien.
+
+58:43 - SALA VIP
+  Pues creo que al rato nos vemos entonces a las 12, tenemos otra reunión, ¿correcto?
+
+58:48 - Emiliano  Lorenzano
+  a las 12, para todo el tema de comercial, y creo que vamos a tocar el tema de la flota.  Muy bien, perfecto.
+
+58:56 - SALA VIP
+  Pues muchas gracias, muchachos. Gracias, Chema Vic. Raúl, no te escuchamos hoy, pero ahí estás presente. Gracias, día. Gracias, día.  Igualmente, buen día, hasta luego. Hasta luego. Hasta luego.

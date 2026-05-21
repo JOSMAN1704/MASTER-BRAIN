@@ -1,0 +1,688 @@
+======================================================================
+ID DE SESIÓN: DEFINICION DE PRODUCTOS NBG MEXICO - ODOO
+FECHA: 2026-04-08
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/QybfUGgy_wRRaszBuv_erB9FJZq__u8P
+======================================================================
+
+RESUMEN
+
+Definicion de Productos NBG Mexico -  Odoo - April 08
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir la estructura del catálogo de productos y los requisitos de datos para Odoo.
+
+Puntos clave
+
+  - Catálogo unificado: Se utilizará un único catálogo de productos compartido entre las tres empresas (Naturberry, Naturag, Naturprime) para garantizar la consistencia de los datos.
+  - Estrategia de SKU: Los SKUs de fruta y empaque deben coincidir con el sistema de EE. UU. para habilitar una futura integración. Los servicios y consumibles usarán una nueva secuencia interna alfanumérica (p. ej., FR00001).
+  - Propiedad de los datos maestros: Un único "Coordinador de ERP" será el propietario de los datos maestros para prevenir errores. Todos los cambios requerirán un proceso formal de solicitud.
+  - Método de costeo: Se utilizará el método estándar de "Costo promedio". El equipo investigará si esto puede calcularse por almacén para reflejar los costos logísticos, ya que el valor predeterminado es por empresa.
+
+Temas
+
+Estrategia del catálogo de productos
+
+  - Objetivo: Crear un catálogo de productos único y unificado para las tres empresas para asegurar la consistencia de los datos.
+  - Control de visibilidad: Los productos pueden restringirse a empresas específicas o hacerse visibles en todas.
+      - Productos compartidos: El costo es el único atributo que puede variar por empresa.
+      - Productos exclusivos: El producto solo es visible y utilizable por su empresa asignada.
+  - Tipos de producto:
+      - Almacenable: Fruta fresca, empaques, tarimas. Se rastrea el inventario.
+      - Consumible: Insumos de oficina/limpieza. No se rastrea el inventario; se usa para registrar gastos.
+      - Servicio: Renta, servicios públicos.
+
+Campos y lógica de datos del producto
+
+  - SKU / Referencia interna:
+      - Fruta y empaque: Deben coincidir con el SKU del sistema de EE. UU. para habilitar una futura integración.
+      - Servicios y consumibles: Se definirá una nueva secuencia interna alfanumérica (p. ej., FR00001).
+  - Costeo:
+      - Método: Estándar "Costo promedio".
+      - Cálculo: De forma predeterminada, Odoo calcula el costo promedio por empresa, no por almacén.
+      - Problema: Esto impide un seguimiento preciso de costos por gastos logísticos entre almacenes.
+      - Acción: El equipo investigará si Odoo puede configurarse para costo promedio por almacén.
+  - Ventas y precios:
+      - Política de facturación: Se utilizarán "Cantidades entregadas" para asegurar que la facturación coincida con los embarques reales.
+      - Precios: Las Listas de precios gestionarán precios específicos por cliente y sensibles al tiempo. El precio principal del producto se establecerá en cero para forzar el uso de listas de precios.
+  - Inventario y trazabilidad:
+      - Rastreo: Por "Lotes" para habilitar la trazabilidad por embarque.
+      - Fechas de caducidad: No se utilizarán debido a la rápida rotación del producto.
+      - Transferencias intercompañía: La función "Intercompany" de Odoo automatizará el proceso de órdenes de venta/compra entre empresas.
+  - Compras:
+      - Información de proveedor: La pestaña "Compra" almacenará precios específicos por proveedor, tiempos de entrega y fechas de vigencia, permitiendo a los compradores tomar decisiones informadas.
+      - Política de facturación: Se utilizarán "Cantidades recibidas" para asegurar que el pago coincida con las entregas reales.
+  - Contabilidad:
+      - Clave SAT: Requerida para la facturación electrónica (timbrado).
+      - Segmentación de ingresos: Las "Cuentas analíticas" clasificarán automáticamente los ingresos (p. ej., Importación, Exportación) con base en reglas (p. ej., grupo de cliente), eliminando errores manuales.
+  - Exportación:
+      - Campos requeridos: Peso, unidad de medida aduanera (UMT) y fracción arancelaria (fracción arancelaria).
+
+Catálogo de proveedores y productores
+
+  - Códigos de productor: Deben ser asignados por el equipo de EE. UU. para asegurar un código unificado en ambos sistemas.
+  - Códigos de proveedor: Se definirá una nueva secuencia interna alfanumérica.
+  - Manejo de divisas: Investigar la práctica estándar de Odoo para proveedores con múltiples divisas (p. ej., USD, MXN) a fin de evitar crear registros duplicados de proveedores.
+
+Próximos pasos
+
+  - Emiliano: Enviar a Robert la plantilla completa del catálogo de productos (con todos los campos, incluyendo exportación).
+  - Robert: Distribuir la plantilla al equipo.
+  - Víctor y José Manuel:
+      - Definir el propósito de cada campo en las plantillas de producto y proveedor.
+      - Reunirse con usuarios clave (Tania, Giovanna, José Roberto) para consolidar y depurar la lista de proveedores.
+  - Equipo:
+      - Definir las estructuras internas de SKU y de código de proveedor.
+      - Confirmar el método estándar de Odoo para manejar proveedores multidivisa.
+  - Todos: Completar las plantillas para revisión en la próxima reunión el martes 14 de abril.
+
+======================================================================
+
+ONE-ON-ONE
+
+Definicion de Productos NBG Mexico -  Odoo - April 08
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Definir cómo estandarizar y cargar el catálogo de productos (bienes, consumibles, servicios) en Odoo para NBG México, alineando multiempresa, costeo, listas de precios, lotes, impuestos y datos para comercio exterior; acordar plantillas, responsables y próximos pasos.
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Conduce la sesión; presenta configuración de productos en Odoo y opciones avanzadas.
+
+Progreso en prioridades desde la última reunión:
+
+  - Muestra campos clave de producto: tipo (bien/servicio/combo), política de facturación, trazabilidad (cantidades/lotes/serie), campos custom (tipo frutilla, estilo empaque), listas de precios con vigencias, impuestos, costo y método de costeo, multiempresa, compras (múltiples proveedores con vigencia y lead time), unidades de medida, política de control, rutas y transferencias, responsables/alertas, peso/volumen, comercio exterior (fracción, UMT, peso), contabilidad (cuentas y analítica/centros de beneficio).
+  - Confirma mejores prácticas: una persona dueña de datos maestros; plantillas de importación/exportación masiva; secuencias para códigos (prefijos + dígitos) y códigos de barras internos.
+  - Aclara multiempresa: productos visibles entre empresas con control por empresa; costos por empresa; transferencias intercompany configurables (venta-compra espejo).
+  - Explica costos adicionales prorrateados (flete/importación) y conservar costo por lote con valuación promedio.
+  - Activa módulo comercio exterior para exponer campos requeridos en plantilla.
+
+Prioridades hasta la próxima reunión:
+
+  - Enviar por correo la plantilla integral de productos (incluye todos los campos relevantes, comercio exterior y campos custom) para que el equipo seleccione qué usar.
+  - Coordinar sesión de apoyo si surgen dudas al llenar la plantilla.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Definiciones internas de NBG sobre: categorías vs. “tipo de frutilla”, listas de precios, impuestos, reglas analíticas, y esquema de códigos.
+
+SALA VIP (Robert)
+
+Registro
+
+  - Lidera decisiones operativas/contables; alinea con prácticas de EE. UU.
+
+Progreso en prioridades desde la última reunión:
+
+  - Define alcance de inventario: controlar solo materiales relevantes (fruta fresca, materiales de empaque, tarimas), no papelería/limpieza (consumibles sin trazabilidad).
+  - Establece gobernanza: un administrador de datos maestros; permisos restringidos (edición por rol/pestaña).
+  - Alinea con EE. UU.: usar mismos SKUs para fruta y materiales cuando aplique; comparar plantillas EE. UU. vs. MX para integración.
+  - Propone estructura de códigos: prefijos por categoría y secuencias; sugiere ranges o alfanuméricos; aplicar también a proveedores/productores con lógica clara de búsqueda.
+  - Política de listas de precios: por cliente, con vigencias; minimizar error humano con reglas automáticas (analítica por cliente/tipo venta).
+  - Define que no gestionarán caducidad; trazabilidad por lote/tarima; tiempos en cámaras gestionados por operación, no por expiración.
+
+Prioridades hasta la próxima reunión:
+
+  - Recibir plantilla de productos; distribuir a Chema/equipo; coordinar revisión integral de campos (incl. comercio exterior).
+  - Definir, con Contabilidad (Yuri), reglas analíticas automáticas y cat. de cuentas (ingresos por nacional/exportación/importación).
+  - Obtener plantillas de EE. UU. para cotejo cuando MX esté lista.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmación contable sobre centros de costo y mapeos automáticos.
+  - Decisión final de codificación y categorías vs. campos custom.
+
+Victor De La Parra
+
+Registro
+
+  - Operaciones; reúne insumos de proveedores; solicita claridad en codificación.
+
+Progreso en prioridades desde la última reunión:
+
+  - Avanza plantilla de proveedores con campos de Odoo; coordinado con Tania/Giovanna; pendiente consolidación de Naturag/Naturprime.
+
+Prioridades hasta la próxima reunión:
+
+  - Depurar y completar plantillas con key users (Tania compras NB, Giovanna NP, Fabi tesorería NA).
+  - Definir codificación de proveedores/productores (prefijos PD/PV + secuencia), considerando alineación con EE. UU. donde aplique.
+  - Confirmar práctica de único proveedor con múltiples monedas en Odoo y socializar uso para evitar duplicidades.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Falta de listas definitivas de compras en Naturag/Naturprime; alineación con EE. UU. para códigos de productores.
+
+Temas
+
+Tipos de producto y trazabilidad
+
+  - Bienes vs. consumibles vs. servicios; activar “rastrear inventario” por cantidades/lotes/serie según caso. Sin caducidad; trazabilidad por lote/tarima.
+
+Listas de precios y políticas de facturación
+
+  - Listas por cliente con vigencias; precio de producto en cero si se usa listas. Facturar por orden o por entregas; recomiendan por entregas.
+
+Impuestos, costos y valuación
+
+  - Cargar impuestos por producto; costo inicial antes de subir inventario; método promedio por empresa (no por almacén). Prorrateo de costos adicionales (flete, importación). Posible guardar costo por lote con valuación promedio.
+
+Multiempresa e intercompany
+
+  - Visibilidad por empresa; costos por empresa. Transferencias entre almacenes de misma empresa; entre empresas vía intercompany (SO-PO espejo). Productos pueden marcarse compartidos.
+
+Compras y proveedores
+
+  - Múltiples proveedores por producto con precio, vigencia y lead time; importación/actualización masiva vía Excel. Unidades de compra configurables; creación de unidad “tarima” con conversiones.
+
+Codificación y datos maestros
+
+  - Secuencias con prefijos por categoría (productos) y tipo (proveedor/productor). Propuesta de apodos/códigos buscables. Un solo dueño de datos maestros; permisos granulados (p. ej. pestaña compras editable por Compras).
+
+Comercio exterior
+
+  - Requeridos: peso, UMT aduana, fracción arancelaria; módulo activado. Peso alimenta factura de comercio exterior.
+
+Contabilidad y analítica
+
+  - Mapeo a cuentas de ingresos; segmentación por centros analíticos (importación/exportación/nacional). Preferir reglas automáticas por cliente/tipo para evitar error.
+
+BOM, equivalencias y materiales asociados
+
+  - Pallets/tarimas y presentaciones modelables vía BOM o unidades equivalentes; productos opcionales no sustituyen BOM.
+
+Alineación con EE. UU.
+
+  - Usar SKUs comunes para fruta/materiales donde corresponda; proceso para alta/actualización con confirmación de EE. UU.; evitar reciclar códigos.
+
+Próximos pasos:
+
+  - Emiliano: Enviar por correo plantilla integral de productos (incl. campos de comercio exterior y custom) hoy.
+  - Robert: Distribuir plantilla a equipo (Chema, etc.); coordinar revisión de campos a usar.
+  - Robert + Yuri (Contabilidad): Definir cuentas y reglas analíticas automáticas por cliente/tipo venta antes de carga.
+  - Víctor + José Manuel:
+      - Depurar/completar plantillas de proveedores/productores con key users (Tania NB, Giovanna NP, Fabi NA).
+      - Definir esquema de codificación (PD/PV + secuencia; productos por categoría) y documentar criterios campo por campo (Word SOP).
+      - Confirmar uso de proveedor único con múltiples monedas en Odoo y socializarlo.
+  - Robert: Solicitar plantillas/maestros de EE. UU. para cotejo cuando MX tenga versión preliminar.
+  - Todos: Comprometer entrega de plantillas en ~3 días hábiles (target: martes 14) para que Odoo procese en la ventana de dos semanas.
+
+======================================================================
+
+TRANSCRIPCION
+
+Definicion de Productos NBG Mexico -  Odoo - April 08
+VIEW RECORDING - 79 mins (No highlights): 
+
+---
+
+0:00 - SALA VIP
+  Le pedí a Chema que nos trajera los productos que actualmente estamos manejando para tenernos la idea de cuál es el listado que hemos estado facturando y compararlo, no sé, con algún listado que queramos estandarizar.  También lo de Prime, creo que debemos como de unificar todo el mismo listado. ver el video. Jorge, Jorge Obregón es Jorge Eduardo, no sé, no sé si ha sentido, ¿cuál es?  Sí, claro, ¿qué viste? De La Parra, de La Parra, sí, ¿cuál de todos? Con la chamo. Sí, Tania Tania, Tania, ah, la.  Ah, sí, lo de la SUA. Sí, la diferencia. Yo me iba a ir por la propuesta de Tania de corregir y timbrar otra vez.  No sé, ¿qué piensas? Ah, otra vez lo mismo. Sí, lo tenía pendiente para verlo completado. Lo mando, mando. ¿Sabes?  Pues ya lo tienes ahí. Ya, poco más rápido. También ya contestó Luis de un correo de Jorge de que urge firmar este...  Ah, Y Luis dice que firme Jorge. sí, para ir a sacarlo ahorita, te pide la autorización de este uso.  Buenos días.
+
+3:42 - Emiliano  Lorenzano
+  ¿Qué tal, Emiliano? Buenos días.
+
+3:44 - SALA VIP
+  Emiliano. Hola, Robert. Buenos días. ¿Quién más se une de allá de contigo? Nada más yo voy a estar.
+
+3:55 - Emiliano  Lorenzano
+  Creo que Raúl está ocupado, entonces no va a estar con nosotros.
+
+4:00 - SALA VIP
+  Perfecto, muy bien, muy bien, pues, guíanos, guíanos, Sembriano, ya conoces a Alfredo, ¿verdad? Ya lo habías visto, Alfredo, nuestro director de adjunto de Naturberry.  Sí, sí, creo que en la reunión ya lo habías visto.
+
+4:20 - Emiliano  Lorenzano
+  Ah, perfecto, muy bien, entonces, a ver, échanos, cuéntanos qué hacemos. Bien, pues hoy vamos a trabajar un poquito con el tema del catálogo de productos.  Ese catálogo de productos que vamos a trabajar, pues, nos puede ayudar para todo el producto que es almacenable, para todo el producto que es consumible, y también para los que son de tipo servicio, por ejemplo, los que van a usar con Yuri para el tema de gastos, por ejemplo, pago de internet, pago de renta, si es que pagan alguno de esos tipos de cosas, ya se sentarían como tipo servicio.  Los consumibles vendrían siendo los productos que usan para la limpieza, jabón, papel, material de oficina, lapiceros, hojas blancas. No sé si esos productos, Robert, lo que es material de oficina y todo lo que es material de limpieza, ¿los vayan a querer manejar como productos almacenables y tener una trazabilidad en inventario o realmente sí se van como consumibles?
+
+5:29 - SALA VIP
+  ¿Como consumibles? Sí, no, es mi experiencia de la administración de esos es un show y no valen el mitsquial o valen el dinero.  No, una verdad que hay poner en los inventarios de material, básicamente material de empaque, material que es fruta fresca, ¿no?  Fruta fresca y tratan. Y creo que las tarimas chef, ¿no? Las querían tener también en nuestro inventario, aunque sea con valor.  Sí, los materiales justamente tarimas. Separadores, cosas grandes, que sí suman a ser como un kit, el famoso para el control de materiales.  Muy bien.
+
+6:18 - Emiliano  Lorenzano
+  Bueno, con Robert ya estábamos trabajando con el control de calidad y se habían dado de alta algunos productos. Digo, entiendo que no es todo el catálogo que puedan manejar, pero pues sí, ya están algunos productos y vamos a revisar y sobre eso partimos para generar lo que vendría siendo la plantilla.  Sobre esa plantilla que les vamos a proporcionar en Excel, ahí vamos a estar llenando toda la información y ya una vez que se tenga la información, ya la subimos al sistema.  Se da una sola plantilla, ¿verdad, Emiliano? Eh, si los productos que... Si tienen, Robert, se comparten dentro de las tres empresas, podemos manejar una sola plantilla.  Si en una empresa hay productos que son exclusivos de una empresa, se crea una plantilla por separado.
+
+7:16 - SALA VIP
+  Una pregunta, si con el objetivo de que una empresa tenga, bueno, la empresa Biobango tenga todos los, este, el inventario, en las diferentes, en las otras empresas se puede desactivar ese, un, un, un, un, un artículo, un producto.  Sí. Porque, realmente, nosotros queremos asegurar que toda la, la, la modificación sea en una sola empresa y que todo sea comunicado a las dos, tres, cinco empresas que tengamos, no, son tres, pero que sea el mismo catálogo y en el caso de que, por ejemplo, no seamos unas tarimas en una, en una de las empresas de Naturprime o, no sé, se puede desactivar, pero todos los productos tienen que estar.  Están activados para todas las empresas y relevantes si se usan o no. Dado de alto, dado de alto, dado de alto, Si se puede, Emiliano, ya te perdimos.  Ah, el micrófono está apagado.
+
+8:16 - Emiliano  Lorenzano
+  Realmente el producto que nosotros vayamos a crear dentro de alguna empresa, por ejemplo, estamos trabajando en Naturberry, no sé si se alcanza a ver.  Igual déjame, voy a hacer un poquito más grande la pantalla. Esta es la empresa de Naturberry y tengo la de Naturag.  entonces ahorita los productos, voy a entrar a uno para tomar como ejemplo. Tengo el arándano. Este producto de arándano, aquí, si se dan cuenta, tiene lo que vendría siendo la descripción del producto que corresponde al nombre que le dan.  Ventas y compras. Venta corresponde... ¿A qué se puede vender ese producto? ¿Que nosotros podemos venderlo con algún cliente? ¿Compras?  ¿Que nosotros lo compramos con algún proveedor? La parte de la información general, aquí viene lo que vendría siendo el tipo de producto, los bienes, los servicios y los combos.  El tipo de producto, bien, se puede manejar también para el tema de consumibles y la única diferencia es que no le pondríamos que se va a rastrear el inventario.  Con eso no afectaría nada de inventario, solamente afectaría lo que vendría siendo el gasto para tener la factura de cuentas por pagar.  La parte de servicios lo vamos a utilizar, yo ponía como ejemplo, ¿no? La renta de algún local, el pago de internet, el pago de luz, agua.
+
+10:00 - SALA VIP
+  Bueno, eso vendría siendo como servicios.
+
+10:02 - Emiliano  Lorenzano
+  La parte de los combos podría armarse también como si fuera lo que vendría siendo un kit, ¿no? O en cocina o en algún restaurante el combo lo manejamos.  Por ejemplo, ¿no sabes qué? Podría llevarme una hamburguesa, unas papas y un refresco, ¿no? Y tengo mi combo de tres productos.  No creo que aplique para nosotros, pero está la opción del combo. Tenemos esta opción que se llama política de facturación.  ¿Esta para qué nos sirve? Esta política de facturación hace referencia a los pedidos de venta, lo que nosotros estamos vendiendo al cliente y nos da dos opciones, que vendría siendo la cantidad ordenada y cantidades entregadas.  Si yo dejo mi producto marcado sobre cantidades ordenadas, yo voy a... Facturar sobre lo que el cliente me está ordenando, aunque yo ahora ya he entregado...
+
+11:05 - SALA VIP
+  Es la orden de venta, ¿correcto? Sí, sobre la orden de venta.
+
+11:10 - Emiliano  Lorenzano
+  Y si lo dejo sobre cantidades entregadas, lo que voy a estar facturando es realmente lo que yo estoy entregando al cliente.  Y acá en la otra parte dice Rastrar Inventario. Aquí nos dice si lo activo yo, ya va a tener una trazabilidad para tener lo que vendría siendo las entradas, los traslados internos y las salidas de inventario.  Aquí me da tres opciones. Me dice que lo puedo manejar sobre cantidades, sobre lotes y sobre números de serie.  En el caso de ustedes, la mayoría de los productos va a estar más enfocada a lotes y por cantidades, ¿no?  Esta parte de tipo de frutilla, estilo de empaque... Fueron unos campos que nos había solicitado Robert en la implementación que se hizo para lo que fue de control de calidad.  Supongo que los vamos a estar utilizando, ¿no, Robert?
+
+12:11 - SALA VIP
+  Yo creo que sí, porque seguimos estando en el mismo ámbito de clamshell e identificar la fruta para después hacer lo que es el proceso de la calidad y de los porcentajes que lleva cada una de ellas.
+
+12:32 - Emiliano  Lorenzano
+  Sí, entonces, estos fueron campos adicionales que se agregaron. Estos no vienen del sistema nativo. Esto ya fue una petición de ustedes.  La parte del precio, si yo le pongo un precio acá, el sistema me va a tomar principalmente este precio de venta.  Pero en una visita que tuvimos allá con ustedes, comentaban algo de que manejaban lista de precios. Entonces, si a cada cliente le dan un precio distinto, pues lo conveniente sería manejarlo por lista de precios y aquí en el precio de venta, pues dejarlo en ser.  Y ya cuando nosotros estemos cotizando, pues va a tomar el precio que tenga asignado dentro de esa lista de precios.  Nada más aquí de preguntar el sistema.
+
+13:24 - SALA VIP
+  Si yo tengo un precio de 1 dólar 50, ese precio va a seguir apareciendo en las órdenes de venta.  Si ajustabas el precio a 2 dólares en enero 1 de 2027, el sistema agarraría el nuevo precio y no ajustaría antes y antes, me imagino.
+
+13:42 - Emiliano  Lorenzano
+  Sí, toma el nuevo precio para las ventas que se vayan a crear a partir de esa modificación y las que ya estaban creadas, pues se van a quedar con el precio que ya tenían asignado.  Ya no se afecta. Duda, Emiliano, este, yo siento que ya...
+
+13:59 - SALA VIP
+  Y ya el... Pues nos enseñarás dónde se carga la lista de precios, pero la lista de precios tiene en vigencia, ¿no?  Sí, tiene en vigencia. Se puede poner una fecha de inicio, una fecha de inicio y una fecha de fin.
+
+14:11 - Emiliano  Lorenzano
+  Si ya llega la fecha de fin, la cotización va a salir en precio cero, si no tiene un precio vigente.
+
+14:20 - SALA VIP
+  Y puede tener dos o tres listas de precios con diferentes vigencias, ¿no? Para que dependiendo del tiempo tomen de una o de otra.
+
+14:29 - Emiliano  Lorenzano
+  Sí se pueden crear varias listas de precios y ya se le establece ya directamente en el cliente la que esté vigente o en dado caso que se esté creando la cotización, el que esté levantando el pedido va a elegir la lista de precios.
+
+14:49 - SALA VIP
+  O sea, no se asigna en automático con la fecha, sino que tienes ahí a lo mejor otro enlace entre fecha y cliente.
+
+15:00 - Emiliano  Lorenzano
+  Eh, está, según nada, se puede asignar directamente, pues una lista predefinida en el cliente. Ya en el, en el, al momento de estar creando la cotización, eh, si una ya está vigente, pues te, te lo dejaría con precio cero, ya no lo estaría manejando.  En teoría, la que tendría que estar vigente sería la, la, la que esté, pues realmente, valga la redundancia la que esté vigente, ¿no?  Pero igual ya, ya harían las pruebas de cómo estaría funcionando. Ok. En la, en la parte de los impuestos, eh, no sé si aquí sus productos vayan exentos de impuestos, vayan con tasa cero, vayan con tasa dieciséis, o alguna retención.  Pero aquí se pone la, la etiqueta del impuesto correspondiente para que, pues salga ya en, en el pedido. El costo, el costo del producto,  Antes de subir un inventario al sistema, tendríamos que establecer el último costo que tengan ustedes para que la evaluación del inventario se corra a partir de este costo que tenga asignado el producto.
+
+16:17 - SALA VIP
+  Emilio, hay un comentario, es más bien para el equipo local. Creo que una de las funciones que ya que esto esté en productivo debe de tener el coordinador del ERP, Robert, que veíamos ayer, es precisamente encargarse de los datos maestros.  Porque lo correcto, a ver, hay Emilio que me corrija, pero lo correcto es que una sola persona sea la que tenga la llave para modificar todo esto, y no que, por ejemplo, contabilidad puede entrar a mover los impuestos, y ventas puede entrar a mover precios de los niños, uno solo por fuera, ¿no?  Le manda la solicitud. A lo mejor, no empezaste por esa parte, Emiliano, pero para entrar a esta vista, necesitas ser administrador.  A lo mejor, empezaste Para editar, para ver si varios pueden ver, ¿no? Exactamente, pero para editarla, si tienes que ser manejador de perfiles y el administrador puedes visualizar todo lo que todo es.  Entonces hay que asignar quién puede ser administrador y quién son usuarios regulares, etcétera, etcétera. Gracias. Sí, ahorita estamos platicando sobre los datos que lleva el producto.
+
+17:29 - Emiliano  Lorenzano
+  Ya después entraríamos a definiciones de qué usuario sí puede crear el producto, qué usuario sí puede editarlo, o realmente si no van a poder editar nada del producto.  Pero sí, a lo que preguntaban hace rato, lo más recomendable sí es que le dejen la responsabilidad a una persona de llevar el registro de los productos.  Porque sí nos ha pasado de que, oye, es que ya le modificaron al precio, ya le modificaron a... El costo.  Y todo esto, como comentaba Raúl ayer en el inicio del proyecto, como el módulo está integrado totalmente con contabilidad, si nosotros hacemos una afectación de costo, nos va a hacer una evaluación como una póliza.  Entonces, sí tendríamos que tener como cuidado en lo que se vaya a realizar. Pero bien, en el costo, tendríamos que poner el último costo que ustedes tengan.  Ya va a depender mucho de qué método de costeo estén utilizando. Si van a utilizar costo estándar, promedio. promedio, ¿no?  Seguimos con promedio.
+
+18:41 - SALA VIP
+  Seguimos con costo promedio.
+
+18:42 - Emiliano  Lorenzano
+  Ya después, cuando se hagan las compras, el costo se va a estar actualizando de forma automática de acuerdo a las compras y al inventario que tengan.
+
+18:51 - SALA VIP
+  Se hace, ese costo promedio se hace en función por cada almacén, es decir, por cada... ¿O almaceno por cada empresa, Emiliano?  ¿Uno lo puede definir?
+
+19:07 - Emiliano  Lorenzano
+  Te lo hace por cada empresa, pero no por almacén.
+
+19:14 - SALA VIP
+  Porque como empresa está habiendo todos los almacenes, y ese precio promedio es el que depende de los sacas, es el mismo precio.  ¿Correcto, Emiliano? Sí, eso sí. Ahí, Robert. Todos los almacenes están haciendo el precio. Te lo digo, qué? Porque ahora que tuvimos el tema de esta, con Compa, con Natur Prime, sí se vio que el costeo se debería de estar diferenciando, si es la palabra, por cada almacén, para que no hiciera un costeo que ahora estás recibiendo en Ananagua.  No, ahora estoy recibiendo en redes, ahora está recibiendo y se costea en forma global y no se especificó, no, lo esencial es que se haga el costeo.  Yo como lo he trabajado en Sapiens One y en Sapiens For Hanna, también el promedio se diferenciaba por el almacén.  El almacén, el almacén dentro de SAP, los almacenes que definas dentro de SAP, si era un costo promedio, pero digo, separado, aunque eran muy parecidos, porque no tendría por qué haber tanto tema, pero por ejemplo, ¿qué pasa si mandarlo al almacén de Irapuato nos sale mucho más caro logísticamente?  Tiene más sentido que el costo promedio allá sea más caro y en realidad veas que ya te está costando más mover el producto que recibirlo en Zamora.  Es un ejemplo, ¿no? Sí, lo que Estados Unidos tenemos es el Fresh and Fresh Tab. Sí, va por tags, entonces todo el almacén está hecho por cada tag, cada paleta tiene su tag, y ese tiene un costo, incluyendo parte de costo adicional.  Depende de dónde está el producto, te va dando el precio de ese... El último que entró sale a ese precio, ¿no?  Sí. Y por aquí en México, eso... Es medio problemático aquí, suelen manejar más costos promedio por almacén. Pero cuando movemos de almacén a almacén, ahí está el número único de TAG.  Cuando metemos el inventario en, Emiliano, cuando metemos el inventario en el almacén, se mete por el código de barras, ¿correcto?  Se puede usar el código de barras. Ok, y ese inventario cuando entra, entrará un precio. Si tú mueves ese inventario TAG a otro, ¿tenías que hacer esa orden para mover ese producto más el flete?  Una transferencia de inventario, y no sé cómo funciona a Du, pero le puedes sumar ese flete. Entonces, ¿qué va a salir?  Va a salir de almacén, va a salir con el costo promedio que ya trae esos artículos. No necesariamente con el último que entró.  No. Ese promedio se va a ir al otro almacén que ya está con otro costo promedio. Se va a promediar y se va a sumar, en teoría se sumaría el flete nuevo.  No sé si con Google funciona así. Emiliano, tu micrófono no está apagado. Ahí pudiéramos aplicar un tema de costos adicionales.
+
+22:14 - Emiliano  Lorenzano
+  Se prorratea el costo del flete. Eso sirve también mucho para el tema de importación. Por ejemplo, sabemos que nuestro proveedor nos manda la factura por solo el costo del producto y después nos manda todo lo demás que viene lo de aduana, lo del IGI, lo del ETE, todo eso.  Y eso pues ya se mete al final, pero se prorratea con lo que está en el inventario. Entonces aumenta pues el costo de ese producto.  Este tema, pues si lo pudiéramos también checar más a detalle también con la parte contable que vendría siendo Yuri, para que también ella nos pueda explicar más.  Sobre ese tema. Y bueno, también les comento un poquito que si quisieran llevar el costo identificado de cada compra, lo pudiéramos hacer mediante la...  sí tener el costo, bueno, la evaluación de inventario como promedio, pero pudiéramos guardar el costo de la compra. esto aplica solamente cuando tenemos lotes, ya que en el lote se guarda ese costo y cuando se hace la venta se va al costo real, que cómo lo compraron.
+
+23:34 - SALA VIP
+  Pero en tu inventario va a estar promediado, pues. Sí, el lote lo usaremos básicamente para la parte de importación de toda la fresa, porque el lote vendría el lote de Estados Unidos a cierto precio, y dependiendo de los costos que hace el cereal, el empate no, pero sí, por eso es que se sea Víctor y José Manuel, se necesitar para importación usar lote.  ¿Por embarque? Por embarque.
+
+24:02 - Emiliano  Lorenzano
+  Muy bien, entonces vamos a poner el impuesto de la compra, voy a ponerle exento, y aquí en la parte de la categoría vendrían siendo las familias, ahorita ustedes le están poniendo que es arándano, pero tiene frambuesa, fresa, zarzamora.  Y no se repite con tipo de frutilla a la izquierda.
+
+24:38 - SALA VIP
+  Justamente, aquí, Roberto, creo que es esencial que tengamos esta plantilla que nos van enviar, y que José Manuel y Víctor definan cada campo que vamos a poner, porque este es, bueno, el número uno, tenemos los dos mismos productos.  El campo de frutilla es el mismo, es el campo de la categoría. Agregamos tipos de frutilla como un desarrollo que a lo mejor categoría hubiera sido, o sea, no hubiera sido necesario.  ¿Se me cachan? Sí, aquí nada más creo que sí hicimos esa diferencia para poder hacer un registro, un ejercicio a la hora de los registros de calidad.  Creo que para el manejo de los porcentajes, para el manejo de los defectos que van a tener, creo que por eso hicimos esa diferencia entre categoría y el tipo de frutilla.  Entonces, ese cambio, ese desarrollo debe pasar por el comité 0, que en efecto aceptamos que tenemos el desarrollo de relación a la pobreza.  A mí me surge una duda, Emilio, ese campo tipo de frutilla es desarrollo, ¿correcto?
+
+25:51 - Emiliano  Lorenzano
+  Sí, es que les comentábamos que fue un desarrollo, no son los campos estándar, categoría sí es campo estándar. Pero acá en categoría, para mí se me ocurre ponerle, no sé, frutas, ¿no?  Todo lo que es empaque, ponerle material de empaque. Todo lo que es material de oficina, de limpieza, todo lo que no vamos a inventar, lo podemos poner como consumibles.  Entonces, todos los productos que son de gastos, le ponemos servicios. Servicios, servicios, exacto.
+
+26:28 - SALA VIP
+  Y en dado caso de una actualización de Odu, ¿qué pasa con esos campos que agregaste como desarrollo? ¿Se borran, se pierden, se tienen que también hacer una adecuación al desarrollo?
+
+26:39 - Emiliano  Lorenzano
+  Se tienen que emigrar para que el sistema no sufra ninguna afectación, porque si no se emigran los desarrollos, pues el sistema va a tronar.  En referencia, se agrega el SKU, el código interno que ustedes manejan, o pueden agregar el código que les manda el proveedor.  Si no tienen SKU, pues se pueden inventar alguno y esto nos sirve, pues es más fácil porque cuando vamos a hacer una compra, una venta o una transferencia, en vez de poner el nombre completo, digo ahorita son nombres pequeños, pero en comercializadoras que tienen, no sé, pintura azul para no sé qué, poner todo, pues es más fácil con un código.
+
+27:25 - SALA VIP
+  Eso es otra cosa que yo iba a preguntar, Emilio, porque al principio que nos mostrase todos, yo vi que todos eran puros nombres y dije, ah, caray, no vamos a manejar códigos, se me se me ha complicado, qué bueno que ya estás llegando a este punto, y este, a mí me gustaría que ustedes, en base a sus mejores prácticas de lo que han implementado, nos sugirieran, ¿qué nos sugieren?  Que por ejemplo, estos productos sean códigos desde 100.000 hasta 199.999 y consumibles sean los 200.000 y servicios sean los 300.000 o con código alfanumérico que sea ARC.  001, arándano o así, conforme vayamos agregando arándanos. A lo mejor ahorita no tienen la respuesta, pero no sé si han trabajado algo de esto ustedes.
+  ACTION ITEM: Definir y documentar prefijos/secuencias de SKUs por categoría - WATCH: https://fathom.video/calls/630340584?timestamp=1705.9999
+  ACTION ITEM: Definir y documentar prefijos/secuencias de SKUs por categoría - WATCH: https://fathom.video/calls/630340584?timestamp=1705.9999
+
+28:36 - Emiliano  Lorenzano
+  No, Le agregamos el prefijo, ¿sabes qué? Para la categoría de frutas va a ser FR y los dígitos van a ser, se va a componer de cinco dígitos y cada vez que se cree un producto que entre a la categoría de frutas, asígnale el que sigue, ¿no?  Entonces ya se va.
+
+29:00 - SALA VIP
+  Sí, con esto igual, Victor, cuando hagamos esta decisión, la tenemos que poner si hacemos, como menciona Emiliano, pero aquí es el SKU de Estados Unidos que usamos en el sistema, tiene que ser el SKU de esta referencia.  Entonces aquí, cuando nos den la plantilla, nos van a pasar a la plantilla de Estados Unidos y nos vamos a intentar para que veamos que los campos estén, porque cuando hagamos la EPA de Estados Unidos aquí, sepamos que la referencia va a ser el SKU de Estados Unidos y esa es la conexión que tendría el sistema con Estados Unidos.  O sea, sí o sí, tendríamos que tomar el SKU de ellos. Para la fruta, ¿correcto? Para la fruta, servicios consumibles, eso sí lo podemos definir internamente, materiales.  ¿Materiales Materiales, igual vamos a ver el SKU de Estados Unidos y lo usamos aquí para que esté unificado de la misma manera que está en Estados Unidos, porque no, entonces el sistema puede abarcar más con eso.  Entonces, fruta y materiales de... Y todo lo demás, regionalizado, con estas mejores prácticas, viendo, le ponemos un prefijo, más un número de N de dígitos, y que se los vaya asignando en automático.  Ah, yo les puedo sugerir lo que ya he trabajado, yo hice la oficina de datos maestros en donde estaba, para el proyecto, y ya tengo como la lógica de eso, y si quieres lo revisamos.  Por ejemplo, consumibles es con 001 hasta, raro que tengas, o 0001 por cuántos queramos llegar a tener en la vida del sistema.  Ok.
+
+30:36 - Emiliano  Lorenzano
+  Sí, no, no hay problema, si ahorita puede ser que el catálogo sea muy pequeñito, pero si va creciendo mucho, puede ser incrementable, puede ser consecutivo, no pasa nada.  Y acá comentaban algo, que con el sistema de Estados Unidos, si se va a enlazar algo, lo correcto sí sea que coincidan, por lo menos, un campo con el de ellos, para que así podamos hacer la conexión.  Gracias. Entonces, en el código de barras, si no tienen código de barras actualmente de sus productos, también se puede crear el código de barras, no hay problema.  Esto, como comentaban hace rato, pues nos puede ayudar mucho para hacer las transferencias internas, para recibir el producto, para vender.  Entonces, yo aquí puedo establecer un código de barras, ahorita voy a ponerle, no sé, este número, así nada más.  Voy a guardar ahorita nada más para mostrarles un ejemplo, y voy a imprimir una etiqueta. Ah, me falta el estilo de enfoque.  Y aquí, este es un pequeño ejemplo, pues a lo mejor la etiqueta viene algo no tan bien, pero pues ya se puede modificar y se crea la etiqueta para...  Pegarle a los productos y ya me sale el código de barras con el nombre del producto, entonces ya nosotros si lo empezamos a escanear, pues ya va a ser más fácil, ¿no?
+
+32:12 - SALA VIP
+  Y no es código universal, no nada más es código para nosotros. Sí, es código de ustedes, está creado, pero pues realmente ya sí lo...
+
+32:21 - Emiliano  Lorenzano
+  Si alguien de sus clientes quisiera utilizar este código, pues tendría que meter el código de barras en su sistema para que así lo puedan leer allá.
+
+32:31 - SALA VIP
+  Exacto, ya. Y aquí viene el tema importante que preguntaban al inicio.
+
+32:38 - Emiliano  Lorenzano
+  Aquí viene la empresa. Ahorita yo no menos tengo dos empresas y ahorita dice que está visible para todas las empresas.  Este producto se va a compartir con la otra empresa. Lo único que va a cambiar por empresa sería el costo.  El costo ahí sí se tendría que poner por cada empresa.
+
+32:59 - SALA VIP
+  próxima. ¡Gracias!
+
+33:00 - Emiliano  Lorenzano
+  Ya en dado caso de que si no quieren que este producto aparezca en Naturagy, pues ya nada más aquí le ponemos que este producto es exclusivamente de Naturberry, le ponemos el nombre de la empresa a que pertenece, y ya este producto no estaría visible en la otra empresa.
+
+33:16 - SALA VIP
+  O si tenemos nuestro listado, nuestro catálogo, nosotros podemos identificar a qué empresa puede ser aplicada. Está genial. Y por ejemplo, si yo entro a Naturagy, que es la otra empresa, y veo el mismo código, el mismo producto, también voy a ver lo de la empresa ahí.  O sea, qué empresa, y desde ahí modificarlo, o cómo funciona, solamente desde Naturberry puedes... No, ustedes pueden modificarlo también allá.
+
+33:45 - Emiliano  Lorenzano
+  Mira, ahorita voy a ponerle el 03 para buscarlo así. Ajá.
+
+33:50 - SALA VIP
+  Y me voy a cambiar a la empresa de Naturagy.
+
+33:55 - Emiliano  Lorenzano
+  Posiblemente me va a botar un error, porque va a decir que no tengo acceso a leer este producto. Por la restricción de que le puse que pertenece a Naturberry.  Vamos a buscar aquí, tengo el buscador y voy a ponerle el código de producto, el AR03, no está, miren, le quito el filtro y no aparece.
+
+34:16 - SALA VIP
+  Y así me voy a Naturberry.
+
+34:19 - Emiliano  Lorenzano
+  Bueno, ya aquí puedo, miren, esto no es, esto lo pueden aplicar, nada más para consultar reportes unificados como inventario o en contabilidad.  Pero si van a operar para hacer una venta o algo, no lo tengan activo así los dos. Y aquí sí aparece, miren, aquí está AR, porque tengo seleccionada las dos empresas.  Voy a quitar el Naturberry y voy a dejar nada más el Naturberry, ahí están. Vamos a continuar. Entonces aquí ya le voy a quitar ahorita la empresa, pero sabemos que sí ya se puede restringir el acceso.  Tengo esta pestañita ya de ventas. Aquí en ventas, por ejemplo, puedo agregar una descripción para la cotización, ¿sabes qué?  Para las frutas, no sé, fruta de temporada, no sé, una descripción que ustedes quieran, ¿no? Ponerle al producto. Esto, pues, nos ayuda mucho cuando nosotros vendemos, pues, ¿qué vendría siendo?  Equipo de cómputo, para ponerle las especificaciones de lo que lleva alguna computadora, algún teléfono. Aquí en los productos opcionales, esto vendría siendo como, pues, darle opciones a tu cliente de que también puede comprar otros productos.  Por ejemplo, ¿no sabes qué? Voy a... A la refaccionaria, voy a comprarme una, no sé, una batería para el carro, ¿no?  Ah, pero también te puedes llevar, no sé, los cables de corriente, si es que no tienes. Entonces aquí, ustedes pudieran, ah, qué?  También te puedes llevar también la fresa de una libra, la fresa de dos libras. Una pregunta, aquí, por ejemplo, vamos a llevar la fresa de ocho por uno.
+
+36:26 - SALA VIP
+  Aquí, por ejemplo, un proyecto adicional que queremos poner es la tarima. Por cada caja es punto cero y cacho de tarima.  Entonces, al tú comprar una tarima de doscientas, ¿cuántas cajas por tarima son? ¿Ciunto veinte? ¿Ciunto veinte? Si son ciento veinte cajas de fresa, sería una tarima.  Entonces, esos eran los productos adicionales que sería por SKU, Emiliano, por ejemplo. No, creo que ahí se definiría como el billete de materiales.  El billete de materiales. Ajá, donde identificamos que dependiendo del número de... Dependiendo de la presentación, del número de cajas, cuántos clans hay adentro y qué pallet vas a utilizar.  Creo que ahí es donde, en algún otro lado, hacemos esa configuración del billete de materiales. Aquí es más como agregar opciones.  Más bien aquí sería, si te estoy contestando fresa, te puedes llevar a Ándano. Lo que tú dices, yo lo he visto como unidades equivalentes.  Y aquí en la parte de etiquetas, también funciona como otro agrupador.
+
+37:41 - Emiliano  Lorenzano
+  Voy a duplicar un poquito la página. Y por ejemplo, aquí en la parte de los productos, yo tengo estos agrupadores.  Yo aquí ya puedo agrupar por tipo de producto. Todos ahorita están como bienes. Si tuvieron los servicios, pues van a salir los servicios.  Pero aquí por categoría de producto. Tengo arándanos, frambuesa, fresa, zarzamora y algunos otros. Entonces, esta parte de etiquetas, pues también puede servir como un agrupador para la parte de los productos.  Nos ha tocado, por ejemplo, a lo mejor va a sonar un poquito absurdo el ejemplo, pero en la parte de los clientes lo manejan mucho las etiquetas para cubrir lo que venían siendo las zonas, ¿no?  ¿Sabes qué? Zona norte, zona sur, zona centro. Para identificar en qué segmento entran cada cliente. Entonces ya para eso se ocupan las etiquetas.  Si no se ocupan, pues también no pasa nada. Ya en la parte de las compras, aquí tengo esta piscinita de compras.  Aquí dice proveedor, agregar un proveedor. Yo aquí puedo establecer con qué proveedor compro yo ese producto. Por ejemplo... Gracias  Lo compro con el productor Manuel. ¿Sabes qué? Con Manuel es quien compro ese producto. La cantidad, pues vamos a ponerle que a partir de una caja, ¿no?  ¿Cuánto sería el precio que nos los vende ese productor? Ahorita no le puse el costo, pero no sé cuándo, creo que la haranda no sé si está caro, creo.  36 dólares, por ejemplo, 36 pesos.
+
+39:22 - SALA VIP
+  No, está muy barato. Ponle 500 pesos y ya. Es que se empezó, sí. 36 dólares. Ajá, 36 dólares. ¿Por qué?  plan de... Ahí está. 6 dólares. 600 dólares. Entonces aquí en la parte de la compra, yo puedo establecerle, ¿sabes qué?
+
+39:43 - Emiliano  Lorenzano
+  Lo compro con el productor Manuel, lo compro con Valentina y lo compro con Diana. ¿Sabes qué? Manuel me lo vende, me lo...  me da el producto en 628, pero Valentina... Diana me lo da en 630 y Diana me lo da en 615, pero aquí también depende.
+
+40:10 - SALA VIP
+  Pero la cantidad de ciencias es 1 por 628, ¿verdad? No es una cantidad que sea mínimo máximo.
+
+40:17 - Emiliano  Lorenzano
+  No, no, no está establecido sobre esa parte. Aquí viene el plazo, plazo de entrega. ¿Sabes qué? Manuel me lo vende en 628, pero él me lo entrega en 3 días.  Diana me lo da en 115, en 615, pero ella me lo entrega en 5 días. Y la de Valentina me lo vende en 630, pero ella me lo entrega en 2 días.  Sé que ahorita nosotros no vamos a manejar algún criterio de mínimos y máximos, pero si manejaran algo así, el sistema pudiera, ¿sabes qué?  Te conviene con este porque te lo...
+
+40:59 - SALA VIP
+  En
+
+41:00 - Emiliano  Lorenzano
+  Te lo entrega en dos días hábiles.
+
+41:05 - SALA VIP
+  Justo nos acaba de pasar algo así, checando con Tania las tarimas blancas a Naturagi y a Zamora, con proveedores diferentes que nos entregan a diferente precio y a diferente tiempo.  Si es un caso real, ¿qué puede pasar?
+
+41:19 - Emiliano  Lorenzano
+  Ah, no, pues si lo tienen así, sin problema, podríamos meter ahí los proveedores y cómo nos los venden. Muy bien, entonces, también acá puedo establecer la fecha de inicio, fecha de fin.  ¿Sabes qué? Con Manuel va a estar activo del primero de abril al 30, porque también los proveedores cambian precios.  Sí, la vigencia de su cotización.
+
+41:54 - SALA VIP
+  ¿Sabes qué?
+
+41:55 - Emiliano  Lorenzano
+  Valentina va a estar activo del primero de abril y solamente nos va a dar 15 días.
+
+42:00 - SALA VIP
+  ¿Esto quiere decir, Emiliano, que, por ejemplo, mi compradora tendría acceso de edición a esta pestaña de este artículo, correcto?  Le podemos dar acceso exclusivamente a que edite solamente esta pestañita de compras. Para que estén mintiendo y capturando esto, porque imagino que esto te va a servir después como un input para planear las compras, ¿correcto?  Sí, ya manejando el tema de los mínimos y máximos, ya ahí el sistema va a detectar, ¿sabes qué?
+
+42:34 - Emiliano  Lorenzano
+  Pues de la que esté vigente y cuál te conviene más, ¿no? Te va a lanzar el proveedor. Me imagino que aquí en esta forma lo estamos haciendo de forma manual e individualizada.
+
+42:48 - SALA VIP
+  Yo sé que nos vas a sorprender en la que Tania pueda hacer su registro masivo. Si me sorprendes mucho en Odoo.  Estaría genial, pero que lo pueda hacer como en Excel y de Excel hace su registro y nomás se lo lleva a Odoo y lo importa y actualiza todos los artículos con los proveedores, pero me imagino que en Odoo también pudiera darse en que Tania entre, vea todo el listado completo y no se tenga que meter uno por uno, sino que de forma masiva pueda actualizar.  ¿Se puede hacer de esa forma? Sí, de hecho la importación se hace de forma masiva.
+
+43:35 - Emiliano  Lorenzano
+  Ah, pero la actualización. Sí, también. Ahorita, para poder importar los productos con proveedores, tendríamos que tener primero el catálogo de proveedores en el sistema.  Si no lo tenemos dado de alta el catálogo de proveedores y subimos primero el de productos, no importa que no se suban ahorita los proveedores.  Ya después hacemos una exportación. Y se actualiza todo de forma masiva. Y bien, aquí vienen las unidades de la compra, cómo se estaría comprando, se puede comprar por unidades, se puede comprar por kilos, por toneladas, aquí se establece.
+
+44:18 - SALA VIP
+  Tienes puntos, son de miles, ¿no? La política de control, portarima. Ajá. Es que el valor es que luego te vayan en portarima y no tanto por miles, kilos, pero bueno.
+
+44:31 - Emiliano  Lorenzano
+  Sí, pudiéramos crear una unidad de medida que sea tarima, pero tendríamos que hacer la conversión de cuánto, cuánto traería esto.  Exacto, representan.
+
+44:41 - SALA VIP
+  Sí, gracias.
+
+44:45 - Emiliano  Lorenzano
+  Y tenemos la parte de la política de control, esto, esto viene más para el, para el tema de las compras.  Ustedes, supongo que, que al proveedor le pagan por lo que están recibiendo, ¿no? No, no le pagan por lo que están pidiendo.  Entonces aquí, entonces aquí la política de control debería quedar sobre cantidades recibidas para pagarles solamente lo que nos está entregando nuestro pueblo.  Con esto cerramos la parte de la pestañita de compras. Acá en inventario, acá en inventario, esta parte ahorita de rutas no las vamos a, bueno, sí la vamos a tocar esta parte de rutas, pero yo creo que sería ya en un ejemplo ya más real, porque esta parte, Robert, nos va a servir para hacer las transferencias entre sucursales.  No sé si recuerdas que nos habías pedido mandar producto de...
+
+45:46 - SALA VIP
+  Regulado a... Ajá, así, de un almacén a otro almacén. Entonces, esta opción para eso sirve.
+
+45:55 - Emiliano  Lorenzano
+  Sí, eso va a ser muy recurrente.
+
+46:00 - SALA VIP
+  Te decimos que también ahí es donde se le carga, te debería cargar el flete en esos traslados entre centros propios.  Sí. Bueno, que ahí entre, mientras sigamos con las tres empresas, no solamente la transferencia es la facturación, porque si de Zamora lo mandas a Irapuato, es venta de Naturberry a Naturagli.  Sí. Correcto. Pero Natur, creo que es, ahorita Naturberry no le vendrá a Naturagli. Sí le vendrá a Naturagli. No, nomás te cobra el servicio de frío y sigue siendo Naturberry el que lo vende a Naturprime.  Sí, ¿a cuánto? Ya lo chece. Tiene razón. Sigue solo nomás el culer. Sorry, sorry. Sígueme, Diana, perdón. Muy bien.
+
+46:50 - Emiliano  Lorenzano
+  Entonces, esto, ¿tendríamos que marcar a los productos que se van a estar transfiriendo o compartiendo entre empresas? ¿Por qué?  ¿Qué diferencia hace si no lo pones?
+
+47:03 - SALA VIP
+  Fathom lo puedes transferir entre almacenes, ¿no? ¿Entre almacenes? si no se activa. ¿Entre almacenes?
+
+47:12 - Emiliano  Lorenzano
+  Sí puedes hacer transferencias, pero solamente dentro de la misma empresa. Ah, o sea, por ejemplo, si lo activas, ahorita estás en Naturberry, puedes transferir a Naturagy.
+
+47:22 - SALA VIP
+  Sí. Si no lo activas, no puedes transferir a Naturagy. Y una, ajá, solamente entre Naturberry, de Azulenea, Anáhuac, y de Anáhuac a Zamora y ya.  Esa mayoría. Ajá, como a Naturagy. Entonces, otra empresa. Pero no es más Sí, es como yo decía. Pero nosotros no transferimos directamente nada más por la venta.  Nosotros tenemos que vender a Naturagy y nosotros tenemos que vender a, pero no podemos transferir materiales entre empresas. Es una mente por medio de venta.
+
+47:50 - Emiliano  Lorenzano
+  Ahí, ahí para ese tema que comentan, se puede hacer una operación que vendrá siendo para multiempresa, donde yo le...  Por ejemplo, yo le vendo a Naturagy, en Naturagy de forma automática se le crea la orden de compra. Eso es.
+
+48:10 - SALA VIP
+  Un caso que, por ejemplo, está pasando ahorita, lo vi en la mañana, Naturberry le vende el empaque a Naturprime.  Sí. Para que Naturprime, a su vez, venda el producto a Walmart, o lo que sea. Y ese, bueno, lo vamos a ver después, pero el método de intercompañía dentro de, ¿qué se puede y qué no se puede, verdad?  Para la parte de las compras. Sí, el setup de intercompañías va por proveedor dentro de, o con eso ya hablamos mejor de una data.
+
+48:45 - Emiliano  Lorenzano
+  Sí, es que sería configuración en la parte del sistema para activar esas operaciones en intercompañía. Perfecto, pero el método se activa aquí mismo en inventarios.
+
+49:00 - SALA VIP
+  ¿O en otro módulo? Sí, ese ya es más a nivel ajuste del sistema.
+
+49:08 - Emiliano  Lorenzano
+  Bien. Esta parte del responsable, aquí pudiéramos dejar a la persona que es encargada de almacenes. ¿Por qué? Porque si nosotros estamos trabajando con lotes, y si en los lotes nosotros metemos lo que vendría siendo fecha de caducidad, para que le manden la alerta de cuándo el producto ya está próximo a caducar.  Y el peso, sí, sería importante. Si vamos a manejar el tema de la carta aporte o para el envío con los fletes, sí es importante ponerle el peso.  El volumen, si lo tienen, también lo Si no, lo dejamos así. El plazo de entrega al cliente, este definitivamente no lo vamos a configurar porque cada cliente se le entrega en plazos distintos.  Entonces acá el plazo del cliente no lo habilitamos. Y qué bueno que ahorita tocamos el tema de los lotes.  ¿Van a manejar fechas de caducidad?
+
+50:22 - SALA VIP
+  Pues en realidad no nos quedamos con el producto más de horas o día, un día, ¿no? O sea, si acaso en sistema.  Sí que es Víctor, 48 horas, 72, 72. Ajá, pero no hay caducidad. No. Entonces con el puro lote tenemos la trazabilidad completa.
+
+50:44 - Emiliano  Lorenzano
+  No, no pasa nada. ¿Víctor, nos oyes? Sí, aquí estoy.
+
+50:48 - SALA VIP
+  Entonces el producto en operaciones, ¿cuál es el tiempo máximo que se queda en el cooler?
+
+50:56 - Victor De La Parra
+  Generalmente pasaba, cuando se queda más tiempo en cooler era cuando... Era el salto del fin de semana. Podría ser que se quedaba, llegaba el viernes, quedaba sábado, domingo y el lunes salía.  Ok, y está refrigerado.
+
+51:10 - SALA VIP
+  Creo que nos dará más problemas y activamos eso que ayudando.
+
+51:17 - Victor De La Parra
+  Yo no lo metré. Muy bien.
+
+51:19 - Emiliano  Lorenzano
+  No, si no es importante ahorita para la operación, no lo establecemos.
+
+51:24 - SALA VIP
+  Tal vez cuando sí nos va a importar, va a ser en la parte, pues no sé si es aquí en mi inventario, pero en la parte de trazabilidad, cuando ya tengamos la fruta ya lista, las alertas que nos debe de arrojar en cada una de las cámaras.
+
+51:48 - Emiliano  Lorenzano
+  Pero sería meter, puede ser de una vez desde el inicio, la configuración. En las cámaras de frío y de refrigeración.
+
+52:00 - SALA VIP
+  Aquí va a durar tres horas. Saca y aquí lo vas a durar en esta otra.
+
+52:06 - Emiliano  Lorenzano
+  Ah, no, no, Robert, pero ahí ya no sería, no sería velocidad del producto, sino sería tiempo de, no sé cómo pudiéramos llamarle, tiempo de reposo o tiempo de hibernación de la fruta.  Ok, y allí no va a intercambiar nada que tengamos seteado o no tengamos seteado esta parte aquí.
+
+52:29 - SALA VIP
+  No te entendí ahí, Robert.
+
+52:31 - Emiliano  Lorenzano
+  Sí.
+
+52:32 - SALA VIP
+  Que si vamos a utilizar ese tipo de tiempos en cámaras, en frío, tendría algún conflicto si seteamos o no aquí en esta parte, este tipo de caducidad.  No, no, porque el control lo llevas por la cámara, no lo llevas por caducidad. Y además ahí... Perceder, percederos, como...  Percederos. Y ahí, Robert, tú lo controlas por tarima, ¿no?
+
+53:12 - Emiliano  Lorenzano
+  Sí, por tarima y lote.
+
+53:17 - SALA VIP
+  Ahí va a estar controlado. Bien, pues ya entonces entréanos a detalles para cómo manejamos ese tema. Y sería toda esta parte y ya vamos a contabilidad.
+
+53:27 - Emiliano  Lorenzano
+  Aquí en contabilidad lo único que nos pide a nosotros es la... la clave del SAT para poder timbrar el producto.  Si nosotros vamos a estar timbrando facturas, ahorita yo le puedo poner que la que no existe en el catálogo, ¿no?  Pero pues ya tendríamos que poner la clave del SAT correspondiente a cada producto. ¿Eso se carga una sola vez?
+
+53:52 - SALA VIP
+  Sí, una sola vez y ya. Claro que tengo el ticket. Una sola vez. Pregunta, aquí este producto... Este si se vende, se va a la cuenta de ingresos, ¿correcto?  Sí, se va a la cuenta de ingresos. Pero si esa cuenta, tenemos cuentas separadas, que bueno, no hemos decidido el catálogo todavía de cuentas contables, pero por ejemplo, nosotros sí separamos los ingresos por categoría que es importación, exportación nacional.  ¿Aquí este producto no podemos categorizar a ese ingreso o nada más está yendo de ingresos?
+
+54:32 - Emiliano  Lorenzano
+  Ah, no, sí, sí, podemos ya hacer algo para ese tema, pero ya requería un poquito más con el área contable, pero igual yo les comento, ahí se manejarían lo que vendría siendo los centros de costos, donde vamos a...
+
+54:46 - SALA VIP
+  De beneficio, ¿no? ¿Eh? ¿Perdón?
+
+54:49 - Emiliano  Lorenzano
+  De beneficio, ¿no? Porque es una venta, ¿no, Emiliano?
+
+54:52 - SALA VIP
+  Ah, es que le llaman, pues, centro de costos o cuentas analíticas. Ok. Donde tú vas distribuyendo, tú tienes la...
+
+55:00 - Emiliano  Lorenzano
+  Cuenta contable, como tal, la 402, que es la de ingresos, pero ya con esos centros de costos o cuentas analíticas, tú puedes ir segmentando, ah, esto va a entrar a importación, exportación, y con eso tú ya puedes entrar al estado de resultados y filtrar por, ah, quiero ver todo el ingreso nada más de exportación o de importación, o como le nombran, pues.  O también por el cliente, ¿no?
+
+55:24 - SALA VIP
+  Por el cliente al que le vendes, tú puedes categorizar en automático a que cuenta de ingresos caiga. Esa es una decisión que tenemos que hacer tú y yo, con el equipo de contabilidad, cómo vamos a estar categorizando, a que sea lo mismo que Estados Unidos, que lo venden por el tipo de...  No, bueno, me refiero que si la factura es a un cliente que ya tenemos catalogado, que es exportación, a toda la lista de clientes, esos clientes, que se vaya a la parte de exportación.  Ah, el de mi cliente, sí, sí, O si es un cliente de Estados Unidos, pues tendría que irse en automático a exportación.  Sí, sí. ¿Estás de acuerdo? Sí. Pero bueno, como dice Emiliano, eso lo veríamos con los... Gracias. Aquí en la venta es que nada más tenemos un cliente.  En exportación. En exportación. En nacional, sí. en exportación. Ok. Yo quiero que quede como más automático, perdón, quede como más automático y no dejemos el factor de error de que quien hace la factura tenga que seleccionar el centro de costo y se equivoque por dedo.  No, ahí ya pueden meter algunas reglas.
+
+56:27 - Emiliano  Lorenzano
+  Entonces, ya ahorita yo no traigo todo el tema así fresco, pero ya con Yuri se van a sentar bien en la parte de contabilidad a configurar y ahí pueden definir algunas reglas para que cuando se venda tal producto ya se vaya al centro de costo.  Ya si no funciona como lo esperan, pues ya así metemos modificaciones. Y pues prácticamente esto es todo lo del producto.  Nada más me queda una duda. Sí, vamos a vender de exportación, ¿verdad? Sí, porque en exportación nos va a pedir la unidad de medida para aduana.  El peso lo va a tomar de acá, ¿no? De acá lo toma. Pero sí es importante el peso para la parte de la factura de comercio exterior.  Sí, Víctor.
+
+57:27 - Victor De La Parra
+  Le mató la mano, creo. No, no, no, no.
+
+57:32 - SALA VIP
+  ¿Qué más? Entonces, el peso y algo más nos comentaste.
+
+57:40 - Emiliano  Lorenzano
+  La clave de, bueno, la unidad de medida de aduana. Pero esa la toma también igual, la toma igual de la que tiene acá, Emiliano, del producto de acá.  Igual déjame, voy a ver si puedo instalar el de comercio exterior. Cuando me das este catálogo para allá.
+
+58:00 - SALA VIP
+  ¿Nos puedes dar los campos en los que tenemos que meter esto cuando sea, cuando escojamos exportación, qué campos tenemos que llenar?  Sí, ahorita voy a activar el módulo para de una vez tomar la plantilla completa. Eso es relacionado con el catálogo de productos.  ¿Cuándo nos van a mandar el catálogo de productos? Nos organizamos los cinco, el catálogo de las cuentas. ¿Quién nos lo tiene que mandar?  ¿No lo han trabajado ustedes? Ajá. No, en cuentas, no, en contabilidad todavía no. ¿Pero la plantilla? No, todavía no.  Solamente trabajamos con la parte de proveedores y productores y clientes.
+
+59:18 - Emiliano  Lorenzano
+  Aquí miren, para la parte de lo que vendría siendo el tema de exportación, nos pide el peso. El peso ya lo digo como lo tomaría de acá.  Si yo le pongo que sería un kilo, ya nos va a tomar el peso acá, ya sale un kilo.  Aquí viene la, bueno, no sé si es, dice UMT, Ravanna, nos da la unidad de medida también. Entonces aquí ya ponemos la, unidades.  Y aquí en la fracción arancelaria, regularmente ponen los demás. No sé, ahí está lo haya aplicado. Muy bien, Emiliano.
+
+1:00:26 - SALA VIP
+  Creo que Víctor tenía una duda. Bueno, no sé si tenía duda, vi que levantó la mano.
+
+1:00:32 - Emiliano  Lorenzano
+  Sí, ahora sí. Gracias, Emiliano.
+
+1:00:34 - Victor De La Parra
+  justamente por ahí lo que, retomando también por ahí lo que dijo Robert de la plantilla de proveedores, yo realmente estoy detenido en esa parte.  No sé si se va a hacer la purga de proveedores. También mencionaba lo del código, también que había quedado pendiente con Emiliano, cómo lo vamos a manejar.  Y aprovechando que por ahí mencionamos a Salvador que tenía experiencia para proveedores. ¿Qué código o cómo podríamos manejar como un prefijo o como un identificador?  Más bien que yo lo ubico como un identificador para esa parte. ¿Cuál podrá ser una recomendación? Que yo ahí de plano, yo ya me quedé detenido en esa parte.
+
+1:01:14 - SALA VIP
+  No me acuerdo de proveedores, pero déjame que te identifico cómo los codificamos y no sé, Emiliano, si tú también tengas en tu experiencia.
+
+1:01:24 - Emiliano  Lorenzano
+  Recuerdo que, bueno, no sé, Víctor, si te acuerdas de las sesiones que tuvimos anteriormente, que podríamos usar dos identificadores.  Déjenme, le muestro un Excel y un pequeño ejemplo sin Excel así rápido. Perdón, perdón, el nombre.
+
+1:01:43 - SALA VIP
+  Cuando entras el código, cuando entras una factura, puedes entrar el código o el nombre, ¿correcto? Probablemente usábamos las primeras letras del nombre y después lo agregamos con los siguientes tres letras y el nombre.  Y 00. Entonces se pueden significar este... ¿Para buscarlo? Sí. Porque a International Paper, INTPAP 00. Y había escrito que tenía 01 que era pesos, 02 era euros, 03 era...  Como su apodo para poderlo buscar. Sí, porque a veces en Internet puede tener cuentas en pesos, dólares, etc. Esa es una idea.  Gracias.
+
+1:02:30 - Emiliano  Lorenzano
+  Miren, por ejemplo, así como de lo que preguntaban ahorita, sabemos que tenemos como dos proveedores, ¿no? Dos tipos, Uno que son productores.  ¿Cuál era el otro, Víctor? ¿O cómo lo llamaban?
+
+1:02:46 - Victor De La Parra
+  Productores y proveedores, sí.
+
+1:02:49 - SALA VIP
+  Y proveedores. Proveedores.
+
+1:02:54 - Emiliano  Lorenzano
+  Aquí yo pongo el prefijo. ¿Sabes qué? Productores va a empezar con PD. Y... Y proveedores van ser con PD, así, PV, ahí está.
+
+1:03:03 - SALA VIP
+  Un ejemplo, ¿no?
+
+1:03:04 - Emiliano  Lorenzano
+  Ya el tamaño de la secuencia le voy a poner que serían de 5, 5, 5, ah, bien. Se genera el primer productor, al primer productor va a tomar PD, 0, 0, 0, 0, 1.
+  ACTION ITEM: Definir y documentar prefijos/secuencias de códigos de proveedores/clientes - WATCH: https://fathom.video/calls/630340584?timestamp=3793.9999
+  ACTION ITEM: Definir y documentar prefijos/secuencias de códigos de proveedores/clientes - WATCH: https://fathom.video/calls/630340584?timestamp=3793.9999  El otro va a ser PV, 0, 0, 0, 0, 1, ahí está. Y esto ya lo, esto lo pudiera crear el sistema de forma automática, pero, pero sí necesitamos que ustedes definan cómo va a quedar y que lo pongan en la plantilla para que ya nosotros tomemos el último dígito.  O si quieren que se suba ahorita sin ese, sin ese número, ya cuando, ahí sí tendríamos que meter el desarrollo para meter esa, esa secuencia, eh, lo hacemos y que ya lo actualice el sistema de manera automática.  Aquí en el productor tiene que ser el mismo código que tiene Estados Unidos, entonces hay que ver ese
+
+1:04:00 - SALA VIP
+  Para comparar con Estados Unidos, para que cuando veamos el código que tiene ellos, es el mismo código que tiene aquí.  ¿En cuánto a producto? O sea, nuestros productores en México también están los de atrás en el SAP de allá.  Ah, en el SAP Ahora ya, nos quitamos el SAP de allá. Pero, ok, entonces va a ser la nuestra también de productores de allá, pero nosotros se la mandamos y ellos la crean en subanoles y después nos dicen, nada, le asignamos este número.  Y es el problema que tuvimos el año pasado, porque, o sea, los años que decían, bueno, esto estudia de productores de nuevo, pero había productores que ya no estaban.  Entonces ponían un nuevo productores en ese mismo código y le decíamos, no, no, no, ese código queda inactivo, tienes que crear un nuevo código para este producto específico, porque cuando sacamos los datos del 3.17.16, este tiene que ser un elemento para productores Roberto, y si es nuevo, ya esos datos se van a...  Agregar a Productores Roberto, pero Productores Roberto no estuvo el año pasado o ante el pasado. Entonces, ese mismo código, porque va a ser el código que te va a unificar al inventar Estados Unidos.  Eso sí. Ok. Entonces, y cada vez que, por ejemplo, que ahora están trabajando con la nueva lista de productores, esa lista se la mandan a Estados Unidos para que ellos verifiquen y vean, ah, este es nuevo, a este le asignamos uno nuevo y se los mandamos, y nosotros tendríamos que actualizarlo aquí.  Ok. Porque lo que Victor De Parra ya sería mandar todos los productores que están este año, más los nuevos.  Es decir, este es el sistema, se lo manda a Estados Unidos y Estados Unidos te da dos nuevos, como me dijiste, y ya no hay cambio de producto.  Y también uno lo entrega con esos famosos prefijos. Sí. Es por eso que necesito todas estas catálogos, los vamos a regresar antes de enviar a su salud para que veamos, lo puedo bajar del sistema de...  Entonces, productos, productores, productos y materiales.
+
+1:06:22 - Emiliano  Lorenzano
+  Pues listo, Robert, esto sería la información estándar que tenemos para un producto. No sé si de esto de lo que nosotros revisamos actualmente, ustedes consideren que falta para tenerlo dentro del formulario del producto.  No, pues ya que nos mandes el catálogo y las columnas, ¿no?
+
+1:06:49 - SALA VIP
+  Sí, hay una más exactamente para alimentar eso, la plantilla, el template. Una ferrita, de una vez. Más bien ya sí, de nuestro lado, algo que sí tenemos acá.  Mándanos con todos los campos para que también aquí decidamos. ¿Cuáles sí y cuáles no? Exactamente. Al menos estos importantes que vimos, ¿no?  Sí, porque es la fracción arancelaria. Mándanos todos, porque aquí me gustaría que José Manuel y Victor vean qué vamos a usar, porque hay, por ejemplo, exportación, ¿Dónde se va a poner exportación?  ¿Qué en exportación? ¿Qué estamos en desarrollo? estamos en? Tenemos que decidir, tenemos que apoyarnos con ellos y decidir qué se va a poner en cada uno.  Sí, es que veo que son un buen. Sí, es que exactamente es que es un chorro de campos los que tienen.  Y es lo que vamos a decir. Yo prefiero, pues, y qué importar. Bueno, no vamos a llenar a todos.  Sí, lo que tú no quieres es que no se nos pase pues ninguno. No nos quede ninguno afuera que sea importante.  Porque cuando Jose Manuel Viejo está hablando con el equipo de Tania, compras, ¿no? Oye, necesito un campo para... Ah, ya está en la lista, ¿o no?
+  ACTION ITEM: Enviar por email a Robert plantilla de productos; luego Robert distribuir y solicitar plantillas de US - WATCH: https://fathom.video/calls/630340584?timestamp=4098.9999  Sí. Ok. Y ahorita se arma la plantilla.
+
+1:08:24 - Emiliano  Lorenzano
+  Ah, perfecto. ¿Y no la mandas, Emiliano?
+
+1:08:27 - SALA VIP
+  Sí, ahorita se la mando de una vez.
+
+1:08:29 - Emiliano  Lorenzano
+  Terminando de armar, ahorita que la termines de armársela, se las envío ahí al... ¿Te las envío al grupo, Robert, o te la mando al correo mejor?  Para más formato.
+
+1:08:39 - SALA VIP
+  Si quieres al correo, está bien, perfecto. Te copio a ti nada más, ¿verdad?
+
+1:08:42 - Emiliano  Lorenzano
+  Ya tú lo distribuyes. Sí, yo aquí ya lo distribuyo con Chema y el equipo.
+
+1:08:47 - SALA VIP
+  Muy bien. Pues sería eso, Robert, de mi lado.
+
+1:08:51 - Emiliano  Lorenzano
+  Si tienen alguna duda, ya con confianza me mandan mensajito ahí en el grupo. Y si se ocupa alguna sesión para aclarar el llenado de la plantilla, ¡Gracias!  Igual me avisan y lo revisamos.
+
+1:09:03 - SALA VIP
+  Sí, y ya con eso tendríamos pendiente también la otra que habíamos visto de productores, proveedores y clientes. Sí, que vendría siendo la misma.  Ajá, ok.
+
+1:09:15 - Emiliano  Lorenzano
+  Ya nada más a lo interno, como dice Víctor, definan cómo van a manejar los, pues el código de proveedores y código de clientes.  Sí, de acuerdo.
+
+1:09:29 - SALA VIP
+  Va, va, Robert, pues entonces ahorita les mando yo la plantilla y que pasen buena tarde.
+
+1:09:35 - Emiliano  Lorenzano
+  Buen provecho. Gracias, igualmente. Gracias, Emiliano.
+
+1:09:39 - SALA VIP
+  Gracias, bye. Bueno, bien. Gracias, Víctor. No, pues aquí ando todavía. Sí, ¿Quieres que platiquemos de los productos o bueno, ya con eso ya nos diste varios?  Sí, nada más queremos hablar con Víctor y con José Manuel cómo va ser el proceso, ¿no?
+
+1:10:09 - Victor De La Parra
+  Aprovechando que estén por aquí, no sé si tengan pues algún otro pendiente, igual nos podemos quedar con José Manuel.  Tengo ya la plantilla con algunos de nuestros proveedores, eran con los que, del lado operativo que yo soy con los que voy visualizando más.  Ya las rellené en los campos, con Giovanna de Naturprime y con, creo que es Roberto de Naturagui, yo los he estado viendo.  No me han dado ni siquiera una lista, pero pues puedo presentarlos e igual ustedes dos pueden ver los campos que este Emiliano me compartió.  Pues también igual pueden definir si así se ve bien o se ve mal. Al final con Tania los hemos revisado y pues me dijo que así estaba bien, pero pues también aprovechamos que están aquí.
+  ACTION ITEM: Enviar a Robert link de OneDrive con plantilla de proveedores - WATCH: https://fathom.video/calls/630340584?timestamp=4254.9999
+
+1:10:54 - SALA VIP
+  De proveedores, dices, ¿verdad? Sí, de proveedores. Ok. Ok. Ok. Pues yo diría que nos lo mandes y le damos una revisada o...  Ah, bueno, también se los pueden enviar. Está listo, o sea, su archivo está en la carpeta y nos va a mandar el link.  Ajá, mandanos el link de tu... Ahora, pero esa lista que tienes ya es la depurada y actualizada, no es...  No, mi problema.
+
+1:11:18 - Victor De La Parra
+  O sea, yo tengo los que vamos a estar manejando en operaciones, que van a seguir siendo los laboratorios, este...  ¿cómo se llama? Viveros y pues toda esa parte, pero de ahí en Fuerte, dentro del área de compras, tanto de Naturaggy, Naturprime, Naturberry, nadie me ha definido nada.  O por eso yo estoy...
+
+1:11:39 - SALA VIP
+  Creo que aquí, con la oportunidad de eso, ok. Ya tenemos la plantilla de José Manuel y Víctor, que esa plantilla está en el OneDrive, donde están todos los documentos.  Es, ahora la oportunidad de ustedes es estarse con todo el equipo, todos los proveedores, este, con todo, con compras, con Naturaggy, con Naturprime.  Júntense con ellos, obtengan toda esa información que necesitan. Si tienen esa plantilla para que ustedes la depuren, la limpien, que no lo necesitan, porque les van a enviar seguramente, también te van a enviar el catálogo de Compaq, ¿no?  Y te decir que sí, que no. Y ustedes tienen que limpiarla antes de que Roberto y Salvador la revisen, ¿no?  Sí, sí, sí. Y hay quien, o sea, estamos de acuerdo que los key users, es Tania, son los que van a decir, este sí ya no, este ya no, ya no, ya no.  Verdad, correcto. Aquí Chema y Vic solamente es de esa sábana que me pasaste a acomodar exactamente los campos, pero ellos no van a decidir a este proveedor, no.  o sea, sino sería en base a la lista que nos facilite tanto Tania o Giovanna como Tania. Entonces, con los key users que quieren presentarse ustedes, es Tania, es Compras, Fabio de Rafael, que es Autoridad y Tesorería.  Giovanna, es Naturprime, y José Roberto, ¿hay más que un saldín? No, para proveedores creo que serían los únicos, al menos de que Rigo tuviera algo diferente, pero creo que ya se lo pasa a Tania.  Sí, todo por Tania, la que es Naturberry. Y más bien estamos en las otras dos empresas, reforzarnos con Gio y con Fabi, Fabi que iba a estar por ahí.
+  ACTION ITEM: Definir y documentar campos/significado en plantilla de proveedores - WATCH: https://fathom.video/calls/630340584?timestamp=4403.9999  Y cada campo que ustedes decidan que van a poner eso, nada más hay que poner en un Word Document, ¿no?
+  ACTION ITEM: Definir y documentar campos/significado en plantilla de proveedores - WATCH: https://fathom.video/calls/630340584?timestamp=4403.9999  El campo que se llama nombre del proveedor, se va a instalar el nombre legal del proveedor. En la currency o moneda, se va a entrar si es dólares, pesos o euros.  Entonces vean todos esos campos, Víctor y José Manuel, y cuando estén usando esa plantilla. ¿Qué van a poner ustedes en ese campo?  Para que cuando creamos la SOP de cómo creamos los mejores en el sistema, alguien puede decir, ok, yo tengo que poner en este campo, tengo que poner el nombre legal del proveedor.  En este campo tengo que tener esto. Porque actualmente hasta generan dos productores, si es dólares y si es pesos.  ¿Actualmente lo vamos a seguir manejando así? ¿O ya no porque en el ERP va a tener esa identificación de pesos o dólares?
+  ACTION ITEM: Confirmar con Emiliano si Odoo soporta un proveedor con múltiples monedas - WATCH: https://fathom.video/calls/630340584?timestamp=4475.9999  ¿O se va a seguir teniendo dos nombres? Ah, dos proveedores. Eso es una pregunta de Víctor con Roberto para UDU.  Cuando nosotros tenemos un proveedor, que bueno, porque va a salir en esta lista, tenemos un proveedor que es de un productor de pesos y dólares.  ¿Qué pasa en UDU? ¿Es un solo productor o es un proveedor con dos currencies? Gracias. ¿O tienen que ser todos proveedores con cada uno de ellos?  Lo ideal es que podamos tener uno, uno mismo con dos y se pueda manejar. Lo que acá hicieron fue un plan de contención para que funcionara, pero no es lo ideal.  Ojalá que sí se pueda. Sí, les parece que les dejo la traducción. Sí, de mejor práctica. Y nos regresan ustedes la respuesta.
+
+1:15:21 - Victor De La Parra
+  De hecho, yo no mal recuerdo en esa última que mencionaba si se podía tener, dentro de las últimas reuniones sí había tocado yo ese tema.  Si no mal recuerdo, sí se podía.
+
+1:15:32 - SALA VIP
+  Sí se podía tener. Confírmelo. Sí. Pero se podía tener uno solo y después identificarlo con dólares y pesos. de moneda.  Sí. Sí, porque si venía. Es es normal que ese se tiene. Sí. Le pones una moneda, perdón, le pones una moneda base y le pones moneda alternativa.  Y ya, o pones la que más usa como base y alternativa a la otra y puedes usar la otra.  Entendido. Entendido. Gracias. Aquí lo único importante es que no tengamos esa confusión cuando vayan a registrar algo. Y que el equipo sea consciente de, ah, de esta manera, Lorenzano.  Estoy de acuerdo, pero acuérdense, una de las premisas que nos dio muy bien ayer Odoo en Chain Management. No querramos cómo corregir esos errores.  Exactamente, no. En base a las prácticas o al estándar que tiene Odoo, así es como se puede hacer. Y si nosotros lo vemos que es viable, pues sí es lógico, pues lo manejamos así, que nos digan.  Pues también lo podemos manejar de otra forma, pero tiene que ser un desarrollo y te tienes que acordar. No, ahí ya nos vamos a meter los pies nosotros mismos.  Entonces, sí, en base al estándar y las mejores prácticas de Odoo, y si lo menciona Víctor correcto, de que así lo manejar con uno solo, pues solamente es la...
+  ACTION ITEM: Agendar reunión de trabajo con Tania, Giovanna, Fabi y José Roberto para depurar proveedores - WATCH: https://fathom.video/calls/630340584?timestamp=4618.9999
+  ACTION ITEM: Agendar reunión de trabajo con Tania, Giovanna, Fabi y José Roberto para depurar proveedores - WATCH: https://fathom.video/calls/630340584?timestamp=4618.9999  La al equipo, de cimbrarse, calcitarse. Oye, pero va a tener confusión de, no, mira, aquí de esta forma lo vas a poder certificar.  Sí. Entonces, Victor y José Manuel se quedan con dos tareas, que es la plantilla, definir cada campo y se van a juntar con los key users.  Y la tercera tarea que me quedo yo es, cuando ustedes ya estén listos, me traigo las plantillas de Estados Unidos, se las pido para que me las manden y las comparamos.  Sí, perfecto, perfecto.
+
+1:17:31 - Victor De La Parra
+  Y bien, creo que tiempo para definir, no sé, alguna fecha de entrega de plantillas, cuándo hacemos la próxima reunión.  Ese tiempo viene definido desde Odu.
+
+1:17:45 - SALA VIP
+  Odu necesita un tiempo para que ellos las hiciesen a cargar. ¿Cuándo nos dijo? Sí, no, no nos mencionó, todavía no nos mencionó, pero...  Digo, obviamente que verlo antes internamente. Odu nos dio dos semanas, pues en una semana revisarlo nosotros. Sí, martes. ¿14?  Sí. ¿Cuánto es capítulo? ¿Siguiente martes va? Sí. ¿Una semana? Bueno, menos. ¿Una semana? Ok. ¿Seis días? Perfecto. ¿Ya la liquidación es el de Vanagic?  Sí, ya. La risa. Bueno, tenemos jueves, viernes, de una semana se redujo a tres días. Ok, ok. ¿No nos la juntan?  Sí, sí, yo la aprobando y les mando la minuta de lo que ahorita me dice. Bueno, perfecto. Muy bien.  Perfecto. Muy bien, estuda. Gracias. Gracias. Gracias, Vic. Gracias, Nente. Vamos a ensamorar. ¿Él está ensamorado?
+
+1:18:47 - Victor De La Parra
+  Sí, ando con ensamorado.

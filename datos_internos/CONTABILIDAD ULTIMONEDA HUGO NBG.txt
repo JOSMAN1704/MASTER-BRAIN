@@ -1,0 +1,344 @@
+======================================================================
+ID DE SESIÓN: CONTABILIDAD MULTIMONEDA CON HUGO NBG
+FECHA: 2026-05-12
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/-JTdLKimnRcLAbZYudBqxDtMxFjRXSpT
+======================================================================
+
+RESUMEN
+
+Odoo-Estados Financieros USD - May 12
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir la estrategia de reporte en dólares para el cumplimiento con US GAAP.
+
+Puntos clave
+
+  - El problema: El método de conversión actual de Odoo (aplicar una sola tasa a todas las cuentas) no cumple con US GAAP. Revalúa incorrectamente activos no monetarios (p. ej., activos fijos, capital) que requieren una tasa histórica.
+  - La solución: Se requiere una base de datos “espejo”, actualizada mensualmente a partir de los libros en pesos, para rastrear tasas históricas para cuentas específicas. Este es el proceso manual actual y el estado objetivo para la automatización.
+  - El camino a seguir: El equipo investigará el módulo de Odoo “Consolidation” para ver si su función de “tasa histórica” puede configurarse para aplicar diferentes tasas a distintos tipos de cuentas, evitando un desarrollo a la medida.
+
+Temas
+
+Requisitos de reporte bajo US GAAP
+
+  - Proceso actual: Se mantiene mensualmente una base de datos “espejo” manual para el reporte en dólares.
+      - Partidas monetarias (p. ej., CxC, CxP): Convertidas a la tasa de la fecha de la transacción y luego revaluadas al cierre de mes.
+      - Partidas no monetarias (p. ej., activos fijos, capital): Convertidas y mantenidas a su tasa histórica de adquisición/contribución.
+      - Inventario: Gestionado mediante un Cardex en dólares separado para rastrear costos históricos para el COGS.
+  - Justificación: Este método asegura el cumplimiento con US GAAP, que exige tasas históricas para activos no monetarios a fin de evitar ganancias/pérdidas artificiales por fluctuaciones cambiarias.
+
+Limitaciones de la conversión estándar de Odoo
+
+  - Funcionalidad: Los reportes nativos de Odoo convierten todos los saldos a una única tasa seleccionada por el usuario (p. ej., fin de mes, promedio).
+  - Insuficiencia: Este método no es adecuado para US GAAP porque revalúa activos no monetarios que deben mantenerse a su costo histórico.
+
+Solución propuesta: Módulo Odoo Consolidation
+
+  - Propuesta: Investigar el módulo “Consolidation”, que tiene una opción de “tasa histórica”.
+  - La pregunta: ¿Puede este módulo configurarse para aplicar diferentes reglas de conversión a distintos tipos de cuentas (p. ej., tasa histórica para activos fijos, tasa de fin de mes para efectivo)?
+  - El riesgo: El módulo podría aplicar un solo tipo de tasa a todas las cuentas, lo que no resolvería el problema.
+
+Necesidades de reporte y contexto de auditoría
+
+  - Reportes principales: Estados financieros mensuales (PyG, Balance General, Balanza de Comprobación), utilidad bruta por producto y presupuesto.
+  - Proceso de auditoría: Deloitte audita los libros en pesos. Los auditores en EE. UU. verifican el proceso de conversión a dólares revisando papeles de trabajo, no re-auditando transacciones individuales.
+
+Próximos pasos
+
+  - Pablo & Juritzen:
+      - Investigar la función de “tasa histórica” del módulo de Odoo “Consolidation” para determinar si puede aplicar diferentes tasas a distintos tipos de cuentas.
+      - Desarrollar una propuesta formal para automatizar el proceso de conversión a US GAAP.
+      - Programar una reunión de seguimiento a través del chat grupal para presentar los hallazgos.
+
+======================================================================
+
+ONE-ON-ONE
+
+Odoo-Estados Financieros USD - May 12
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Alinear los requisitos y las soluciones viables para reportar estados financieros en USD conformes con US GAAP a partir de una base en MXN, incluyendo el manejo de partidas monetarias vs. no monetarias, la aplicación del tipo de cambio y las herramientas (consolidación de Odoo vs. libro espejo vs. desarrollo a medida).
+
+Actualizaciones
+
+Hugo Rodriguez Olveda
+
+Registro
+
+  - Ninguno compartido.
+
+Progreso en prioridades desde la última reunión:
+
+  - Explicó el proceso actual de doble libro mayor: compañía operativa en MXN + espejo en USD alimentado mensualmente con: registros a tipo histórico para no monetarias (activos fijos, capital), kardex de inventario en USD, revaluaciones mensuales y depreciación específica en USD.
+
+Prioridades hasta la próxima reunión:
+
+  - Proporcionar papeles de trabajo/informes de ejemplo usados para la conversión a USD (si se solicitan) para informar el diseño de la solución.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Requiere un método soportado por el sistema que preserve: tipos históricos para activos fijos/capital, tipos a la fecha de transacción para partidas monetarias, asientos de depreciación en USD y capas de costo de inventario en USD.
+
+Juritzen Rentería
+
+Registro
+
+  - Ninguno compartido.
+
+Progreso en prioridades desde la última reunión:
+
+  - Aclaró el comportamiento actual de Odoo: los reportes multicurrency convierten al tipo de cambio de la fecha del informe; el módulo de consolidación aplica de forma uniforme una única base de tipo seleccionada (cierre/promedio/histórico): no congela tipos por cuenta/por transacción.
+
+Prioridades hasta la próxima reunión:
+
+  - Coordinar con Desarrollo (Alex/Isaac) para evaluar configuración/personalizaciones que bloqueen el tipo de cambio por transacción y manejen las partidas no monetarias conforme a US GAAP.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Requiere validación de producto/desarrollo sobre la viabilidad de reglas FX por cuenta y bloqueo a nivel de transacción en Odoo.
+
+Pablo Valero
+
+Registro
+
+  - Ninguno compartido.
+
+Progreso en prioridades desde la última reunión:
+
+  - Expuso la intención de evitar la contabilidad doble completa si se puede lograr un reporte consistente mediante multicurrency de Odoo + revaluación + consolidación.
+
+Prioridades hasta la próxima reunión:
+
+  - Investigar la Consolidación de Odoo (última versión integrada en Contabilidad) para:
+      - Comportamiento y límites de tipos de tasa (cierre/promedio/histórico)
+      - Capacidad de mezclar bases de tasa por clase de cuenta
+      - Manejo del ajuste por conversión de moneda (CTA)
+  - Proponer opciones (configuración vs. personalización ligera vs. automatización de libro espejo) con implicaciones.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Necesita mayor claridad sobre la cadencia/requisitos de reporte de la corporación en EE. UU. para dimensionar la solución (auditorías a nivel transacción vs. estados financieros).
+
+SALA VIP
+
+Registro
+
+  - Ninguno compartido.
+
+Progreso en prioridades desde la última reunión:
+
+  - Enfatizó el requisito: la conversión debe respetar el tipo de cambio a la fecha de transacción para partidas monetarias, tipo histórico para activos fijos/capital; el inventario requiere COGS basado en kardex en USD; se requieren informes mensuales (ER, BG, Balanza), además de intercompañía, margen bruto por producto y presupuesto en USD.
+
+Prioridades hasta la próxima reunión:
+
+  - En espera de propuestas; abierto a revisar una demostración de Odoo Consolidation usando tres parámetros de tipo si puede cumplir las reglas.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Falta confirmación de que Odoo pueda congelar el tipo de cambio por cuenta/transacción; la conversión de tasa uniforme actual es insuficiente.
+
+Alfredo Munoz
+
+Registro
+
+  - Ninguno compartido.
+
+Progreso en prioridades desde la última reunión:
+
+  - Proporcionó contexto de auditoría: Deloitte audita MXN por asiento; USD se valida mediante papeles de trabajo de conversión. Los auditores de EE. UU. pueden requerir reporte detallado en USD; se prefiere libros en USD detallados (no promediados).
+
+Prioridades hasta la próxima reunión:
+
+  - Evaluar la factibilidad de un ETL nocturno hacia un libro espejo en USD (enfoque previo con SAP B1) como respaldo, con controles de QA.
+
+Necesita asistencia / Está bloqueado en:
+
+  - Necesita garantía de que la solución elegida soporte estados financieros detallados en USD y necesidades de auditoría sin trabajo manual excesivo.
+
+Temas
+
+Proceso actual de cierre y conversión a USD (Hugo)
+
+  - Doble compañía: operaciones en MXN, espejo en USD actualizado mensualmente.
+  - Partidas no monetarias (activos fijos, capital) al tipo histórico; sin revaluación para el capital.
+  - Depreciación en USD registrada por separado usando tipo histórico.
+  - Inventario: mantener kardex en USD; COGS basado en capas de costo en USD.
+  - Partidas monetarias revaluadas al cierre de mes.
+
+Capacidades y brechas de Odoo (Yuri/Pablo)
+
+  - El multicurrency nativo convierte al tipo de cambio de la fecha del informe.
+  - La consolidación soporta bases de tipo (cierre/promedio/histórico) pero aplica una base única a todas las cuentas; no congela reglas mixtas por la necesidad de US GAAP.
+  - Existe una cuenta de CTA para compensar impactos de tasas mixtas, pero la mezcla de reglas por cuenta no es estándar.
+
+Requisito de respetar FX de transacción/histórico
+
+  - Debe usarse el tipo de cambio a la fecha de transacción para partidas monetarias; histórico para activos fijos/capital; kardex de inventario en USD; asientos de depreciación en USD.
+  - Paquete de reportes: ER, BG, Balanza mensuales; detalle intercompañía; margen bruto por producto; presupuesto en USD.
+
+Soluciones potenciales exploradas
+
+  - Validar las últimas funciones de Odoo Consolidation; confirmar si ahora existe algún mapeo de tasas por cuenta.
+  - Personalización: bloquear FX por transacción y mapear clases de cuenta a la lógica de tasa; generar CTA.
+  - Automatización de libro espejo: proceso nocturno para asentar en la compañía USD; precaución con conciliaciones propensas a error; requiere monitoreo.
+
+Expectativas de auditoría y reporte
+
+  - MXN auditado por asiento; USD mediante papeles de trabajo, pero los interesados en EE. UU. pueden solicitar detalle transaccional.
+  - Se necesitan salidas en USD consistentes y conciliables adecuadas para US GAAP y reporte interno.
+
+Próximos pasos:
+
+  - Pablo/Juritzen: Validar la Consolidación de Odoo (versión actual) para manejo de tasas, CTA y cualquier opción de FX por cuenta/por transacción; preparar demo con escenarios de cierre/promedio/histórico. Responsable: Pablo/Juritzen
+  - Juritzen: Involucrar a Desarrollo (Alex/Isaac) para evaluar viabilidad/esfuerzo de: reglas de tasa por cuenta, bloqueo de FX a nivel de transacción, asientos de depreciación en USD, alineación del kardex de inventario en USD, automatización de CTA. Responsable: Juritzen
+  - Pablo: Elaborar propuesta con 2–3 rutas (Solo configuración, Configuración+Ligera personalización, Automatización de libro espejo en USD), incluyendo pros/contras, auditabilidad, esfuerzo, cronograma. Responsable: Pablo
+  - SALA VIP/Hugo/Alfredo: Compartir paquete mensual de ejemplo (ER, BG, Balanza, detalle intercompañía, margen bruto por producto, plantilla de presupuesto) y papel de trabajo de conversión a USD como referencia. Responsable: SALA VIP/Hugo/Alfredo
+  - Pablo: Confirmar fecha tentativa para la presentación de seguimiento en el chat grupal tras la revisión interna. Responsable: Pablo
+  - Equipo: Considerar piloto de ETL nocturno a libro espejo en USD como respaldo; delinear controles si se sigue esta vía. Responsable: Pablo/Juritzen con aporte de Alfredo
+
+======================================================================
+
+TRANSCRIPCION
+
+Odoo-Estados Financieros USD - May 12
+VIEW RECORDING - 26 mins (No highlights): 
+
+---
+
+0:00 - Hugo Rodriguez Olveda
+  Final de mes lo revaluamos al tipo de cambio del cierre de mes para reflejar los dólares evaluados al tipo de cambio del cierre de mes o los, pues sí, los dólares evaluados al tipo de cambio del cierre de mes.  A la inversa, toda esa operación.
+
+0:17 - Juritzen  Rentería
+  Que ese es un proceso, es decir, es un proceso pues manual, ¿no?
+
+0:22 - Hugo Rodriguez Olveda
+  Se genera una póliza de revaluación, pero el traspaso que nosotros le llamamos así, el traspaso inicial se hace de esa manera, ¿no?  Todas las transacciones o todas las pólizas se traspasan considerando el tipo de cambio de la fecha en que se registró la póliza.  Ok.
+
+0:45 - Juritzen  Rentería
+  Por ejemplo, hablando del cierre del 30 de abril, tú bajaste las operaciones e hiciste esa revaluación. De las de dólares, tal cual te la llevaste con su valor en dólares con el que se registró.  Si al día 15, si al día 20. Y si no quedó pagado, nada más se hizo la revaluación y ya.  ¿Hasta ahí vamos bien? Sí. Ok. Sí. ¿Qué otro proceso hay?
+
+1:13 - Hugo Rodriguez Olveda
+  Para el cierre en dólares se tienen que llevamos una, las partidas no monetarias, se tienen que evaluar al tipo de cambio histórico, entonces se llevan papeles de trabajo especiales para estas cuentas en dólares.  Por ejemplo, una partida no monetaria son los activos fijos. El activo fijo se traspasa a dólares considerando el tipo de cambio del día de la adquisición y ese tipo de cambio es el que se considera para la depreciación en dólares.  Es decir, no, la póliza de depreciaciones de pesos a dólares se puede pasar, pero esa no es la póliza que se utiliza en dólares.  Gracias. No que es la póliza, sino que esa póliza se tiene que volver a hacer o generar otra depreciación en dólares.  Y así con las partidas no monetarias, que principalmente serían activos fijos. ¿Qué pasa con las cuentas de inventario y capital?  La cuenta de capital se traspasa al tipo de cambio histórico, esa no tiene revaluación. Cuando se hace una aportación de capital, se considera el tipo de cambio del día de la aportación de capital.  Y así es como se queda posteado en los saldos en dólares. Esa no tiene revaluación. Y con los inventarios, lo que estamos haciendo es generar un cardex en dólares, considerando los tipos de cambio.  ¡Gracias! Por ejemplo, las compras, se consideran el tipo de cambio del día de la compra y las ventas, se tiene un cardex adicional para determinar ese costo, para determinar el costo de esas ventas, considerando el tipo de cambio, considerando el costo histórico, pues, o considerando el costo anterior en dólares.  Una compra en pesos se traspasa a dólares, ese es el, ese es mi costo inicial, y si lo ven, y dependiendo de las piezas que vendan, o las unidades que se vendan, se considera ese costo, se determina el costo unitario en dólares, y con ese costo unitario se determina el costo de ventas.  Entonces, que ese, no sé, entiendo que habrá procesos. No se podrán hacer automáticamente a expensas que me está equivocando, pero por ejemplo, las depreciaciones, pues sí se va a tener que postear una póliza de depreciación en dólares para considerar esa depreciación en dólares.  Las revaluaciones, probablemente sí se puede hacer una revaluación automática después de que se traspase toda la información de pesos a dólares, pero habrá algún proceso que se tendrá que hacer manualmente.  Es lo que me estoy imaginando que va a pasar cuando esté implementado el sistema. Sí, correcto.
+
+4:45 - Juritzen  Rentería
+  Bueno, era parte de eso ver si había una parte de desarrollo justamente por estas cuentas que comentas de activos no monetarios.  Entonces, lo que hace el sistema ahorita y se los muestra. Ayer a los chicos es que tenemos el estado de resultados, el balance, la balanza, diferentes estados financieros que se convierten a dólares, según el día que yo esté mostrando ese reporte, ¿no?  Puede ser del día 12 de mayo y me va a tomar el tipo de cambio que tenga registrado el sistema al 12 de mayo.  ¿Sale? Esa información. Entonces, ¿no respetábamos el tipo de cambio del activo fijo al momento de su compra?
+
+5:32 - Hugo Rodriguez Olveda
+  Sí, del activo fijo, bueno, eso no debería ser así, o sea, debería de, o sea, entiendo que así lo hace el sistema, todos los saldos los multiplica por el tipo de cambio y es como si multiplicáramos el balance general de estos resultados por el tipo de cambio del cierre o de la fecha en que se emita el financiero en moneda extranjera.  Pero ese creo que no va a servir. O sea, para los efectos que necesitamos financieramente, para efectos de cumplir con, en este caso, con US GAAP, ese proceso así tal cual no serviría.  Es correcto.
+
+6:24 - SALA VIP
+  Es lo que les decíamos ayer, Hugo, precisamente, que les estamos explicando esto, que nosotros sí necesitamos que haga la conversión por el tipo de cambio del día que se efectuó la operación.  Digo, para lo que no es activo, ni capital, ni lo que ya mencionaban ahorita. Pero para todo lo demás, sí tienen que ir y tomar el tipo de cambio del día.  Es como tú lo haces, ¿correcto lo que entiendes?
+
+6:48 - Hugo Rodriguez Olveda
+  A lo mejor lo que vale la pena aclarar es que tenemos dos bases o dos, le llamamos respaldos, dos empresas en el sistema actual.  Una es en pesos y otra es en dólares. Entonces, al cierre de mes vamos alimentando la empresa en dólares con toda la información, con este proceso que ya les comenté.  Y entonces se va quedando el histórico y lo único que se hace es se revalúa o se hacen los ajustes de cierre de mes necesarios, revaluaciones, depreciaciones, todos los, este ajuste que les comento del inventario.  Entonces, no sé si eso, si eso les ayuda. Actualmente tenemos, no es, no es un reporte como tal que se emita únicamente para, para el cierre de cada mes.  Si hay reportes que se emiten, pues, pero ese reporte viene de una base, una base de datos espejo convertida a dólares.  Sí, sí, entiendo. Pablo, Pablo, ¿está de ahí?
+
+8:09 - Alfredo Munoz
+  Pablo. Sí, sí, sí. Sí, creo que con el comentario que hace Hugo, eso es justamente creo que lo que hemos practicado hace casi más de un año en esa compañía, como lo hacen nuestros editores, mantener una, vamos a decir, la doble contabilidad, ¿no?  La de pesos en la que nosotros hacemos transacciones día a día y la de dólares en el que se están posteando de acuerdo a las diferentes necesidades de la balanza.  Entonces, aquí la pregunta para ti, Pablo, que en este momento la parte de revaluar o de mostrar reportes en la compañía de pesos, ¿no?  No tiene la facilidad de lo que necesitamos en USGAP. ¿Cómo podemos llegar a Ahora la solución de esa compañía, a mejor espejo, no sé si sea una solución en que podamos emitir los financieros con los diferentes rubros que aquí se han platicado.
+
+9:10 - Pablo Valero
+  Sí, mira, y justo es parte de lo que queremos terminar de aterrizar, porque el sistema, por ejemplo, todo el manejo multimoneda, pues es nativo, está la opción de reportear a un tipo de cambio de una fecha de consulta, que también es parte de lo que veíamos ayer.  Pero sí, o sea, el tema de la contabilidad de espejo, o sea, nosotros consideramos, por supuesto, esquemas de reporteo en dólares, pero no como tal una copia de cada asiento contable, ¿verdad?  Entonces nosotros queríamos ver, digamos, el nivel de reporteo de la empresa de Estados Unidos, a qué nivel llegaba, si era más a nivel de estados financieros.  Buscar esquemas donde podamos revisar, por ejemplo, los movimientos multimoneda, los tipos de cambio de la facturación, del pago, procedimientos de revaluación, que también, por ejemplo, comentaba Robert en un correo reciente que nos mandó con la expectativa, para poder buscar darle consistencia a los reportes y que, este, cubran la necesidad, pero sin necesariamente tener que hacer ese, pues esa, esa, esa doble contabilidad, ¿verdad?  Que al final de cuentas es lo que termina siendo. No sé cómo lo ves, Yuri, en términos de, con esto que nos explican, con lo que hemos platicado, también en cuanto a desarrollo, o sea...  ¿Qué camino ves que pudiéramos tomar? Si es que todavía en este momento lo podemos proponer.
+
+11:16 - Juritzen  Rentería
+  Sí entiendo la necesidad de reportar como las GAT de Estados Unidos, entonces creo que sí va a ser necesario, no sé, que la parte de desarrollo, Alex o Isaac nos apoyen con esta configuración justamente para llamar esas cuentas y generar esos reportes.
+
+11:40 - Pablo Valero
+  Pero por ejemplo, ¿qué es lo que ves que haríamos? sea, tal vez sobre el reporte que mostramos ayer en vez de quedarnos con el tipo de cambio de cierre de mes, bloquearlo por transacción o cómo lo ves.  Sí, bloquearlo por transacción para que se congele justamente esa parte del reporte que se va a generar en Estados Unidos.
+
+12:12 - SALA VIP
+  Yuri, Pablo, buenos días. Hola, un módulo, hay un módulo investigando y leyendo, hay un módulo que se llama Consolidación en Odu.  Correcto. Esa que es una capa analítica financiera, ¿esa no nos serviría para estos datos o para esta información? Porque creo que es justo lo que necesitaríamos que hiciera, el hecho de aplicar reglas de conversión de moneda específicas por cuenta y unificar todo en un solo reporte maestro, que sería la de la moneda de dólar.  No sé si ya han visto o ya la han aplicado esta... ¿A este módulo o este reporteo de aplicación de consolidación?  Robert, si lo hemos aplicado, pero justamente toma un tipo de cambio establecido.
+
+13:13 - Juritzen  Rentería
+  Es decir, no te va a congelar la cuenta de activos fijos, capital, etcétera, sino que va a evaluar tal cual como se los mostrábamos ayer en los reportes.  La diferencia es que acá en el módulo de consolidación tú diseñas el tipo de reporte, es decir, un estado de resultados, una balanza, un balance, y esas cuentas son las que convierte a ese tipo de cambio que sería la moneda eje de esos reportes.
+
+13:38 - SALA VIP
+  Pero dice que sí se puede hacer, que creo que tiene tres formas, una tasa histórica, una tasa de cierre y una tasa promedio en la cual se puede configurar.  Sí, pero te toma ese mismo factor o porcentaje o tasa o tipo de cambio, lo toma para todas las cuentas.
+
+14:00 - Juritzen  Rentería
+  ¿Lo podrías diferenciar? O sea, no puedes hacerlo como tres.
+
+14:04 - SALA VIP
+  Como los de activo, los de activo que es del día que se compró el activo. Bueno, te dice que sí, tú puedes seleccionar, ¿no?  Sí. Pero dice Yuri que uno u otro. Ajá, o sea, tienen tres formas, pero de esas tres formas no las...  La que agarras es para todo, ¿va, Yuri? No. Sí, correcto. No, que puedes, ¿qué es lo que me dijo ayer?  Puedes hacer diferente. Dice, dado que vas a mezclar tasas de cierre para bancos, tasas históricas para bancos, para ventas, el balance no va a cuadrar matemáticamente por el diferencial cambiado.  Fodute te pide configurar una cuenta de ajuste por conversión cambiaria dentro del capital contable para absorber esta diferencia y mantener la partida doble para el reporte corporativo.  ¿Cómo sería la visualización? El cierre operativo cierran el mes normal en pesos, generan... Generar consolidación. Entran a la aplicación de consolidación, crean el periodo mayo 2026 y le dan en calcular.  La matriz de análisis, el sistema despliega una pantalla tipo Excel usado donde las columnas son de todas las empresas en dólares y los ajustes manuales de consolidación, una eliminación intercompañías.  El total consolidado es en dólares. Auditoría a nivel, bueno, es lo que dice que hace este reporte. ¿Por qué no, Pablo, se lo llevan como de pendiente y le dan una checada nueva a ver si algo cambió o se habilitó algo nuevo como esto que dice Robert?  ¿O nos confirman que es como ustedes dicen? No sé cómo lo veas.
+
+15:53 - Pablo Valero
+  Yo creo que es un buen camino, Salvador, este, para... Porque sí, por ejemplo, el módulo de consolidación lo hemos implementado incluso con empresas americanas.  Sé que en esta última versión, digamos, más que ser un módulo independiente, lo envidieron dentro del módulo contable. Entonces, como para hacer una validación de acuerdo a la expectativa y también poderles dar un planteamiento, ¿verdad?
+
+16:32 - SALA VIP
+  Sí, a lo mejor podrían mostrarnos cómo pudiera funcionar esta aplicación de consolidación con estos tres parámetros, ¿no? De las tres diferentes tasas o no sé, que se pueden modificar.  Sí, yo solamente quisiera también este para llevarnos, digamos, esto de esta tarea.
+
+17:00 - Pablo Valero
+  O sea, conocer un poco la dinámica del día a día que tienen con el corporativo en Estados Unidos, ¿verdad?  O sea, porque entendemos perfectamente que seguramente les pedirán informes financieros, reportes de cartera, información similar, pero no sé si llegue al punto de una auditoría por asiento contable, ¿verdad?  O sea, ¿qué es lo común que sucede en el día a día?
+
+17:39 - Alfredo Munoz
+  Una pregunta en la parte de, con Deloitte, ellos nos hacen la auditoría en pesos por movimiento, vamos, por cada póliza, Deloitte.  Y la de dólares, ¿también la proveemos por movimiento?
+
+18:00 - Hugo Rodriguez Olveda
+  El de dólares, lo que se envía es solamente un papel de trabajo de conversión. Ellos lo que verifican es que los saldos en pesos cumplan las reglas para la conversión en dólares.  Entonces, no para Deloitte. Han llegado a pedir reportes detallados, pero no siempre. No siempre piden reportes detallados en la conversión.
+
+18:33 - Alfredo Munoz
+  Correcto, pero significa que sí, en el caso de, van a estar esos reportes y los reportes van a Estados Unidos, a los auditores en Estados Unidos.  Entonces, sí, la contabilidad tiene que estar detallada en dólares. No puede ser ni promedio ni por montos de cada cuenta.  En general, Pablo, la interacción con Estados Unidos es, en este momento, es el reporte mensual de financieros. Tanto de la balanza como de estos resultados, incluyendo también el trial balance.  ¿Y qué más mandamos, Giovanna, Rafael? ¿Esto último qué fue, perdón?
+
+19:15 - Pablo Valero
+  Balanza de comprobación. Balanza, ok. Estos resultados, balanza, balanza.
+
+19:24 - SALA VIP
+  Y bueno, nos piden prácticamente algunos nuevamente por transacciones, algunos de intercompañías prácticamente. Es el que quieren ver por producto también.
+
+19:42 - Alfredo Munoz
+  Ah, sí, el gross profit, el gross profit por producto. Y el budget. el budget, sí. Sí, para el budget lo armamos en base a lo que definamos de conversión, al detalle que definamos de conversión a dólares.
+
+20:00 - SALA VIP
+  Es el mismo detalle que ponemos de presupuesto, ¿no? Sí.
+
+20:09 - Pablo Valero
+  Ok. No sé, ¿cómo lo ves, Yuri? Como para llevarnos esto y sobre eso darles un planteamiento, ¿no? Sí, de acuerdo.  De lo que quiero hacer, un pie.
+
+20:27 - Juritzen  Rentería
+  ¿En qué, perdón? Ah, creo que no era para nosotros lo que di por frente.
+
+20:35 - SALA VIP
+  Ok. Entonces, Pablo, se llevan de tarea a investigar posibles propuestas y ya nos las muestran, ¿no? Sí, sí, tú no, de acuerdo.  Otra que se me ocurre que implementamos en, digo, fue con SAP, Business One, en otra compañía, pero... Pero durante la noche, Pablo, teníamos un yo que tomaba todos los movimientos del día y hacía la carga en la otra contabilidad en dólares para que no le requiriera mucha demanda al sistema mientras lo estábamos utilizando.  Igual también para que se lo lleven de alternativa si lo ven funcional. Ok, nada más que sí, estaba susceptible a muchos errores, o sea, sí, tenías que pagar a una persona prácticamente para que al día siguiente estuviera revisando.  Pero por otra parte, pues, tenías los reportes. Sí, ya. Bueno, pues va. Entonces, ahí, pues, ustedes se coordinan con Robert para que Robert nos vuelva a convocar, ¿no, Rob?  Sí. ¿O ponemos una fecha? Hay que poner una fecha cuando creen, Yuri y Pablo, que nos puedan mostrar propuestas.  Estas propuestas, tus planteamientos.
+
+22:08 - Pablo Valero
+  Igual si nos dan chance para revisar implicaciones con más detalle y se los comunicamos por favor en el grupo.  en el chat. Yo les quería preguntar, Pablo, nada más antes de que terminemos.
+
+22:23 - SALA VIP
+  Me imagino que ya con varias empresas que han implementado les han tocado empresas como nosotros, ¿no? Que tengan contabilidad entre esos pero que reporten en USGAP.  ¿Cómo lo manejan? ¿Así con el estándar?
+
+22:41 - Pablo Valero
+  Entiendo es así, ¿no, Yuri? O sea, por ejemplo, en frío entiendo que debió manejarse pues con herramienta de consolidación y revaluación, ¿no?  Correcto. Sí, fue solo la herramienta de consolidación.
+
+22:58 - Juritzen  Rentería
+  Así los reporte. Que les comentaba, se diseñaron para la empresa y se multiplicaban por el tipo de cambio. Ellos se fueron por la vía del tipo de cambio promedio y el 100% de operaciones.
+
+23:13 - SALA VIP
+  Y en otras que me ha tocado participar también ha sido lo mismo.
+
+23:16 - Juritzen  Rentería
+  O sea, no nos han pedido así como congelar algunos tipos de cambio para ciertas cuentas. Ok, vamos para tener el benchmark.
+
+23:28 - SALA VIP
+  En este de consolidación, Yuri, si hay uno que se llama Historical Rate, que es el tipo de cambio histórico.
+
+23:38 - Juritzen  Rentería
+  Sí, te va guardando el sistema, los tipos de cambio que tú dejas en tu matriz. Igual tú sacas así tu reporte en la fecha y te lo muestra con ese tipo de cambio histórico.  Ejemplo, quiero ver el resultado del 31 de diciembre y replicas con ese tipo de cambio. Ok, sí.
+
+24:00 - SALA VIP
+  Si tenemos ese tipo de cambio, ¿cuál sería entonces el problema para presentarlo? El histórico cambiaría todo al tipo de cambio el 31 de diciembre.  No, no, no, no, pero si el Odu con esta histórica al rey está guardando los históricos de cada día, ¿por qué no lo va a representar de esa manera?
+
+24:31 - Juritzen  Rentería
+  Es tipo como los reportes que les mostraba ayer, o sea, no va a tomar, por ejemplo, un tipo de cambio especial para el capital, tampoco para las depreciaciones, ni un tipo de cambio congelado para las compras o ventas en moneda nacional convertidas a dólares, sino que va a tomar la del día que se está reportando.  En ejemplo, para ese tipo de cambio, para ese tipo sería el fin de mes, pero todas las cuentas por ese tipo  de cambio. Ajá. O aunque lo tengas, no te lo va a respetar, a lo que entiendo.
+
+25:06 - SALA VIP
+  Te va a tomar el de ese día, es como lo que me mostró allá. Sí, o sea, aunque lo tengas así, configurado, no te lo va a respetar, pues, tomaría con el tipo de cambio del pecho de agua.  Exactamente.
+
+25:17 - Juritzen  Rentería
+  Las que se arrastra así con valor así de su transacción fueron las transacciones que se afectaron en dólares.
+
+25:31 - SALA VIP
+  Bueno, pues, chequen internamente y nos volvemos a juntar. Va. Ok. De acuerdo.
+
+25:39 - Pablo Valero
+  Nos quedamos con eso y les informamos, este, a la brevedad, la, la, la fecha de la siguiente reunión para, para ya poderlo aterrizar.  Gracias. Gracias. Gracias. Gracias a ustedes. Buen día. Buen día.
+

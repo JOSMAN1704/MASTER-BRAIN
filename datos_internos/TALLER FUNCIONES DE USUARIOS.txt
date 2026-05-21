@@ -1,0 +1,672 @@
+======================================================================
+ID DE SESIÓN: TALLER FUNCIONES DE USUARIOS
+FECHA: 2026-05-15
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/UxvvJrUY94R7YWVnLQySrckzY2Wz8s1r
+======================================================================
+
+RESUMEN
+
+Funciones de Usuarios  - May 15
+VIEW RECORDING: 
+Propósito de la reunión
+
+Revisar la gestión de usuarios y permisos de Odoo.
+
+Puntos clave
+
+  - Permisos granulares: Utilizar la función personalizada "Hide Specific Menu" para otorgar a los usuarios amplios derechos de Administrator y luego restringir el acceso a submenús específicos (p. ej., reportes, configuración). Esto evita las limitaciones del rol predeterminado User.
+  - Archivado de usuarios: Archivar a los usuarios cuando se desvinculen. Esto preserva sus datos históricos (p. ej., registros de "Creado por") para auditorías y libera su licencia, ya que los usuarios archivados no se facturan.
+  - Seguridad e Interfaz de Usuario (UI):
+      - 2FA: Obligatoria para todos los usuarios para cumplir con los requisitos de auditoría.
+      - Botón "Cancelar": Agregar un mensaje de confirmación para evitar pérdidas accidentales de datos.
+      - Página de inicio: Se puede establecer una imagen de fondo personalizada en la pantalla de inicio de sesión.
+
+Temas
+
+El desafío de permisos en Odoo y la solución
+
+  - Problema: Los roles predeterminados de Odoo (User vs. Administrator) son demasiado rígidos.
+      - User → Carece de acceso a configuración y reportes.
+      - Administrator → Otorga acceso total, requiriendo restricciones manuales.
+  - Solución: Función personalizada de Inflexyon "Hide Specific Menu".
+      - Método: Otorgar derechos de Administrator y luego ocultar los menús no deseados en cualquier nivel (menú padre, submenú o elemento).
+      - Beneficio: Permite control preciso para roles complejos (p. ej., un agente de compras que necesita ver facturas pero no reportes financieros).
+
+Gestión del ciclo de vida del usuario
+
+  - Creación:
+      - Los usuarios se pueden crear manualmente o mediante una plantilla para importación masiva.
+      - El primer usuario de un perfil se puede duplicar para crear otros con los mismos permisos.
+  - Salida:
+      - Archivar (Recomendado): Preserva todos los datos históricos (p. ej., registros de "Creado por") para auditorías. Los usuarios archivados no cuentan contra el límite de licencias.
+      - Eliminar (No recomendado): Elimina el registro del usuario, rompiendo los vínculos con los documentos que creó y dificultando las auditorías.
+
+Mejores prácticas de seguridad y mejoras de UI
+
+  - Autenticación de dos factores (2FA):
+      - Requisito: Obligatoria para todos los usuarios para cumplir con los estándares de auditoría.
+      - Activación: Los administradores pueden enviar invitaciones desde el registro del usuario.
+  - Personalización de UI:
+      - Página de inicio: Se puede establecer una imagen de fondo personalizada en la pantalla de inicio de sesión.
+      - Botón "Cancelar": Se agregará un mensaje de confirmación para evitar pérdidas accidentales de datos.
+
+Módulo de Aprobaciones para Requisiciones
+
+  - Propósito: Gestiona solicitudes internas (p. ej., requisiciones de compra) antes de que se conviertan en documentos formales.
+  - Flujo de trabajo:
+    1.  El usuario crea una solicitud en el módulo Approvals.
+    2.  La solicitud sigue una secuencia de aprobación definida (p. ej., Gerente → Compras).
+    3.  Solo las solicitudes aprobadas avanzan a la siguiente etapa (p. ej., una Orden de compra formal).
+
+Próximos pasos
+
+  - Robert:
+      - Crear usuarios para el equipo (Víctor, Tania, Chema) en el entorno de pruebas.
+      - Implementar la función "Hide Specific Menu" para definir roles precisos.
+      - Enviar invitaciones de 2FA a todos los usuarios nuevos.
+  - Emiliano:
+      - Proporcionar una plantilla de creación de usuarios para importaciones masivas.
+      - Implementar el mensaje de confirmación para el botón "Cancelar".
+
+======================================================================
+
+ONE-ON-ONE
+
+Funciones de Usuarios  - May 15
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Alinear la configuración de gestión de usuarios en Odoo: crear usuarios iniciales, definir la estrategia de permisos (administrador vs usuario + ocultar menús de forma granular), reforzar la seguridad (2FA) y acordar ajustes de UX y flujos de aprobación.
+
+Actualizaciones
+
+Emiliano Lorenzano
+
+Registro
+
+  - Liderando la configuración de Odoo; demostró la configuración de Usuarios, MFA, acceso por empresa, la función de ocultar menús (personalizada por Inflexyon) y el módulo de Aprobaciones
+  - Confirmó entorno de prueba activo; el envío de correos aún no está configurado
+
+Progreso en prioridades desde la última reunión:
+
+  - Creados usuarios: Roberto (admin), Víctor (limitado), Tania (enfocada en compras)
+  - Habilitado y probado MFA; verificado “recordar dispositivo”
+  - Demostrado los valores predeterminados de acceso por empresa y la visibilidad multiempresa
+  - Mostrados permisos de exportar/crear y control de “ocultar menú” por módulo/submenú
+  - Aclarado el comportamiento de archivar vs eliminar y los límites del rastro de auditoría
+  - Opciones de tematización de la UI; compartida guía para imagen de inicio y modos oscuro/claro
+
+Prioridades hasta la próxima reunión:
+
+  - Configurar correo saliente en el entorno de pruebas para enviar invitaciones
+  - Preparar una importación/plantilla de usuarios para crear en lote con roles base
+  - Validar el comportamiento de permisos de exportar/crear por modelo; resolver inconsistencias
+  - Redactar perfiles de ocultación de menús para roles clave (Ventas, Almacén, Compras, Finanzas)
+  - Delimitar ajustes de UI: botones Guardar/Cancelar más grandes y confirmación al cancelar (v19)
+
+Necesita asistencia / Está bloqueado en:
+
+  - No se señalaron; confirmará licenciamiento/contabilidad de usuarios archivados (ya respondido: los usuarios archivados no cuentan para licencias)
+
+Roberto Estrada
+
+Registro
+
+  - Coordinando definiciones de roles entre Operaciones y Finanzas; prioriza seguridad/preparación de auditorías
+
+Progreso en prioridades desde la última reunión:
+
+  - Aceptó la invitación e inició sesión en pruebas; validó el flujo de MFA
+  - Probó permisos (crear/exportar) y reportó brechas para que Emiliano verifique
+  - Alineó el enfoque: otorgar admin por módulo y luego restringir mediante “Ocultar menú específico”
+  - Planteó necesidades de auditoría: quién archivó/desarchivó y hora; preguntó sobre impacto en licencias de usuarios archivados (resuelto)
+
+Prioridades hasta la próxima reunión:
+
+  - Empezar a crear usuarios adicionales (probadores de proveedores/productos); definir necesidades de rol por área
+  - Proveer imagen corporativa para la página de inicio y recurso de firma (preferentemente imagen) para usuarios
+  - Decidir por rol qué informes/menús deben ocultarse
+
+Necesita asistencia / Está bloqueado en:
+
+  - A la espera de la configuración de correo para invitaciones automáticas
+  - Necesita perfiles/plantillas de roles predeterminados para acelerar la creación de usuarios
+
+Víctor De La Parra
+
+Registro
+
+  - Líder de Operaciones; prefiere tema claro; preocupado por acciones accidentales en la UI
+
+Progreso en prioridades desde la última reunión:
+
+  - Probó perfil restringido; confirmó la capacidad de duplicar usuarios para una implementación más rápida
+  - Validó que admin vs usuario principalmente alterna los menús Configuración e Informes en los módulos
+
+Prioridades hasta la próxima reunión:
+
+  - Proveer requisitos de roles de Operaciones (Almacén, Inventario, Calidad, Campo, Compras)
+  - Revisar los menús ocultos propuestos para Ventas/Contabilidad
+
+Necesita asistencia / Está bloqueado en:
+
+  - Ninguno
+
+Temas
+
+Estrategia de creación de usuarios, roles y permisos
+
+  - Dos niveles base: Usuario vs Administrador; diferencias limitadas (Configuración/Informes)
+  - “Ocultar menú específico” de Inflexyon ofrece control granular por módulo/submenú/tercer nivel
+  - Patrón recomendado: otorgar Admin en los módulos necesarios y luego ocultar menús para minimizar exposición
+  - Multiempresa: establecer empresa predeterminada y empresas permitidas; considerar indicador visual de la empresa activa para evitar errores
+
+Seguridad: MFA y credenciales
+
+  - 2FA habilitado por usuario (Microsoft/Google Authenticator); se admite “recordar dispositivo”
+  - El administrador puede restablecer contraseñas; puede forzar invitaciones de 2FA
+  - Archivar un usuario revoca rápidamente el acceso; eliminar quita vínculos del usuario en algunos registros—preferir archivar por auditabilidad
+
+Auditoría y licenciamiento
+
+  - El registro básico muestra “última actualización por/fecha”; el registro detallado por acción no es universal—considerar controles de proceso
+  - Los usuarios archivados no cuentan para el licenciamiento de Odoo; es seguro archivar en lugar de eliminar
+
+Matices de permisos: crear/exportar y alcance por modelo
+
+  - La marca Crear en datos maestros (Productos/Contactos) controla crear vs leer; admin del módulo puede sobreescribir—requiere validación por modelo
+  - El permiso de exportar varía por modelo; se observó inconsistencia (la exportación de la lista de Empleados funcionó a pesar de la restricción); Emiliano revisará el alcance
+
+UX y tematización
+
+  - Se puede cambiar la imagen de la página de inicio; mantener contraste de íconos; oscuro/claro por usuario
+  - Solicitud: agrandar Guardar/Cancelar y agregar confirmación al Cancelar (v19); aceptable hacer solo confirmación al Cancelar
+
+Módulo de Aprobaciones para requisiciones
+
+  - Usar Aprobaciones para recopilar solicitudes del área; aprobaciones secuenciales (gerente y luego Tania) antes de crear RFQ de Compra
+  - Los RFQ creados en Compras omiten aprobaciones; Aprobaciones asegura gobernanza aguas arriba
+  - Acceso: usuarios finales crean solicitudes; aprobadores según configuración por categoría
+
+Enfoque de despliegue de usuarios
+
+  - Crear primero un usuario “perfil” por rol, ajustar menús y luego duplicar para otros
+  - Creación masiva vía plantilla/importación para establecer campos base y permisos; luego finalizar específicos
+  - Se pueden crear usuarios en cualquier empresa y otorgar acceso multiempresa; aplican los mismos permisos
+
+Próximos pasos:
+
+  - Emiliano: Configurar correo saliente en pruebas; reenviar invitaciones (Responsable: Emiliano)
+  - Emiliano: Entregar CSV/plantilla para creación masiva de usuarios con campos de roles base (Responsable: Emiliano)
+  - Emiliano: Proponer borradores de perfiles de ocultación de menús para Ventas, Almacén, Compras, Finanzas/CxC/CxP (Responsable: Emiliano)
+  - Emiliano: Investigar inconsistencias de permisos de crear/exportar por modelo; reportar hallazgos (Responsable: Emiliano)
+  - Emiliano: Delimitar e implementar cambios de UI (botones más grandes, confirmación al cancelar) en pruebas v19 (Responsable: Emiliano)
+  - Roberto: Definir matriz de acceso por rol (módulos, informes, menús a ocultar) y compartir con Emiliano (Responsable: Roberto)
+  - Roberto: Proveer imagen corporativa para inicio y recurso de firma de correo para usuarios (Responsable: Roberto)
+  - Víctor: Listar menús/informes operativos necesarios vs ocultos para roles de Operaciones (Responsable: Víctor)
+  - Equipo: Empezar a crear usuarios iniciales (p. ej., Tania finalizada; otros para ingreso de proveedores/productos) y probar flujos (Responsable: Roberto con apoyo de Emiliano)
+
+======================================================================
+
+TRANSCRIPCION
+
+Funciones de Usuarios  - May 15
+VIEW RECORDING - 85 mins (No highlights): 
+
+---
+
+0:04 - SALA VIP
+  ¿Está fallando tu internet o qué text? No, no, no.
+
+0:07 - Victor De La Parra
+  Más bien yo creo que nadie entendió cómo vamos a iniciar esto. ¿Cómo vamos a iniciarlo? Ahí, ahí, presentó Emiliano.  No, no, no. No, sí, como que estás medio...
+
+0:18 - SALA VIP
+  ¿Sí? Ajá. Se ve pues que está como trabado y se traba y se traba.
+
+0:27 - Emiliano  Lorenzano
+  Muy bien, el día de hoy, pues creo que hay por algunos temas, no coincidimos todos y para no perder el hilo ya de lo que llevamos, vamos revisando un poquito el tema de los usuarios.  Esta parte pues yo creo que nos pudiera ayudar un poquito también para que ya, por ejemplo, Tania pues pueda ayudarnos a crear a lo mejor unos registros de compras, algunos registros en proveedores.  Entonces, no sé quién vaya a ser el usuario que vaya a dar de alta los productos, pero también ya pudiera ir creando...  Algunos productos para que se vayan familiarizando con el sistema. Entonces, el día de hoy lo que vamos a revisar, equipo, sería la creación de los usuarios.  Para toda la gestión del sistema como un administrador de la plataforma, bueno, sí, de su sistema, vamos a utilizar el módulo que se llama Ajustes.  Entonces, en este módulo de Ajustes, tenemos acá el menú que se llama Usuarios. Tenemos aquí otras funciones, ¿no? Pues esto viene de la empresa, aquí viene la parte de configurar los documentos que vamos a estar ocupando.  Pero ahorita nos vamos a enfocar en la parte de los usuarios. Tengo el menú y aquí tengo la parte de los usuarios, ¿no?  Ahorita tengo solamente uno. Aquí le voy a poner administrador para diferenciarlo de ponerle inflexión. Ya después, Robert, nos dicen si nos dejan el usuario o entramos con un usuario que tengan ustedes por revisiones, actualización de información.  A veces recomendamos que se quede un usuario para nosotros para diferenciar qué hacemos nosotros con qué hacen ustedes como administradores.  Ya ustedes nos indican ahí cómo procedemos.
+
+2:29 - SALA VIP
+  Aparte de este usuario de administrador, ¿todavía hay un nivel más arriba que tenga el control de toda la base de datos?
+
+2:44 - Emiliano  Lorenzano
+  Pues este sería el nivel más arriba, porque está como administrador y este tiene acceso a todas las funciones de configuración.  Hay uno que a lo mejor lo vamos a ver más adelante, que es el... Entrar como Odubud, que ese sí tiene ya más control sobre todas las cosas.  Eso realmente no lo ocupamos mucho, nada más de vez en cuando para algunos temas lo ocupamos, pero realmente todo lo hacemos con el administrador.  Bien, por ejemplo, Victor está en el área de inventar almacenes, ¿no? ¿O no? No, bueno, sí y no.
+
+3:40 - SALA VIP
+  Recuerda que estamos tratando como de dividir las funciones para poder hacer el alcance a todas las áreas y si bien Chema se va a dirigir más a contabilidad de finanzas, BIC se va a dirigir más a lo que es operaciones.  Entonces, entre operaciones, pues está almacén, inventario, calidad, campo, no sé, ese tipo de compras, tal vez también. Bien, y Chema, aparte de eso, que también lo va, y se necesita que lo vea, pues también va a tener toda la parte de contabilidad, finanzas, costos, faturación, todo eso.
+
+4:40 - Emiliano  Lorenzano
+  Muy bien, entonces vamos a crear tu usuario primero, Robert. Vamos a ponerle aquí un nuevo, y vamos a poner el nombre, ¿no?  Sería Roberto Estrada.
+
+4:59 - SALA VIP
+  Aquí en el usuario. Vamos a agregar tu correo electrónico, hacemos aquí lo copio.
+
+5:04 - Emiliano  Lorenzano
+  Con la X.
+
+5:07 - SALA VIP
+  Así está, aquí en el...
+
+5:09 - Emiliano  Lorenzano
+  Ah, perdón, me equivoqué, creo que ya veo mal. Para los entornos de prueba, podemos utilizar el correo de cada quien.  El correo, el teléfono ahorita no lo voy a agregar. ¿Sabes qué? Lo que sí, que ayer, ayer, ayer estabas platicando, sí me gustaría que tuviéramos todos el multifactor.
+
+5:47 - SALA VIP
+  Para que al momento de tener una revisión de alguna auditoría externa, nos digan que al menos no tengamos un...  Un hueco en el tema de la seguridad y que si tengamos cubierto la doble autenticación.
+
+6:11 - Emiliano  Lorenzano
+  Sí, entonces para activarlo vienen las funciones. Aquí vienen dos funciones, usuario y administrador. El usuario serían todos los usuarios comunes, se pudiera decir.  Y el administrador sería el que ya está en el área de sistemas o el que va a estar a cargo de la plataforma.  En este caso, Robert, tú vas a tener como administrador. Cuando te pones como administrador, Robert, tú vas a poder entrar a revisar las configuraciones o así.  Y cosillas, ahorita revisamos también. Aquí viene la parte de las empresas. En las empresas vamos a establecer a cuáles vas a tener tus disponibles.  Ahorita por default tienes tú la empresa de Naturberry, pero podemos agregarte a Naturagi y a Naturprime. Aquí nos dice que la empresa es predeterminada.  Como ahorita tenemos tres empresas, cada vez que nosotros iniciemos sesión en el sistema, nos va a posicionar dentro de la empresa de Naturprime.  Pero por ejemplo, para los usuarios que van a estar en Naturag y en Naturprime, aquí les ponemos tú vas a iniciar directamente en Naturprime.  Y si te dan cuenta, pues aquí nos dicen, ¿no? A lo mejor podríamos poner aquí una banderita de en qué empresa están, para que no se vayan a confundir.
+
+7:51 - SALA VIP
+  Bien, después, ajá. En caso de que nos lleguemos a equivocar alguien que dé la alta, por ejemplo, que le pongamos que es en...  Naturberry, si en empresas determinadas, por alguna u otra razón, pongan Naturbrine, ¿hay un candado que diga que no coincide que le estés asignando esa empresa y le pongas predeterminada otra?
+
+8:17 - Emiliano  Lorenzano
+  Bueno, tal, si el registro está disponible en ambas empresas, pues no te votaría ninguna advertencia, ¿no? Pero si por error ocasionas algo así, si ese registro pertenece a una sola empresa, ahí sí te puede votar restricción de que no estás utilizando la empresa correspondiente.  Pero yo creo que sí, entonces iba a ser bueno ponerles una banderita acá, porque aquí no se nota mucho, ¿no?  Aquí una etiqueta en color verde o rojo para decir en qué empresa estamos operando. Después, aquí vienen los datos maestros, dice...  Productos. Si yo le pongo la opción de crear, este usuario va a poder crear productos. Si le quito esta opción, pues solamente va a poder visualizar los productos, pero no va a poder crear.  Con la opción de crear rover, este también va a poder editar, va a poder editar de cierta manera los productos.  Aquí en el contacto también sería lo mismo. Esto aplica tanto para proveedores y clientes. Si yo le pongo que no puede tener la función de creación, solamente va a poder visualizar los registros, pero no va a poder crear.  En este caso, como tutuario sería el administrador, pues vamos a ponerte que sí tendrías el permiso para todo. A eso iba.
+
+9:48 - SALA VIP
+  Al momento de tú decirle que eres administrador, ¿no te da como que todo eso ya por default para que no estés peleándote con que sí tengo o no tengo permisos?  No, no, no, no lo pone así como por default.
+
+10:05 - Emiliano  Lorenzano
+  Y una parte está bien porque también para nosotros cuando luego si nos quitamos ahí algunos permisos para no para no afectar algo pues en la operación.  Y aquí esta parte de exportar, si tú tienes que sea permitido, voy a ingresar acá por ejemplo, para ir viendo, por ejemplo, aquí en compras, yo tengo todas estas, ya estas compras, ¿no?  yo la selección, aquí vamos a poner la acción y aquí vamos a darle exportar. Bueno, aquí me dice que sí.  Tendría que ver en dónde está permitido la exportación. Ah, no, pero estoy con mi usuario. Perdón, ahí estoy con mi usuario, ahí sí tengo permitido.  Ajá, sí, tendríamos que entrar con mi usuario.
+
+10:51 - SALA VIP
+  Sí, incluso. Espierta, Emiliano, tómate bien el cabecito.
+
+10:55 - Emiliano  Lorenzano
+  Entonces, si gustas, déjame, te voy compartiendo este, te lo voy enviando. También. Mira, así les va a llegar a los usuarios cuando tengan ya habilitado, les va a llevar el correo y ellos tienen que aceptar y déjate, le voy a enviar al chat.  Listo, Robert, ya te lo acabo de enviar. Eso les va a llegar por correo electrónico, ellos tienen que aceptar la invitación y ya quedaría todo bien.  Ahorita pues está el idioma inglés, yo creo que ustedes no tienen problemas, se les da muy bien el inglés, pero pues lo podemos cambiar también al español.
+
+12:26 - SALA VIP
+  Correo aún todavía no me llega. Te lo envía a chat, a WhatsApp, ahí te envía el enlace.
+
+12:33 - Emiliano  Lorenzano
+  ¿Pero no dices que también debería de llegar?
+
+12:36 - SALA VIP
+  ¿O porque estamos? ¿Será que la de pruebas no la activaste?
+
+12:43 - Emiliano  Lorenzano
+  No, ahorita tendré que configurarlo para que salgan los correos. Ah, camarón.
+
+12:50 - SALA VIP
+  Si quieres, entra a WhatsApp y ahí activa tu cuenta. El nombre, yo no lo puedo cambiar.
+
+13:19 - Emiliano  Lorenzano
+  El nombre, ahorita no. Eso sí se cambiaría directamente acá en la administración de los usuarios. Sí, ya, ¿puede usted ingresar?
+
+13:37 - SALA VIP
+  Voy poniéndole la contraseña para que no se me olvide. Ok, ahí estoy.
+
+14:01 - Emiliano  Lorenzano
+  Listo, aquí ya me dice que ya llegó, que ya está conectado Robert, y ya tengo el chat también para mensajear acá con Robert.
+
+14:15 - SALA VIP
+  ¿Puedo marcarle? Que el 31 de mayo va a calucar nuestra... La de prueba, sí.
+
+14:23 - Emiliano  Lorenzano
+  Sí, como es de prueba, nos dan 30 días, pero ya acá nosotros vemos cómo lo renovamos. Bien, entonces, por ejemplo, ahorita con Robert, aquí no le puse que pueda exportar, entonces si aquí él selecciona, por ejemplo, las órdenes de compra y le da aquí en acciones exportar, no debería dejarle o permitirle pues la exportación.  Acá mira Robert, pues está sucediendo con compra. Seleccione, acciones, y aquí tengo esta opción que dice exportar. Ahorita te lo tengo bloqueado, pues no tienes tú permitido exportar.
+
+15:11 - SALA VIP
+  Fíjate que, ahorita te digo, sí pude exportar. A ver, ok, déjame checar entonces. Pude exportar una lista de empleados.
+
+15:28 - Emiliano  Lorenzano
+  Bien, entonces para revisar en dónde está, en qué modelos.
+
+15:33 - SALA VIP
+  Ajá, que se define como la exportar, pero en dónde afecta.
+
+15:38 - Emiliano  Lorenzano
+  Sí, en qué modelos, en qué modelos, porque, a ver, documentos. Bien, si te quito la opción de crear, Robert, intenta crear un producto, nada más ahí actualiza tu sesión, ¿sí te dejó?
+
+16:42 - SALA VIP
+  Pues nada más tienes pura visualización. Sí, es que no tengo todos los iconitos como tú los tienes. Déjate, pongo ahorita ya.  Me tienes restringido con contactos, empleados. Ya te puse de administrador a ti todo, Roberto.
+
+17:16 - Emiliano  Lorenzano
+  Si quieres actualizar, ya debería aparecer ahora sí todo.
+
+17:21 - SALA VIP
+  Ok, ya estoy ya en compras, entro a compras, productos, productos, nuevos productos. Ahorita sí tienes habilitado la opción de crear.  Ok. Déjalo, voy a quitar. Ándale.
+
+17:40 - Emiliano  Lorenzano
+  Y ya, si quieres actualizar, ya guardé el registro.
+
+17:44 - SALA VIP
+  Ándale, estoy dando crear, refresh, me voy a compras, productos, productos. Entonces le doy nuevo y sí me deja crear nuevo.  Sí, entonces para ti no aplica, Robert, tú eres el administrador.
+
+18:14 - Emiliano  Lorenzano
+  Bien. Ahorita probamos con un usuario normal. A ver si también lo dejas.
+
+18:20 - SALA VIP
+  Bien.
+
+18:24 - Emiliano  Lorenzano
+  Dentro de esta parte, Robert, tengo lo que vendría siendo el módulo de ventas y solamente tengo, en ventas tengo tres permisos.  El no, pues vendría siendo para no activarnos el ícono de ventas, ¿no? De acá, este ícono de acá de ventas.  Y luego dice usuario, solo mostrar documentos propios. Con este permiso, si yo tengo habilitado este de solo mostrar documentos propios, acá en la parte de ventas, bueno, igual voy a...  Y aquí en las cotizaciones tengo este filtro que se llama mi cotización. Si yo lo quito, pues no me va a mostrar nada más, sino solamente me va a mostrar las que yo estoy creando.  Aquí dice que fue el administrador, vamos a ponerle creado por y me dice que las creó el administrador. Entonces a esto se refiere.  Permiso. Usuario, solo mostrar documentos propios. Después tiene usuario todos los documentos. Si yo hilito todos los documentos, acá me va a mostrar igual hasta producto nada más, pero ahora si yo quitarle el filtro, aquí pudiera visualizar todos los documentos que generen los demás vendedores o los demás asesores.  Y la parte de lo que vendría siendo el administrador, si le pongo administrador, pues ya puedo ver la parte de la configuración.  Acá ya puedo tener los equipos de ventas. Bueno, aquí ustedes pueden crear un encabezado y un formato más bonito, se pudiera decir, para sus propuestas.  Realmente, pues sí viene un poco limitado la parte de los usuarios, Robert, pero aquí no aplica ahorita. Vamos a...  Crear un usuario para Víctor, por ejemplo. Él es un usuario y solamente va a tener acceso a Naturberry. Le voy a poner esta parte de administrador ahorita y quiero que damos algo, Roberto.  Mira, aquí se me habilita esta que dice ocultar menú específico. Si yo quiero que Víctor sí tenga, que no se pierda como nada de accesibilidad para el módulo de ventas, este que dice ocultar menú específico, yo le puedo ir quitando restricciones.  Por ejemplo, entro a ventas, este es el menú padre, ¿no? El menú principal. Y estos son, este es el hijo, se podría decir, y este ya sería el tercer nivel.  Por ejemplo, ¿sabes qué? Yo a Victor sí quiero que tenga acceso como administrador en el módulo de ventas, pero no quiero que tenga esta opción de ajustes.  Incluso vamos, déjame, voy a entrar con, voy a ponerle aquí una contraseña nada más, así, aquí está lo de ventas, ¿no?  ¿Te das cuenta? Aquí él, como es un usuario, él no puede crear productos, él ya no puede crear productos, pero aquí.  Kif tiene, vamos a cambiarle ahorita el idioma, tiene esta opción de configuración, pero no va a tener ajustes como nosotros o con el perfil de administrador.  Pero por ejemplo, yo no quiero que Victor entre a esto que dice órdenes de venta, encabezados o las etiquetas.  Entonces aquí voy a ponerlo así. Aquí en el usuario de Victor, aquí en dice ocultar menús, le puedo decir, ¿sabes qué?  Quiero que le quites el que dice órdenes de venta. Este es el menú principal. Se llama, viene Ventas, Configuración y Ordenes de Venta.  Si yo le quito, le selecciono esto, guardo el registro, me vengo acá, Robert, mira, ya le quité esa opción.
+
+24:20 - SALA VIP
+  ¿Sabes qué? No quiero que Victor tenga acceso a las unidades de medida.
+
+24:25 - Emiliano  Lorenzano
+  Quiero que sí pueda ver las categorías de los productos, que sí pueda ver las etiquetas de productos, pero no quiero que vea las opciones de los combos, ni que vea las unidades de embalaje.  Entonces acá, yo vengo y busco esa que dice opciones de los combos, y aquí está, mira. Ahora ya no estoy jalando el submenú que se llama productos, sino ahora ya lo estoy especificando por el tercer nivel.  Lo selecciono. Y quiero también que no tenga acceso a la que dice unidades, unidades. Aquí está ventas, configuración, productos, unidades, embalaje.  Guardo el registro, actualizo. Y sí, ya ahora tiene acceso a categorías, etiquetas de producto, pero ya le oculté los otros menús.
+
+25:27 - Victor De La Parra
+  O tanto te deja por la categoría como por la subcategoría.
+
+25:31 - Emiliano  Lorenzano
+  Sí, sí, sí, ya ahí para que no se compliquen tanto la vida, Robert, de que si le pones el administrador o así.  Pero es que si, por ejemplo, si yo le quito que no sea administrador, pues no puede ver los reportes de acá.  Entonces es más fácil dejarle que sea administrador y tú ya le vas quitando menos. Por ejemplo, mira, algo que pasa muy común es en la parte de contabilidad.  Por ejemplo, Víctor, ¿qué pudiera tener? So we're just about Fathom, Clientes, Fathom de Proveedores, pero nada de estado de resultados, nada de eso, ni balanza.  Mira, por ejemplo, si yo le pongo que es administrador, actualizo, él va a poder ver toda la configuración, plan de cuentas, impuestos, diarios, todo, los reportes, balance general, los libros de cuenta mayor para los reportes, este menú de revisiones, contabilidad, donde vienen los asientos contables, y aquí tengo los menús que se llaman facturas, proveedores, este es de clientes, proveedores.  Entonces, ¿sabes qué? Yo no quiero que Víctor, no sé, supongamos que Víctor sí tendría que consultar el reporte de, que se llama, estos tres de acá, reportes del contacto para, cuenta por cobrarlo en SIDA y cuenta  Ya párale, Emiliano, no voy a poder ver nada. Petición de Robert. Empecé aquí. Aquí lo puedo dejar como administrador, Robert, acá en Contabilidad, como administrador.  Y aquí en Ocultar Menús, le quito, sabes que yo no quiero que vea Configuración. Y aquí viene Contabilidad, Configuración.  Le voy a quitar prácticamente todo ese menú. Selecciono, guardo el registro, actualizo. Ya no tiene el menú de Configuraciones.  También no quiero que tenga el menú de Revisión. Vamos a quitarle el menú de Revisión. Una vez le quitamos también...  No creo que Victor entre a los asientos contables, vamos a quitarle lo de asientos contables, todo este menú de contabilidad, contabilidad, contabilidad, vamos a guardar el registro, actualizamos, y ya no tiene, ahora tiene nada más el de reportes, pero aquí en reportes yo quiero que no vea el que dice reporte de estado de cuenta, no quiero que vea el que dice libros contables.  Vamos a actualizar acá y ya solamente le dejamos lo que vendría siendo los reportes, ¿no? Cuenta por cobrar vencida y cuenta por pagar vencida.  Ya lo delimitamos bastantísimo. Ahora, ¿sabes qué? En proveedores sí puede ver facturas, puede ver notas de crédito, pero él no puede ver los pagos.  Entonces, igual hacemos lo mismo, quitamos el menú de los pagos. Esta parte del tablero muestra, por ejemplo, el comportamiento, ¿no?  De cuántas facturas se han generado por semana. Aquí el estado general de los ingresos, lo de compras, lo que hay en banco, si ustedes no quieren que tenga también, que sí pueda entrar a ver las facturas de los clientes, pero que no tenga acción a este tablero, que seguramente sí va a ver que van a limitar algunas cosas ahí con la parte contable o con algunos usuarios.  Entonces aquí vamos a quitarle y vamos a ponerle el que dice tabler, contable a tabler, ahí está, ya entra directamente al menú de facturas de clientes.  Entonces con esto ya quedó muy, muy delimitado el usuario, con esta opción pues que se llama ocultar menú específico, ya con eso.  A ahí sí pudiéramos ir amarrando cada usuario. Sabes que este usuario sí quiero que entre a este módulo, pero no quiero que vea tal menú.
+
+31:12 - SALA VIP
+  Sí, lo veo como una labor muy titánica, porque como que nada más tienes dos opciones, o eres usuario o eres administrador.  Y aparte, pues tienes que retirar, o sea, no hay como un usuario de almacén y que sabemos lo que conlleva el usuario de almacén, ¿verdad?  Un usuario de ventas y lo que conlleva ventas. Aquí como vamos a ser, pues muy específicos y también lo entiendo que Naturberry o NVG México va a...  Comportarse un poco diferente en cuanto a sus procesos, pues sí tendríamos que ver bien en qué posición va a estar cada usuario para poderle dar su acceso correspondiente.  O sea, aquí sí, entre Chema y Vic, sí tenemos que estar muy al pendiente de qué tantos permisos va a tener un usuario.  Sí, porque en otros sistemas, pues es como que fácil el identificar que tú eres de almacén, de compras y se lo vas asignando, pero aquí es, y no tanto, bueno, parte de Olu, que no lo tiene de esa manera, pero también parte de nuestros procesos.  En nuestros procesos, pues el asesor va a ver tanto facturas como compras. Va a poder entrar a lo mejor a algo de contabilidad dependiendo del portal de proveedores.  O sea, sí va a ser como que diferente la dinámica de asignar permisos de los usuarios. Pero, pues bueno, ya con lo que nos está mostrando Emiliano, creo que, pues a lo mejor podemos como ver un encabezado y ese encabezado no dale permiso y pues ya se quita todo lo que tiene dentro de ese árbol.  Pero sí, sí, sí. Sí, la verdad.
+
+33:36 - Emiliano  Lorenzano
+  Bueno, sí, sí entiendo su punto, Robert. Y créeme que muchos clientes sí nos han, pues, hecho este comentario, uno de los permisos en Odoo.  Y justamente por eso nosotros siempre metemos este, este de ocultar menús. Ya viene como de cajón, pues, con nosotros.  ¿Cómo de con nosotros?
+
+34:03 - SALA VIP
+  Ah, de Inflexyon, pues.
+
+34:06 - Emiliano  Lorenzano
+  ¿Cómo? ¿No lo tenía?
+
+34:08 - SALA VIP
+  ¿Odú en su parte de estándar?
+
+34:10 - Emiliano  Lorenzano
+  No, este es hecho por nosotros, pero siempre lo ponemos de cajón cuando iniciamos una implementación. ¡Órale, qué chido!
+
+34:19 - SALA VIP
+  O sea, ¿Odú como el de estándar te suelta todo la vista? Sí, es muy libre en esa parte. Ok.  Sí, por eso. Sí, Víctor. Una pregunta.
+
+34:36 - Victor De La Parra
+  ¿Puedes duplicar el usuario? O sea, por ejemplo, que tengamos ya las restricciones, como por ejemplo, para un usuario de almacén, lo dupliquemos en vez de tener lo que estar haciendo de uno por uno y ya nomás le quitemos los específicos, los poquitos específicos.  Así Así es.
+
+34:52 - SALA VIP
+  Ahorita nos va a mostrar cómo, por ejemplo, cuando tengamos un asesor y somos 12 asesores... ¡Gracias! ¡Gracias! ¡Gracias! ¡Gracias!  ¡Gracias! ¡Gracias! Creas el primero, le asignas todos los permisos, y a ese pues nomás lo duplicas, le cambias el nombre, tus generales, y vamos.  O sea, esa parte, aquí lo único es crearlo al inicio, al inicio crear bien los perfiles y los accesos de cada uno de los usuarios.  Y también cuando vayamos, cuando ya los tengamos y después nos digan, ay, pero también hay que darles permiso a este, pues tendríamos que hacer la misma dinámica, porque si no nos vamos a meter de uno por uno a asignarle, y no, mejor agarramos a uno y le barremos a todos los que pudieran tener ese perfil.  Pero ustedes son tres, son tres, Robert, lo sacan rápido. Nos ha pasado que un cliente que tenía como 150...
+
+36:01 - Emiliano  Lorenzano
+  Y era un... Sí tenían equipo de TI, pero solamente uno estaba enfocado al sistema. Ya te imaginarás ahí qué chinga le pusieron.  Pero bien, pero sí, Victor, sí podemos duplicarlo. Ahorita era como el general. Por eso les decía que mejor pues le dejamos el administrador a todos.  Le dejamos administrador en compras, administrador en inventario, y pues ya lo vamos delimitando nada más con la parte de los menús.
+
+36:32 - SALA VIP
+  ¿Cuál es la diferencia entonces si a un usuario lo dejas como usuario y a otro como administrador? sea, ¿qué activa o qué desactiva por default?  Por ejemplo, mira, por default.
+
+36:45 - Emiliano  Lorenzano
+  Por default ahorita tengo aquí habilitado en compras que es administrador. Si yo me vengo aquí al usuario de Victor, ya me sale el módulo de compras.  Y aquí en compras me sale este menú que se llama configuración, donde puedo ver las categorías. Si yo le pongo que es un usuario, me quita dos menús, el de reportes y la configuración.  Realmente viene muy sencillo, como tú dices.
+
+37:17 - SALA VIP
+  Sí, pero cuando lo creas, por ejemplo, cuando creas a un nuevo usuario y lo delimitas como usuario, ¿es eso justamente que nada más lo...?  Sí, nomás es eso.
+
+37:34 - Emiliano  Lorenzano
+  Aquí ahorita, como a él le puse que no puede crear productos, solamente puede ver, pues solamente puede ver los productos.  En contactos también no puede crear, solamente puede visualizar. Este es el de Victor, usuario. Tendría que revisar también por qué no lo está respetando el comportamiento.  Y el de exportar, vamos a ver, ya no tiene aquí la opción de exportar, no tiene habilitado lo de exportar.  Ya, por ejemplo, él puede ver el menú de aplicaciones, tendríamos que quitárselo. Las aplicaciones, pues, solamente sería para ustedes, Robert, para administradores.  Ahí está. Ahorita esta parte, Robert, no nos está respetando. Respectando el de contacto, el de creación, porque al momento que el usuario esté como administrador, ya sea en inventario, ventas, nos va a permitir la creación.  Si yo le pongo ahorita, por ejemplo, que es un usuario y que es un usuario, ya no me deja crearme.  Entonces, el sistema respeta la jerarquía del administrador en los módulos. Por eso sí te deja crear. Y como dicen ahorita ustedes, si crean un asesor, lo configuran, configuran todo lo que va a llevar ese asesor, ya acá, directamente.  Lo pueden duplicar. Duplican y ya nada más cambian el nombre, el correo electrónico y listo, ¿no? Aquí en Preferencias, aquí me dice el idioma al que voy a estar utilizando el sistema, si va a ser en español o va a ser en inglés.  Aquí podemos agregar la firma de correo electrónico de nuestro usuario. Veo que, Robert, bueno, parece que en el correo que tú mandas, si traen ahí una...  Sí, tenemos ya una firma institucional. Una firma, creo que no se alcanza a ver bien aquí en el chat, pero aquí pudieran ustedes adjuntar esa firma.  ¿La tienes en imagen, Robert, o la tienes en... o cómo la tienen?
+
+41:02 - SALA VIP
+  Pudieras decirse que sí y no, porque es una configuración en otro sistema, pero pues igual se puede copiar y guardar como imagen.
+
+41:20 - Emiliano  Lorenzano
+  Sí, porque si se tuviera como imagen, sí, porque si tuviera la imagen, Robert, aquí la pudiéramos adjuntar, sería más fácil.  Así que tengo aquí una imagen, aquí está la de la fresa. Bueno, está muy grande la imagen, pero sería como referencia.  Ya pueden agregar aquí la firma. Aquí pues el tema vendría siendo, si lo quieren, oscuro, claro, o que tome el que tiene el sistema.  Y aquí la parte de la notificación, esta parte de la notificación se maneja por dos lados, ¿no? Por correo o en Odoo.  Si manejamos... Por correo, cada que nosotros enviemos aquí una orden de compra, una factura, cuando nos respondan, la respuesta va a llegar a nuestro correo electrónico.  Y si lo manejo en Nodu, pues directamente va a caer todo acá dentro del sistema. Si mando el correo y tengo respuesta, me va a caer directamente acá y no se va a generar como ese respaldo allá en su correo.  El almacén predeterminado, pues esto nos sirve mucho cuando tenemos varias sucursales que venden. Aquí podemos establecer un almacén predeterminado para cada vendedor.  Pero como aquí entregan de varios almacenes o de varios coolers, pues ya tenemos... Tendrán que elegir cuando se esté entregando el producto de qué almacén están sacando el material.  Después viene esta parte de la seguridad, Robert, que decías. Aquí puedo generar la autentificación de dos factores. Aquí la podemos usar con la herramienta de Microsoft.  No me acuerdo cómo se llama. O la de... Microsoft Authenticator.
+
+44:28 - SALA VIP
+  O la de Google.
+
+44:32 - Emiliano  Lorenzano
+  Pueden usar las dos. Y ya lo que va a hacer es que les va a llegar el código, ¿no?  Cada vez que quieran, este... Vamos aquí a invitar. Dice, los siguientes usuarios recibirán la invitación para activar la autentificación en dos factores.  Victor De La Parra, vamos a ponerte a ti, Robert. Y déjame sacar el correo. Yo te lo mandé a tu chat, Robert, y ahí te va a activar todo ese paso para que lo manejen en dos pasos el inicio de sesión.
+
+46:07 - SALA VIP
+  Ok, oh, digo, listo, ya se habilitó. Sí, entonces ya eso fue, podemos habilitar en todos los usuarios.
+
+46:32 - Emiliano  Lorenzano
+  ¿Y qué pasaría con eso?
+
+46:35 - SALA VIP
+  O sea, si yo ahorita me salgo y vuelvo a ingresar. Te voy a pedir.
+
+46:45 - Emiliano  Lorenzano
+  A ver si es cierto.
+
+46:47 - SALA VIP
+  Pida, no me voy a derranger. Verificación, muy bien. ¿Eso es cada vez que entre? Sí, cada vez que entre.  Ah, bueno, aquí tiene un recuérdame en este dispositivo. Ok, esto es bueno. Bien, y si me salgo y vuelvo a ingresar.  Ok, sí.
+
+47:39 - Emiliano  Lorenzano
+  Bien, entonces ya tienes esta parte de acá, y acá donde dice el calendario, aquí tenemos que agregar la zona horaria de nosotros.
+
+47:54 - SALA VIP
+  Perdón, Emi, ahí en seguridad, ese que dice deshabilitado. Si lo quitas o si le das un clic, ¿se desactiva o cómo?  No hace nada, miren.
+
+48:09 - Emiliano  Lorenzano
+  Estaba deshabilitado, pero ya lo envié. Supongo que ya debe estar habilitado. Ya está habilitado, miren. Y aquí tiene el botoncito de deshabilitar para quitarlo.
+
+48:18 - SALA VIP
+  Ah, ok. Es como el estatus que tiene, Ok, ese es el estatus.
+
+48:22 - Emiliano  Lorenzano
+  Y aquí tiene la opción para cambiar la contraseña directamente tú como administrador. urge mucho, tú puedes cambiar la contraseña al usuario.  O si el usuario olvidó su contraseña, pues aquí tú puedes enviarle por correo un restablecimiento de contraseña o directamente el usuario.  Vamos a ver acá. Aquí tiene la de restablecer contraseña. Oye, sí.
+
+48:59 - SALA VIP
+  Fíjate que... Si nos dicen, sabes que esta persona ya dejó el changarro, ya dejó el changarro y bloqueenlo, que sería lo más rápido.  Si tienes esa opción.
+
+49:17 - Emiliano  Lorenzano
+  Aquí lo seleccionamos, le damos en acción, le damos en archiva, y ahorita si yo quiero entrar con el usuario de Victor, ya no está bien, ya no puede entrar.  Y ya se queda aquí, por ejemplo, si tú le seleccionas acá, le pones fuertes inactivos y aquí ya te va a poner Victor De La Parra.  Y ya está archivo. Te dice...
+
+50:00 - SALA VIP
+  ¿Cómo en una auditoría te dice quién lo quitó? ¿Sí tiene ese log? ¿Quién lo archivó? Ajá, ¿quién lo archivó y si guarda como ese histórico?
+
+50:16 - Emiliano  Lorenzano
+  Mira, aquí nada más vamos a poner, encontrarlo, por ejemplo, última actualización, vamos ponerle por día, que fue el 15 de mayo, ¿no?  Y aquí le voy a poner última actualización por, y dice que fue administrador, pero si entra alguien más y lo archivo, le hace algún movimiento, pues se perdería porque ya quedaría con la evidencia del otro.  Entonces, si es importante, pues vemos, y aquí le dejamos el historial de quién lo archivó y quién lo volvió a habilitar.
+
+50:55 - SALA VIP
+  Ah, esa parte no la tienes ahí un lado, ok. No, no, no aplican todos los modelos. Ok, sí, esto es por parte de auditoría de sistemas, sí es importante el tener, el saber quién lo, quién ha activado, inactivado y el tiempo también.  Oye, Emiliano, yo tengo otra duda, supongamos que tenemos como un auxiliar de compras, que es la persona que se encarga de subir, bueno, en general las órdenes de compra y eso, está viendo que en el usuario aparecía, bueno, supongamos que lo configuramos con  Solo para ser mis registros, ¿de acuerdo? Ah, ¿cómo? Ya ves que lo habíamos configurado para que ese usuario en su tablero solamente vea los registros que haya hecho, pongamos, las órdenes de compra que solamente generó esa persona.  Ajá. Pero, por eso, pongamos que se da de baja y toda la compañía. Pasa algo si, por ejemplo, Víctor se da de baja y entra, pues no sé, José Manuel, y ya dice, oye, ¿sabes qué?  A José Manuel, ya, por ejemplo, si le editas y le cambias el nombre a Víctor De La Parra por José Manuel y el usuario, ¿se pierden todos esos registros?  ¿O a José Manuel le siguen apareciendo los registros que haya hecho Víctor? ¿O habría que configurarlo diferente el nuevo usuario?
+
+52:50 - Emiliano  Lorenzano
+  Ahí en ese caso, sí se queda la información que generó Víctor en un inicio, por ejemplo, acá, ¿no? Aquí dice que fueron creados por el administrador.  Si yo entro acá, aquí tiene un historial, nos dice administrador Inflexyon. Si te das cuenta, aquí ya está el claro ejemplo, ¿no?  Hace rato yo le cambié el nombre. Estaba solamente administrador. Bueno, aquí vamos a ponerle administrador. Administrador Inflexyon. Entonces, todos los registros se cambian con el nombre que tú haces.  Ahí no sé si tendría que mantenerse el nombre original. Porque ahí, ¿qué hacen ustedes? ¿Van de baja un usuario?  ¿O ese mismo usuario nomás lo modifican? No, pues es la pregunta.
+
+53:58 - SALA VIP
+  Porque, bueno, pues actualmente... Por ejemplo, cualquier que tenga el permiso a un módulo, por así decirlo, pues puede ver todos los, o sea, los registros de todos.  No, pero lo que decías de que si se daba de baja a un usuario.
+
+54:13 - Emiliano  Lorenzano
+  Ajá.
+
+54:16 - SALA VIP
+  ¿Ese se elimina, Roberto? Se archiva. Sí, y crean uno nuevo. Yo, ahí como es el tema de la licencia, Emiliano, si un usuario ya está archivado, ya no cuenta como licencia, y no me van a estar Odú después diciendo, oye, tienes 102 usuarios, ¿qué onda?  Dije, sí, pero todos están ya archivados, o cómo los cuentan, cómo los contabilizan. Ahora sí, Raúl, echame la mano con esa.  ¿Está comiendo sus chilaquiles? Dale un ratito. Pero sí, es bueno nada más saber esa parte, Emiliano, si un usuario archivado está contando con licencia activa o no.  Déjame preguntarle a Pablo en las horitas. No, no te preocupes. Pero para tenerlo ahí entre los pendientes. Déjame aquí, vamos a mandarle mensajito a Pablo.  No, dice tu amigo Genio que no, que un usuario archivado no cuenta como una licencia activa, y por lo tanto no te genera ningún costo en la facturación de Odu.  Bien, todo igual. Exactamente.
+
+56:29 - Emiliano  Lorenzano
+  Ah, ya, bien. Entonces ahí, Chema, pues si es así, pues yo creo que sería archivar el usuario para que los registros se quedarían, ¿no?  Por ejemplo, ahorita vamos a hacer una compra con el usuario de Víctor.
+
+56:53 - SALA VIP
+  ¿Ahorita estás con el usuario de Víctor? No, estoy con el mío. Ah, pero sí, mejor vamos a hacerlo con el...
+
+57:00 - Emiliano  Lorenzano
+  Ah, ya lo dije de baja. Lo ha archivado.
+
+57:12 - SALA VIP
+  Bueno, está archivado, lo pueden recuperar.
+
+57:15 - Emiliano  Lorenzano
+  Sí, lo había archivado, ahí no me acordaba que lo...
+
+57:45 - SALA VIP
+  Una pregunta que a lo mejor aquí tiene Victor y Chema y no se animan a decírtela. ¿Ese pista que tiene Odoo es la que siempre va a tener o nosotros podemos ponerle un fondo?  ¿Nuestro logo? ¿Nuestra, no sé, algo que corporativamente a lo mejor nos vayan a regir o a dictar? Sí, sí, ahorita ustedes lo pueden cambiar, tiene por default.
+
+58:13 - Emiliano  Lorenzano
+  Ustedes no tienen que decir, bueno, nos pueden pasar la imagen, se carga, nada más que haga contraste con esto de acá, porque luego se pierde mucho.  Nos pasan, por ejemplo, algo así medio raro y pues ya se pierden los íconos principales. Igual les paso aquí una captura de pantalla de los...  déjenme, voy a sacarla acá de la base de datos principal.
+
+58:43 - SALA VIP
+  Digo, me gusta así el fondo oscuro, está muy suave a diferencia de que yo conocía con lo que me habían dado en lo que actualmente tenemos.  Sí, sí está. Nice. Pero no sé si nosotros podemos ponerle alguna imagen corporativa, ¿no, Vic?
+
+59:06 - Emiliano  Lorenzano
+  Ya les mandé ahí en el chat para que también ahí lo tomen como referencia a los colores de los íconos, y así si van a crear una imagen o una portada para ponerla acá, pues que haga match, ¿no?  Con los íconos y no se pierdan tanto. Pero sí se puede cambiar.
+
+59:28 - SALA VIP
+  Ahí, Emiliano, sí, podemos, por ejemplo, el fondo, y ya ves que viene el tema claro y oscuro. ¿Solamente lo que cambiaría sería el encabezado de la parte de arriba?
+
+59:39 - Emiliano  Lorenzano
+  No, esto es aparte. ¿Solamente sería como para el inicio ese de...?
+
+59:50 - SALA VIP
+  Sí, si cambian la imagen sería para el inicio.
+
+59:53 - Emiliano  Lorenzano
+  Y aquí viene el tema, ¿no?, en el usuario. Este es el productivo. Vamos a cerrar esto. Por ejemplo, voy a ponerle que aquí dice que es este claro.  Vamos a ver aquí el usuario. Ya lo cambia, Emiliano.
+
+1:00:24 - Victor De La Parra
+  Generalmente prefiero los tonos oscuros, pero en este caso como que me gusta más ese claro.
+
+1:00:29 - SALA VIP
+  Y cuando entras a un menú, a un módulo, te mantiene lo blanco, ¿verdad? Sí, lo blanco.
+
+1:00:38 - Emiliano  Lorenzano
+  Aquí vamos a ver cómo está. Ah, está el botón, color del botón.
+
+1:00:52 - Victor De La Parra
+  Ahí dice revisar todas las plantillas. Plantillas de correo electrónico, no. Sí, sí, lo cambia.
+
+1:01:06 - Emiliano  Lorenzano
+  A ver, ¿dónde están? Meet Odoo Studio, the tool that helps you... Y aquí ya lo cambié, miren cómo se ve.  Pues no puse algo pues así, nada me dejó una imagen que tenía ahí de ustedes, pero para que vean pues la diferencia.  Yo creo que no se pierde tanto los íconos de los módulos.
+
+1:02:33 - SALA VIP
+  Entras acá y aquí pues no te cambia nada realmente.
+
+1:02:37 - Emiliano  Lorenzano
+  No, solo es la de inicio, lo único que cambia.
+
+1:02:40 - SALA VIP
+  ¿Sabes lo que sí, como te lo había mencionado cuando instalamos lo de calidad? Cuando entras a un módulo, si gustas entrar y ábrete cualquier cosa.  Ah, ok, bueno, no aparece, pero es andales, que esas, no sé por qué los chavos de Bélgica o de donde hicieron, los dos pusieron esos botones tan chiquitos y tan juntos, o sea, de verdad que eso está súper raro, deberían de tenerlo un poco más separado, algo más grande, ¿por qué?  Porque, pues ahí, o le das un clic a, quieres guardarle y se movió un poquito y pum, ya te echaste todo tu cotización, o etcétera, etcétera, ¿no?  Entonces, sí, como lo habíamos hecho en el otro, que pudieran ser más grandes y un poquito separados esos dos botones.
+
+1:03:52 - Emiliano  Lorenzano
+  Pero podríamos basarnos en el que ya están, actualizarlo a la versión 19.
+
+1:04:03 - SALA VIP
+  Pero esta es la versión 19, ¿no? Ah, no, el que estaban, de ustedes, era la versión 18, creo. Ah, el que tenemos nosotros.  Para pasarlo aquí a la versión 19.
+
+1:04:18 - Emiliano  Lorenzano
+  Sí. ¿O cómo ven ustedes, Chema?
+
+1:04:21 - SALA VIP
+  Sí, mejor. Pues sí, sí, mejor.
+
+1:04:25 - Victor De La Parra
+  Sí, porque con un clic se hace la acción, ¿verdad?
+
+1:04:28 - SALA VIP
+  O no es como que confirmar. Ah, no sé, sí, hay un tema de confirmación cuando seleccionas uno u otro.  El de guardarlo, no sé si lo manda directo, pero el de cancelar, no sé si cuando le das cancelar, te manda el mensaje de, ¿estás seguro?  Porque se te cancela todo lo que le hayas modificado, ¿verdad? Sí.
+
+1:05:02 - Emiliano  Lorenzano
+  Si eso pudiera funcionar más, ¿no? Pero, por ejemplo, aquí si yo le doy cancelar, ¿que me mandara aquí una alerta de que estoy seguro?  Ah, no sé. O que se hagan más grandes los botones. Pues hasta cualquiera de las dos, no lo sé.
+
+1:05:28 - SALA VIP
+  Déjame, voy a entrar aquí en el otro. Naturalli. Yanni, porque tengo lentes, ¿no?
+
+1:06:13 - Emiliano  Lorenzano
+  Por ejemplo, no sé si efecte aquí, pero sí, efecte también. Aquí están los íconos más grandes, pero igual no me sale esa advertencia, solamente los íconos están más grandes.  Ahí entonces no sé si sí quieren que se pongan estos íconos más grandes, o que al momento que le dé clic acá me salga una advertencia de si estoy seguro.
+
+1:06:56 - SALA VIP
+  Sí, al menos en el de cancelar. No sé, usted es Vic, Chema.
+
+1:07:10 - Victor De La Parra
+  Sí, para mí también.
+
+1:07:17 - SALA VIP
+  En las capacitaciones les decimos que, o sea, que entiendan que no conforme vayas como ahí, pues, escribiendo o editando, se van guardando.  Ah, se van guardando.
+
+1:07:34 - Emiliano  Lorenzano
+  Sí, efectivamente, ya cuando no se guarda de manera automática, si se salen, pues sí se guarda el registro, ¿no?  Pero si no, pues queda ahí. Listo. Entonces ya con eso. Dicen que nada más en el de cancelar, ¿no?  En el de guardar, ¿no?
+
+1:08:18 - SALA VIP
+  Sí, en el de guardar no lo creo. No lo creo necesariamente.
+
+1:08:23 - Emiliano  Lorenzano
+  Y entonces regresando un poquito al tema que comentaba Chema, acá en esta parte de las compras, aquí debería aparecer la que generó, no aparece la que generó, ah sí, la generó Víctor, pero aquí se quedó.  Como la comprador, ahí está. Entonces aquí, ya tengo aquí, mira, que fue Victor el comprador, ya le pongo aquí creado por, sale quien creó, mira, Victor De La Parra, Inflexyon, entonces aquí ya, si yo archivo este usuario, déjame cerrar aquí su, ahí está, el registro pues se queda acá, porque pues ya estaba, y como el usuario no se ha eliminado del sistema, realmente está, está acá, mira, y queda aquí la evidencia pues de que lo, se generó con él.  Ya si, como comentaba, también vi que Pablo dijo que no, no te lo cobraban un usuario. Y ahora sí, ya queda la evidencia de lo que hizo el usuario anterior, con lo que va a ser el usuario nuevo.
+
+1:10:16 - SALA VIP
+  Y si por error o por alguna razón lo llegamos a eliminar, de todas maneras, no se queda mucha información.
+
+1:10:24 - Emiliano  Lorenzano
+  De hecho, voy a buscar aquí el usuario nativo de Victor, me voy eliminar. Ah, sí lo eliminó. Pero eso estaba bloqueado, que no lo eliminara porque tenía registros en sistema.  Aquí sí se perdió, mira, ninguno tiene. Pero aquí quedó el historial, pues que vea que se había quedado este Victor.  Pero como ya no hay un usuario acá ligado, aquí lo que se quitó fue el compra. Pero aquí en el historial sí quedó quien lo creó.  A lo mejor para una auditoría se pudiera consultar información de acá, de este historial. Yo creo que ahí, Robert, pues entonces mejor lo que haríamos es que no eliminen al usuario, ¿no?  Que no archiven.
+
+1:11:26 - SALA VIP
+  No, que eliminen. Ah, o sea, sí. O sea, también existe la opción de eliminar. Sí.
+
+1:11:35 - Emiliano  Lorenzano
+  No dejaba antes, se bloqueaba porque tenía documento relacionado dentro del sistema. Ajá. Y ahorita veo que ya sí ya lo eliminó.  Bien, entonces vamos a crear otra vez a Victor. Chuyó. Chuyó. Chuyó. You
+
+1:12:05 - SALA VIP
+  Oye, ahorita que estás creando eso, Emiliano, ¿se puede que demos de alta a todos los usuarios y después les asignemos el rol a cada uno de ellos?  ¿O no hay forma de envasarle eso?
+
+1:12:23 - Emiliano  Lorenzano
+  Con una plantilla, una plantilla la pudieron dar de alta. Sacamos, por ejemplo, los permisos que vienen activos y ya los damos de alta.  Entonces, pues igual yo armo una plantilla. Y se los pasa.
+
+1:13:10 - SALA VIP
+  Manches, un chorro de datos de campos para el usuario.
+
+1:13:20 - Emiliano  Lorenzano
+  No sé, Robert, ¿cómo ves? ¿Crees que generamos un usuario para Tania? ¿Para Tania?
+
+1:13:29 - SALA VIP
+  Sí. Poner aquí a Tania. Tania Ortega. ¿El correo? Igual, Tania, arroba, naturberry.net.
+
+1:14:01 - Emiliano  Lorenzano
+  Ella va a ser un usuario, ella tendría acceso a qué empresas? A todas. Ella va a poder crear, bueno, sí, va a poder crear, ¿no?  Registro. Ella no tiene acceso a ventas. A contabilidad tendría que tener acceso a facturación de los proveedores, ¿no?
+
+1:14:29 - SALA VIP
+  Sí. ¿Y tendría que ver el estado de resultados de los proveedores?
+
+1:14:36 - Emiliano  Lorenzano
+  No sé qué tanto pueda mostrarlo. Mira, por ejemplo, si yo entro acá en la parte de la contabilidad, aquí en el reporte tengo esta de cuenta por pagar vencida, ¿no?  Y aquí me van a salir a qué proveedores le debo.
+
+1:14:51 - SALA VIP
+  Ah, sí, creo que no. Ajá, no hay tema con ese. Ah, entonces, dejarle aquí.
+
+1:15:00 - Emiliano  Lorenzano
+  En español, vamos a poner administrador y vamos a ocultar los menús.
+
+1:15:47 - SALA VIP
+  Ahora, el hecho de que desde alta a un usuario, por ejemplo, ahorita Tania la estás agregando en la empresa, estás activo en la empresa Naturberry, ¿verdad?  Sí. Y le estás diciendo... ¿Qué a tener acceso a las tres empresas? ¿Es decir que no es necesario que la deis de alta en otra empresa?  ¿O bien pudiéramos haberla agarrado de alta en Naturagy y darle acceso a las tres empresas si va a tener los mismos permisos?
+
+1:16:20 - Emiliano  Lorenzano
+  Sí, justamente tú lo puedes crear en Naturberry, Naturagy o en la empresa principal y va a tener los mismos permisos.  Por ejemplo, aquí a Tania todavía le podemos limitar esto de acá de los reportes, ¿no? Pero vamos a quitarle el que dice...  Libro mayor y el que dice por cobrar vencer y ya le quité prácticamente todo a la parte de contabilidad y si quiero ingresar con ese usuario, vamos a intentar acá, va a tener aquí el módulo de contabilidad, pero ya solamente va a poder ver la factura de los proveedores y el reporte de cuenta propagando.  La quité todo. Vamos a activarle acá al de Tania. Ya me lo cerró. Déjenme, voy a ingresar con el usuario mío.  Vamos a ponerle aquí que va a tener acceso a la parte de lo que sería compras y no quiero que vea la parte de las aplicaciones.  Aquí ya tiene la parte del módulo de compras. Entra en la parte de contabilidad. Solamente puede ver la factura de los proveedores.  Pago de proveedores, notas de crédito, productos, proveedores y el reporte de cuenta por pagar vencida, ¿no? Ya lo delimitamos tantísimo, pero tiene acceso a su módulo de compras.  Veo que tienes un módulo y te dice aprobaciones.
+
+1:20:20 - SALA VIP
+  ¿Qué tiene ese módulo de aprobaciones?
+
+1:20:22 - Emiliano  Lorenzano
+  Ese módulo de aprobaciones lo vamos a ocupar para la parte de generar las órdenes de compra, las solicitudes de los usuarios, que aunque no aplica, bueno, que aplica también para pedir, por ejemplo, un permiso.  ¿Sabes qué? De viaje de negocios, este, el aprovisionamiento de material, crear una solicitud de cotización, aquí se aprobó un contrato, entonces aquí puedes mandar como aprobación, solicitar aprobaciones.  De algunas cosas que quieras gestionar dentro de la empresa. Yo este módulo lo estaba pensando más, Robert, para lo que quería Tania, ¿no?  De que comentaban que cada área genera una requisición. Y esa requisición le llega al jefe inmediato de cada área.  Y el jefe inmediato aprueba o rechaza esa requisición. Y si él aprueba, pues ya la pueden mandar directamente con Tania.  Si él rechaza, pues nunca pasa para el área de compras. Yo estaba pensando más para eso, pero pues aquí trae otras opciones también.  Ok.
+
+1:21:39 - SALA VIP
+  Sí, justamente, pero ahí ese de aprobaciones, ¿quién tendría acceso a eso? ¿Todos o solamente los jefes o solamente nosotros tres, que somos los que vamos a configurar?  Pues en teoría aquí sí tendrían que tener atención.
+
+1:22:00 - Emiliano  Lorenzano
+  Eso, los usuarios, ¿no? Para que ellos puedan levantar su solicitud. Ah, ok, ok.
+
+1:22:09 - SALA VIP
+  Entonces, es que aquí es donde generas una solicitud y no porque sean aprobaciones, sino de aquí generas solicitud y ya después le llegará alguien para aprobar.
+
+1:22:24 - Emiliano  Lorenzano
+  Ah, Ahorita estoy con el usuario de Tania, no puedo entrar toda la configuración, pero si yo entro con el administrador, aquí en aprobaciones, tengo esta configuración y tengo esta que dice categoría de aprobaciones.  Esta que dice crear solicitudes de cotización. Yo aquí puedo poner, ¿sabes qué? ¿Quién es el gerente del empleado, no?  Ah, es aprobador obligatorio. Y aquí voy a poner el aprobador. Ah, ¿sabes ¿Qué? Este del área de base Robert, ¿no?  Pero también quiero que Tania, si autoriza a Robert, pues ya le va a caer a Tania. ¿Va a tener modificaciones?  Sí. Y aquí quiero que sí aplique la secuencia. Necesito las dos aprobaciones. La del jefe inmediato y la de Tania.  Entonces, mira, aquí una vez que... Voy a crear aquí una solicitud, mira. Aquí el usuario viene creando nueva solicitud.  Este... Aquí va a agregar el producto. Por ejemplo, caja de cartón. Pero entraría aquí a aprobaciones.
+
+1:23:38 - SALA VIP
+  No, no. Es igual si entra allá a compras y crea la solicitud. No, porque ya compra ya directamente.
+
+1:23:48 - Emiliano  Lorenzano
+  Pero en compras no hay una solicitud de cotización.
+
+1:23:52 - SALA VIP
+  Sí, pero esa ya es más directamente para el área de compras.
+
+1:23:56 - Emiliano  Lorenzano
+  Ahí no pasaría por ninguna aprobación. Ah, ok.
+
+1:24:01 - SALA VIP
+  Y aquí, mira, voy a crear esto.
+
+1:24:04 - Emiliano  Lorenzano
+  Voy a crear esto. Aquí dice que los aprobadores son Roberto y Tani. Aquí me dice enviar. Bueno, déjame aquí vincular aquí a alguien.
+
+1:24:18 - SALA VIP
+  Emiliano, vamos a aparecer aquí. a solicitar la sala, entonces la dejamos pendiente para continuar esta sesión.
+
+1:24:33 - Emiliano  Lorenzano
+  Sí, pero realmente el tema del usuario, ahí sí me quieren ayudar a realizar unas pruebas, Robert, de crear alguno de los que puedan ya empezar a crear proveedores o crear productos.
+
+1:24:49 - SALA VIP
+  Sí, sí, sí empiezo a crear nuevos usuarios. Ahorita les llevo al equipo. Sí, ¿cómo tú ya tienes acceso al sistema de pruebas?
+
+1:25:00 - Emiliano  Lorenzano
+  Si ya puedes crear usuarios, entonces ya. Ahorita yo le di, generé el usuario de Victor, pero no le di el acceso.
+
+1:25:07 - SALA VIP
+  Muy bien. Y ahí lo revisas bien. Sí. Ya va, Emiliano. Bueno, gracias, Robert. No, gracias a ti. Gracias, Victor.  Gracias a ti. Adiós. Bye. Bye.

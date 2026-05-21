@@ -1,0 +1,1350 @@
+======================================================================
+ID DE SESIÓN: MACROPROCESO NBG PARA ODOO
+FECHA: 2026-04-17
+LINK DE LA GRABACIÓN (FATHOM):https://fathom.video/share/suiMk49Ua7qKaUcXjCnsfnxgHPV8ExQv
+======================================================================
+
+RESUMEN
+
+Macro proceso NBG para Odoo - April 17
+VIEW RECORDING: 
+Propósito de la reunión
+
+Definir los macroprocesos integrados para Naturberry, Naturprime y Naturagui en Odoo.
+
+Puntos clave
+
+  - Modelo de proceso unificado: El equipo presentará a los consultores de Odoo un único macroproceso integrado para las tres empresas, reemplazando el enfoque anterior en silos.
+  - Ventas nacionales/exportación homogeneizadas: El proceso de ventas nacionales reflejará el de exportación, utilizando un "precio preliminar" para facturar a Naturprime al embarque, con una nota de cargo semanal para ajustar al precio final de mercado.
+  - Inventario de planta como inventario de fruta: El inventario de planta se gestionará como la fruta, con una única OC global para todas las plantas. Cada cuarto frío recibirá y expedirá plantas, creando una trazabilidad clara tanto para el inventario de Naturberry como para los servicios de Naturagui.
+  - Seguimiento de materiales de productores: Un "almacén virtual" para cada productor rastreará todos los materiales (p. ej., cajas plásticas). El sistema señalará saldos negativos, indicando una desviación de material y habilitando la facturación automática.
+
+Temas
+
+El problema: procesos en silos
+
+  - Revisar los procesos de forma aislada (p. ej., compras) resultó ineficaz, ya que las operaciones abarcan tres empresas: Naturberry, Naturprime y Naturagui.
+  - Solución: Definir un único macroproceso integrado para ofrecer una visión holística para la implementación en Odoo.
+
+Macroproceso de Naturprime (ventas nacionales)
+
+  - Planificación y previsión:
+      - El presupuesto de producción de Naturberry alimenta el presupuesto de ventas de Naturprime para fruta del mercado nacional.
+      - Naturprime usa estos datos para construir un plan de demanda (semanal/mensual por cliente) y negociar programas.
+  - Ventas y facturación:
+      - Objetivo: Habilitar la facturación de fin de semana, actualmente bloqueada por la necesidad de inventario físico.
+      - Proceso:
+        1.  Naturprime crea una Orden de Venta (OV) para Naturberry.
+        2.  Operaciones del cuarto frío cierran el embarque ~1 hora antes de la carga.
+        3.  El sistema autogenera una factura de Naturberry a Naturprime a un "precio preliminar".
+        4.  Naturprime genera su propia factura al cliente final.
+        5.  Una nota de cargo semanal de Naturberry a Naturprime ajusta el precio al valor final de mercado.
+      - Justificación: Esto refleja el modelo de exportación, garantizando facturación oportuna e inventario preciso.
+  - Gestión de fletes:
+      - Asignación: Manual, no automática. Esto es necesario para respetar los acuerdos comerciales con transportistas específicos.
+      - Proceso: El equipo de operaciones de Naturprime asigna el transportista en la OV. El sistema entonces autogenera una OC especializada para el transportista, que contiene todos los datos necesarios para la carta porte (conocimiento de embarque).
+  - Rechazos y reclamaciones:
+      - Naturprime gestiona los rechazos revendiendo la fruta a otros mercados, creando un nuevo ciclo de venta.
+      - Un fondo de $20 MXN/caja cubre pérdidas por rechazos y otros incidentes.
+      - Requisito del sistema: Un informe debe rastrear el saldo y uso del fondo para auditoría y conciliación de fin de año.
+
+Macroproceso de Naturagui (servicios de cuarto frío)
+
+  - Definición de rol: Naturagui es un proveedor de servicios, no un propietario de inventario.
+  - Propiedad del inventario: Todo el inventario de fruta pertenece a Naturberry y se rastrea en la compañía de Naturberry en Odoo.
+  - Flujo entre compañías:
+      - Naturagui usa los datos de recepción de Naturberry para comprobar sus servicios.
+      - Naturagui factura a Naturberry por servicios (preenfriado, etiquetado), diferenciados por mercado nacional vs. exportación.
+      - Naturagui factura directamente a Naturprime por certificados fitosanitarios.
+  - Gestión de materiales:
+      - Naturberry es dueña de todos los materiales (cajas, termógrafos).
+      - Naturagui solicita materiales mediante una orden de traslado, que se rastrea como "material en consignación" en un almacén virtual.
+
+Macroproceso de Naturberry (producción y gestión de planta)
+
+  - Abastecimiento e inventario de planta:
+      - Problema: El seguimiento actual del inventario de planta es manual y carece de trazabilidad.
+      - Solución: Tratar el inventario de planta como el inventario de fruta.
+        1.  Una única OC global de Naturberry a NVG crea el inventario inicial.
+        2.  Los cuartos fríos reciben y expiden plantas, creando una trazabilidad clara para el inventario de Naturberry y los servicios de Naturagui.
+  - Seguimiento de cajas plásticas:
+      - Problema: El seguimiento de devoluciones de cajas de los productores es un gran punto de dolor.
+      - Solución: Crear un "almacén virtual" para cada productor.
+        1.  Las cajas entregadas a un productor se registran en su almacén virtual.
+        2.  Las devoluciones de cajas se registran como traslados de regreso al inventario principal de Naturberry.
+        3.  El sistema señala saldos negativos, indicando una desviación de material y habilitando la facturación automática.
+      - Justificación: Esto proporciona visibilidad en tiempo real y reemplaza el poco fiable proceso de JustForm.
+
+Próximos pasos
+
+  - Robert:
+      - Consolidar todos los procesos en un único diagrama de macroproceso integrado.
+      - Distribuir el diagrama al equipo la próxima semana.
+  - Todos:
+      - Prepararse para presentar el macroproceso integrado a los consultores de Inflexion.
+
+======================================================================
+
+ONE-ON-ONE
+
+Macro proceso NBG para Odoo - April 17
+VIEW RECORDING: 
+Propósito de la reunión:
+
+Alinear macroprocesos end-to-end entre Naturberry, Naturprime y Naturagui para Odoo, definiendo interacciones intercompañía, responsabilidades operativas/administrativas, y requerimientos de sistema (inventarios, ventas, logística, liquidaciones, calidad, y trazabilidad).
+
+Actualizaciones
+
+Victor De La Parra
+
+Registro
+
+  - Estuvo apoyando con diagramas y validación de procesos
+
+Progreso en prioridades desde la última reunión:
+
+  - Consolidó flujos previos (compras, almacén, contabilidad) y detectó faltantes de integración interempresa
+  - Propuso manejo de materiales en Naturagui como “aparente en campo” y traspasos entre almacenes
+
+Prioridades hasta la próxima reunión:
+
+  - Ajustar diagramas con acuerdos de hoy (interacciones NB–NP–NA, transporte, facturación, aparente)
+  - Definir con Odoo: doble registro de recepciones (NB y NA) a partir de un solo evento
+
+Necesita asistencia / Está bloqueado en:
+
+  - Criterios técnicos de Odoo para disparos automáticos y visibilidad cruzada intercompañía
+
+Edder Palacios
+
+Registro
+
+  - Operaciones NB y estandarización con exportación
+
+Progreso en prioridades desde la última reunión:
+
+  - Alineó que facturación de nacional la emite el cooler al cierre de embarque (homologado a exportación)
+  - Definió “acknowledge” de planta y fruta en coolers (recepción, evaluación, salida) con trazabilidad por lote
+
+Prioridades hasta la próxima reunión:
+
+  - Parametrizar cierre de embarque T–1h para detonar: factura, carta porte, documentos de salida
+  - Definir flujo de cajas y aparente en campo por productor con alertas de negativos
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmación de Odoo para reglas de bloqueo/alertas por negativos y portal de productor
+
+Juan Pablo Cholico
+
+Registro
+
+  - En carretera; lidera NP comercial y operaciones comerciales
+
+Progreso en prioridades desde la última reunión:
+
+  - Definió que el budget/forecast de NP se alimenta del MPS/budget NB (nacional); construcción de demand plan por cliente/semana
+  - Acordó OV de NP a NB; coolers cierran embarque y facturan; órdenes de compra de flete con datos de carta porte desde la OV
+  - Estableció uso de pre-precio semanal y complemento con nota de cargo; manejo de rechazos con mini-ciclo (NC/ND, re-factura, nueva CP)
+
+Prioridades hasta la próxima reunión:
+
+  - Campos en OV para asignación/cambio de transportista y datos de CP; módulo de notas de crédito por entrega en tienda
+  - Reportes para blend semanal y fondo de $20 por caja (rechazos) y su conciliación intercompañía
+
+Necesita asistencia / Está bloqueado en:
+
+  - Definir con Odoo: asignación manual de transportistas (respeta acuerdos comerciales) editable antes de carga
+  - Soporte contable para provisiones y liquidaciones semanales con complementos
+
+Alejandra Juarez
+
+Registro
+
+  - Contabilidad/administración; enfocada en intercompañías y provisiones
+
+Progreso en prioridades desde la última reunión:
+
+  - Clarificó que NA factura servicios a NB y NP según aplique; NB factura fruta; separación de almacenes y contabilidad por empresa
+  - Alineó necesidad de reportes de retenciones/fondos y estados de cuenta por productor
+
+Prioridades hasta la próxima reunión:
+
+  - Diseñar reportes: retención $20/caja, conciliación interco, estados de cuenta productor con aparente y devoluciones
+  - Definir quién alimenta precio base semanal y candado de edición
+
+Necesita asistencia / Está bloqueado en:
+
+  - Reglas de Odoo para notas de cargo automáticas y corte semanal multi-destino
+
+Jorge Obregon
+
+Registro
+
+  - Gerente de coolers; operación NA y terceros
+
+Progreso en prioridades desde la última reunión:
+
+  - Alineó que inventario físico vive en NA pero pertenece a NB (por cliente/ubicación); NA factura frío diferenciado (nacional vs export)
+  - Definió necesidad de trazabilidad intra-cooler (cámaras, prefrío, etiquetado) y numeración de embarque común NB–NA
+
+Prioridades hasta la próxima reunión:
+
+  - Establecer traspasos NB→NA (materiales) y operación NA como “otro cooler” con visibilidad a NB
+  - Implementar evidencia operativa para auditorías (recepción, servicios, checklist, fotos)
+
+Necesita asistencia / Está bloqueado en:
+
+  - Mecanismo de doble registro (datos únicos, uso contable/operativo por empresa) en Odoo
+
+Salvador Bustamante
+
+Registro
+
+  - Solicita resumen por intermitencias
+
+Progreso en prioridades desde la última reunión:
+
+  - Validó manejo de aparente en campo por productor y facturación a partir de saldos no devueltos
+
+Prioridades hasta la próxima reunión:
+
+  - Revisar diseño de almacenes virtuales por productor y proceso de facturación mensual por concepto
+
+Necesita asistencia / Está bloqueado en:
+
+  - Confirmación de filtros/masivos para facturación por almacén-productor
+
+Temas
+
+Macroprocesos por empresa (NB, NP, NA)
+
+  - Separar operativamente 3 macroprocesos y definir puntos de interacción: forecast NB alimenta budget NP; NA opera físicamente con datos de NB
+
+Forecast y MPS
+
+  - NB define MPS/budget por tipo (export, org, nacional); NP toma nacional para demand plan por cliente/semana/precio estimado
+
+Órdenes de venta y cierre de embarque
+
+  - NP genera OV a NB; cooler cierra T–1h (ideal T–24h) fijando cantidad final; detona factura NB→NP, CP y docs; homogenizar con export
+
+Facturación nacional con pre-precio y complemento
+
+  - Precio base semanal al salir; complemento vía nota de cargo al cierre por blend semanal; cortar por semana y presentación
+
+Rechazos y mini-ciclo
+
+  - Rechazo abre nueva venta/CP/NC/ND y mantiene trazabilidad de costos del viaje; afecta liquidación NB
+
+Fletes y carta porte
+
+  - Asignación de carrier desde OV NP, manual por acuerdos comerciales; al cerrar embarque, OC de servicio (CP) se genera con cantidades finales
+
+Naturagui como cooler propio y como empresa
+
+  - NA opera como otro cooler de NB: inventario de fruta/planta de NB, trazabilidad y numeración de embarque compartida
+  - NA factura servicios (frío, etiquetado, paletizado incluido, fitos) a NB/NP según corresponda; precios de frío diferenciados Nac/Exp
+
+Materiales y almacenes
+
+  - Materiales pertenecen a NB; NA maneja traspasos y control; excepción CHEP en NP
+  - “Aparente en campo” por productor con almacenes virtuales; dashboard de negativos y bloqueos/alertas
+
+Planta (viveros) flujo “como fruta”
+
+  - OC NB→NVG US para existencia; recepción en cooler con evaluación y lote; salida a productor vía OV del asesor/logística
+  - Trazabilidad por lote (de vivero) hasta productor; NA factura frío de planta; uso de reportes operativos (Heavy Connect) como evidencia
+
+Estados de cuenta productor y portal
+
+  - Portal con estado de cuenta: entregas, aparente, materiales, devoluciones, facturas; envío semanal automático
+
+Fondo de $20/caja y contabilidad interco
+
+  - Fondo en NP para rechazos y gastos; reportes de uso y provisión; cierre de temporada con conciliación y cargo a NB
+
+Comercio exterior e IMEX
+
+  - Requerimientos aduaneros en facturas y control de pedimentos; módulo robusto en ERP; área de comercio exterior separada de operaciones
+
+Próximos pasos:
+
+  - Roberto: Actualizar macrodiagramas con acuerdos y compartir la próxima semana
+  - Edder/Jorge: Definir procedimiento de cierre de embarque T–1h y evidencias; homologar docs salida; dueños
+  - Juan Pablo: Especificar campos en OV (carrier, placa, chofer, CP) y proceso de cambio de transportista
+  - Alejandra: Diseñar reportes interco: retención $20, conciliación fondo, blend semanal, notas de cargo automáticas
+  - Víctor: Proponer en Odoo: doble registro de recepción (NB y NA) a partir de un evento; numeración común de embarque NB–NA
+  - Edder/Víctor: Parametrizar “acknowledge” de planta y fruta en coolers (recepción, evaluación, salida) con trazabilidad por lote
+  - Equipo compras (NB): Definir OC marco NB→NVG y manejo de variaciones por vivero en Odoo
+  - Operaciones NP: Definir módulo de notas de crédito por entrega en tienda y reglas de cálculo
+  - Contabilidad/IT: Definir reglas de bloqueo/alertas por negativos en almacenes virtuales de productor y flujo de facturación por concepto
+  - Comercio exterior: Levantar requerimientos de IMEX/pedimentos/campos fiscales para facturas de venta y CP (owner: Ale/Comex)
+
+======================================================================
+
+TRANSCRIPCION
+
+Macro proceso NBG para Odoo - April 17
+VIEW RECORDING - 151 mins (No highlights): 
+
+---
+
+0:23 - SALA VIP
+  Alvaro Sardes, Henda Rafa, buenas tardes. Hola, buenas tardes.
+
+0:28 - Victor De La Parra
+  Buenas tardes, Rafa, buenas tardes, ¿cómo andas?
+
+0:31 - Edder Palacios
+  Bien, estrés, ¿qué tal?
+
+0:33 - SALA VIP
+  Bien, Bien, gracias. No, buenas tardes, Felipe mencionó que iba a ir en camino, pero que se iba a conectar, entonces ya no tarden.  Hvernig fjallum andeinu sagði að Páll bara segna? ¿La Liga? Se canceló. ¿La de cuáles de almacenes? Sí, se canceló.  Le mandé un mensaje. Como no estaba en la invitación inicial, no apareció y es que la mandó Raúl de Inflation.  Pero sí se canceló. Gracias, Dios. Bueno, vamos dándole y ahorita esperamos a Juan Pablo que se una. Bueno, el día de ayer, después que tuvimos la sesión de compras con el equipo, nos salieron varias dudas, las cuales vimos que no es solamente un problema.  ¿Qué me pasó, Juan Pablo? Estoy acabando, ok. Y, bueno, le envié la reunión también a Jorge Obregón. No se ve conectado aquí, ¿verdad Vic?  Se acaba de conectar Juan Pablo, pero no Jorge.
+
+5:18 - Victor De La Parra
+  Jorge no lo ve en la reunión. ¿Cómo estás, Juan Pablo? Buenas tardes, bien. Andamos en la...
+
+5:24 - SALA VIP
+  Porque estaba viendo unos coolers en Zamora, eh. Ah, ya le estoy. Le estoy mandando un mensajito a George. Ok, Y desde aquí en Zamora andaba viendo unos coolers, de hecho.  Ok. Gracias, gracias. Cholico, apenas íbamos a iniciar y iniciamos justo con el propósito de esta reunión. El día de ayer tuvimos una reunión en donde vimos con el equipo de consultoría de Inflexion un proceso...  El de compras, ya habíamos tenido un proceso de almacén, ya habíamos tenido un proceso contable, que creo que ese sí fue muy ligero y no hubo tantos temas, pero en donde llegamos con la parte de compras, vimos que lo estábamos revisando de forma aislada y no de forma global como lo queríamos o como lo queremos y necesitamos.  Después de esa reunión, nos comunicamos aquí en lo interno, junto con Salvador y con Ale, y bueno, decidimos que el día de hoy que teníamos la siguiente sesión con Inflexion, la cancelaríamos para poder tener esta reunión de ver nuestro diagrama o nuestra radiografía,  o nuestro macro proceso bien definido y que a nosotros estar correctos y con el conocimiento de qué vamos a hacer en cierto proceso, pues ya sea más fácil hacerle la comunicación al equipo de inflexión y sobre todo que los key users sepan que de esa manera se generará.  Sé que Edder con toda la experiencia de los de operaciones nos puede apoyar allí en la forma de operar en Naturberry y con pues Juan Pablo lo que se necesita obviamente de Naturprime.  Invité a Rafa porque él como va a ser la parte de contabilidad, él tendrá pues que revisar y verificar.  No quise invitar a Maskey User porque creo que aquí lo podemos resolver de una forma rápida y ágil. Esa es la intención, Juan Pablo.  Si bien ya teníamos y tenemos nuestros diagramas de flujo que hicieron nuestros compañeros Chema y Víctor, aún así nos hacía falta esa integración entre que esos procesos en donde se ven aterrizados para la parte de Naturberry.  Sí, interacción con Naturagui, interacción con Naturprime, interacción con NVG o con las bases de datos que queramos. Esa es la intención.
+
+8:40 - Juan Pablo Cholico (naturprime.mx)
+  Oye, Robert, pero lo que estoy viendo aquí es, me parece muy, muy, muy buena idea. Sin embargo, yo sigo viendo un macro proceso para Naturberry.  ¿Sí?
+
+8:53 - SALA VIP
+  Sí.
+
+8:53 - Juan Pablo Cholico (naturprime.mx)
+  Y ahorita lo comentaste, es como la interacción con, la interacción con, y creo que mi sugerencia tendría que ser es que tendrías que tener tres macroprocesos operacionales, el de Naturari, el de Naturprime, el de Naturberry, y que a lo mejor administrativamente podremos tener algo que seamos un común denominador para operar dentro de Odoo.  Pero operativamente, este, viendo este macroproceso, esa parte de ventas y facturación, quiero entender que es el de Sprime, esa es la ventas y facturación de Naturberry, ¿no?  Ah, a eso es a lo que voy.
+
+9:32 - SALA VIP
+  Y sí, aquí puse este otro macroproceso, que es el de Naturprime. Aquí está, aquí está. Y justo quería iniciar contigo, porque sé que andas en carretera y que podamos, podamos iniciarlo.  Aquí está el macroproceso de Naturprime, y aquí a un ladito del macroproceso de Naturberry, tenemos el macroproceso Macro proceso de naturagui.  Así tal cual. Esto es obtenido de los diagramas de la información que tuvo Víctor con tu gente y Chema con tu gente.  Así tal cual. Entonces, quisiera que esa fuera la dinámica para que cuando estemos con el equipo de Inflexion veamos el proceso desde inicio hasta el final y no ver nada más módulos de compras o nada más ver un módulo de almacén.  No, ¿por qué? Porque cada uno de esos módulos está incluido en no uno ni dos, en varios procesos de nuestra cadena y no solamente en una sola empresa, sino en las tres empresas se ve ese mini módulo.  Tal vez sí funciona en donde solamente hay una. Una sola empresa y en una sola empresa pues ven el módulo de su almacén, su módulo de compras, facturación y listo.  Pero aquí estamos hablando de que se incluyen tres empresas y que hay diferentes procesos, mini procesos en cada una de ellas.  Y ayer justamente que estamos hablando en la parte de compras, pues ahí está Alejandra y ahí está Edder y ahí está Salvador, que no me dejarán mentir que íbamos brincando.  Terminamos ya no hablando de compras, sino terminamos hablando de órdenes de venta o inventarios y en dónde pegaba todo.  Por eso fue la adquisición de mercancía, que es la fresa en sí, ¿no?
+
+11:40 - Juan Pablo Cholico (naturprime.mx)
+  ¿Perdón? La adquisición de mercancía, que es la fresa en sí, que no es una compra como tal, pero es un ingreso como compra a nuestro sistema.  Así es, así es. Entonces, esta es la idea.
+
+11:53 - SALA VIP
+  La finalidad de que podamos, si lo podemos hacer el día de hoy en una sola sesión y reunión, qué suave estaría y vamos afinando ese punto.  Empezando contigo, Juan Pablo, donde tienes también mucha interacción, sabemos que, bueno, al menos en el proceso, está que tú haces la construcción del forecast y cotización y negociación con el cliente.  Ese sería como nuestro punto inicial del lado de Naturprime, ¿correcto? Correcto.
+
+12:33 - Juan Pablo Cholico (naturprime.mx)
+  Y esa planeación viene, usando el nombre del RP, de un solo flujo, la planeación viene de la curva de Naturberry.  De la gran curva de Naturberry, un porcentaje de mercancía es el forecast de planeación de Naturprime. De la 4 millones de cajas, 800 mil cajas van a ir a Prime.  Semana a semana tendríamos una curva, parecida a la que va a tener Naturberry, en la que el suministro de esa fruta va a llegar a Naturprime y va a cumplir ese programa.  Esa es la parte de planeación y de construcción de los programas comerciales.
+
+13:14 - SALA VIP
+  Entonces, ¿tú esperas iniciar con los datos que Edder vaya a gestionar en su proceso de producción?
+
+13:28 - Juan Pablo Cholico (naturprime.mx)
+  Sería un pasito antes porque supongo que también Naturberry va a tener su forecast de producción, decir, el budget contra lo real.  Entonces, del budget es donde estoy sacando el número de las 800 mil cajas, de las 4 millones que va a tener Naturberry.  Entonces, ese budget alimenta el budget de Naturprime para empezar los dos de ceros, con un budget inicial que es también el...
+
+13:53 - SALA VIP
+  Ok, sí, aquí justo al inicio de Naturberry, aquí puse justamente el MPS, que es la planeación de la producción.  Aquí tendríamos que incluirte también a ti para que tú puedas visualizar y en base a eso hacer tu construcción de forcas.
+
+14:19 - Juan Pablo Cholico (naturprime.mx)
+  Sí, el forcas de Naturberry va a tener fruta convencional de exportación, fruta orgánica, fruta nacional, y esa fruta nacional es la que se transfiere al budget de Naturprime, al momento que la etiqueta de la empresa productora alimenta el budget de Prime, que es la comercializadora, y el de exportación va a alimentar el budget de ventas de Naturberry Farms en exportación, por decirles un ejemplo.  Pero en nuestra interacción de compañía. que vamos a vivir en el mismo ambiente del sistema. Para vivir en el mismo flujo, la información tiene que venir de Naturberry, en donde Edder dice, estos son mis cuatro millones de cajas, este es el breakdown de cada una de estas cajas, y lo que corresponde a Nacional es la información que viaja como budget inicial de Prime.  De ahí empezamos a construir programas.
+
+15:23 - SALA VIP
+  Perfecto.
+
+15:24 - Juan Pablo Cholico (naturprime.mx)
+  El ATEM, el ATEM.
+
+15:25 - SALA VIP
+  Sí, y ahí solamente, ¿qué necesitarías tú como del sistema? Solamente visión y visibilidad, ¿no?
+
+15:36 - Juan Pablo Cholico (naturprime.mx)
+  Visibilidad de curva semanal, de proyectado de cajas, para que, te doy un ejemplo rápido, así yo voy a saber que en el mes de enero, por decir un mes, Naturberry planea darme 120.000 cajas.  Entonces, Entonces, Entonces, Entonces, Entonces, Entonces, Yo desde octubre estoy planeando la venta de estas 120.000 cajas. Desde ahí construimos la venta para tratar de que sea mínima la venta spot, o sea, la venta que se va a un mercado de avasos.  Podrá haber circunstancias que van a mover el budget, clima, precios de mercado. Eso no tiene que estar firmado con piedra, pero es nuestra base inicial.  Y sobre esa base, también nosotros vamos a presupuestar precios para mantener un forecast de precios, de ingresos. De ahí se forma el precio, en la construcción del forecast y cotización que tienes ahí.
+
+16:41 - SALA VIP
+  Esta parte obviamente la tendríamos que pedirse el laudo para que construya tu ambiente de negociación con el cliente, ¿correcto?  Exacto. Casi lo tenemos en Farms. De ese forecast, te lo puedo mostrar después a detalle, ¿no?
+
+17:03 - Juan Pablo Cholico (naturprime.mx)
+  De ahí hay un demand plan, así le llaman en el sistema, en donde decimos, de este millón de cajas van a estos clientes en estas fechas y se va viendo el cumplimiento de ese forecast por cliente ya.  Hay un detalle a nivel semana, mes, cliente, empaque. Ok.
+
+17:25 - SALA VIP
+  Y es justamente ese el envío del programa semanal, ¿correcto? Que se le envía. Mensual, ajá. Dependiendo del tipo de cliente, ¿no?
+
+17:35 - Juan Pablo Cholico (naturprime.mx)
+  Un Walmart te da un programa mensual y lo hacemos a veces quincenal porque esa es nuestra conveniencia. Entonces, ya te permite decir, esta es la cotización a Walmart, estos son los precios, este sería el posible retorno a Naturberry y ahí es cuando está la...  La confirmación del sí o no de ese programa. Cuando ya está confirmado, es cuando se le manda la instrucción de la operación para que se ejecute la venta.  Ok, perfecto.
+
+18:07 - SALA VIP
+  Entonces, inicias con tu budget, haces tu negociación con el cliente, vamos a tener ese módulo en Odoo para que puedas tú tener esa visión, sus criterios de venta, de precios.  Luego entramos con el tema de programación logística. Aquí, obviamente, tú no vas a tener nada en tu inventario o no vas a tener como un almacén de inventario.  Hablando del tema de, cuando es, este, materiales. Ajá, material y, no, y fresa. O sea, no la vas a...  O sea, sí, sí va a existir.
+
+18:54 - Juan Pablo Cholico (naturprime.mx)
+  Porque va haber una transferencia de Naturberry a Naturprime. Virtual, si tú quieres, porque a mejor físicamente están ahí un palet, ¿no?  Pero virtualmente, administrativamente, la tendencia de la fruta de nosotros es cuando la subimos al camión, ¿sí? Podemos estar en Ario, la fruta es de Naturberry, pero un día antes puede haber un etiquetado de esa fruta que ya está destinada para Naturberry, perdón, para Naturry Farm de Exportación, o para Naturprime, para Mercado Nacional.  Cuando se hace esa transferencia, ahí es donde nosotros, punto importante, ahora mismo, en las compras de mercancía, nosotros generábamos nuestro propio inventario, ¿cierto, Alejandra?  Bueno, bueno. Sí, correcto. Ahí voy a la salita, ya terminé.
+
+19:53 - Alejandra Juarez
+  Sí.
+
+19:53 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, es bien importante esa parte porque uno de los inconvenientes de esa app es que no te deja facturar hasta que tienes el inventario y ustedes no van a tener el inventario hasta que tengan la entrada de la fruta.  ¿Cómo le vamos a hacer el fin de semana? Ahí es un punto que hago con paréntesis, ¿no? Es, no tengo el inventario, pero puedo crear la entrada para poder generar facturas, aunque todavía físicamente no tenga la mercancía, porque va a llegar a medida que los clientes van, los clientes, perdón, los productores van entregando su fruta.  Entonces, administrativamente es un rollo el que yo quiera facturar el viernes, el sábado, el domingo, por eso, o tú necesitas hacer ya una facturación automática para que no dependamos de este mecanismo de que ya tengo la mercancía física, ¿cómo le hago para facturar?
+
+20:45 - SALA VIP
+  Y esa facturación la harías directamente tú en la empresa de natur.
+
+20:54 - Juan Pablo Cholico (naturprime.mx)
+  Sí, lo que podemos hacer es, para no depender de ese círculo vicioso, es que operaciones, ingrese el programa con órdenes de venta.  ¿Cuánto vamos a embarcar físicamente? Va a ser responsabilidad de los coolers al momento de armar los embarques. Cuando ya está concluido el embarque y sabemos que en el embarque de San Martín Obispo va a ir fulanito, menganito, perganito como productores, porque es una transferencia de mercancía de Naturberry a Naturprime, en ese momento vamos a poder facturar desde el almacén.  Previo a eso, no es que le vamos a pasar la responsabilidad al cooler, es que ventas y operaciones ya hicieron su chamba de hacer la orden de venta y lo único que hace el cooler es afinar de que si yo pedí mil cajas, el cooler diga, van a ir 995 porque no lo completé o porque cinco cajas se dañaron o por lo que tú quieras.  Y tú vas a poner un código genérico, ventas, pero yo voy a poner el código real que se embarcó, de los productos que se embarcaron, de los productores que se embarcaron.  Así vamos a tener la posibilidad. Entonces, este, Ed, quería decir algo otra vez, Ana Benita, por comentar.
+
+22:12 - Edder Palacios
+  Sí, mira, lo que se podría hacer aquí es sacarlo igual que exportación, en el cual Kulera, al momento que lo saca, Kulera hace la factura.
+
+22:25 - SALA VIP
+  Correcto.
+
+22:26 - Edder Palacios
+  Kulera hace la factura y ya lo sacaremos así del sistema. Porque es que el problema es que como tenemos dos tipos de procesos, el de exportación y el de nacional, nos pega.  Entonces, tenemos que homologar los procesos. Exacto. Adaptar a lo mismo, lo más que se puede, de calidad, el de exportación.  Tratando de adaptar y ya podremos estructurar.
+
+22:51 - SALA VIP
+  Entonces, ya eso genera los documentos que se le entrega.
+
+22:53 - Juan Pablo Cholico (naturprime.mx)
+  al operador y no dependemos de que alguien esté el fin de semana o checando, sino que. Exactamente.
+
+23:02 - SALA VIP
+  Ya se hace una facturación electrónica automática. Una pregunta.
+
+23:07 - Jorge  Obregon
+  Por ejemplo, cuando ya Cooler va a hacer la factura, cuando ya hizo la transferencia a Naturprime, nosotros podremos tomar esta precarga, ¿verdad?  Ya en el sistema para poder realizar la factura y comparar con lo que realmente se va a embarcar, ¿verdad?
+
+23:26 - Juan Pablo Cholico (naturprime.mx)
+  Sí, en la gestión de los fletes de facturación y el envío de programas, en realidad ya no vamos a mandar programas.  Lo que vamos a subir son órdenes de venta para que se despachen.
+
+23:37 - SALA VIP
+  Y entonces, ¿sí? Entonces, la orden de venta la generaría Prime, que es una orden de venta. A ver, sería para...  ¿Naturberry o sería para naturagui? ¿Por qué lo digo? No, para naturberry, porque naturagui es un servicio de cooler, ¿sí?
+
+24:03 - Juan Pablo Cholico (naturprime.mx)
+  A mí no me está vendiendo naturagui el servicio, esa es otra cosa.
+
+24:07 - SALA VIP
+  Lo que me está vendiendo naturberry son fresas.
+
+24:13 - Juan Pablo Cholico (naturprime.mx)
+  Yo le estoy diciendo, naturberry necesito mil cajas para San Martín Obispo el día 6. Si estamos vinculados con naturagui y con Ario, obviamente la información le va a llegar a todo mundo.  Entonces, a naturberry le dice, naturprime necesita mil cajas el lunes. Entonces, le llega también la información al cooler y dice, tengo que preparar un pedido de mil cajas para mi cliente naturprime.  ¿Sí? Y ahí viene la carta dedicada.
+
+24:43 - SALA VIP
+  ¿Quién compra el servicio? Es ahí en la negociación del contrato. Los servicios de natur. El sistema, ¿cómo va a tomar la?  ¿Quién lo sucede? ¿Quién? Exactamente. ¿Quién va a surtir qué producto? De cuenta, yo tengo una orden por 5.000 cajas y tengo 2.000, 3.000, 1.000 y 1.500, ¿no?  ¿Cómo el sistema identifica si a qué cooler tiene que surtir este producto? Es lo que hace Julian allá.
+
+25:10 - Juan Pablo Cholico (naturprime.mx)
+  Todos los vendedores subimos nuestros pedidos y él va diciendo, este pedido, Juan Pablo, ponlo en tal cooler, este ponlo en tal cooler y esto.  Desde ahí te lo voy a surtir. Alguien de operaciones es el que decide cómo se reparte el pastel. Entonces ya cada cooler sabe qué le corresponde de esos 10 embarques de naturprime y también de los de exportación.  Exactamente.
+
+25:36 - SALA VIP
+  ¿Y es que nos estamos metiendo, al final de cuentas son cajas y nosotros ya nada más te decimos, sabes que recoges en tal parte.
+
+25:48 - Edder Palacios
+  Sí, pero lo que hay que buscar es el sistema automático esto. Exactamente. Entonces, ¿cómo lo haríamos? Estamos automáticos homologando la operación de exportación con la nacional.  Así se vuelve automático todo.
+
+26:01 - Juan Pablo Cholico (naturprime.mx)
+  Porque el problema es que en nacional tú facturas, no facturas lo que voy a hacer es, puedo decir, necesito 10.000 cajas.  Ya tú, Edder, me vas a decir en dónde voy a recoger las 10.000 cajas. Sí, yo te la tendría que facturar en cuanto salga el culer.
+
+26:17 - Edder Palacios
+  Tú tienes que salir con una factura mía de naturberry, naturprime. Es correcto. Quienes en un momento que que emitir la de prime, ¿no?
+
+26:27 - SALA VIP
+  Sí, así como lo hacemos con Estados Unidos. No, de naturberry a naturprime no, Edder, porque esa factura la vamos a hacer hasta la siguiente semana en la legislación.
+
+26:35 - Juan Pablo Cholico (naturprime.mx)
+  Simplemente van a ser una salida de mercancía. Yo no necesito presentar una factura en aduana como las con exportación.
+
+26:43 - SALA VIP
+  O una nota. Una nota de revisión o ya decidirán. Pero transportación. Documentar la salida. Pero nosotros queremos que tenemos el documento, perdón.  Pablo, por ejemplo, si necesitamos el documento al momento de que sacamos la mercancía, o si tendría que ser una factura directamente a Naturprime, a mi punto de vista.  ¿Cómo?
+
+27:04 - Juan Pablo Cholico (naturprime.mx)
+  ¿Y ahorita qué documento es el que hace la salida? ¿De Nacional? ¿De Nacional?
+
+27:11 - SALA VIP
+  Pues prácticamente, con el mismo pedido que ustedes ya van a generar a Naturberry, con eso sacaremos la factura a Naturprime, para poder sacar la fruta.  Aquí el único tema sería, realmente, de el domingo, que serán cuando tendríamos el nuevo precio, ¿no? Porque realmente ya tenemos precios de lunes a sábado.  Es que el precio final es en la liquidación, ¿estamos?
+
+27:38 - Juan Pablo Cholico (naturprime.mx)
+  Sí. Entonces, tú lo que propones es un precio base como el de exportación, y después haces el complemento con la liquidación.  A mi punto de ver, sí, porque realmente, en ese mismo momento, tendríamos que manejar, o si vamos a homologar.
+
+27:53 - SALA VIP
+  Exportación con Nacional, tendríamos que manejar la misma mecánica para poder tener nuestro stock o nuestro inventario correcto y al día.  Ajá.
+
+28:03 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, el domingo tú vas a tener un pedido de 500 pesos, suponiendo que fuera de fin de mes y aparte domingo, ¿no?  Entonces, a lo mejor de lunes a sábado tuve un precio de 400 pesos y el domingo, ya es primero de mayo, lo subo a 500 pesos.  Entonces, tú lo que vas a tener que definir ahí es, en ese pedido del domingo, cuánta fruta va de tus productores que te entregaron de domingo a sábado y cuántas son de ese mismo domingo, porque es otra semana la que vas a liquidar.  Y sabes que para ese pedido en particular, tu precio de venta de Naturprime es de 500 pesos, pero tú sabes después discernir cuántos vas a liquidar de la semana 19 y cuántos de la semana 20.  Pero entonces ya tendría que ser... ¿Qué diferenciado nacional con la explotación?
+
+28:56 - Edder Palacios
+  No, porque a le va a caer todo, él va a ser igual, va a ser igualito que ahorita.
+
+29:01 - Juan Pablo Cholico (naturprime.mx)
+  No, no, porque brincó semana, y ahí tendremos que ponerle el precio de la que sigue. Sí, o sea, si un pedido de mil cajas lleva 600 de la semana 19, a él le decimos de la semana 19, 600 cajas las vas a liquidar sobre el precio de 500 pesos, y es igual en Estados Unidos.  Tú tienes ventas de 10, 12, 8, 9, 10 dólares, y te entrega un solo precio. Igual acá, naturprime te entrega un solo precio de todo el cóctel de precios que hubo en la semana, correspondiente a la fruta de la semana 19, y cuando lleguemos a la 21, hacemos lo mismo para la semana 20.  ¿Verdad, Rafa? A mi punto de ver si tendría que manejar esa, es la misma mecánica que manejamos en exportación.
+
+29:47 - SALA VIP
+  Exacto, Ralfito.
+
+29:48 - Juan Pablo Cholico (naturprime.mx)
+  El sistema nos tiene que ayudar a distinguir automáticamente cuánta fruta viene de cada... No,
+
+29:56 - SALA VIP
+  Sí, y por ejemplo, el sistema nos tendría que dar un corte por semana para poder distinguir las cajas y a qué mercado se fue, para poder delimitar los precios en las liquidaciones, como dice Juan Pablo, saber cuántas cajas pagamos a una semana y cuántas van a brincar la que sigue, por lo tanto van a tener un precio diferente.
+
+30:18 - Juan Pablo Cholico (naturprime.mx)
+  Sí, y al final ya ustedes hacen, ustedes tienen dos fuentes de ingresos, el nacional y el de exportación, y hacen un blend para dar un solo precio a los productores de la semana que les quites.  Exactamente.
+
+30:36 - SALA VIP
+  Por ejemplo, Juan Pablo, en ese caso les tendríamos también que estar manejando una nota de cargo por semana como se maneja en exportación para delimitar el precio final.
+
+30:44 - Juan Pablo Cholico (naturprime.mx)
+  Y no habría problema porque el sistema tendría todo para calcularte esa nota de cargo, porque como estamos unidos, yo no voy a tener ningún...  Ninguna necesidad de calcularlo. La transparencia va a estar dentro del mismo sistema. Si Juan Pablo vendió a 500 y la sacamos para darle salida en 250, hay una nota de cargo de esa factura de la semana 21 de 250 pesos para complementar a los 500.  Sí, como el precio también va a estar homologado, realmente, tanto nacional como exportación.
+
+31:14 - SALA VIP
+  O sea, realmente ya vamos a ver, o sea, no tendríamos que hacer ningún algo adicional, más que nada, solamente delimitar el precio de la siguiente semana.
+
+31:21 - Juan Pablo Cholico (naturprime.mx)
+  Ajá, y ya cuando terminemos la semana, prácticamente el sistema nos tiene que dar la liquidación para revisión, una pre-liquidación ya hecha, calculada.
+
+31:33 - SALA VIP
+  Y habíamos pensado en que ese precio fuera una sola persona quien alimentaría ese y que cuando se haga la factura, nadie le pueda mover a ese dato y que en automático lo tome para que se pueda hacer la factura de...  Sí, correcto. Que viene renovado por esa parte. Sí. Sí, que el, ajá, o sea, podría ser de esa manera, el detalle es que nosotros tenemos un precio una semana después.  Si lo tuviéramos en el momento no tendríamos ningún inconveniente al facturar, el problema es ese pequeño detalle. Sí, porque no compramos, consignamos toda la fruta.  Ajá, pero el costo esto tiene que ser rico en un precio. Ajá, entonces, y tendrías dos, el de exportación en dólares y uno en pesos para nacional.
+
+32:20 - Juan Pablo Cholico (naturprime.mx)
+  Exactamente.
+
+32:20 - SALA VIP
+  Aquí sería más, o sea, más que nada sería como, por ejemplo, ¿quién delimitaría el precio de facturación por semana como en la exportación?
+
+32:29 - Juan Pablo Cholico (naturprime.mx)
+  Es que con las forcas de precios nosotros podemos hacer una fórmula en la que dices, si Juan Pablo tiene vendido en 450 pesos menos 120 de lo que gasto regularmente, me protejo con 180 pesos y entonces salgo con un precio muy cercano al que me van a liquidar y el complemento siempre va a ser una nota de cargo.  Esa sería como la regla, ¿no? Sí.
+
+32:53 - SALA VIP
+  Exactamente, porque esa es la situación, esa es la razón de que siempre tengamos una nota de cargo y no la nota del débito hacia abajo, exactamente.
+
+33:05 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, salgo a 200 pesos, la liquidación se hace, salió pagar 280 o 250, hacemos una nota de cargo de esa semana de 50 pesos por todas las cajas que le vendiste, o 50 pesos a las de Walmart, 25 a las de abastos, eso ya se define en el momento que queramos saber qué tanto detalle.  Porque, ¿sabes qué? Me pasó algo. El problema que tuvimos en Prime es que yo tengo ventas en algunos meses que se fueron al mercado de abastos y a Walmart.  Entonces, cuando tú le estabas facturando a Prime, facturabas un solo precio para esa semana. Entonces, de repente llegaba ese costo promedio a Prime y aparecían con pérdida de las ventas al mercado de abastos y con una súper utilidad en las de Walmart.  Cuando en realidad debimos haber tenido el costo de cada una de esas ventas para llegar a un promedio semanal que te va a dar el costo real de naturprime de esa semana.  No sé si fui claro con eso. Así podríamos tener explicado que una venta de 120 pesos al mercado de abastos, tú me la facturaste en 100 pesos y tenemos una ganancia de 20 pesos.  Y la de Walmart también tiene una ganancia del 8%, no del 20 en Walmart y una pérdida del 5 en el mercado de abastos.  Porque estábamos probando un solo precio para todas las cajas de una sola semana.
+
+34:32 - SALA VIP
+  A eso iba. Tú alimentarías en base al forecast, tú alimentarías ese precio estimado por cada semana independientemente a qué cliente lo vayas a enviar.  Uno sería en pesos y otro sería para exportación. Digo, esa es una decisión. Ajá.
+
+34:53 - Juan Pablo Cholico (naturprime.mx)
+  Que tendría que tomar cuenta, pero en mi forma de ver las cosas, tendríamos que tener bien identificados los costos de cada uno de los productos.  Era una de las preguntas que me hacían el otro día, ¿por qué hay fresas de 6 y fresas de 9 en la misma semana?  Y si las fresas de 6 y de 9 tú les pones un costo de 7, las de 6 le vamos a perder y las de 9 le estamos ganando 2.  Y eso no es la verdad.
+
+35:22 - SALA VIP
+  Financieramente, no contablemente, tal vez sí.
+
+35:23 - Juan Pablo Cholico (naturprime.mx)
+  Y con Pablo, por ejemplo, aquí no tendrías algún tema en cuestiones de rechazo con Walmart.
+
+35:30 - SALA VIP
+  Sí, correcto.
+
+35:31 - Juan Pablo Cholico (naturprime.mx)
+  Cuando se va la fruta, el mundo ideal es que yo vendo mil cajas y todas se van a Walmart, ¿no?  Y te hago una liquidación por 400.
+
+35:41 - SALA VIP
+  Pero dos tarimas, 240, se van al mercado.
+
+35:46 - Juan Pablo Cholico (naturprime.mx)
+  Estas te las voy a liquidar con un Pencil Price aparte, ¿sí? Te las voy a liquidar para tener la liquidación.  Porque si me las rechazaron el domingo, yo creo que las van a terminar de vender el miércoles. Para el miércoles nosotros ya teníamos que haber determinado el precio del productor.  Entonces ahí es donde tenemos que contablemente saber que Naturprime todavía me debe dinero por esas dos que se fueron al mercado, que me las puso en un principal de tres dólares, pero tal vez pueda recuperar cinco.  Es lo mismo, es complementar los precios, pero en una segunda etapa. Una es el preprecio que mandas al momento de la salida de la mercancía y otro, aquella mercancía que salió y que sigue en consignación porque fue rechazada.  Entonces vas a tener otra nota de cargo por esa fruta que se fue de rechazo.
+
+36:53 - SALA VIP
+  Es lo que vimos con Víctor, acuerdas, Vic?
+
+37:00 - Juan Pablo Cholico (naturprime.mx)
+  Y con Estados Unidos, ¿no? Las rechazos, te lo ponen en el Pencil Price y se acabó. Tres dólares, y si después recuperaron cinco, ya harán una cuenta entre Naturallfams y NBG, ya no la hacen con...  Tengo entendido que ya no te hacen ningún complemento de pago, ¿verdad, Rafa? No, ellos no.
+
+37:20 - SALA VIP
+  Ellos me realizan la liquidación. Precio firme, ajá, para el promedio. Sí, ellos me hacen la liquidación y ya no hay ninguna modificación de precios.  Entonces, en absoluto.
+
+37:30 - Juan Pablo Cholico (naturprime.mx)
+  Lo toman del dólar que NBG se protege con el dólar allá, ¿no?
+
+37:35 - SALA VIP
+  Exactamente.
+
+37:37 - Juan Pablo Cholico (naturprime.mx)
+  Y acá el dólar, los 20 pesos los tenemos en Prime.
+
+37:48 - SALA VIP
+  Cuando envías esa gestión de... A Frutas y a los clientes, aquí hay, al menos en el diagrama, el manejo del flete.  ¿Ese manejo del flete lo vamos a hacer dentro de Prime o se hará en algún otro, en Naturberry?
+
+38:12 - Juan Pablo Cholico (naturprime.mx)
+  En Prime, porque la mercancía ya es legalmente, su tendencia es a partir de que nos la entregan en el flete, afuera del cooler.
+
+38:23 - SALA VIP
+  Ajá, ok. ¿Y ahí haces una, se generarán órdenes de compra hacia tus proveedores de transporte?
+
+38:33 - Juan Pablo Cholico (naturprime.mx)
+  Sí, con la que está pendiente de que ésta sea con las características de un servicio de cartaporte. Es decir, es una orden de compra especializada para una cartaporte, que también te va a servir para los fletes de planta, porque no es como de una computadora o un servicio.  Necesita tener... Otras cosas que les sirven al transportista para generar la carta aporte, porque recuerden que la carta aporte tiene que cuadrar con la factura.  Entonces, por eso es importante que nosotros tengamos el dato lo más pronto posible de cuánto vas a subir al camión, para que en cuanto sepamos que de las mil cajas se van a ir finalmente 900, en cuanto tengamos esto determinado, se le puede enviar la instrucción al transportista de que me haga una carta aporte por 900 cajas, y no que terminemos todo el ciclo y luego nos tengamos que esperar a que el transportista me mande la carta aporte.  Ahí, para agilizar eso, ¿cuál es la sugerencia? Que el cooler, en cuanto tenga determinado cuántas va a subir, no quiere decir que lo va a determinar en el momento que empiece a cargar la carga.  Lo va a determinar una, dos o tres horas antes. O un día antes, porque va a etiquetar esa fruta, acuérdense, ¿no?  Que le hace un trabajo especial físicamente, entonces tenemos que dar como una validación del cooler en donde diga, este pedido de mil, un día antes, lo ideal, cuando está el pico de temporada y sobra la fruta, se va a ir con mil.  Pero al final de temporada, al principio, que estamos a cuenta agostas recibiendo la fruta, pues por lo menos va a tener ese dato una hora antes, porque una hora antes tenemos que empezar a pre-friar el carro.  Entonces, esa hora es suficiente para que cierre el embarque, el cooler, y ahí determine cuántas cajas finalmente va a subir, y también le indique la señal al transportista de qué cantidad de cajas va a hacer la carta porta.  ¿Podemos contar con eso, Edder, George?
+
+40:44 - SALA VIP
+  Porque Edder, tú como encargado de operaciones, y Edder como encargado del cooler, va a... ¿Dónde se puede hacer, George?
+
+40:53 - Edder Palacios
+  ¿Tú perdón, Robert? ¿Sí puedes hacerlo así? Sin ningún problema, porque eso es lo que sería, nada más, el único problema sería cuando salgamos cortos, pero de ahí fuera.
+
+41:04 - SALA VIP
+  no vas a determinar. No era un problema.
+
+41:06 - Juan Pablo Cholico (naturprime.mx)
+  Sí, o sea, una hora antes vamos a saber que vamos a ir cortos, ¿no? Ya, cerramos el viaje. Entonces, es una indicación al montacargistas de decir, listo, ya puedo subir esto, ya está cerrado, ¿no?  En cuanto esté listo el camión, el montacargista, los operadores, quien hagan, ya saben que van a subir 900 cajas, independientemente que hay 10.000 cajas en el cooler, saben que en ese camión nada más 900 porque ya está cerrado el pedido.  Entonces, la factura va por 900, la carta de aporte va por 900, los documentos que debe de generar automáticamente el sistema va por 900, y así ya no vas a tener esperando ni a Sofía, ni a Carla, ni al almacenista, ni al montacargista, ni la carta.  Por la información, porque al momento que lo cierra, tendría que llegarle la información a todos. Sí, perfecto.
+
+42:02 - SALA VIP
+  Entonces, para avanzándonos con la cantidad de cajas, efectivamente, que tenemos.
+
+42:08 - Jorge  Obregon
+  Exacto. Con una hora antes, como tú dices, se cerraría lo que es el embarque. En el peor de los casos, cerrar el pedido.
+
+42:18 - SALA VIP
+  Exactamente.
+
+42:19 - Jorge  Obregon
+  Y ahí ya todos toman la información a través del sistema, ¿correcto? Sí.
+
+42:23 - Juan Pablo Cholico (naturprime.mx)
+  Y esa hora, Jorge, es en el peor de los casos, porque en el mejor de los casos, el ideal es que la fruta nacional va a estar un día antes lista.  De acuerdo. Por el etiquetado.
+
+42:38 - SALA VIP
+  Esa gestión de los fletes, ¿la seguirá haciendo Carla, la seguirá haciendo Leti, o la va a hacer Tania? Es que la gestión...
+
+42:53 - Juan Pablo Cholico (naturprime.mx)
+  Yo lo veo así, Ale. Una cosa es solicitar el servicio y como es recurrente todos los días, la orden de compra se convierte en un mecanismo automático que le va a llegar al transportista, cumple tu obligación administrativa de trazabilidad y a la vez le da agilidad a la operación.  Entonces, ¿quién lo va a hacer? Debería ser el sistema. ¿Quién lo va a revisar? La parte operativa la seguimos haciendo en Prime y la parte administrativa pues le va a caer el servicio a compras y a cuentas por pagar para que sepa que este servicio va a tener una trazabilidad y una evidencia y cuando caiga la evidencia automáticamente el compra va a llegar con, ah, es este servicio, ok, ya se puede pagar, ¿no?  Es que va a ser, ¿cuál es una cosa?
+
+43:47 - Edder Palacios
+  Una parte operativa la lleva Prime y otra parte operativa la lleva Naturberry. La orden de compra. Ambos llevan parte, exactamente, orden de compra, todo eso, ¿quién la va a hacer?  ¿Ustedes o nosotros?
+
+44:04 - SALA VIP
+  Es que la parte de Prime, del flete, me queda claro, si se lo facturan a Prime, quien pide el servicio es operativo.  Yo la tengo que hacer, exactamente, entonces tú únicamente serás administrativo, serás operativo. Pero compra va a ser 90.000 pesos.  Es al revés. O sea, compra va a generar algo de compra y nosotros se dan que generar No, porque operativo, yo tendría que subir todos los trailers y todo, únicamente tú me vas a poner el trailer.  Es cuando cierras el pedido. Ajá.
+
+44:30 - Edder Palacios
+  Y yo voy a hacer todo el proceso antes, subiéndote yo la fruta al trailer, cerrando, poniendo candado y mandándote los papeles, ya no es mía esa fruta.  Correcto. Ya salió. Y el flete, el flete es la orden de compra que estamos discutiendo, es decir, ¿cómo vamos a generar la orden de compra del flete de Prime?
+
+44:50 - Juan Pablo Cholico (naturprime.mx)
+  Es que tendrá que ser en el mismo sistema donde lo tendrá. Sí, o sea, más que en la persona sería el proceso que automáticamente se dispararía al momento de que solicite la cartaporte.  Le cae la orden de compra-compras, operaciones, le da seguimiento, el transportista sube su información para darle evidencia y así ya está llegado con la venta, con la compra, con el productor para las liquidaciones.  ¿Quién determina, quién es el responsable de asignar los pletes dentro de nuestro proceso?
+
+45:23 - SALA VIP
+  Porque a ver, si va a llegar la orden de compra, va a llegar la orden de compra de la fruta y yo tengo cuatro coolers, entonces el sistema va a determinar en base a la cantidad de fruta disponible, tipo YTC, quién puede surtirte o no ese pedido.  ¿La orden de venta? Ajá. ¿En la orden de venta tenemos que asignar al transportista? ¿Cuál sería el criterio de...  ¿Qué parametrización del sistema para asignar qué transportista va? Obviamente por la parte de la zona, estamos de acuerdo, pero a mejor yo puedo tener un escalafón uno, dos y tres.  Si el primero no está, entonces que tome el segundo. ¿A qué voy? Si el primero, si el primer proveedor o primer transportista asignado dentro de esa parametrización por zonas, si el primero no puede darle el servicio porque está bloqueado, porque tiene opinión de cumplimiento negativa, entonces el sistema va a ir contra el segundo transportista.  Tenemos que hacerlo más discrecional porque tenemos, es como el clamche, igual.
+
+46:37 - Juan Pablo Cholico (naturprime.mx)
+  Entonces la asignación tiene que ser manual.
+
+46:41 - SALA VIP
+  No, no, no puede ser, no puede ser manual, no puede ser manual, porque yo le voy a dar la transferida, el sistema ya me va, me tiene que automatizar.  Este ¿Por qué yo tengo que meterme? Ah, no, este sí para aquí, este sí. ¿Por qué si lo puedo parametrizar en base a la disponibilidad de la fruta?  Sería el transporte, porque si era el transporte. Te voy a decir algo. Le explico yo o le explica tú, Edder.
+
+47:12 - Juan Pablo Cholico (naturprime.mx)
+  Ahí no te lo puedo explicar, pero tenemos que hacerlo manual. O sea, porque si no, en algunas cosas vas a decir, ¿por qué no le están dando?  Bueno, lo tengo que explicar, ¿no? Pero ahorita tiene que ser manual, Ale. Me encanta tu idea, pero ahorita lo tenemos que ser manual.
+
+47:35 - Edder Palacios
+  ¿Tienes que es de acuerdo a lo que se tiene, Ale? Es un acuerdo de negociación comercial.
+
+47:41 - Juan Pablo Cholico (naturprime.mx)
+  Entonces, esa parametrización que dices no va a respetar ese acuerdo comercial, a menos de que le pongamos la parametrización.  Y te digo, ¿para qué? Pues para nada. Entonces, dale este porcentaje a este proveedor y este... Porcentaje de este proveedor.  Y va a decir, ¿por qué? Bueno, después te lo platico, ¿sí? Sí, después, sí, sí, ya, sí, ya, ya.
+
+48:01 - SALA VIP
+  ¡Ah, gracias! ¡Hola! ¡Qué buen día! Ya, gracias, gracias en el rugby. ¿Cómo tiene que ya saber? Sí, va. No es una decisión ni de Carla, ni de Edder, ni de nadie, ¿sí me explico?
+
+48:15 - Juan Pablo Cholico (naturprime.mx)
+  Es un acuerdo comercial que tenemos que en esa paramatrización lo podemos configurar así.
+
+48:23 - SALA VIP
+  Y me ahorrarías mucho trabajo, ¿no? Ok, entonces, ¿cómo, para ser claros aquí en la reunión, cómo quedaría, entonces, ese plente?  ¿Quién lo generaría? operaciones asignan los transportistas? ¿Operaciones de? ¿Operaciones? ¿De Frank? De Frank. Es que solamente tengo operaciones y alguien otra vez va a enseñar.  tu mente sí, pero es operaciones Frank, porque no se quiere que la exportación. Sí, entonces.
+
+48:54 - Juan Pablo Cholico (naturprime.mx)
+  Hay una cosa, quien ejecuta la venta es comercial, ¿sí? Y dentro del organigrama comercial hay un área de operaciones que designa transportistas, porque son los que le van a dar seguimiento.
+
+49:09 - SALA VIP
+  Ajá.
+
+49:10 - Juan Pablo Cholico (naturprime.mx)
+  En la parte de exportación hay una operación de exportaciones a quien le asignan los transportistas desde Estados Unidos y le da seguimiento a operaciones a que lleguen en los tiempos que se le solicitó.  Pero el transportista de Estados Unidos no lo designa Eder, lo designa manualmente, lo designa Natural Farms, quien es quien paga el producto.  Te voy a decir así, es como si le dijeras, Walmart, tienes que cargar con fulanito, y te va a decir, Walmart, ¿por qué?  Yo te voy a mandar mi camión. Costco va a decir, ¿por qué? El camión lo pongo yo, entonces yo designo.  Es lo mismo. Farms es el que paga los fletes y Prime es el que paga los fletes. Viene la asignación del flete del cliente, si lo quieres ver desde esa perspectiva.  Tú solamente se lo tienes que entregar al cliente en su camión. Ok, entonces, ¿quién gestionaría sería operaciones de naturprime?
+
+50:08 - SALA VIP
+  Sí. El flete, ahí se vería órdenes de compra hacia el proveedor para que haga el servicio.
+
+50:18 - Juan Pablo Cholico (naturprime.mx)
+  Yo pediría que desde la orden de venta tengamos el campo para que ahí se pueda designar y volver a cambiar.  En SAP lo hacemos igualito. En la orden de venta nosotros decidimos, este es el carrier que se va a llevar la mercancía y si en el Inter hay un cambio antes de cargar la mercancía, obviamente, puedes entrar a la orden de venta y modificarlo para que entre el segundo proveedor en caso de que le haya pasado algo al primero en la orden de venta.
+
+50:48 - SALA VIP
+  Entonces, los datos del transportista se cargan ahí para que cuando llegue al cooler...
+
+50:53 - Juan Pablo Cholico (naturprime.mx)
+  tengan los datos del camión y la línea que va a cargar inclusive el chofer, porque son datos que necesitamos en la carta de instrucciones de Walmart, en la carta porte y en la hoja de instrucciones de Walmart, que son tres documentos.  Entonces, en una sola captura desde la orden de venta, Operaciones Sofía Carla, le están dando todas las indicaciones al cooler y al transportista, de quién va a cargar y a dónde van a cargar.  Sí, me acuerdo.
+
+51:26 - SALA VIP
+  En la toma del servicio, hablando de naturagui, que es quien saca la fruta, bueno, al menos en ese aspecto, debe de haber interacción con naturprime, o es con naturberry, o es con naturberry la interacción.  ¿De interacción para qué? ¿Por dónde se cortó? De la pregunta. Para los servicios que da Naturagui.
+
+52:03 - Juan Pablo Cholico (naturprime.mx)
+  Ah, en Nacional Comprime, los servicios de Naturagui se los cobra a Naturberry. Sí, en personas de frío.
+
+52:12 - SALA VIP
+  Sí, fríos, material, bueno, manejos de material, todos los asesores, sé, Rafa te estaba a decir mejor qué es lo que le cobra, ¿no?  Sí, realmente todo el servicio de Naturagui. Naturagui a la Comprime. No, este, todo, todo lo que es frío y lo que lleva parte del producto es con Naturberry, pero tengo entendido, Pablo, que a este, Naturagui les facturan unas, no me acuerdo si son, este, análisis, una cosa así, ¿no?  Fitosanitarios o no me acuerdo. certificados, a ver, que nos diga, Los certificados fitosanitarios. Son los certificados fitosanitarios.
+
+52:44 - Jorge  Obregon
+  Y yo no tengo ningún problema que me los cobres en la fruta, ¿eh?
+
+52:49 - Juan Pablo Cholico (naturprime.mx)
+  O sea, si eso causara conflicto en un futuro y homologar. Todo en los servicios de naturagui hacia acá, podrías cobrarle también los fitos sanitarios a Naturberry, Naturberry me los cobra a mí, o los tenemos contemplados en la liquidación.
+
+53:04 - Jorge  Obregon
+  A mí no me gustaría cobrar eso junto con la fruta porque estaríamos perdiendo tratabilidad, porque hay algunos certificados que tienen traslado y otros no, y entonces vamos a empezar o entrar en una situación en la que, ¿Por qué me cobras un precio y por qué me cobras otro?  Ok, va, me late, Jorge.
+
+53:29 - Juan Pablo Cholico (naturprime.mx)
+  ¿Cómo quedó? Aparte de que Naturagui factura o que los clientes son las más es...
+
+53:33 - SALA VIP
+  Entonces, ¿cómo quedó esa parte? ¿Queda ya con la misma y sigue igual? En la general, se dedicaba un fito.  Naturagui a Prime y Naturbergui a Prime, o los dos. Ajá. Son conceptos diferentes, pero los dos tienen que poder generar, por lo tanto, Prime va a tener estados de cuenta diferentes.  Muchas gracias. Gracias. Exactamente, sea, naturagui va a interacción con los dos. Sí.
+
+53:58 - Juan Pablo Cholico (naturprime.mx)
+  Y la importación es completamente naturagui con prime y naturberry con prime por los materiales. Sí, efectivamente. ¿Quién? ¿Naturberry?
+
+54:18 - SALA VIP
+  Sí, los dos, naturagui prime y naturberry prime. Entonces tendríamos que tener un almacén de termógrafos, un almacén, almacenes diferentes.  Sí, exactamente. Para que el sistema reconozca de aquí saco esto y por lo tanto las no son socios. No es diferente, sea, realmente solamente el sistema tiene que decirte de dónde hay que almacén calar.  Sí, pero ¿quién va a dueño del almacén? Naturberry. Naturagui no va a tener almacén. Es que Naturagui no tiene almacén.  Todo el material lo tenemos, lo tiene Naturberry. Todos los insumos que le... vendemos a Prime, todo tiene naturagui. Excepto las tarimas de Chef, Prime sí tiene Chef.
+
+54:59 - Juan Pablo Cholico (naturprime.mx)
+  Ah, esa parte.
+
+55:02 - SALA VIP
+  O sea, lo único que hace Naturagui es como, es la mano de obra prácticamente, hacer el cambio. Pero realmente todos los índices son de nosotros.  No, pero Naturagui tiene que, a ver, Jorge. Pero Naturagui va a tener que hacer un cobro. Es que yo, hay que ver a Naturagui como para otros clientes, servicio para otros Y ahí sí.  Tiene que tener almacenes. Sí, tiene que tener almacén natural. Y rentan un espacio acá al Giant o a Outlook, pues van a tener un control de ese almacén, ¿no?
+
+55:37 - Juan Pablo Cholico (naturprime.mx)
+  Y el servicio es el control de ese almacén, supongo. Sí, sí, sí, sí.
+
+55:42 - SALA VIP
+  Porque ahí vamos a, o sea, ahorita no tenemos manual, pues. ¿Me explico? Pero nosotros sí rentamos un cierto almacenaje.  De hecho debe haber un control del material que le entregas tú a Naturagui. ¿Cuánto ruagui para que luce y cuánto terreno?
+
+55:55 - Juan Pablo Cholico (naturprime.mx)
+  Ah, sí, sí. Esa parte sí es algo. Pero si no, es un tema de una vez.
+
+56:00 - SALA VIP
+  Es como un aparente en campo. Sí, es como un aparente en campo. Pero es una transferencia de armazenamiento natural.  Sí. Sí, exactamente, como si fuera un inventario, bueno, un material en consignación, se podría decir. Sí, sí, una transferencia tal cual.
+
+56:14 - Juan Pablo Cholico (naturprime.mx)
+  Como si mueven tarimas de un almacén a otro, o sea, inclusive, pues, es un almacén también para... En el mundo del momento, bueno.
+
+56:27 - SALA VIP
+  Exactamente, maneja como si fuera un tipo de aparente en campo. Ok. De aquí, si seguimos tu flujo, bueno, ya vimos que son las salidas, evidencias.  Toda esa la va a generar... El sistema.
+
+56:47 - Juan Pablo Cholico (naturprime.mx)
+  Sí, el sistema, pero del lado de...
+
+56:53 - SALA VIP
+  Uf, es que tendría que ser nosotros, que es lo que les decía. Sí, y ahí va a ser la ventaja, somos el que le vendemos.
+
+57:01 - Edder Palacios
+  Esa parte de la documentación de salida, tú me la mandas, pero yo es el que tengo que hacer notas y todo lo demás.
+
+57:07 - Juan Pablo Cholico (naturprime.mx)
+  Ajá, pero también desde Prime, yo ya estoy vendiéndole a Walmart, entonces ahí es la hoja de salida, o la hoja de recepción de la mercancía, más los instructivos del chofer, la hoja de lotes, el checklist de cajas, las fotos del servicio.
+
+57:24 - SALA VIP
+  Es que lo tuyo.
+
+57:26 - Juan Pablo Cholico (naturprime.mx)
+  Ajá, son dos servicios diferentes, tú la entrega y yo la recepción. Exacto.
+
+57:32 - SALA VIP
+  Y luego yo la entrega a mi cliente.
+
+57:36 - Juan Pablo Cholico (naturprime.mx)
+  Toda entrada tiene una salida y ambas tienen que estar documentadas. Exacto.
+
+57:41 - Edder Palacios
+  O sea, aquí lo importante yo creo que es poner en la mesa y decir, ¿hasta dónde operativamente nosotros entramos?  ¿Y qué ocupas de nosotros? Ajá, operativamente. Ya cerré el candado del trailer, ya es tuyo, Juan Pablo, y yo ya no me meto.  Ajá, y tu evidencia es la factura de salida con el preprecio.
+
+58:05 - SALA VIP
+  Exacto.
+
+58:06 - Juan Pablo Cholico (naturprime.mx)
+  Tu hoja de salida de evidencia del almacén, Ario, Tato Tonilco, donde salgamos. Ajá. Y ya viéndonos más exquisitos, toda la evidencia de los servicios, porque te lo van a pedir para la trazabilidad.  Ah, no, sí, pero eso ya sería interno, administrativa.
+
+58:27 - Edder Palacios
+  Ajá, pero eso es administrativa.
+
+58:28 - SALA VIP
+  Pero va a estar en el sistema, ajá, en el sistema va a quedar porque se va a estar haciendo esa gestión.
+
+58:33 - Juan Pablo Cholico (naturprime.mx)
+  Al cliente, ya se me llames en Naturberry Farms, o Naturprime, o otro cliente, tú le vas a entregar su hoja de salida, su factura, y lo que ustedes le quieran poner de más.  Pero básicamente es la factura, ¿no? Y cualquier... Documento que necesitemos de tu parte para yo poder moverlo. Pero ahí está viéndolo desde la perspectiva de Naturprime, o sea, de este macro, que es el de Prime, yo recibo de Naturberry esos documentos y yo genero los documentos para entregarle a mi cliente.  Ahí es donde están aquí juntitos todos. Esos cuatro íconos de checklist, fotos y la, y los documentos que Naturberry me va a entregar.  Sí, ok.
+
+59:36 - SALA VIP
+  Ya la gestión de la evaluación de calidad de entrega, eso ya es por parte de Naturprime, ahí no hay tema.
+
+59:44 - Juan Pablo Cholico (naturprime.mx)
+  A ver, ya estamos nosotros integrados, la información que genera Naturberry en su trabajo... Nosotros tenemos visibilidad para saber que se inspeccionó esa fruta, que se etiquetó, que tenemos la variación de carga y descarga que se hizo bien, que tenemos la evidencia de que va completa la mercancía, o sea, es trabajo de naturberry en sus almacenes, en sus coolers, trabajo, así decirlo, de Jorge, y que nosotros tenemos como evidencia para cualquier asunto con nuestros clientes, aprovechando que estamos en conjunto.  Si fuera Driscoll, pues no me va a dar esta información, porque es cliente proveedor, ¿no? Pero estando en conjunto es aprovechar esa visibilidad y tener esa información a través de los sistemas, tanto Jorge como, déjenmelo verlo como personas, tanto Edder como Jorge como yo, queremos saber ciertos puntos específicos de la operación, que hay una evidencia de que está bien hecho.  Claro.
+
+1:00:44 - SALA VIP
+  El acceso lo van a tener, pero no necesitan que un proceso migre a otro lado, ¿correcto? Exacto, es visibilidad nada más de temperaturas etiquetadas.
+
+1:00:55 - Juan Pablo Cholico (naturprime.mx)
+  De los puntos críticos que cuidamos para que la mercancía llegue bien. De eso se trata este punto. Perfecto.
+
+1:01:02 - SALA VIP
+  Lo que vemos ahorita, vaya, ¿no? Ajá, sí, sí, Y el monitoreo de cadena de frío, pues ya lo sabes, ¿no?
+
+1:01:11 - Juan Pablo Cholico (naturprime.mx)
+  El tener esa portal para poder monitorear la temperatura de los cambios.
+
+1:01:15 - SALA VIP
+  Sí, pero ahí ya es completamente de prime. Totalmente de prime.
+
+1:01:20 - Juan Pablo Cholico (naturprime.mx)
+  Llega, entregamos, ¿y qué pasó? Entregamos bien o entregamos parcialmente bien. Y el parcialmente bien, se abre una línea en donde decimos, esta fruta va a otro mercado y se abre otro ciclo de venta.  Otra factura, otra cartaporte. Pero manejo exclusivamente de prime.
+
+1:01:42 - SALA VIP
+  De prime.
+
+1:01:43 - Juan Pablo Cholico (naturprime.mx)
+  Que va a afectar en la liquidación que le voy a entregar a Rafa al final de la semana. Igual como lo hace Farms.  Yo recibí mil cajas. Me rechazaron mil, de esas mil te doy un pencil price y del otro el precio normal.  El promedio me da cuatro en vez de cinco. Sobre eso eliquida tu producto, lo mismo voy a hacer yo acá.  Pero genera otro miniciclo de notas de crédito, notas de cargo, devoluciones de mercancía para refacturarlas a un nuevo cliente, que es el que va a recibir la mercancía que originalmente era para Walmart, una nueva carta aporte que tiene que ir ligada a la carta aporte original para que por temas de costos siga la misma trazabilidad de ese carro.  Yo iba a gastar treinta y cinco pesos y terminé gastando treinta y ocho por un rechazo. Esos tres pesos tengo que tener bien visualizado porque se los voy a cobrar a alguien tomando de los veinte pesos para los rechazos.  Eso lo necesita contabilidad. Saber a dónde va esos gastos y cómo los vamos a aprovisionar o cómo los vamos a cubrir.  ¿Cierto, Alejandra? Fue a, ahí sí, tomando en cuenta los 20 pesos, ¿verdad? Exactamente, o sea, para saber los rechazos y todo, ahorita va, todos los rechazos, las comercializadoras, en este caso Farms, NVG o Prime, tienen esos 20 pesos.  Si hay un reclamo de calidad, yo se los reclamo a Naturberry. ¿Cómo se los reclamo? Poniéndole un pencil price, porque es un reclamo de 3 dólares en vez de pagárselo a noche.  Pero recuperar esos, esa diferencia, lo tomamos de un fondo que tenemos de 20 pesos por caja de cada una de las cajas que manejamos.  Entonces, si manejamos un millón de cajas, pues tenemos 20 millones de pesos. Y los rechazos fueron por 4 millones, ok, entonces quedaron 16 que le pertenecen a los productores de Naturberry.  Y ya directivamente nos van a decir cómo van a trasladar esos 20 millones, esos 16 millones a la siguiente.  Este es un tema contable que hay que tener bien visualizado y trazable para que nos van a preguntar, ¿qué haces con estos 20 pesos?
+
+1:04:04 - SALA VIP
+  ¿Y de dónde salen estos 20 pesos? ¿En qué parte del contrato vienen estos 20 pesos?
+
+1:04:09 - Juan Pablo Cholico (naturprime.mx)
+  Eso. La imagen que se queda, ¿Verdad?
+
+1:04:12 - SALA VIP
+  ¿Y tú qué verías, o tú qué esperarías de ahí, de ese nuevo Pencil Price, o de ese reclamo? Sí, de ese Pencil Price, tengo entendido que realmente, terminando temporada y verificando ya los precios, creo que con Naturpreit también tenemos unas notas de cargo por las últimas semanas.  Con esos 20 pesos o ese dólar en su defecto que se quedaba, Frank, tengo entendido que va a haber, bueno, nos van a pasar lo que es la diferencia, ya descontando los, o sea, los inconvenientes que tuvo prácticamente el primer momento de la venta de Chas.  O cualquier otro tipo de situaciones. Y esa diferencia, se lo tendremos que estar facturando como una diferencia en precio para la temporada.  Para que nos puedan devolver esa diferencia que tuvieron en lo que nos recibieron, contando todas las incidentes que tuvieron.  Yo supongo que va a funcionar como el dólar, ¿no?
+
+1:05:16 - Juan Pablo Cholico (naturprime.mx)
+  Al final de cuentas, lo que sobra del dólar allá, te sirve para el dólar que tienes para la siguiente temporada, ¿no?
+
+1:05:24 - SALA VIP
+  Exactamente. Serían procesos dentro de la contabilidad. Sí. En intercompañías. Exactamente. Intercompañías con reportes que nos ayuden a visualizar eso, ¿no?  Sí, que realmente, o sea, tiene que haber un reporte como ese con Pablo, donde se vea reflejado esa retención que nos está haciendo Prime.  Exactamente. Para nosotros también poderlo visualizar y saber cuánto es lo que ya tiene Prime. Y nosotros también poderlo contemplar en la turbia, como que ese dinero.  Pero se está quedando de aquel lado y nosotros también tenemos que provisionar. Llega auditoría y dices, ¿cómo usaste estos 20 millones?
+
+1:05:59 - Juan Pablo Cholico (naturprime.mx)
+  Ah, pues mira, están aquí estas cosas por etiquetado, estas por posesión, estos son para cubrir los fletes extras, usé 4 millones.  Ok, entonces tienes que tener 16 provisionados contablemente, hacemos el cargo, se los pagas a Naturberry y se acabó la temporada.  Exactamente.
+
+1:06:18 - SALA VIP
+  Ok, muy bien. ¿Sería el fin de los procesos, del macro proceso, el flujo de Prime o nos está faltando algo más?
+
+1:06:34 - Juan Pablo Cholico (naturprime.mx)
+  Faltan las aplicaciones de las tiendas, las notas de crédito, descuentos, convenios que están en la parte de gestión de rechazo, reclamación de notas.  Ah, ahí en la parte de reclamaciones y notas de crédito, bueno. Ahí falta una. Ese es por reclamos, pero hay una serie de notas de crédito que se hacen en las entregas a tiendas.  Entonces, ese módulo de notas de crédito por entieras a tiendas es importante porque eso es lo que va a generar los saldos reales que vamos a recibir en Naturprime y también nos va a servir para determinar el precio final con el que vamos a liquidar a Naturprime.
+
+1:07:17 - SALA VIP
+  Ok. Sí, ese me imagino que viene acá dentro del otro diagrama de flujo que tiene o que ya hizo Chema o Vitor, que por aquí está.  Chema estaba, ajá, ok. Ajá, todo este. Aquí nada más estamos viendo como el macroproceso en donde podamos tener interacción con ya sea Naturberry o Naturagui.  Entonces, ese es más tu proceso de interno de primos. De ventas, ajá. Correcto. Pues listo, Chomico. Yo creo que, digo, si quieren permanecer en la reunión, adelante.  Sí, desmigo, pero ya voy a ir arrancando, estaba parado.
+
+1:08:03 - Juan Pablo Cholico (naturprime.mx)
+  Ándale, no, no, quedó excelente, Juan Pablo.
+
+1:08:08 - SALA VIP
+  Pero entonces sí vamos a tener la parte de comercio con logística.
+
+1:08:13 - Juan Pablo Cholico (naturprime.mx)
+  Ah, esa parte de comercio al parecer se vendría bajo el organigrama de comercial, ¿verdad, Ale? O comercio.
+
+1:08:26 - SALA VIP
+  Es que tendrías que sacarlo en línea punteada. No puede ser comercial. Pero operaciones, operaciones, línea punteada comercial, ¿no? Pues es que me van a hacer listos en importación y a ustedes les va a hacer listos en exportación.
+
+1:08:41 - Juan Pablo Cholico (naturprime.mx)
+  No, es que ya no, ya no, ya no.
+
+1:08:44 - SALA VIP
+  Pero es operacional. Sí, es operacional. ¿De qué lado? ¿De operaciones? ¿Cómo? ¿De cuál lado? ya ya no. Gracias. O tenemos una sola operación.  Ahorita estamos hablando de operaciones. Ya sabes que es un tema que estoy tratando de, los muchachos me han dado mucha calma en ese punto, mucha paciencia, pero creo que el tema aquí es definir, para después pasar al sistema, esa parte de quién tendría que tenerla.  ¿Por qué no nos podemos poner de acuerdo? Cuando digo que los muchachos no han tenido paciencia, Pablo y Edder, estamos todavía como que debatiendo esa parte, cuando lo vemos con un todo.  Y si no, no puedo yo decir, ya quedamos, pues se han faltado los criterios de Aldo y de Salvador.  Yo podría decirte, todas las operaciones con esa línea punteada a la parte comercial. Pero no sé yo cuál sería la estrategia que pueda tener ya un ángulo de crecimiento y demás.  Me falta finanza. Pero pongo sobre la mesa porque todavía es un módulo que nos hace falta de finanza. Y ahí sí interactuamos todos.  Sobre todo ahorita para ver lo del tema del IMEX también. ¿Cómo no tendríamos que tener confianza en sistema? IMEX, IMPO y ESPO.  Está choncho en el departamento. Comercio, comercio. No, ajá, pero no es como algo para poder salir en vivo, ¿verdad?  O sea, ¿podemos salir en vivo a pesar de eso y irlo...?
+
+1:10:32 - Juan Pablo Cholico (naturprime.mx)
+  O sea, tenemos que tomar en cuenta que hay requerimientos en materia aduanera que tienen que estar dentro del sistema para que estén en la factura, factura de venta.  Esos campos se tienen que definir independientemente de un departamento y en el organigrador quien van a responder, ¿no?
+
+1:10:50 - SALA VIP
+  Correcto. Totalmente, sí. Estoy de acuerdo. Eso. Ok. Ahí, bueno, es comercio exterior, ¿no? Y tal cual. El IMEX, todas tus compras, pues tiene que tener pedimento de importación para que esté decidiendo, para el examen que se presenta.
+
+1:11:07 - Juan Pablo Cholico (naturprime.mx)
+  O sea, tiene que estar un módulo en ERP muy robusto para que lleven ese control lo más suave posible.
+
+1:11:13 - SALA VIP
+  Es que es parte primordial de mi proceso productivo. Ya, ¿a quién van a responder? Esa es otra historia, doña Clonita.  Ya, que no me quiero, o sea, que si va a ser Clonita y Leti y todos directamente, ya es otro tema.  Es que una cosa es comercio exterior y otra es operaciones. Es correcto. Estamos en ese, pero sí, sí habría que...  Que uno es administrativo y el otro es operativo.
+
+1:11:43 - Edder Palacios
+  Y es que Carla, tú la ves como logística y no...
+
+1:11:46 - Juan Pablo Cholico (naturprime.mx)
+  Carla hace parte de la logística, pero es el soporte a la venta.
+
+1:11:49 - Edder Palacios
+  O son completamente trabajos diferentes.
+
+1:11:51 - Juan Pablo Cholico (naturprime.mx)
+  Es que Carla es... Carla... ¿Qué logística administrativa? O sea, ejecuta la venta, pero que suene a caballo no quiere decir que sea granja, o sea, que suene a camión no quiere decir que sea logística, o sea, hace un trabajo mayor, grande a lo que tú crees, ¿no?  Y Leti igual, se mete en coolers y mete en operaciones y no por eso es logística ni operaciones. Ah, es que, pero se mete, ¿qué es lo que queramos?
+
+1:12:19 - SALA VIP
+  Unificar el proceso.
+
+1:12:22 - Juan Pablo Cholico (naturprime.mx)
+  No, es que ese es el punto, que estás casi ya en unificar un proceso que son diferentes, para amoldarlo a un organigrama, cuando se tiene que ser al revés.  No déjate el organigrama, la operación.
+
+1:12:40 - Edder Palacios
+  Es que tienes que homologarlo a como lo hacemos en computación. Sí, pero que tiene que ver la... Se hace la nota, se hace esto, todo es prácticamente igual.  Es igual, pero son...
+
+1:12:56 - Juan Pablo Cholico (naturprime.mx)
+  Es como si dijeras, quita César de Irapuato y llévatelo todos a Zamora porque todos hacen lo mismo, ¿no? Son diferentes, ¿sí?  Pero hacen cosas igual, a eso voy. No es lo mismo el cooler de Ario que el de Naturagui, no es lo mismo el de Anáhuac.  Se van a homologar ciertas cosas, pero hay otras cosas que tiene. Y es como nos dijo Chan, ¿no? No puedo homologar Ousnar con México.  No puedes homologar Expo con Nacional, ni con INPO. Administrativamente sí entiendo, pero operativamente no lo vas a poder hacer igual.  Entonces, nada más dinos qué es lo que quieres homologar y en esa parte te ayudamos. Lo único que tienen que homologarse es cómo aceptar.
+
+1:13:47 - Edder Palacios
+  ¿Cómo qué? ¿Cómo vamos a sacar los embarques? Ah, pues eso sí, eso es un hecho. Lo único que tenemos que homologar, no sé por qué le estamos dando tanta vuelta, que si uno hace, que si el otro hace, que si uno dice y el otro dice.  Pues claro, ojo, o sea, es mucha importancia. Pero no vas homologar, ¿cuáles son las funciones de Carla? ¿Cuáles son las funciones de Leti?  ¿Cuáles son las funciones del mundo?
+
+1:14:15 - SALA VIP
+  acuerdo. ¿Quién te quitamos las dos arrojones? Pues. ¿Todo va a estar en cisterna? Correcto. Ah, gracias. Sí, si vemos, gracias Juan Pablo, si vemos entonces el área de naturagui, lo tenemos que ver como almacén, lo tenemos que ver como cooler, lo tenemos que ver como diferentes procesos, sé que tú vas a...  Vas tener, como va a tener Prime, vas a tener también tus procesos internos, en donde vas a iniciar tú, viéndolo de forma global, sería en la recepción de la fruta, llámese de exportación o de lo que sea, ¿no?  Tú ahí no tienes ningún, a lo mejor ya se fue Jorge. Ah, ahí está. Tú ahí no tienes un MPS, no tienes un forecast, aquí únicamente sería el manejo de tus clientes, como se ha visto en año anterior y comparado con lo que se va a hacer en el año actual.  Y ahí ves la diferencia. Sí, pero eso es más que nada para temas.
+
+1:15:53 - Jorge  Obregon
+  para yo medir mi capacidad instalada contra la recepción de la fruta, los forcas, y como bien dices, todo empieza en la recepción.
+
+1:16:05 - SALA VIP
+  Ok, entonces, si hablamos de, cuando viene de importación, no me preocupa tanto porque, pues en cuanto entra, ahí ya tú entras con el proceso, pero cuando es de exportación, que te van a entregar los productores, tu almacén o tu cooler, vamos a distinguirlo de esa manera que se esté viendo por medio de naturagui y no por medio de naturberry, es decir, la fresa va a llegar al cooler, pero va a estar en la empresa de naturagui o en la empresa de naturberry.  ¡Gracias!
+
+1:16:53 - Jorge  Obregon
+  Físicamente va a estar en naturagui, pero él, esa fruta es de mi cliente naturberry, o sea, yo físicamente para cuestiones de inventarios lo tengo en naturagui, pero debería de estar en el inventario de cada cliente, en este caso de naturberry como cliente independiente.
+
+1:17:25 - Edder Palacios
+  Sí, a ver, necesitas quitarte la cachucha de naturagui, Jorge, y ponerte la camisa de naturberry. Ok.
+
+1:17:34 - Jorge  Obregon
+  Como gerente de coolers.
+
+1:17:36 - Edder Palacios
+  Ya.
+
+1:17:39 - Jorge  Obregon
+  O sea, ¿cómo lo vas a hacer el global de todos los coolers? No naturagui. Ok. Ponte la camisa de naturagui, tengo dos coolers en Zamora, tengo el de Jalisco y tengo el de...
+
+1:17:53 - Edder Palacios
+  Tirapuato, tienes cuatro coolers. Lógicamente en uno tienes cuatro clientes.
+
+1:17:59 - Jorge  Obregon
+  Sí. En todos los demás tienes un cliente que eres tú nada más.
+
+1:18:03 - Edder Palacios
+  Exactamente. cual operamos nosotros, únicamente es un servicio externo. Ok. Entonces, entendiendo cómo está ese flujo, ya puedes decir, ok, mira, yo recibo la fruta, se exporta, se pone esto, y ahí arrancas.
+
+1:18:22 - Jorge  Obregon
+  Ok. Sí, porque si enfocas a naturagui, no estamos hablando de la operación de naturagui, estamos hablando de la operación de naturberry, de NRG.  Es correcto. Y porque los productores van a estar en la empresa de naturberry. Así es. Sí, entonces sí tendría que ser un almacén de naturberry global.  Con ubicaciones de cada cooler y de ahí estar repartiendo.
+
+1:19:12 - SALA VIP
+  Naturagui se puede ser diferente a los otros coolers porque si hay interacción con Naturberry directamente o va a ser lo mismo que se haga en Atotonilco y en Anahua va a ser lo mismo que se haga en Naturagui en cuestión de la prestación de servicio.  Sí, tendríamos que unificar la prestación de servicio. ¿Cuál sería entonces la... Interacción que tenga naturagui con naturberry entre empresas, si es que va a haber algún orden de compra o algún orden de venta o traspasos.
+
+1:20:12 - Edder Palacios
+  Serían como todos los coolers, Robert, traspasos como lo hace por ejemplo Radea o como lo hace Anahuac, sería un cooler más de nosotros, una operación.  Sí, pero ahí ya a ellos ya les incluiría facturación y todo el otro tema. O no sé, Rafa, administrativamente, en la parte de finanzas que es lo que necesitaría.  Que por ejemplo.
+
+1:20:41 - SALA VIP
+  Porque ese es el cooler propio. Exactamente. O sea, por ejemplo, aquí el momento de hacer traspasos o que también tengan el inventario natural y para poder hacer este.  Cambios o, bueno, no cambios, más que nada el reempacado, por ejemplo, en cuestiones de prime o el material que se requiere para los embarques, naturagui, no sé quién tendría que estar solicitándose ese producto o ese material.  Aquí mi duda, por ejemplo, es que naturagui tendría que hacer una solicitud a un almacén para hacer esos traspasos, para también no tener un sobrestock.
+
+1:21:23 - Jorge  Obregon
+  No sé, ¿tú qué opinas?
+
+1:21:25 - Edder Palacios
+  ¿Va a seguir funcionando naturagui como tal dentro del RP?
+
+1:21:35 - SALA VIP
+  Pues sí, estarían, prácticamente estarían las tres en el RP, pero creo que tengo entendido que van a estar por separado, ¿no?
+
+1:21:43 - Edder Palacios
+  Entonces el almacén de naturberry tendría que mandarle a naturagui. Y traspaso como lo hace con los demás.
+
+1:21:52 - Jorge  Obregon
+  Pero como es que... ¿Qué?
+
+1:21:55 - Edder Palacios
+  ¿Perdona? En el organigrama, recuerden, queda ese punto todo.
+
+1:22:04 - Jorge  Obregon
+  Ajá. Y está el gerente de coolers, y gerente de coolers lleva también almacenes.
+
+1:22:14 - Edder Palacios
+  Entonces, aquí tú le tendrías que hacer, como le hacen, por ejemplo, cuando le mandan material de empaque a Anahuac, tendrías un igual, ¿no, Rafa?
+
+1:22:29 - SALA VIP
+  Sí, que, por ejemplo, allí, o sea, sí, sí, sí te entiendo la mecánica, las que, por ejemplo, Anahuac, nosotros entre almacenes, como es un almacén temporal, nosotros manejamos, o nosotros controlamos ese stock.  Acá el tema es si naturagui también va, o sea, lo vamos, va a funcionar como si fuera un cooler independiente.  Nosotros también manejaríamos esto, o si lo vamos a ingresar como un cooler de Naturberry, pues realmente naturagui nos tendrá que estar haciendo esa solicitud de material cada vez que requiera y no nosotros internamente.  Por eso era mi duda. Lo ideal sería, si vamos a homologar toda la operación, lo ideal sería hacerlo como todos.  Correcto. Como si fuera uno independiente. Así es.
+
+1:23:29 - Edder Palacios
+  Yo sé lo que vería como un ideal.
+
+1:23:58 - SALA VIP
+  Y el tema de la gestión de los transportes, el tema de la gestión de los materiales, ¿lo tendría que estar haciendo de manera independiente o Naturberry lo va a generar y solamente va a hacer traspasos hacia naturai?
+
+1:24:18 - Victor De La Parra
+  Es que será traspaso, que es lo que haría este Jorge con su equipo. Este caso es como el que habíamos comentado en Prime, que va a ser prácticamente como material en concesión, se podría decir, que es el mismo macén que vamos a manejar tanto para facturar la Prime como los consumibles que van a utilizar para los embarques.
+
+1:24:47 - SALA VIP
+  Al final de cuentas, desde Naturagui vamos a emitir cada una de las facturas de exportación. Sí, pero como naturagui, como naturberry.  Es que naturagui tendría que ser la facturación, aunque tengan prácticamente acceso a los timbres de naturberry, es esa parte.  ¿Pero saldría de naturai o...? No, las facturas son de naturberry, pues, pero... Ah, ok, ok. Ajá, pero al final de cuentas, toda esa operación la analiza naturberry.  Sí, o sea, operacionalmente la va a hacer, pero los datos y la información, ¿quién la va a tener naturberry?
+
+1:25:22 - Victor De La Parra
+  Que es como comenta Edder, si lo vamos a homologar, como todos los coolers, prácticamente es información de la provera.
+
+1:25:42 - SALA VIP
+  Ningún cooler maneja otro dato que no sea el de nosotros, otra información que no sea la de nosotros.
+
+1:25:57 - Victor De La Parra
+  Es que en el punto de ver, Naturagui tendrá acceso a las dos empresas, a Información de Naturberry e Información de Naturagui, su operación normal de Naturagui y la que va involucrada junto con Naturberry, que también va a hacer actividades en nuestro hogar.
+
+1:26:13 - SALA VIP
+  No decimos, ¿cuáles? En cuestiones de facturación, o sea, en facturación y recepciones, todo se tiene que registrar en la empresa de Naturberry, pero operativamente lo va a realizar Naturagui.  Ok, ¿materiales va a ser algo de compra Naturagui? No, todo lo va a ser Naturberry, solamente lo vamos a utilizar para traspasarles materiales.  Ok, ¿hay alguna parte de la gestión de Naturagui? Naturagui que nos genera a nosotros órdenes de compra, ¿la tiene que hacer naturagui o la va a hacer naturberry?  El frío, ok. A mi punto de ver el frío, frío y qué tal, que va directamente de naturagui a naturberry, ahí tendrían que realizar la orden de compra para poder otros ingresar ese insumo en su defecto, aunque es un servicio, a nuestro inventario de naturberry.  Ok, esas órdenes de compra o esos servicios los gestionaría directamente a naturagui o los haría aquí, este... Hola, Sandra, ¿qué es realizar compras?  Compras, tendría que hacer esa orden de compra basándose a la recepción que tuvimos para poder tener ese stock tal cual.  Por eso... Eso va como de la mano, porque naturberry se supone que el frío va conforme a todas las recepciones que tuvimos en naturagui.
+
+1:28:02 - Victor De La Parra
+  Ok, ok.
+
+1:28:10 - SALA VIP
+  Muy bien, claro. Y ahí, ¿qué más naturagui va a tener que ver? Si ya lo vimos, la parte de prime, ¿qué va a tener como forma global con naturberry?  Es que tendríamos que ver el proceso que tiene Jorge, también, y ver en qué parte se entra naturberry. O sea, realmente, como lo vimos en prime.  O sea, prime, prácticamente, así como lo vimos con Juan Pablo, tendrá que decirnos el proceso y ver dónde interacciona.  Por ejemplo, en cuestiones de recepción, ok, entra el naturagui, pero realmente es la base de datos de naturberry. No sé si más como antes.  Justamente. Porque es que va el proceso tal cual. Porque el dato está en naturberry, pero en el Google Earth.  De naturagui. Exacto. O tú, ¿cómo ves Jorge? ¿Cómo lo podremos manejar mejor? ¿De esa manera o verlos por separado?
+
+1:29:08 - Jorge  Obregon
+  Es que mira, aquí por ejemplo, como tú bien dices Rafa, estás poniendo, naturagui hace muchos procesos de manera operativa, pero es información de naturberry.  Lo que son las recepciones, lo que es la parte de calidad y la parte de, ¿cómo se llama? De embarques.  En todas esas partes del proceso, naturagui trabaja con la información de naturberry. Lo único que sería información de naturagui sería la cantidad de cajas, pero en cuanto a los servicios, para qué.  Este, ¿cómo se llama? Para que Naturberry realizara su orden de compra. No sé cómo vean ustedes. Creo que ya te quedó un poco más claro, Roberto.
+
+1:30:10 - SALA VIP
+  Y seguimos tu proceso, al menos el que está incluido con tu proceso interno y con la interacción que tienes con Naturberry y Naturprime.  Tú después de hacer tu recepción, haces tus servicios de valor agregado, que es lo del frío y etiquetado. Y aquí, bueno, se hace el proceso de, si es nacional o exportación, que ahí seguiría siendo Naturberry.  En cuestiones de frío nos hacen dos facturas, uno por nacional y uno por exportación. Ah, ok. Aquí también desde naturagui, por ejemplo, naturagui, el frío tendría que delimitarlo a mi punto de ver, porque si no es que me equivoco, a qué mercado se fue, porque tienen las cotizaciones diferentes.  Son precios diferentes, es correcto, sí tendría que ir diferenciado. Ok, ahí es proceso de naturagui. Exactamente, sí, en el proceso de naturagui, o sea, ahí es, nuevamente solamente estoy opinando a lo que yo tengo en conocimiento, si no es que Tuerca a lo mejor tenga datos adicionales.  Sí, aquí tú delimitas entonces por nación de exportación, tu pre-enfreado y tu etiquetado. Así es. El paletizado también, como tal, el servicio es de ahí.
+
+1:31:38 - Jorge  Obregon
+  El servicio de paletizado va incluido en el precio de frío para el caso de exportación y de importación. Ok.  Y...
+
+1:31:52 - SALA VIP
+  Y... Por ejemplo, duda, Jorge, disculpen, en ese proceso de paletizado, en tu proceso, ¿no tendrías como esa visualización? Porque entiendo que es un pre-frío después para llevar toda la cadena de frío, ¿no?  No entiendo, o no recuerdo bien el proceso, pero por ejemplo, ¿tú no tendrías que tener como traspasos entre tu proceso para saber dónde se encuentra la mercancía, con qué embarques?
+
+1:32:17 - Jorge  Obregon
+  En el caso de, para trazabilidad, sí tendría que ser, pero por ejemplo, llega en el área de palet, en el caso de la importación, ¿no?  Porque todo de un mismo camión se distribuye a los diferentes clientes. En el caso de exportación, sí, porque viene de diferentes agricultores y en el momento del paletizado se consolida en tarimas.  Sí, sí, ahí tenemos, si le respondo a Rafa, se tiene planeado que se haga un...
+
+1:32:53 - SALA VIP
+  Una trazabilidad completa dentro del mismo cooler de naturai, dependiendo de las fases que va a traer el referido, para saber identificar cada, no cada, bueno, cada palet, pero cada sección, que va a tener que incluir varios palets, saber cuánto va a durar en cada una de las secciones.  ¿Y de quién son? ¿Y de quién son? Sí, claro. La trazabilidad desde el inicio ya está identificada. Cuando se va a armar sus, no sé, 10 o 15 palets para meterlo a una cámara, ahí se tiene que hacer la trazabilidad y también alertas de qué hay ahí, para después pasar a la siguiente cámara hasta que esté preparada.  O sea, debe de tener todas esas alertas que las gestionamos con el, con el, este, con, con. Conodú, para que lo hiciera de esa manera.  Ahora, nuevamente, esa parte estará en Naturagui o está en Naturberry, porque si se va a hacer que esa gestión se haga a la empresa de Naturagui, entonces debería de estar la fresa y trazabilidad de Naturagui para poder hacer esa gestión.  Más bien tendrían que manejar la misma información de las recepciones, para poder llevar el mismo embarque que nosotros que tenemos en Naturberry, se maneja el mismo embarque en Naturagui, porque al momento de que nosotros facturemos, tendríamos que también tener, a lo mejor no toda la trazabilidad de por qué cámaras pasaron, pero sí el mismo embarque que Naturagui utilizo para sacarlo.
+
+1:34:48 - Jorge  Obregon
+  Ahí sería nada más la trazabilidad de cuándo entró, qué servicios se le proporcionaron. ¿Y en qué embarque salió? En cuanto a la trazabilidad nada más de naturagui.  En la cuestión de naturberry sí tendrías que tener toda la trazabilidad de productores y todo ese rollo, ¿no?
+
+1:35:12 - SALA VIP
+  Exactamente. Pero a mi punto de ver, tendríamos que manejar el mismo embarque en una empresa como en otra. Para poder llevar la trazabilidad y poder cruzar información en algún momento que se requiera.  Mismo número de embarque, o sea, ese tipo de situación. Sí, porque si no perderías trazabilidad.
+
+1:35:41 - Jorge  Obregon
+  O sea, tienes que tener un nombre de inicio, que es la orden de compra lo mejor, de naturberry, y ese mismo nombre tener.  Tenerlo en todas las partes del proceso.
+
+1:35:58 - SALA VIP
+  ¿Por qué? Porque lo que puede pasar es que a lo mejor poder identificar en la exportación, en su defecto, si tuvimos algún inconveniente con algún embarque o hubo algún daño en el trayecto, tenía identificado a mejor qué fue lo que pasó.  A lo mejor hubo un atraso en la cadena de frío o fue realmente fue en el trayecto del camión, no sé, para poder identificar exactamente dónde pasó ese inconveniente, a mi punto de ver.
+
+1:36:34 - Jorge  Obregon
+  Pero eso ya sería más operativo, ¿no?
+
+1:36:37 - SALA VIP
+  No, pero yo me refiero a ser operativo para saber, por ejemplo, identificar el embarque, por ejemplo, que llegó a Estados Unidos y ver todo desde que la misma que tuvo Naturagui y la misma que tuvo Naturberry, para a lo mejor poder delimitar dónde fue la situación.  Ok.
+
+1:36:55 - Jorge  Obregon
+  Es que solo llevaría logística, Zora.
+
+1:36:59 - SALA VIP
+  ¿Vale? Esa la parte que lleva logística. Correcto. Ok. Logística en conjunto con comercio exterior. Y no ventas como lo quieren poner a venta.  Es correcto. Ok.
+
+1:37:18 - Jorge  Obregon
+  Sí, es que, me cuento una cosa, cooler, cooler, cada cooler tiene su venta logística.
+
+1:37:27 - Edder Palacios
+  Y esa gente logística, la que la dirige es esta Leti. Leti es la que les dice que van a cargar y que no van a cargar.  Y esa logística es muy independiente de la logística de Naturberry. Entonces, el que te va a marcar esa pauta va a ser esta Leti, Rafa.
+
+1:37:53 - Jorge  Obregon
+  Gracias. Ok.
+
+1:37:54 - SALA VIP
+  No, perfecto. Nada más aquí, Robert, creo que se quedó a mi espalda. Para el tema del ERP de forma global, y vuelvo a insistir, si tenemos tres empresas diferentes, y aquí en este caso, naturagui va a querer también tener el conocimiento de lo que va a cobrar de frío, etc., etc., pues de alguna manera va a tener que saber qué es lo que está ingresando.  Y si nosotros lo estamos viendo como tal, los datos pertenecen a Naturberry, o sea, la información está a Naturberry, porque la factura...
+
+1:38:37 - Edder Palacios
+  Es financieramente va a agarrar este Naturberry a natural, tiene que agarrarlo. Si no, Ale, sería así. Es correcto.
+
+1:38:51 - SALA VIP
+  Tendría que agarrarlo financieramente. Gracias. O duda, no sé, estoy divagando, a mejor hablando de más, pero por ejemplo, no hay forma en el momento de que se ingrese o la recepción, esa misma información se dirija a los dos a crear solo un ingreso y se direcciona la misma información a las dos empresas, para que ya tenga natural exactamente la misma recepción, pero ellos contemplarlo como un servicio de frío y se dirige esa misma información a naturberry.  O sea, un mismo, un mismo ingreso direccionando la información a dos, a dos, a dos bases de datos, que ya no pensé, no sé si se puede o no se puede.  Y es que ya, ya me estás cachando en que la información tiene que vivir en, en los dos sistemas, en las dos empresas, en el mismo sistema, pero en las dos empresas, para que naturagui pueda hacer esa facturación del servicio, pero los datos tal cual de trazabilidad deben pertenecer.  O duda, no sé, estoy divagando, a mejor hablando de más, pero por ejemplo, no hay forma en el momento de que se ingrese o la recepción, esa misma información se dirija a los dos a crear solo un ingreso y se direcciona la misma información a las dos empresas, para que ya tenga natural exactamente la misma recepción, pero ellos contemplarlo como un servicio de frío y se dirige esa misma información a naturberry.  O sea, un mismo, un mismo ingreso direccionando la información a dos, a dos, a dos bases de datos, que ya no pensé, no sé si se puede o no se puede.
+
+1:40:32 - Jorge  Obregon
+  Y es que ya, ya me estás cachando en que la información tiene que vivir en, en los dos sistemas, en las dos empresas, en el mismo sistema, pero en las dos empresas, para que naturagui pueda hacer esa facturación del servicio, pero los datos tal cual de trazabilidad deben pertenecer.  O deben de estar en la empresa naturberry, como van a estar los otros coolers de Anahua y de Ario y tal cual, o sea, como verlo independiente, pero no.
+
+1:41:06 - SALA VIP
+  Sí, sí, es un pinche de lo nuevo.
+
+1:41:07 - Jorge  Obregon
+  Ajá, verlo independiente, pero no, independiente de sus procesos de cobro de frío, como lo van a hacer los otros coolers, pero que no son nuestros, y el manejo de los materiales.
+
+1:41:24 - SALA VIP
+  Porque también van a eso me refería, Robert, a eso me refería que era la información de Naturberry, pero la utiliza Naturagui como su prueba de operación.  O sea, haz de cuenta, llega el agricultor fulanito de tal, está en la información de Naturberry, pero Naturagui utiliza para probar, esa misma información la utiliza Naturagui para probarle a Naturberry que ingresaron esas cartas.  Y que a esas cajas le dieron ese servicio y por consiguiente esa trazabilidad está reflejada también en la factura y hasta el pago desde inicio.  Pero como dice Rafa, es tomar desde una misma sola entrada nada más direccionarla para dos propósitos diferentes. Ok, cuando le hagan auditoría a naturagui, ¿qué le van a solicitar?  ¿Qué le van a pedir? ¿Únicamente tu servicio de frío? ¿O le van a pedir es...? Es que dependiendo de qué tipo de auditoría quieras pedir.  O sea, porque de la hora le va a pedir todo. Toda la trazabilidad. Sí. Pero de su operación. Exacto.  ¿Y por ejemplo...? ¿Cómo qué operación?
+
+1:42:50 - Jorge  Obregon
+  Un ejemplo, no sé, acabas de facturar la Naturberry, no sé.
+
+1:42:53 - Victor De La Parra
+  x60, no sé, 60 cafas, 60 servicios de frío, ¿no?
+
+1:42:58 - SALA VIP
+  Por esa recepción. Compruebame, dame tu evidencia, que lo recibiste, tu trazabilidad de cómo conformas o cómo llevaste la operación con Naturberry.  ¿Qué es lo que va a pasar?
+
+1:43:10 - Edder Palacios
+  Ok, naturagui tendrá que comprobarle cómo recibe la fruta, tiene que comprobarle que se hizo etiquetado, tiene que comprobarle que realmente tuvo el servicio que está especificando en su factura.
+
+1:43:26 - SALA VIP
+  Esa es la trazabilidad que va a auditar esa parte externa. Por ejemplo, ya que venga una, puede haber una auditoría, este, recuérdame, Jorge, ¿cuáles son los certificados que deben tener los frigoríficos?
+
+1:43:46 - Edder Palacios
+  Es, este, buenas prácticas de manufactura y en el caso de Naturagui orgánico.
+
+1:43:52 - Jorge  Obregon
+  Compruebame.
+
+1:43:56 - SALA VIP
+  Sí, aquí está, miren, aquí están estos certificados, certificado, bueno, no se ve, hablo de orgánico, quién sabe qué, quién sabe qué.  ¿Cierto sanitario, orgánico? Sí. Muy bien. ¿Se acuerdan cuando tuvimos la reunión? Ale, Jorge, Aldo, no me acuerdo quién más estaba yo, para ver el organigrama.  Sí, es correcto. Los controles esos los toma Gloria, con el equipo. Correcto, correcto.
+
+1:44:35 - Edder Palacios
+  En línea apuntada.
+
+1:44:37 - SALA VIP
+  ¿Correcto? Exacto.
+
+1:44:40 - Victor De La Parra
+  Sí, y yo empecé a tomar la parte de certificaciones, igual que la parte de logística, ponerse de acuerdo, la tomaba Leti con línea apuntada también.
+
+1:45:26 - Edder Palacios
+  Es el de naturprime, de abajo. Esta es la de naturagui que se genera de, todo es un naturagui. La parte de validación que hice con naturprime es más que nada para la parte de los...
+
+1:45:53 - SALA VIP
+  O de los puestos de los embarques.
+
+1:45:56 - Edder Palacios
+  Ya de ahí pues a estar lo que son, lo que me explicaba Felipe, la capacitación y actualizaciones con, del personal, las auditorías de tercera parte, que es lo que dices que es con Gloria, o con Sandra, dependiendo quién haga la auditoría en Kule, y el cronograma de maestro que también toma Naturagui para, para cómo se llama, para sus auditorías internas que tienen, que toman pues los análisis a naturagui.  No, con este Premus Labs, perdón. Así es. Pero esos son procesos internos que tú haces. Sí, esos son internos.  Sí, esos sí son internos. Ah, y esos procesos, sí. No, no estarían, porque de alguna Nada más en la parte de compras.
+
+1:46:44 - Victor De La Parra
+  Ah, eso tienes que ligar a compras, porque tienes que subir orden de compra para los muestreos y todo eso.  Ah, dale, para allá iba, justamente para allá iba.
+
+1:46:54 - SALA VIP
+  Ese proceso, ¿quién lo va a ejecutar?
+
+1:47:00 - Jorge  Obregon
+  Gloria.
+
+1:47:01 - Edder Palacios
+  Para la parte de muestreos, tendría que ejecutarlo Gloria, poner la orden de compra. No, Gloria tendría que hablar con la gente que va a traer de encargados del cooler, Lalo, y Lalo indicará a los coolers para que tomen las muestras.
+
+1:47:21 - SALA VIP
+  Pero en caso de naturagui, ahí sí tendría que ser un agente de nosotros.
+
+1:47:31 - Victor De La Parra
+  Porque los externos, acuérdate que nada más nos van a llegar, Robert, los externos con el resultado. Que ahí sí, me equivoco, Edder, Jorge, actualmente parte, o bueno, personal de naturagui que toma las muestras, ¿ese es Felipe o no?
+
+1:47:50 - SALA VIP
+  Es correcto. Sí, estoy descargándolo para... Y sería Felipe, ¿sí? Gloria le dice a Lalo, Lalo le dice a Felipe y se arranca.  Así es. Y en el caso, por ejemplo, de Anahuac, Gloria le dice a Lalo, Lalo le dice a Rigo, creo que era.
+
+1:48:10 - Edder Palacios
+  Sí.
+
+1:48:12 - SALA VIP
+  Y Rigo tiene que comunicarse con Anahuac para que Anahuac lo haga. Ah, sí. Sí, me lo separo. Es correcto.  Y en el sistema, ¿qué estaría ejecutándose? Porque... Sistema únicamente tendría que meter la orden de compra de naturagui. Es la que metería Felipe Díaz.  Y la evidencia de la orden de compra. ¿Qué sería en ese caso, por ejemplo, de un certificado? El proveedor.  sería el certificado. Ajá, junto con su factura. O sea, la ejecutaría. No, manda llamar, manda llamar en cuanto le entreguen el certificado que el sistema manda llamar a quien lo...  Sí, la solicitud es la de a Felipe, que Felipe se pondrá de acuerdo con el laboratorio. Sí. Y evidencia la sube al laboratorio.  Sí, sí, como lo estamos viendo. Sí. Pero exclusivo del proceso de Naturai, que suena como un poquito más sencillo que...  que el de Prime. ¿Por qué no? Más sin embargo, pero con la salvedad de eso, justamente, como lo menciona Rafa, verlo intercompañía, qué datos van a vivir.  Yo estoy casi en que todo viva como del lado Naturberry y que se vea como un cooler, pero que se puedan ver.  Esa es una información ya de la empresa de Naturalli para que pueda hacer toda su facturación y todo su proceso y cuando llegues a auditorías también tengas la responsabilidad de saber esto lo facturé porque me llegó tanto y tanto y tanto.
+
+1:50:11 - Jorge  Obregon
+  Eso es como lo veo y como esta misma sesión se la voy a transmitir a los chavos de Odu, pues nos están escuchando y que ellos van a estar pensando de cómo harían ese proceso de intercompañía para que se pueda realizar.
+
+1:50:30 - SALA VIP
+  Sé que hacen más procesos en Naturalli, pero de forma global creo que son los que más interactúas con Naturberry.  Correcto, Jorge, porque obviamente todos los procesos de materiales, o bueno, tenemos aquí a uno que vamos a... Vamos tocar de la naturberry y ya vemos si aquí se aplica.
+
+1:50:58 - Victor De La Parra
+  ¿Tienes algún comentario, Jorge?
+
+1:51:02 - SALA VIP
+  Estoy de acuerdo, Robert. Ok, mira. Ahorita, de manera general, esos son los procesos y ya los otros ya muy detallados.  Yo siento que los podremos ver cuando veamos el módulo de naturagui, ya la parte empresarial de naturagui. Exactamente, sí.  Y esos procesos, como se lo mostraba a este, a Cholico, también están aquí todos estos procesos de naturagui.
+
+1:51:31 - Edder Palacios
+  Mira, aquí en chiquito, aquí están.
+
+1:51:34 - SALA VIP
+  Pero esos procesos se van a ver ya cuando tengamos la sesión o lo que se tenga que ver en específico de qué hace cada, cada, cada empresa.
+
+1:51:45 - Edder Palacios
+  Ok, ahora, del lado de naturberry, ahí viene lo bueno.
+
+1:51:50 - SALA VIP
+  Aquí empieza Eder con...
+
+1:51:53 - Edder Palacios
+  Su manejo de planeación. Ahí en la planeación todavía no vemos nada de órdenes de compra, solamente es planeación. Sí hay revisión de contratos con los viveros y cotizaciones.  ¿Esas cotizaciones nosotros las iniciamos? Sí, sí, nosotros las premiamos al proveedor. Ok, nosotros Naturberry, o hablamos ya de NVG.
+
+1:52:41 - SALA VIP
+  No, Naturberry lo hace, bueno, NVG México. NVG México, ok, más bien vamos con la turipe de Estados Unidos. Sí, exactamente.  Naturipa, Estados Unidos, es el que le hace la orden a Rafa, ¿correcto, Rafa? Sí, se podría decir que sí.  Si la negociación la hago yo, en promedio de cuentas, yo le digo, a ver, en EBG, Estados Unidos, voy a comprar 40 millones de plantas y así están distribuidas.
+
+1:53:18 - Edder Palacios
+  Y Rafa y Alfredo hablan con Jeff para que ellos le pongan una orden de compra a...
+
+1:53:25 - SALA VIP
+  Al vivero. A Rafa. La orden de compra al vivero yo se la pongo. Y la orden de compra, porque en EBG paga esa planta a Estados Unidos.  Entonces ellos tienen que poner una orden a Rafa. Ajá, pero tú se la pones al vivero, pero no de Naturberry.  No, se la pone. O él se la pone como si fuera en EBG de Estados Unidos. Estados Unidos. Así es, sí, porque si yo se la pongo como en México, no tengo manera de sacarla, porque yo no la pago.  Exactamente. Sí, más bien, Edder, lo que hace Naturberry, nosotros Naturberry mete orden de compra a NVG, para que no se emita esa factura.  Ok, sí, ahí es el que sabe, Rafa, y cómo le hace para la factura esa, y puede sacarla. Sí, exactamente, así es la mecánica que utilizamos ahorita para poder generar las existencias en nuestros inventarios.  En nuestros inventarios, hablando del lado contable, o también lo vamos a querer ver del lado de inventario como... No, también la existencia.  Como existencia. Sí, como existencia, porque justamente ya cuando nos llega esa factura de NVG, esa nosotros la tenemos que recibir para poder crear la existencia y poder sacar las facturas.  Cada uno de los productores. Ok, entonces ahí tendríamos que hablar bien con Odoo para saber cómo vamos a gestionar esa entrada de inventario.  Así es. ¿Por qué no va a ser una orden de compra?
+
+1:55:11 - Edder Palacios
+  ¿O generaríamos internamente órdenes de compra de Naturberry para poder hacer la recepción de la planta?
+
+1:55:21 - SALA VIP
+  Sí, porque, por ejemplo, en la temporada pasada lo que hicimos fue gestionar una orden de compra inicial por el pedido original que se manejó.
+
+1:55:32 - Victor De La Parra
+  Pero como en cuestión de los viveros, si no me dejarás mentir, Edder, hay muchas variaciones en cuestiones de que si cumple, que no cumple, que nos cambió las cantidades entre variedades porque a mejor no tuvieron la capacidad para entregarme la variedad solicitada.
+
+1:55:51 - SALA VIP
+  Y esos hay cambios en En órdenes de compra con Estados Unidos. Eso lo vamos a querer, o lo vas a querer ver también, Edder, de tu lado del nuevo módulo que quieres gestionar, del nuevo proceso que quieres gestionar de la producción.
+
+1:56:08 - Victor De La Parra
+  Sí, porque en base a eso nosotros vamos a avanzar las curvas y a las entregas de planta.
+
+1:56:15 - SALA VIP
+  Ok, eso ya tendría que estar del lado de Natur, ya dentro de Naturberry o todavía no hasta cuando ya queden firmes.  Sí, tendría que estar dentro de NBG México, ¿no, Rafa? Sí, exactamente. Ok. Porque de ahí Rafa se da una idea de yo cómo estoy empezando a surtir y cuánto recibo y todo.  Exactamente. Y de aquí del vivero. Entonces, gestionamos la salida de la planta hacia dos lugares, hacia el productor o hacia el cooler.  Ya me sé, tipo de planta, ¿no? Así, hacia los dos. Esa solicitud, como lo estábamos viendo en el proceso, ¿cómo se va a generar por medio de cómo vivirlo?  Porque tendría ya que estar el inventario de Naturberry de esas plantas para poder enviárselas o cobrárselas al productor. El inventario la tendríamos que dar de alta desde la ONU de compra.  Y ya genera sus ciertas ONU de compra y generaremos. Tenemos una existencia en base a la orden de existencia.  Ahí, desde ahí, sí. Exacto. Ahorita sí, a mí no sé que incluyamos algún proceso, pero no hacemos esa revisión de, a ver, son $135,000.  No las hacemos así, o sea, en base a la orden de compra. Sí, y también, ojo, en esta parte, hay una planta que pasa por cooler.  Sí, justamente aquí está. Esa planta tendría, pues, haría la misma mecánica que con la fruta, porque cooler no tiene que facturar ese servicio de frío.
+
+1:58:33 - Victor De La Parra
+  ¿Solamente lo enviamos a un cooler?
+
+1:58:36 - SALA VIP
+  Naturai. No, de irredeando. No. Naturai irredeando. A los dos. A los dos. Sí, aquí el tema nada más es con Naturai, que tendrá que tener la misma información y hacer la misma mecánica que hace con la fruta, para que tenga ese dato.
+
+1:58:58 - Victor De La Parra
+  Y ese movimiento, ¿quién lo inicia?
+
+1:59:04 - SALA VIP
+  ¿El asesor? ¿Quién inicia? ¿Cuándo llega el cooler? Ajá. ¿Cuándo llega el cooler, Edder? ¿Quién tiene ese dato? Realmente de cuando hacen...  Bueno, más bien aquí sería ver quién tendría esa información de cuando entra el cooler la planta. ¿Por qué? ¿Otro mamá nos llega?  Leti con Víctor. Sí, con los folios que hace cada asesor o supervisor en campo. Ok, entonces el asesor va a disparar esa orden.  Aquí sí será con un quejón. Aquí no sé cómo lo podríamos manejar porque aquí llega primero el cooler y después el protocolo.  No.
+
+1:59:53 - Victor De La Parra
+  O ese peyón llega directo al productor, lo que es raíz, ya se distribuye, llega a cooler y ya de ahí cada productor pasa por la planta.  Es que, perdón, Edder, esa era mi duda, ¿no? O sea, porque realmente llega primero al vivero, perdón, al cooler y después al productor, se podría decir.  Ah, bueno, sí. Esa era mi duda. Sí, aquí lo tenemos. ¿Cómo se hará en el sistema? O ¿quién va a disparar para que se genere de nuestro inventario, primero que ya hicimos de recepción de planta de nuestros viveros, mediante a la producción que generó Edder?
+
+2:00:36 - SALA VIP
+  Ahora sí, ¿cómo lo vamos a distribuir? ¿Quién va a ser el disparador? El asesor, que fue la plática que tuvimos ayer, que nos tardó un buen rato.  ¿Quién sería? Ajá. Es que desde el inicio el supervisor o asesora o toma la solicitud de planta, lo que se le pide, lo que el productor nos hace, lo que es el wishlist pues del productor.  Desde ahí, si lo vemos desde ahí, pues sí sería el supervisor.
+
+2:01:11 - Edder Palacios
+  Aunque no es pues cerrado, eso pues puede variar dependiendo la temporada, a menos que me equivoque, que en este caso sí, que ese que ya se tiene en el folio es el que se le va a entregar, que pues no, siempre va a cambiar.  Bueno, puede cambiar por la operación. Por ejemplo, Vic, duda, si lo manejamos de esta manera, solamente entrará al cooler cada, este, la parte que está solicitando el asesor?  No entraría más planta o un embarque con más planta del que se pidió y después ya irla sacando? Esa es mi duda.
+
+2:01:51 - SALA VIP
+  O sea, no sé si el asesor pidió, no sé. Y va a ser entrega de tres, este, a tres productores, y no sé, son cien mil cada productor, ¿no?  Pero realmente el camión de planta viene por quinientas, y solamente va a sacar trescientas. Esa sería como mi duda.  Claro. No te entendí bien.
+
+2:02:12 - Victor De La Parra
+  A ver, no podemos hacerle, Rafa, por ejemplo, que meto una orden global, la que nosotros metemos con un EVG, y de esa global tendremos que estar sacando las plantas.
+
+2:02:30 - Edder Palacios
+  Cuando me llega el cooler, de ahí, de esa global, saco esas plantas, y como si fuera una transferencia, vamos a decir, un agua, y de ahí ya cuando la suelta el productor ya se liga todo, o no se puede hacerle.  Se podría hacer así, Edder, pero por ejemplo, Jorge no tendría el dato exacto.
+
+2:02:53 - SALA VIP
+  ¿Cuánta planta va a tener de frío?
+
+2:02:57 - Jorge  Obregon
+  Porque si hacemos la misma mecánica de que sea la recepción tal cual, que vamos a manejar el lato tanto en el cooler como en naturberry, ahí ya no tendríamos el lato exacto, no sé si me voy a entender.
+
+2:03:12 - Edder Palacios
+  Ya, sí, o la otra a la que él les explicaba, que le decía Odoo, yo cuando recibo el trailer de Plant Science, yo tengo que evaluar esa planta, hago su conteo de calidad, cuántas coronas bien, raíces, toda esa parte.  Le decía, yo tengo que evaluarla, entonces eso a mí me tiene que quedar como inventario porque la recibí, y cuando yo vaya sacando al productor, se tiene que estar saliendo de esa orden.
+
+2:03:43 - Victor De La Parra
+  ¿Puedes quererles comentar eso a los de Odoo?
+
+2:03:46 - Edder Palacios
+  Para mí eso sería lo ideal, como si fuera fruta, pero estamos hablando de plantas. Exactamente. de acuerdo contigo, Edder, porque sales de una orden de compra general y ya tú sabrás en Odoo a qué almacén lo vas dirigiendo.  Y ya sabes tú qué proporción de tu orden de compra global tienes en cada lado. La parte de cepellón, esa tendrán que hacerla en la aplicación Odoo, como si fuera el Gibi Connect, que era lo que decía, que si existe esa interfaz con Gibi Connect, para que ellos la hagan cuando están descargando el transporte en el campo del productor, dan la entrada con la merma y dan la salida en ese momento con la merma.  Ahí, Edder, te refieres al reporte que hacen cada uno de ellos, ¿verdad? Exactamente. Es que de todos modos, Víctor, a ver, es que es lo que les digo.  La parte es como si fuera... Una recepción de fresas, de frutas, pero son plantas. Esta es la calidad y la sacamos con tal embarque.
+
+2:05:04 - SALA VIP
+  Pero ahora va a ser, esta es la calidad que me llegó el número de plantas y la sacamos a tal productor.  Sería al revés. No, sería igual. Recibo en cooler, pero ahora mi cliente no se va a llamar Transcool o NBG de Estados Unidos, se va a llamar Armando Sendejas, vamos a decir.
+
+2:05:25 - Edder Palacios
+  Y yo le di esas plantas a Armando y entonces a Rafa, Rafa ya está viendo qué lote se fue con Armando Sendejas, qué día salió.
+
+2:05:37 - SALA VIP
+  Y toda esa trazabilidad de ese lote, el sistema tiene que tener la capacidad de cuando yo le ponga lote número 3150, variedad de Santa María, decirme a dónde se fue y en qué fecha.  Para en base a eso empezar a crear lo que decíamos, Robert, nuestras curvas de producciones exactas. ¿Ese lote va a estar identificado previamente desde la salida del vivero?  Sí, desde el vivero viene ese lote. Vivero nos da lote, sí, como dice Eber. Pero, ¿cuándo es la salida?  ¿O desde que nace y vive? Es que vivero me llega nada más con una nota y me dice, es de tu carga o te la entrego.  Ah, ok, entonces es desde la salida. Sí. Ok. Entonces yo la tengo que recibir y la tengo que sacar.  Y allí esa recepción, Rafael, ayúdame, esa recepción de la planta y la salida, ¿cómo se puede ser, cómo se puede gestionar en el sistema?  En el sistema, pues realmente tendrá que ser directo. O sea, la entrada directamente tendría que ir desde la orden de compra, que como comentaba, y la salida realmente va a ser en cuestiones de facturación, pero la salida para poder llegar a facturación tendría que haber, como comentamos ayer, la orden de venta ya direccionada por cada uno de los asesores o quien sea los responsables para que nosotros nada más nos llegue realmente la conversión y tengamos que realmente solamente agregar el precio final.  Que va a ser la facturación del productor. Exactamente. Para mí es mi salida de almacén, eso lo inventaré. Esa, ok, esa, no lo sé si Ede tiene la respuesta o tendríamos que preguntárselo a Odu para saber cómo gestionar ese proceso, de quién tendría que salir el disparo de...  Ya solicito esta, porque si o si la necesidad está aquí en el productor, yo necesito la planta, pero ¿quién gestiona eso?  El asesor, ok, el asesor va a hacer la orden de venta y la orden de compra al mismo tiempo?  Es que la orden de compra la va a gestionar, o sea, realmente la orden de compra nos iríamos desde el pedido inicial que va a generar, para poder ahí realmente ir descontando más que nada, lo que podríamos tener, como les comentaba, son como las variantes que vamos a tener con los viveros, pero de un inicio partimos de una sola orden de compra gestionado por el departamento directamente que se va a dirigir a NVG, o sea, tenemos que tener una orden de compra inicial de donde a donde.  De Naturberry a NVG para nosotros poder generar nuestra entrada a inventarios. Y de ahí ir partiendo por qué son las órdenes de compra que tenemos.  Y de ahí realmente solo vamos a facturar las órdenes de venta que se vayan generando por cada persona correspondiente.  O sea, ya sería Edder quien delimitaría o realmente ver quién va a generar esas órdenes de venta, ya sea el asesor o logística que tiene el dato de qué cámaras se van a ir a cada uno de los productores.  Ya sería prácticamente quien delimitaría hacer esa actividad. Pero por ende, ahorita sí tendríamos que manejar como ese proceso, independiente de quién lo va a elaborar.  En el Heavy Connect realizan toda esa operación, registran cuál es el ingreso, cuál es la merma también que están recibiendo y también las cajas, todo eso.
+
+2:09:53 - Edder Palacios
+  ¿Entran ahí? Sí. Sí, ¿qué es lo que nos piden para lo de las auditorías, para el SAT y todo eso?  Es que justamente en el Heavy Connect, tengo entendido, Edder, si no me equivoco, o sea, tú metes la información de a qué rancho se fue, quién es el productor, las evidencias fotográficas, el porcentaje de merma, y Heavy Connect te bajó un reporte, que es el que nos mandan a nosotros para que sea la evidencia para facturación.  Así es, que es el PDF. Exactamente.
+
+2:10:31 - SALA VIP
+  Ese es el que nos ayuda para comprobar la trazabilidad de cada una de las entregas para facturar. ¿Sabes cómo tendría que ser?  Perdona, Rafa.
+
+2:10:43 - Victor De La Parra
+  ¿Sabes cómo tendría que ser, Robert? Un acknowledge.
+
+2:10:50 - Edder Palacios
+  Sí. Así, como un acknowledge, en el cual yo le meto la plana. No, no, no, no te escuché, que tú metes la planta y qué, perdón.
+
+2:11:02 - SALA VIP
+  Y la saco la planta. Así tendría que funcionar independientemente de lo documental que nosotros llevamos para Rafa, porque el cooler tiene que recibir esa planta y el cooler la tiene que sacar, para que a Rafa le aparezca esa alta y esa baja.  Y entonces ya de ahí, los reportes del híbrico negra y todo eso, se van a seguir haciendo para que Rafa los tenga.  Sí, y aparte, por ejemplo, Edder, también ese dato lo necesita Jorge para facturarnos el frío que corresponde a esa planta que llevó.  Así es. Es correcto. Yeah, makes sense to me.
+
+2:11:49 - Edder Palacios
+  Excuse me. ¿Qué es esto que quieres decir? Excuse me, Víctor. Sí, que digo que me ha sentido.
+
+2:11:56 - SALA VIP
+  Ni me acordaba que tenía el micro abierto, es que ya están cerrando la bodega.
+
+2:12:00 - Edder Palacios
+  Sí, tendría que ser como una acknowledge, como una recepción do-do en fruto, pero en planta.
+
+2:12:08 - SALA VIP
+  Ok, que sea acknowledge, pues. Similar. Es que, Roberto, te voy a centrar, pero volvemos al mismo punto de partida, entonces.  Es que es como la fruta, pero en planta. Será la acnomecánica. Sí, sí. La misma evidencia, la misma posibilidad.  Sí. Y solamente es cómo se va a gestionar y quién va a disparar esa en nuestros colaboradores. Sí, pero esa ya la decisión la puede tomar cada uno.
+
+2:12:44 - Edder Palacios
+  La hace coolers.
+
+2:12:48 - SALA VIP
+  Sí, ¿no, Rafa? La recepción la va a hacer cooler. La tendría que hacer. Sí, La evaluación.
+
+2:12:55 - Victor De La Parra
+  Ajá, si es la misma mecánica que vamos a manejar con la de fruta, sí. Sí, y la distribución la hacen los supervisores junto con la orden de venta.
+
+2:13:07 - SALA VIP
+  Es correcto, entonces ya íbamos a empezar con la prestabilidad. Con la orden de venta, exactamente. Independiente de quién haga esa actividad, ¿no?  El chiste es que tengamos el proceso, ya quien se lo vayas a delimitar, ya es otra cosa. Pero al menos que sea de manera general.  Exactamente. Ok. Ok. Aquí en esta parte entra algo de flete, de transportación, de nosotros, que nosotros lo manejemos. Sí, todo lo es.  Sí, todo lo es. Sí, pero del vivero, que salga del vivero, ahí no, solamente... Sí, del vivero nosotros coordinamos ese tráiler.  todo lo Y tienen ahí las evidencias que también nos solicitan para la parte de la factura al transportista. Ok.  Entonces, si gestionamos esa transportación, que es una orden de compra al proveedor, ¿verdad? Para que se le pueda pagar.  Y empezamos con compras. Oigan, chicos, ¿los escuchó? ¿Está bien? ¿Se los escuchó en camino? ¿Que me marca? Están sin desmadre.  ¿Quieres que hagamos todo el proceso de robar? Ah, no lo sé. No lo sé. Apenas vamos en esa parte.  Apenas vamos en la tercera parte. Pues sí y no. Sí y no, porque pues ya es de aquí del proceso.  Obviamente vamos a gestionar el transporte. De aquí ya está bien.
+
+2:14:52 - Edder Palacios
+  Después del proceso.
+
+2:14:55 - SALA VIP
+  Vamos a sacarlo, vamos a enviarlo, el productor va a hacer varias cosas, el productor va a enviar al cooler y el productor también va a ir por su material de almacén, creo que ahí no hay tanto problema porque ya los hemos visto en los procesos que actualmente tenemos.  Sí, gracias, Ale.
+
+2:15:20 - Edder Palacios
+  Gestión de materiales también, creo que no tendríamos el tema y problemas porque también se va a hacer con una orden de compra.
+
+2:15:37 - SALA VIP
+  ¿Ahí hay algún tema, algún punto fino que tengamos que tener, Edder, en la cuestión de los materiales? No, nada más la parte de las cajas.  Cajas y la apariencia, ¿no, Edder? Sí, las cajas y la apariencia. Sí, Ok, sí, el aparente ese, como lo platicamos con los chavos del dúo, tanto contable como debe de estar ese portal.  Sí. Ok. Y la parte de trazabilidad, primeras salidas, y más o menos, y tener qué tipo de lotes con el productor, porque eso nos pasó mucho ahora con el reclamo que hubo, que no sabíamos ni qué lotes traían.  Ah, pues es como la trazabilidad de la cuestión de los embarques. De los de, sí. Creo que, sí, creo que ese era el, creo que el punto más, más difícil de tratar es justamente ese, el del, de los viveros, cómo nace y cómo va a llegar la, la planta hacia el productor.  Lo que pasa después, creo que ya no ha... No habría tanto tema, puesto que el productor va a hacer sus entregas y conforme a lo que viene en un futuro, que son las liquidaciones y retenciones, vamos a hacer su recepción, se hará su facturación, seguirá haciendo su facturación después, ¿no, Rafa?  Una vez sabiendo los precios, se le va a hacer su facturación. Sí, el chiste es de que realmente también desde el sistema podamos meter esa parte, pero ya tendríamos que basarnos de la recepción, que el nuevo sistema nos diera qué recibió cada uno de los productores y ahí no poder hacer la gestión de la factura solamente ingresando el precio final.  Ok, ok. Entonces, la recepción, el envío que ellos hagan a los coolers, ahí vamos a tener que tener ciertos criterios para identificar.  Exactamente. Sí, que nos salga prácticamente. También un delimitante por semana, cajas, presentación, y cada uno de los productores, para eso mismo nada más nosotros gestionar la parte de la liquidación y poder hacer la solicitud de factura.  Creo que ya después de aquí ya no hay más temas. La salida, facturación, ya lo tocamos ahorita con Cholico, cómo queremos hacer esa facturación, que sí o sí tiene que generarla el cooler, un precio que va a estar oculto, ya nos van a poder mover, pero nosotros lo vamos a tener que gestionar.  Que digan, o sea, la parte de Naturberry no es tan difícil solamente gestionar bien esta parte.
+
+2:18:53 - Victor De La Parra
+  Que es la que vamos más a controlar. Y sobre todo, tener muy en cuenta el inventario. El inventario que queremos tener en la empresa de Naturberry, pero identificado en cada uno de los hulers.  Y ya en ese caso especial, el huler de Naturai, porque va a tener esa gestión también propia e identificable.  Ok. Chicos, algún punto que vean que haga falta. Sé que no vimos comercio exterior, pero creo que no aplicaría tanto para verlo aquí en un macroproceso.  Algo más que tengas que tomar en cuenta, ¿no? Liquidación de sus intenciones, todo eso es parte de contabilidad y se verá parte.  ¿Algo más, Vic? Yo sí, sí, no, no quise...
+
+2:19:55 - SALA VIP
+  ¿Cómo se llama? Con la espinita. La parte de devoluciones de cajas, digo, vamos a tener el seguimiento de todo lo que se le dé al productor.  Actualmente en el folio le ponemos cuántas cajas le entregamos.
+
+2:20:11 - Edder Palacios
+  El detalle es cómo se va a saber cada supervisor, porque no todos los supervisores están en, no exactamente en todas las devoluciones de caja en campo.  Entonces, esa ha sido una de las, y le puedes preguntar a Leti, esa ha sido una de las, como de esos puntitos en donde hay, es que porque, por ejemplo, dice, nosotros cargamos 144,144 cajas, y Vivero dice, bueno, 1872, y Vivero dice que llegaron 1870.
+
+2:20:41 - Victor De La Parra
+  Y las imágenes que, por ejemplo, toman evidencias, pero pues a veces no se ven el total de las cajas.
+
+2:20:49 - SALA VIP
+  Ahí esa parte sí me gustaría como verla un poquito más. Gracias. ¿Cómo lo afinamos eso, Edder? ¿Cuál? ¿Las cajas?  El retorno de cajas plásticas, ¿no? Eso tendría que estar cuando tú recibiste el cepellón y le diste al productor las 1780 cajas, y se las das al productor, esas cajas deberán de quedarte a ti como negativo al productor, ¿no, Rafa?  ¿Se podrá decir que se las tendríamos que cargar como a su inventario, se podrá decir, si lo quieren manejar de esa manera?  Como aparente en campo. Como si fuera aparente en campo, si lo quieren de esa manera, si no, pues realmente ver cómo, cómo podremos...
+
+2:21:53 - Salvador Bustamante
+  Tenemos llevar otro control totalmente independiente, porque en ese momento, no sé si al momento de que entreguemos la planta a Edder, tengamos la noción exactamente de cuántas cajas están entregando para hacer el mismo registro.
+
+2:22:10 - SALA VIP
+  Sí, sí, ahí sí se tiene. Es que tendríamos que ver ahí, al momento de hacer la entrega, un apartado donde realmente puedas direccionar cuántas plantas y cuántas cajas para que se vayan como su aparente en campo.  Ajá. Y al momento de retorno, dale salida. Y las que no tenga, un ejemplo, las que no nos regrese, que se quede en su aparente en campo y nosotros ahí podamos jalar para facturarnos.  Ok.
+
+2:22:43 - Salvador Bustamante
+  Ok. Así como lo comentas, creo que se ve, se escucha bien el... Sí, también lo veo bien.
+
+2:22:52 - SALA VIP
+  Sí, sí, El de que ya tenía el grupo.
+
+2:22:56 - Alejandra Juarez
+  Robert, Rafa, sería que cada productor tendría su almacén virtual y ahí le mandaríamos su aparente en campo, ¿no? Ahí estaría su existencia hasta que hiciéramos liquidaciones o cierres, ¿correcto?  A mi punto de ver, sí, Salvador. ¿Perdón? A mi punto de ver, sí se tendría que manejar de esa manera para poder tener realmente en su estado de cuenta qué material tiene y no nos han devuelto.  Correcto. Sí, tendría que tener cada productor en un almacén virtual, este rover, y ahí tener su inventario aparente en campo.  Sí.
+
+2:23:35 - Edder Palacios
+  Creo que de esa manera sería más fácil llevar el portal de proveedores. Sí. Correcto. Y de ahí, de ese mismo almacén le puedes facturar cuando ya estés cobrándole cosas.  Sí, bien.
+
+2:23:54 - SALA VIP
+  Una manera para no meterme a productor por productor para facturarle, que me dijera, tienes todos estos materiales pendientes para facturar, quieres emitir una factura global, decirle sí, o ya estoy pidiendo.  Pero le tienes que cobrar a cada productor lo suyo, ¿no? Sí, pero haz de cuenta, una factura global, pero que sea por concepto.  O hoy mes tengo que facturarle todos los materiales, ¿no? O sea, o tendría que meterme uno por uno a los 108, me queda la duda.  Bueno, una factura global de todos los materiales, sí, y que te la, te la, digo global por concepto, y que cada productor, pues, sí le emitemos su documento.  Sí, pero es que ahí, es lo que, por ejemplo, dice Salvador, cada productor tiene que tener el, propio almacén virtual.  Entonces el sistema, nosotros tenemos que tener la capacidad de que el sistema nos filtre dónde están los negativos. Correcto.  Para no revisar los cientos y tantos productos.
+
+2:24:54 - Alejandra Juarez
+  Sí, realmente como que nos dé la, al momento de facturar, me dé la, me dé la opción que realmente jale de solamente de un almacén, a mi punto de ver.  Existencia, Rafa, y de las existencias ya facturamos. Es que realmente la existencia va a existir en el almacén del productor, o no va a estar en negativo, porque al final de cuentas, o sea, él va tener el store que le estamos dando, si a eso le quitamos su entrega, va a tener siempre un positivo en su almacén, en su almacén virtual.  Al momento que nos hagan la devolución, va a ser un traspaso de almacén a almacén, siempre quedando la existencia del material que no nos devolvió.  Más bien aquí en el momento de la facturación, tendríamos que solamente jalar de ese almacén el material que tiene en su poder.
+
+2:25:53 - Salvador Bustamante
+  O que no nos entregó, y en ese momento quedaría en ceros.
+
+2:25:59 - SALA VIP
+  Oye, pero si va a haber negativos, porque quiero que haga negativos, porque ahí te va, entonces significaría que si yo me está entregando y empezó a descontar y muevo el inventario de cada productor en base a las entregas, entonces va a haber un momento en el que va a ser un negativo y ahí me voy a fijar para ver si me está desviando o no.  Más bien en negativo, o sea, quedaría cuando realmente me entreguen más de lo que tienen aparente, porque ahora estoy sacando más material del que él contiene.  Y a eso quiero llegar con un dashboard ya para que me pueda mandar una alerta, oye, no puedes facturarle material porque ya trae un saldo negativo.  Eso yo creo que sí se debe poder darle bien fácil, que le digamos a Odoo, si algún almacén de un productor tiene negativo, mándame una alerta y ya.
+
+2:26:51 - Edder Palacios
+  Quiere decir que desvió o que lo movió para otro lado. Sí, o que te lo bloqueé, literalmente. Espero que me permita recibirle fruta.
+
+2:27:03 - Alejandra Juarez
+  Sí, sí, sí, sí, porque al final de cuentas, el cierre del material se hace al final de la temporada, ya no entrega, ya no tiene operación, por lo tanto, solamente tiene que tener en su aparente campo material parado, que ya no va mover.
+
+2:27:21 - Edder Palacios
+  Sí, sí, sí, pero no lo veo convencido a mi Robert. ¿No? Así es, así es. Y pregunta, al inicio de la temporada, los productores se pueden quedar con material y te pueden decir, ah, yo tengo material de la temporada pasada.  Esa sería otra política que tiene que ver con almacenes. Ahí sí, ya se deben quedar.
+
+2:27:46 - SALA VIP
+  Para eso nos va a ayudar el Jossform, justamente para eso.
+
+2:27:51 - Edder Palacios
+  Ahí sí, ya es otra cosa. No deberían de... ¿Cuánto realmente está?
+
+2:27:55 - SALA VIP
+  Porque a lo mejor el que no llegó bien sellado, no llegó bien empaquetado, que le regresaron al proveedor, al productor, ese sí lo deben de tener.  Oye, Edder, vamos a empezar a hacer auditoría para subir la cantidad total de lo que tiene en Aparente en Campo el productor.
+
+2:28:14 - Edder Palacios
+  Sí, es que el JustForm nos tiene que dar toda esa información. Sí.
+
+2:28:22 - SALA VIP
+  O el JustForm va a ser mi, este productor tiene, que era lo que les decía ayer, 500 cajas en Aparente en Campo.  Mi forecast me marca que esta semana va a entregar 200. Viene el productor y me pide mil. ¿Por qué?  No, no te los puedo dar.
+
+2:28:43 - Edder Palacios
+  Pero ¿por qué el JustForm?
+
+2:28:44 - SALA VIP
+  Vamos a seguir llevando el JustForm y no lo vamos a gestionar en los sistemas. Está malito, entiéndanlo. El O2 es el que me tiene que dar eso.  Ah, ok, sí, ok.
+
+2:29:04 - Victor De La Parra
+  Y así para que administrativamente sea más fácil todo.
+
+2:29:08 - SALA VIP
+  Bien. Ok. Y cuando vaya el productor a donde es ir a la oficina, puede decir, ¿sabes qué? Ocupo un estado de cuenta.  Y se lo imprimimos en ese momento y se lo damos. Correcto. Edder, ni lo va a necesitar que vaya porque va a tener su portal, va a tener acceso, va a tener el acceso, él lo va a poder visualizar.  Podemos mencionar que le esté llegando semanalmente, que le esté llegando su correo. Sí, eso será lo que tiene que hacer.  Ok. Ok. ¿Algún otro punto respecto a esto de la... Y que, bueno, ya nos metimos un poquito más al portal.  Vic, ¿alguna otra duda o ya te quedó un poco más claro? No, ahí me quedo más tranquilo, Roberto, gracias.  Ok, ok. Pues creo que sería lo más relevante de esta reunión con estos macroprocesos que vimos. Vamos a plantearlo de una forma que se vea un poco más claro y se los envío la siguiente semana.  Creo que con esto ya tenemos una noción y visión general para poder así estar con los consultores y demostrarles cuál es nuestro proceso y qué es lo que queremos en cada uno de los puntos.  Va. Chava, ¿alguna otra duda, pregunta, comentario? No, Robert, me espero al resumen porque se me cortaba muchas partes. Sí, claro que sí.  Muy bien. Mi George, vas llegando. ¿Algún otro comentario, duda? Perdón, no te alcancé a ir, Robert. ¿Algún otro comentario que tengas?  No, yo creo que de momento no. Ok, vale. Sí nos alargamos un poquito más, pero pues qué bueno que pudimos terminar con este flujo.  Gracias a todos, que pasen un buen fin de semana. Excelente, muchas gracias. Gracias. gracias por el tiempo. Hasta luego.  Hasta luego. Gracias. Hasta luego. ¿Cómo está, Roberto? Ok. ¿Más próximo o no? Pues, creo que sí. Creo que sí fue bueno.  Sobre todo me interesaba que estuviera...
