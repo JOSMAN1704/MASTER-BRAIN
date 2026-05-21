@@ -1,127 +1,88 @@
 import streamlit as st
-import google.generativeai as genai
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
 import os
+import google.generativeai as genai
 
-# 1. CONFIGURACIÓN DE SEGURIDAD (STREAMLIT SECRETS)
-# Recogemos las llaves que guardaste de forma segura en la plataforma
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-CLIENT_ID = st.secrets["CLIENT_ID"]
-CLIENT_SECRET = st.secrets["CLIENT_SECRET"]
+# =====================================================================
+# 1. CONFIGURACIÓN INICIAL DE LA IA
+# =====================================================================
+# Traemos la API Key desde los Secrets de Streamlit
+if "GEMINI_API_KEY" not in st.secrets:
+    st.error("Falta la configuración de GEMINI_API_KEY en los Secrets de Streamlit.")
+    st.stop()
 
-# Configurar el motor de Gemini
-genai.configure(api_key=GOOGLE_API_KEY)
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-st.set_page_config(page_title="Cerebro Maestro ERP", page_icon="🧠", layout="centered")
+# Inicializamos Gemini 1.5 Flash y le activamos la búsqueda en Google en tiempo real
+modelo_ia = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    tools=[{"google_search": {}}]
+)
+
+# =====================================================================
+# 2. FUNCIÓN PARA LEER ARCHIVOS AUTOMÁTICAMENTE
+# =====================================================================
+def leer_datos_internos():
+    carpeta = 'datos_internos'
+    
+    # Si la carpeta no existe por alguna razón, la creamos vacía
+    if not os.path.exists(carpeta):
+        os.makedirs(carpeta)
+        return ""
+        
+    archivos = os.listdir(carpeta)
+    contenido_total = ""
+    
+    # Escaneamos y leemos cada archivo dentro de la carpeta
+    for archivo in archivos:
+        if archivo.endswith('.txt') or archivo.endswith('.csv'):
+            ruta_completa = os.path.join(carpeta, archivo)
+            with open(ruta_completa, 'r', encoding='utf-8') as f:
+                contenido_total += f"--- INICIO ARCHIVO: {archivo} ---\n"
+                contenido_total += f.read() + "\n"
+                contenido_total += f"--- FIN ARCHIVO: {archivo} ---\n\n"
+    return contenido_total
+
+# =====================================================================
+# 3. INTERFAZ DE USUARIO (STREAMLIT)
+# =====================================================================
+st.set_page_config(page_title="Cerebro Maestro", page_icon="🧠")
+
 st.title("🧠 Cerebro Maestro - Proyecto ERP")
 st.write("Consulta todo el historial de Fathom e investigaciones de Odoo con IA en tiempo real.")
 
-# 2. AUTENTICACIÓN CON GOOGLE DRIVE VIA OAUTH2
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+# Cuadro de texto para las dudas
+pregunta_usuario = st.text_input("¿De qué tienes duda hoy?...")
 
-def obtener_credenciales():
-    # Esta es la URL que vive en la consola de Google
-    REDIRECT_URI = "https://odoo-implementacion.streamlit.app/" 
+if pregunta_usuario:
+    # 1. La app escanea la carpeta en este instante
+    contexto_fathom = leer_datos_internos()
     
-    client_config = {
-        "web": {
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET,
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "redirect_uris": [REDIRECT_URI]
-        }
-    }
+    if not contexto_fathom:
+        st.warning("⚠️ Nota: No se encontraron archivos en la carpeta 'datos_internos'. La IA responderá usando solo su conocimiento y búsqueda web.")
     
-    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-    flow.redirect_uri = REDIRECT_URI
+    # 2. Creamos las instrucciones para Gemini
+    prompt_maestro = f"""
+    Eres el Cerebro Maestro del Proyecto ERP, una IA experta diseñada para apoyar al equipo de desarrollo y liderazgo.
     
-    # Aquí generamos la URL de autorización
-    auth_url, _ = flow.authorization_url(prompt='consent')
+    Tu objetivo es responder de manera analítica, clara y directa la duda del usuario utilizando las siguientes fuentes:
     
-    st.write("### 🔗 Autorización necesaria")
-    st.markdown(f"[Haz clic aquí para autorizar el acceso]({auth_url})")
+    1. CONTEXTO INTERNO (Minutas de reuniones de Fathom y reportes cargados):
+    {contexto_fathom}
     
-    # IMPORTANTE: Para capturar el código, necesitamos que el usuario 
-    # regrese a la app con un parámetro en la URL
-    query_params = st.query_params
-    if "code" in query_params:
-        auth_code = query_params["code"]
-        flow.fetch_token(code=auth_code)
-        st.session_state.credentials = flow.credentials
-        st.success("¡Autenticación exitosa!")
-        st.rerun()
-# 3. AUTENTICACIÓN DIRECTA (Sin botones que desaparecen)
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-
-def obtener_credenciales():
-    client_config = {
-        "web": {
-            "client_id": CLIENT_ID,
-            "project_id": "cerebro-maestro-drive",
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"]
-        }
-    }
+    2. BÚSQUEDA WEB EN TIEMPO REAL:
+    Si la duda del usuario requiere detalles técnicos actualizados sobre Odoo ERP, configuraciones estándar, módulos o buenas prácticas que NO estén en el contexto interno, utiliza obligatoriamente tu herramienta de búsqueda en Google.
     
-    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-    auth_url, _ = flow.authorization_url(prompt='consent')
+    PREGUNTA DEL USUARIO:
+    {pregunta_usuario}
     
-    st.write("### 🔗 Paso 1: Autorización")
-    st.markdown(f"[Haz clic aquí para autorizar el acceso a tu Drive]({auth_url})")
+    Se muy profesional y enfócate en dar soluciones claras orientadas a la optimización del ERP.
+    """
     
-    auth_code = st.text_input("Paso 2: Pega aquí el código que te dio Google después de autorizar:")
-    
-    if auth_code:
-        flow.fetch_token(code=auth_code)
-        st.session_state.credentials = flow.credentials
-        st.success("¡Autenticación exitosa! Ya puedes usar el Cerebro Maestro.")
-        st.rerun()
-
-# Lógica de inicio
-if 'credentials' not in st.session_state:
-    obtener_credenciales()
-    st.stop() # Esto detiene la app hasta que se autentique
-else:
-    drive_service = build('drive', 'v3', credentials=st.session_state.credentials)
-    # Aquí iría el resto de tu código de chat...
-
-# 4. INTERFAZ DE CHAT Y PROCESAMIENTO CON GEMINI
-if drive_service:
-    # Caja de texto para la duda del usuario
-    user_question = st.text_input("¿De qué tienes duda hoy? (Ej. ¿Qué pendientes tiene Miguel? o ¿Cómo resuelve Odoo los lotes?)")
-    
-    if user_question:
-        with st.spinner("El Cerebro está consultando tus carpetas y buscando en la Web..."):
-            # Traer los datos de tus TXT en tiempo real
-            contexto_documentos = obtener_contexto_drive(drive_service)
-            
-            # Configurar el modelo con Google Search Grounding activado (Búsqueda en Google)
-            model = genai.GenerativeModel(
-                model_name="gemini-1.5-flash",
-                tools=[{"google_search_grounding": {}}] # <--- ESTO ACTIVA LA BÚSQUEDA WEB EN VIVO
-            )
-            
-            # Construir el prompt estructurado
-            prompt_maestro = f"""
-            Eres el Cerebro Maestro del proyecto ERP. Tu objetivo es cruzar lo que se habló en las sesiones de Fathom de la empresa con las soluciones del mercado.
-            Identifica usuarios (como Miguel Pérez, Roberto, etc.), tareas, acuerdos y diferencias entre modelo estándar y desarrollo técnico.
-            
-            [CONTEXTO INTERNO DE TUS ARCHIVOS DRIVE]:
-            {contexto_documentos}
-            
-            [PREGUNTA DEL USUARIO]:
-            {user_question}
-            
-            Responde de manera puntual y estructurada. Si la información no está en los archivos de Drive, utiliza tu herramienta de búsqueda web en vivo para complementar cómo lo resuelve Odoo.
-            """
-            
-            response = model.generate_content(prompt_maestro)
-            
-            # Mostrar la respuesta en la pantalla de la App
-            st.markdown("### 🧠 Respuesta de tu Cerebro Maestro:")
-            st.write(response.text)
+    # 3. Procesamos con la IA
+    with st.spinner("El Cerebro está analizando los archivos e investigando en la web... 🌐"):
+        try:
+            respuesta = modelo_ia.generate_content(prompt_maestro)
+            st.write("### 🤖 Respuesta del Cerebro Maestro:")
+            st.write(respuesta.text)
+        except Exception as e:
+            st.error(f"Hubo un error al procesar la información con Gemini: {e}")
