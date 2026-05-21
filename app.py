@@ -39,7 +39,7 @@ def autenticar_drive():
         flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
         # Usamos redirección local simulada para entornos web
         flow.redirect_uri = 'https://localhost'
-        st.session_state.credentials = flow.run_local_server(port=0, open_browser=False)
+        st.session_state.credentials = flow.run_console()
     
     return build('drive', 'v3', credentials=st.session_state.credentials)
 
