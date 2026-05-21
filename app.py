@@ -11,9 +11,9 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Opción A: Usar el nombre de versión específico de la API v1beta
+# Cambiamos a 'gemini-1.5-pro', que es el modelo que soporta 'google_search_retrieval' en v1beta
 modelo_ia = genai.GenerativeModel(
-    model_name="gemini-1.5-flash-latest", # <--- Cambiamos a '-latest'
+    model_name="gemini-1.5-pro", 
     tools=[{"google_search_retrieval": {}}]
 )
 # =====================================================================
