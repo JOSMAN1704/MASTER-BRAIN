@@ -11,10 +11,10 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Usamos la estructura nativa compatible con versiones anteriores y nuevas
+# Añadimos el prefijo 'models/' para que la API v1beta lo encuentre sin problemas
 modelo_ia = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    tools=[{"google_search_retrieval": {}}] # <--- ESTE es el nombre exacto del componente en el motor de Google
+    model_name="models/gemini-1.5-flash", 
+    tools=[{"google_search_retrieval": {}}]
 )
 
 # =====================================================================
