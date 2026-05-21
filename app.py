@@ -5,20 +5,16 @@ import google.generativeai as genai
 # =====================================================================
 # 1. CONFIGURACIÓN INICIAL DE LA IA
 # =====================================================================
-# Traemos la API Key desde los Secrets de Streamlit
 if "GEMINI_API_KEY" not in st.secrets:
     st.error("Falta la configuración de GEMINI_API_KEY en los Secrets de Streamlit.")
     st.stop()
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Inicializamos Gemini 1.5 Flash y le activamos la búsqueda en Google en tiempo real
-# CÓDIGO NUEVO:
-from google.generativeai.types import Tool
-
+# Usamos la estructura nativa compatible con versiones anteriores y nuevas
 modelo_ia = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
-    tools=[Tool(google_search=genai.protos.GoogleSearch())]
+    tools=[{"google_search_retrieval": {}}] # <--- ESTE es el nombre exacto del componente en el motor de Google
 )
 
 # =====================================================================
