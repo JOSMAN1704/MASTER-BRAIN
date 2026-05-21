@@ -42,14 +42,15 @@ def buscar_en_web_odoo(consulta):
         return "No se pudo obtener documentación adicional de la web en este momento."
 
 # =====================================================================
-# 3. PROCESAMIENTO ESTILO NOTEBOOK (GOOGLE EMBEDDINGS V004)
+# 3. PROCESAMIENTO ESTELO NOTEBOOK (GOOGLE EMBEDDINGS V004 CORREGIDO)
 # =====================================================================
 @st.cache_resource
 def obtener_embeddings_google():
-    # Invoca el motor profesional de Google para indexación semántica avanzada
+    # Forzamos a la librería a usar la API Key y el cliente correcto de AI Studio
     return GoogleGenerativeAIEmbeddings(
-        model="models/text-embedding-004", 
-        google_api_key=st.secrets["GEMINI_API_KEY"]
+        model="models/text-embedding-004",
+        google_api_key=st.secrets["GEMINI_API_KEY"],
+        task_type="retrieval_document" # Especifica a Google que es para buscar documentos
     )
 
 def buscar_parrafos_clave_expertos(pregunta, carpeta="datos_internos"):
@@ -57,39 +58,57 @@ def buscar_parrafos_clave_expertos(pregunta, carpeta="datos_internos"):
         return ""
         
     documentos_texto = []
-    archivos = os.listdir(carpeta)
     
-    # 1. Leer archivos inyectando metadatos de origen
-    for archivo in archivos:
-        if archivo.endswith('.txt') or archivo.endswith('.csv'):
-            ruta = os.path.join(carpeta, archivo)
-            with open(ruta, 'r', encoding='utf-8') as f:
-                # Estructuramos el contenido original
-                documentos_texto.append(f"ORIGEN_ARCHIVO: {archivo}\nDATOS_REUNIÓN: " + f.read())
+    try:
+        archivos = os.listdir(carpeta)
+        for archivo in archivos:
+            if archivo.endswith('.txt') or archivo.endswith('.csv'):
+                ruta = os.path.join(carpeta, archivo)
+                with open(ruta, 'r', encoding='utf-8') as f:
+                    contenido = f.read()
+                    # Si el archivo está vacío, lo ignoramos para evitar errores en la API
+                    if contenido.strip():
+                        documentos_texto.append(f"ORIGEN_ARCHIVO: {archivo}\nDATOS_REUNIÓN: " + contenido)
+    except Exception as e:
+        st.error(f"Error al leer los archivos de la carpeta: {e}")
+        return ""
                 
     if not documentos_texto:
         return ""
         
-    # 2. Picar el texto en fragmentos pequeños (Indispensable para no saturar la API de Embeddings)
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    
-    # Creamos los fragmentos como objetos "Document" puros compatibles con LangChain Core
+    # Segmentación estricta
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=150)
     fragmentos = text_splitter.create_documents(documentos_texto)
     
-    # 3. Construcción del mapa semántico FAISS con la tecnología de Google
-    embeddings_google = obtener_embeddings_google()
-    
-    # Ahora que los textos van en pedazos de 1000 caracteres, FAISS y Google los procesarán al instante
-    base_conocimiento = FAISS.from_documents(fragmentos, embeddings_google)
-    
-    # 4. Extracción de los 4 bloques de datos más alineados conceptualmente a la duda
-    resultados_busqueda = base_conocimiento.similarity_search(pregunta, k=4)
-    
-    contexto_filtrado = ""
-    for doc in resultados_busqueda:
-        contexto_filtrado += doc.page_content + "\n\n-----------------\n\n"
+    try:
+        embeddings_google = obtener_embeddings_google()
         
-    return contexto_filtrado
+        # Generamos la base de conocimiento local
+        base_conocimiento = FAISS.from_documents(fragmentos, embeddings_google)
+        
+        # Extracción de los 4 bloques más alineados
+        resultados_busqueda = base_conocimiento.similarity_search(pregunta, k=4)
+        
+        contexto_filtrado = ""
+        for doc in resultados_busqueda:
+            contexto_filtrado += doc.page_content + "\n\n-----------------\n\n"
+            
+        return contexto_filtrado
+        
+    except Exception as e:
+        # Si Google vuelve a rechazarlo, este bloque atrapará el error y te dirá la causa real en la pantalla
+        st.warning(f"Aviso técnico: El motor de Embeddings de Google reportó un detalle de conexión: {e}. Procediendo con extracción básica...")
+        
+        # Plan de respaldo (Fallback): Si falla Google Embeddings por región o cuota, 
+        # extraemos los párrafos que contengan palabras clave de la pregunta para no detener la app
+        palabras_clave = pregunta.lower().split()
+        coincidencias = []
+        for frag in fragmentos:
+            if any(palabra in frag.page_content.lower() for palabra in palabras_clave if len(palabra) > 3):
+                coincidencias.append(frag.page_content)
+                if len(coincidencias) >= 4:
+                    break
+        return "\n\n-----------------\n\n".join(coincidencias)
 
 # =====================================================================
 # 4. INTERFAZ DE USUARIO Y CONTROLADOR DE RESPUESTAS (STREAMLIT)
