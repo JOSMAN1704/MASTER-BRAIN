@@ -21,7 +21,6 @@ st.write("Consulta todo el historial de Fathom e investigaciones de Odoo con IA 
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 def autenticar_drive():
-    # Creamos la configuración de autenticación sobre la marcha sin archivos JSON físicos
     client_config = {
         "web": {
             "client_id": CLIENT_ID,
@@ -30,18 +29,25 @@ def autenticar_drive():
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_secret": CLIENT_SECRET,
-            "redirect_uris": ["http://localhost"]
+            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"] # Este es el truco para obtener un código manual
         }
     }
     
-    # Esto abrirá una ventana emergente para que firmes con tu cuenta la primera vez
-    if 'credentials' not in st.session_state:
-        flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-        # Usamos redirección local simulada para entornos web
-        flow.redirect_uri = 'https://localhost'
-        st.session_state.credentials = flow.run_console()
+    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
+    auth_url, _ = flow.authorization_url(prompt='consent')
     
-    return build('drive', 'v3', credentials=st.session_state.credentials)
+    # Esto te dará el link en la pantalla
+    st.write(f"### 🔗 Autorización necesaria")
+    st.write("Haz clic en el enlace de abajo, inicia sesión y copia el código que te dará Google:")
+    st.write(auth_url)
+    
+    auth_code = st.text_input("Pega aquí el código de autorización que te dio Google:")
+    
+    if auth_code:
+        flow.fetch_token(code=auth_code)
+        return build('drive', 'v3', credentials=flow.credentials)
+    
+    return None
 
 # 3. FUNCIÓN PARA LEER ARCHIVOS TXT DE LA CARPETA DE DRIVE
 def obtener_contexto_drive(service):
