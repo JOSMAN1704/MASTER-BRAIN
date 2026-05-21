@@ -33,8 +33,8 @@ def autenticar_drive():
         }
     }
     
-    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
-    auth_url, _ = flow.authorization_url(prompt='consent')
+  flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
+  auth_url, _ = flow.authorization_url(prompt='consent')
     
     # Esto te dará el link en la pantalla
     st.write(f"### 🔗 Autorización necesaria")
