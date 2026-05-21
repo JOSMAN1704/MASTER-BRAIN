@@ -3,7 +3,7 @@ import os
 import google.generativeai as genai
 
 # =====================================================================
-# 1. CONFIGURACIÓN INICIAL DE LA IA (VERSIÓN ESTABLE)
+# 1. CONFIGURACIÓN INICIAL DE LA IA (VERSIÓN ACTUALIZADA)
 # =====================================================================
 if "GEMINI_API_KEY" not in st.secrets:
     st.error("Falta la configuración de GEMINI_API_KEY en los Secrets de Streamlit.")
@@ -11,9 +11,9 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Usamos el modelo puro de producción, sin herramientas que fuercen la API beta
+# Cambiamos al modelo actualizado de producción para evitar el error 404
 modelo_ia = genai.GenerativeModel(
-    model_name="gemini-1.5-flash"
+    model_name="gemini-2.5-flash"
 )
 # =====================================================================
 # 2. FUNCIÓN PARA LEER ARCHIVOS AUTOMÁTICAMENTE
