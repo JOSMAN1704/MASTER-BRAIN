@@ -3,4 +3,3 @@ google-generativeai
 requests
 langchain-community
 faiss-cpu
-sentence-transformers
