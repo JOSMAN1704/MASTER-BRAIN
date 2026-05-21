@@ -3,7 +3,7 @@ import os
 import google.generativeai as genai
 
 # =====================================================================
-# 1. CONFIGURACIÓN INICIAL DE LA IA
+# 1. CONFIGURACIÓN INICIAL DE LA IA (VERSIÓN ESTABLE)
 # =====================================================================
 if "GEMINI_API_KEY" not in st.secrets:
     st.error("Falta la configuración de GEMINI_API_KEY en los Secrets de Streamlit.")
@@ -11,10 +11,9 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Cambiamos a 'gemini-1.5-pro', que es el modelo que soporta 'google_search_retrieval' en v1beta
+# Usamos el modelo puro de producción, sin herramientas que fuercen la API beta
 modelo_ia = genai.GenerativeModel(
-    model_name="gemini-1.5-pro", 
-    tools=[{"google_search_retrieval": {}}]
+    model_name="gemini-1.5-flash"
 )
 # =====================================================================
 # 2. FUNCIÓN PARA LEER ARCHIVOS AUTOMÁTICAMENTE
@@ -58,22 +57,21 @@ if pregunta_usuario:
     if not contexto_fathom:
         st.warning("⚠️ Nota: No se encontraron archivos en la carpeta 'datos_internos'. La IA responderá usando solo su conocimiento y búsqueda web.")
     
-    # 2. Creamos las instrucciones para Gemini
+  # Nuevas instrucciones limpias para la IA
     prompt_maestro = f"""
     Eres el Cerebro Maestro del Proyecto ERP, una IA experta diseñada para apoyar al equipo de desarrollo y liderazgo.
     
-    Tu objetivo es responder de manera analítica, clara y directa la duda del usuario utilizando las siguientes fuentes:
+    Tu objetivo es responder de manera analítica, clara y directa la duda del usuario utilizando la siguiente fuente de información interna:
     
-    1. CONTEXTO INTERNO (Minutas de reuniones de Fathom y reportes cargados):
+    CONTEXTO INTERNO (Minutas de reuniones de Fathom y reportes cargados):
     {contexto_fathom}
-    
-    2. BÚSQUEDA WEB EN TIEMPO REAL:
-    Si la duda del usuario requiere detalles técnicos actualizados sobre Odoo ERP, configuraciones estándar, módulos o buenas prácticas que NO estén en el contexto interno, utiliza obligatoriamente tu herramienta de búsqueda en Google.
     
     PREGUNTA DEL USUARIO:
     {pregunta_usuario}
     
-    Se muy profesional y enfócate en dar soluciones claras orientadas a la optimización del ERP.
+    REGLAS DE RESPUESTA:
+    1. Sé muy profesional y enfócate en dar soluciones claras orientadas a la optimización del ERP.
+    2. Si la respuesta no se encuentra en el contexto interno, utiliza tu propio conocimiento general y técnico sobre Odoo ERP para guiar al usuario de la mejor manera posible.
     """
     
     # 3. Procesamos con la IA
