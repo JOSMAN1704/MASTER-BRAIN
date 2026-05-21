@@ -6,9 +6,9 @@ import os
 
 # 1. CONFIGURACIÓN DE SEGURIDAD (STREAMLIT SECRETS)
 # Recogemos las llaves que guardaste de forma segura en la plataforma
-GOOGLE_API_KEY = st.secrets["AIzaSyBbZsQViIBjfoKGgvniBLKiWO3OSuOqFHk"]
-CLIENT_ID = st.secrets["91680377649-u23gt5h4vdkbcptdtctkddg4ebokjpr9.apps.googleusercontent.com"]
-CLIENT_SECRET = st.secrets["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"]
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+CLIENT_ID = st.secrets["CLIENT_ID"]
+CLIENT_SECRET = st.secrets["CLIENT_SECRET"]
 
 # Configurar el motor de Gemini
 genai.configure(api_key=GOOGLE_API_KEY)
