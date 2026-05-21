@@ -13,9 +13,12 @@ if "GEMINI_API_KEY" not in st.secrets:
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 # Inicializamos Gemini 1.5 Flash y le activamos la búsqueda en Google en tiempo real
+# CÓDIGO NUEVO:
+from google.generativeai.types import Tool
+
 modelo_ia = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
-    tools=[{"google_search": {}}]
+    tools=[Tool(google_search=genai.protos.GoogleSearch())]
 )
 
 # =====================================================================
