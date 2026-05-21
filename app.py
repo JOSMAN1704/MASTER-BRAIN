@@ -3,7 +3,8 @@ import os
 import requests
 import google.generativeai as genai
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import GoogleGenerativeAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings # <--- Ruta oficial actualizada
+from langchain_core.documents import Document # <--- Añadimos esto para asegurar compatibilidad
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # =====================================================================
@@ -71,7 +72,7 @@ def buscar_parrafos_clave_expertos(pregunta, carpeta="datos_internos"):
         
     # 2. Fragmentación matemática del texto para preservar el contexto de acuerdos
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    fragmentos = text_splitter.create_documents(documentos_texto)
+    fragmentos = [Document(page_content=texto) for texto in documentos_texto]
     
     # 3. Construcción del mapa semántico FAISS con la tecnología de Google
     embeddings_google = obtener_embeddings_google()
