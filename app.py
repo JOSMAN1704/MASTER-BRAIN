@@ -49,37 +49,43 @@ def autenticar_drive():
     
     return None
 
-# 3. FUNCIÓN PARA LEER ARCHIVOS TXT DE LA CARPETA DE DRIVE
-def obtener_contexto_drive(service):
-    # NOTA: Reemplaza 'ID_DE_TU_CARPETA_AQUÍ' por el ID real de tu carpeta 00_Cerebro_Maestro
-    folder_id = '16Qa47qooE2M6W4XrLYM_1-km_SINjxfx?hl=it' 
-    query = f"'{folder_id}' in parents and mimeType = 'text/plain'"
-    results = service.files().list(q=query, fields="files(id, name)").execute()
-    items = results.get('files', [])
-    
-    contexto_completo = ""
-    for item in items:
-        file_id = item['id']
-        request = service.files().get_media(fileId=file_id)
-        content = request.execute().decode('utf-8')
-        contexto_completo += f"\n\n--- ARCHIVO: {item['name']} ---\n{content}"
-    
-    return contexto_completo
+# 3. AUTENTICACIÓN DIRECTA (Sin botones que desaparecen)
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
-# --- PUESTA EN MARCHA DEL BOTÓN DE CONEXIÓN ---
-if 'drive_service' not in st.session_state:
-    if st.button("Conectar con Google Drive"):
-        try:
-            st.session_state.drive_service = autenticar_drive()
-            st.success("Conectado con éxito ✅")
-            st.rerun() # Esto recarga la página para mostrar el chat
-        except Exception as e:
-            st.error(f"Error al conectar: {e}")
+def obtener_credenciales():
+    client_config = {
+        "web": {
+            "client_id": CLIENT_ID,
+            "project_id": "cerebro-maestro-drive",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_secret": CLIENT_SECRET,
+            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"]
+        }
+    }
     
-    drive_service = None
+    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES)
+    auth_url, _ = flow.authorization_url(prompt='consent')
+    
+    st.write("### 🔗 Paso 1: Autorización")
+    st.markdown(f"[Haz clic aquí para autorizar el acceso a tu Drive]({auth_url})")
+    
+    auth_code = st.text_input("Paso 2: Pega aquí el código que te dio Google después de autorizar:")
+    
+    if auth_code:
+        flow.fetch_token(code=auth_code)
+        st.session_state.credentials = flow.credentials
+        st.success("¡Autenticación exitosa! Ya puedes usar el Cerebro Maestro.")
+        st.rerun()
+
+# Lógica de inicio
+if 'credentials' not in st.session_state:
+    obtener_credenciales()
+    st.stop() # Esto detiene la app hasta que se autentique
 else:
-    drive_service = st.session_state.drive_service
-# -----------------------------------------------
+    drive_service = build('drive', 'v3', credentials=st.session_state.credentials)
+    # Aquí iría el resto de tu código de chat...
 
 # 4. INTERFAZ DE CHAT Y PROCESAMIENTO CON GEMINI
 if drive_service:
